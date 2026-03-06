@@ -559,13 +559,47 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
   .pdf-2col { grid-template-columns:1fr; }
 }
 @media(max-width:600px) {
-  nav { padding:0 16px; }
-  .hero, .wrbi { padding:0 20px; }
+  /* Navbar */
+  nav { padding:0 12px; gap:8px; }
+  .nav-co-name { display:none; }          /* sembunyikan nama PT */
+  .nav-logo-img img { height:28px; }
+  .nav-logo { font-size:15px; letter-spacing:2px; }
+  .nav-sep { display:none; }
+  .nlink { padding:6px 10px; font-size:9px; letter-spacing:1px; }
+
+  /* Hero */
+  .hero, .wrbi { padding:0 16px; }
+  .hl { padding:40px 0 32px; }
+
+  /* Info strip */
   .istrip { grid-template-columns:1fr 1fr; }
-  .esec, .apid, .mwrap { padding:48px 20px; }
-  .clayout { padding:20px; }
+  .ii { padding:18px 16px; }
+  .ii .n { font-size:28px; }
+
+  /* What is RBI */
+  .tbi-grid { grid-template-columns:1fr; }
+
+  /* Equipment */
+  .esec, .apid, .mwrap { padding:40px 16px; }
   .egrid { grid-template-columns:1fr; }
-  .co-name-input { width:100px; }
+
+  /* API 581 deep */
+  .apidh { grid-template-columns:1fr; }
+  .apibig { font-size:56px; }
+  .apmods { grid-template-columns:1fr; }
+
+  /* Risk matrix */
+  .minner { grid-template-columns:1fr; }
+
+  /* Calculator */
+  .clayout { padding:16px; }
+  .frow { grid-template-columns:1fr; }      /* semua input stack vertikal */
+  .frow.s3 { grid-template-columns:1fr; }   /* course inputs juga stack */
+
+  /* Footer */
+  .site-footer { padding:32px 16px 20px; }
+  .footer-inner { grid-template-columns:1fr; gap:24px; }
+  .footer-bottom { flex-direction:column; align-items:flex-start; gap:6px; }
 }
 </style>
 </head>
@@ -1401,3 +1435,4 @@ buildCoursePanels();
 </script>
 </body>
 </html>
+
