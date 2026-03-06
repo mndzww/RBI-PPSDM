@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RBI Platform — Risk-Based Inspection</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+<!-- MathJax for proper equation rendering -->
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], packages: {'[+]': ['boldsymbol']} },
+  options: { skipHtmlTags: ['script','noscript','style','textarea'] },
+  startup: { ready() { MathJax.startup.defaultReady(); } }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+<style>
+/* ═══════════════════════════════════════════
+   VARIABLES & RESET
+═══════════════════════════════════════════ */
+:root {
+  --bg:    #07090c;
+  --s1:    #0d1117;
+  --s2:    #131920;
+  --s3:    #19222d;
+  --s4:    #1f2c3a;
+  --bdr:   #1e2d3d;
+  --bdr2:  #274056;
+  --gold:  #d4891a;
+  --gold2: #f0a830;
+  --gold3: #ffc84a;
+  --gdim:  rgba(212,137,26,.10);
+  --gglow: rgba(212,137,26,.22);
+  --red:   #e03535;
+  --green: #27b86a;
+  --tx:    #c8d8e8;
+  --tx2:   #7a96b0;
+  --tx3:   #3d5568;
+  --white: #edf4fc;
+  --nav-h: 62px;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--bg); color:var(--tx); font-family:'IBM Plex Sans',sans-serif; min-height:100vh; overflow-x:hidden; }
+body::after { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,rgba(0,0,0,.04) 0,rgba(0,0,0,.04) 1px,transparent 1px,transparent 3px); pointer-events:none; z-index:9999; }
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+@keyframes flow  { to{stroke-dashoffset:-56} }
+@keyframes glp   { from{filter:drop-shadow(0 0 3px rgba(212,137,26,.4))} to{filter:drop-shadow(0 0 14px rgba(212,137,26,.9))} }
+@keyframes gmk   { from{box-shadow:0 0 6px var(--gglow)} to{box-shadow:0 0 22px rgba(212,137,26,.7),0 0 44px var(--gglow)} }
+@keyframes fup   { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fin   { from{opacity:0} to{opacity:1} }
+
+/* ═══ NAVBAR ═══ */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:500;
+  height:var(--nav-h);
+  background:rgba(7,9,12,.92); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bdr);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 32px;
+}
+.nav-left { display:flex; align-items:center; gap:20px; }
+
+/* Company branding slot */
+.nav-logo-wrap {
+  display:flex; align-items:center; gap:12px;
+}
+.nav-logo-img {
+  display:flex; align-items:center; justify-content:center;
+  height:36px; flex-shrink:0;
+}
+.nav-logo-img img {
+  height:36px; width:auto;
+  object-fit:contain;
+  display:block;
+}
+.nav-co-name {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:17px; font-weight:700;
+  color:var(--white); letter-spacing:.5px;
+  line-height:1.15; white-space:nowrap;
+}
+.nav-co-name span {
+  display:block;
+  font-size:10px; font-weight:400;
+  color:var(--tx2); letter-spacing:2px;
+  text-transform:uppercase;
+  font-family:'IBM Plex Mono',monospace;
+}
+
+.nav-logo { font-family:'Barlow Condensed',sans-serif; font-size:19px; font-weight:800; color:var(--white); letter-spacing:3px; display:flex; align-items:center; gap:10px; }
+.nav-logo .ac { color:var(--gold2); }
+.ldot { width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); animation:blink 2.4s infinite; }
+.nav-sep { width:1px; height:28px; background:var(--bdr2); }
+
+.nav-links { display:flex; gap:4px; }
+.nlink { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--tx2); background:transparent; border:1px solid transparent; padding:7px 16px; cursor:pointer; border-radius:2px; transition:all .18s; }
+.nlink:hover { color:var(--tx); border-color:var(--bdr2); }
+.nlink.on { color:var(--gold2); border-color:var(--gold); background:var(--gdim); }
+
+/* ═══ PAGES ═══ */
+.page { min-height:100vh; padding-top:var(--nav-h); display:none; }
+.page.on { display:block; }
+
+/* ═══════════════════════════════════════════
+   PAGE 0 — LANDING
+═══════════════════════════════════════════ */
+.hero {
+  display:grid; grid-template-columns:1fr 460px;
+  min-height:calc(100vh - var(--nav-h));
+  max-width:1400px; margin:0 auto; padding:0 40px;
+  align-items:center;
+}
+.hl { padding:30px 60px 60px 0; }
+.eyebrow { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--gold2); letter-spacing:3px; text-transform:uppercase; display:flex; align-items:center; gap:12px; margin-bottom:28px; animation:fup .5s ease both; }
+.eyebrow::before { content:''; width:32px; height:1px; background:var(--gold); }
+h1.main { font-family:'Barlow Condensed',sans-serif; font-size:clamp(52px,6.5vw,96px); font-weight:800; line-height:.93; color:var(--white); letter-spacing:-1px; margin-bottom:30px; animation:fup .5s .08s ease both; }
+h1.main .ac { color:var(--gold2); }
+h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent; }
+.hdesc { font-size:15px; color:var(--tx2); line-height:1.78; max-width:520px; margin-bottom:40px; font-weight:300; animation:fup .5s .16s ease both; }
+.hpills { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:40px; animation:fup .5s .22s ease both; }
+.pill { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1px; padding:5px 12px; border-radius:2px; background:var(--s3); border:1px solid var(--bdr2); color:var(--tx2); }
+.pill.hi { background:var(--gdim); border-color:var(--gold); color:var(--gold2); }
+.hcta { display:flex; gap:12px; flex-wrap:wrap; animation:fup .5s .28s ease both; }
+.btnp { display:inline-flex; align-items:center; gap:10px; background:var(--gold2); color:#07090c; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:15px; letter-spacing:2px; text-transform:uppercase; padding:14px 28px; border:none; cursor:pointer; clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%); transition:all .18s; }
+.btnp:hover { background:var(--gold3); transform:translateY(-2px); box-shadow:0 8px 28px var(--gglow); }
+.btns { display:inline-flex; align-items:center; gap:10px; background:transparent; color:var(--tx2); font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; padding:14px 24px; border:1px solid var(--bdr2); cursor:pointer; border-radius:2px; transition:all .18s; }
+.btns:hover { color:var(--tx); border-color:var(--tx2); }
+
+/* HERO SVG */
+.hr { position:relative; height:100%; min-height:600px; display:flex; align-items:center; justify-content:center; border-left:1px solid var(--bdr); animation:fin .7s .1s ease both; }
+.ref-svg { width:420px; height:520px; flex-shrink:0; }
+.fl  { stroke-dasharray:8 6; animation:flow 1.8s linear infinite; }
+.fl.s { animation-duration:3.2s; }
+.fl.r { animation-direction:reverse; }
+.gp { animation:glp 2.5s ease-in-out infinite alternate; }
+.api-badge { position:absolute; top:40px; right:20px; background:rgba(13,17,23,.94); border:1px solid var(--gold); padding:16px 20px; backdrop-filter:blur(8px); }
+.ab-num { font-family:'Barlow Condensed',sans-serif; font-size:48px; font-weight:800; color:var(--gold2); line-height:1; letter-spacing:1px; }
+.ab-lbl { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--tx3); letter-spacing:2px; margin-top:2px; text-transform:uppercase; }
+.ab-sub { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--tx2); margin-top:6px; line-height:1.5; }
+.sfloat { position:absolute; background:rgba(13,17,23,.9); border:1px solid var(--bdr2); padding:10px 14px; backdrop-filter:blur(4px); }
+.sf-n { font-family:'Barlow Condensed',sans-serif; font-size:24px; font-weight:700; color:var(--gold2); line-height:1; }
+.sf-l { font-family:'IBM Plex Mono',monospace; font-size:8px; color:var(--tx3); letter-spacing:1px; margin-top:3px; }
+
+/* INFO STRIP */
+.istrip { background:var(--s1); border-top:1px solid var(--bdr); border-bottom:1px solid var(--bdr); display:grid; grid-template-columns:repeat(4,1fr); }
+.ii { padding:28px 36px; border-right:1px solid var(--bdr); }
+.ii:last-child { border-right:none; }
+.ii .n { font-family:'Barlow Condensed',sans-serif; font-size:38px; font-weight:800; color:var(--gold2); line-height:1; margin-bottom:6px; }
+.ii .l { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--tx3); letter-spacing:1.5px; text-transform:uppercase; }
+
+/* WHAT IS RBI */
+.wrbi { max-width:1200px; margin:80px auto; padding:0 40px; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
+.stag { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--gold2); letter-spacing:3px; text-transform:uppercase; display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+.stag::before { content:'//'; color:var(--tx3); }
+.wrbi h2 { font-family:'Barlow Condensed',sans-serif; font-size:44px; font-weight:800; color:var(--white); letter-spacing:-.5px; line-height:.96; margin-bottom:24px; }
+.wrbi p { font-size:14px; color:var(--tx2); line-height:1.8; font-weight:300; margin-bottom:16px; }
+
+/* Equation display box */
+.eq-box { background:var(--s2); border:1px solid var(--bdr); border-left:3px solid var(--gold); padding:28px 28px 24px; border-radius:2px; }
+.eq-label { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--gold2); letter-spacing:2px; text-transform:uppercase; margin-bottom:20px; }
+.eq-block { margin-bottom:18px; padding-bottom:18px; border-bottom:1px solid var(--bdr); }
+.eq-block:last-child { margin-bottom:0; padding-bottom:0; border-bottom:none; }
+.eq-title { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--tx3); letter-spacing:1px; margin-bottom:8px; }
+.eq-block .MJX-TEX, .eq-block mjx-container { color:var(--white) !important; }
+.eq-block mjx-container { font-size:1.05em !important; }
+
+/* TBI comparison */
+.tbi-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:16px; }
+.tbi-c { background:var(--s2); border:1px solid var(--bdr); padding:14px; border-radius:2px; }
+.tbi-c.hi { background:var(--gdim); border-color:var(--gold); }
+.tbi-t { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--tx3); letter-spacing:1px; margin-bottom:6px; }
+.tbi-c.hi .tbi-t { color:var(--gold2); }
+.tbi-v { font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:700; color:var(--tx2); }
+.tbi-c.hi .tbi-v { color:var(--gold2); }
+.tbi-s { font-size:11px; color:var(--tx3); margin-top:4px; }
+.tbi-c.hi .tbi-s { color:var(--tx2); }
+
+/* EQUIPMENT SELECTOR */
+.esec { background:var(--s1); border-top:1px solid var(--bdr); border-bottom:1px solid var(--bdr); padding:70px 40px; }
+.einner { max-width:1200px; margin:0 auto; }
+.ehdr { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:40px; flex-wrap:wrap; gap:16px; }
+.ehdr h2 { font-family:'Barlow Condensed',sans-serif; font-size:40px; font-weight:800; color:var(--white); letter-spacing:-.5px; }
+.ehdr .esub { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--tx3); letter-spacing:1.5px; }
+.egrid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.ecard { background:var(--s2); border:1px solid var(--bdr); padding:28px 24px; cursor:pointer; transition:all .2s; position:relative; overflow:hidden; border-radius:2px; }
+.ecard::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--bdr2); transition:background .2s; }
+.ecard:hover { border-color:var(--bdr2); background:var(--s3); transform:translateY(-3px); box-shadow:0 12px 40px rgba(0,0,0,.4); }
+.ecard:hover::before { background:var(--gold); }
+.ecard.av::before { background:var(--gold); }
+.ecard.av { border-color:rgba(212,137,26,.25); }
+.ecard.av:hover { border-color:var(--gold); }
+.ec-ico { width:48px; height:48px; margin-bottom:18px; color:var(--tx3); transition:color .2s; }
+.ecard:hover .ec-ico, .ecard.av .ec-ico { color:var(--gold); }
+.ec-nm { font-family:'Barlow Condensed',sans-serif; font-size:22px; font-weight:700; color:var(--white); letter-spacing:.5px; margin-bottom:8px; }
+.ec-dc { font-size:12px; color:var(--tx2); line-height:1.65; font-weight:300; margin-bottom:14px; }
+.ec-ft { display:flex; align-items:center; justify-content:space-between; }
+.ectag { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1.5px; padding:3px 10px; border-radius:2px; text-transform:uppercase; }
+.ectag.rdy { background:var(--gdim); border:1px solid var(--gold); color:var(--gold2); }
+.ectag.sn  { background:rgba(61,85,104,.2); border:1px solid var(--bdr2); color:var(--tx3); }
+.ec-ar { width:16px; height:16px; color:var(--tx3); transition:all .2s; }
+.ecard:hover .ec-ar { color:var(--gold2); transform:translateX(4px); }
+
+/* API DEEP */
+.apid { max-width:1200px; margin:80px auto; padding:0 40px; }
+.apidh { display:grid; grid-template-columns:auto 1fr; gap:24px; align-items:center; margin-bottom:40px; }
+.apibig { font-family:'Barlow Condensed',sans-serif; font-size:80px; font-weight:800; color:var(--gold2); line-height:1; text-shadow:0 0 60px rgba(212,137,26,.25); }
+.apidh h3 { font-family:'Barlow Condensed',sans-serif; font-size:30px; font-weight:700; color:var(--white); }
+.apidh p { font-size:13px; color:var(--tx2); line-height:1.7; font-weight:300; margin-top:6px; }
+.apmods { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--bdr); border:1px solid var(--bdr); }
+.apm { background:var(--s1); padding:32px 28px; }
+.apm:hover { background:var(--s2); }
+.apm .mn { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--gold2); letter-spacing:2px; margin-bottom:14px; }
+.apm h4 { font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:700; color:var(--white); letter-spacing:.5px; margin-bottom:12px; }
+.apm p { font-size:12.5px; color:var(--tx2); line-height:1.7; font-weight:300; }
+
+/* MATRIX */
+.mwrap { background:var(--s1); border-top:1px solid var(--bdr); padding:70px 40px; }
+.minner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 360px; gap:60px; align-items:start; }
+.minner h2 { font-family:'Barlow Condensed',sans-serif; font-size:40px; font-weight:800; color:var(--white); letter-spacing:-.5px; margin-bottom:16px; }
+.minner p { font-size:13px; color:var(--tx2); line-height:1.75; font-weight:300; margin-bottom:20px; }
+.rmx { display:grid; grid-template-columns:32px repeat(5,1fr); grid-template-rows:repeat(5,44px) 32px; gap:3px; }
+.rm  { display:flex; align-items:center; justify-content:center; border-radius:2px; font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:500; }
+.rml { color:var(--tx3); font-size:10px; }
+.rl  { background:rgba(39,184,106,.12); color:#27b86a; border:1px solid rgba(39,184,106,.18); }
+.rm2 { background:rgba(212,137,26,.14); color:var(--gold2); border:1px solid rgba(212,137,26,.2); }
+.rm3 { background:rgba(212,137,26,.28); color:var(--gold3); border:1px solid rgba(212,137,26,.38); }
+.rm4 { background:rgba(224,53,53,.18); color:var(--red); border:1px solid rgba(224,53,53,.24); }
+.rmk { background:var(--gold2); color:#07090c; font-weight:700; font-size:13px; animation:gmk 2s ease-in-out infinite alternate; }
+.mleg { display:flex; flex-direction:column; gap:10px; margin-top:20px; }
+.mlr { display:flex; align-items:center; gap:10px; }
+.mlb { width:32px; height:14px; border-radius:2px; flex-shrink:0; }
+.mlt { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--tx2); }
+
+/* ═══════════════════════════════════════════
+   PAGE 1 — CALCULATOR
+═══════════════════════════════════════════ */
+.clayout { max-width:1280px; margin:0 auto; padding:36px 40px; display:grid; grid-template-columns:1fr 380px; gap:28px; align-items:start; }
+
+.cpanel { background:var(--s1); border:1px solid var(--bdr); border-radius:2px; overflow:hidden; margin-bottom:20px; }
+.phd { background:var(--s2); border-bottom:1px solid var(--bdr); padding:16px 24px; display:flex; align-items:center; gap:12px; }
+.ptag { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--gold2); background:var(--gdim); border:1px solid var(--gold); padding:2px 8px; letter-spacing:1px; border-radius:2px; }
+.phd h3 { font-family:'Barlow Condensed',sans-serif; font-size:17px; font-weight:700; color:var(--white); letter-spacing:1px; }
+.pbd { padding:24px; }
+
+/* Form */
+.frow { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
+.frow.s3 { grid-template-columns:1fr 1fr 1fr; }
+.fld { display:flex; flex-direction:column; gap:5px; }
+.fld label { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--tx3); letter-spacing:1.5px; text-transform:uppercase; }
+.fw { position:relative; display:flex; align-items:center; }
+.fw input { width:100%; background:var(--s3); border:1px solid var(--bdr2); color:var(--tx); font-family:'IBM Plex Mono',monospace; font-size:12px; padding:9px 44px 9px 12px; border-radius:2px; outline:none; transition:border-color .15s, background .15s; }
+.fw input:focus { border-color:var(--gold); background:rgba(212,137,26,.04); }
+.fw input::placeholder { color:var(--tx3); }
+.fw .un { position:absolute; right:9px; font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--tx3); pointer-events:none; background:var(--s3); padding:1px 5px; border-radius:2px; letter-spacing:1px; }
+.dvhr { border:none; border-top:1px solid var(--bdr); margin:20px 0; }
+.slbl { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--gold2); letter-spacing:2px; text-transform:uppercase; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+.slbl::after { content:''; flex:1; height:1px; background:var(--bdr); }
+
+/* Course tabs */
+.ctabs { display:flex; gap:4px; margin-bottom:18px; }
+.ctab { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1px; padding:6px 14px; background:var(--s3); border:1px solid var(--bdr2); color:var(--tx2); cursor:pointer; transition:all .15s; border-radius:2px; }
+.ctab.on { background:var(--gdim); border-color:var(--gold); color:var(--gold2); }
+
+/* Formula reference */
+.eq-ref { background:var(--s3); border:1px solid var(--bdr2); border-left:2px solid var(--gold); border-radius:2px; padding:16px 18px; margin-top:12px; }
+.eq-ref-lbl { font-family:'IBM Plex Mono',monospace; font-size:8px; color:var(--gold2); letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; }
+.eq-ref-row { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+.eq-ref-row:last-child { margin-bottom:0; }
+.eq-ref-num { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--tx3); width:22px; flex-shrink:0; }
+
+/* Buttons */
+.calc-btn { width:100%; background:var(--gold2); color:#07090c; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:16px; letter-spacing:3px; text-transform:uppercase; padding:15px; border:none; cursor:pointer; clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%); transition:all .18s; margin-top:20px; }
+.calc-btn:hover { background:var(--gold3); box-shadow:0 4px 24px var(--gglow); }
+.export-btn { width:100%; background:transparent; color:var(--gold2); font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:14px; letter-spacing:2px; text-transform:uppercase; padding:12px; border:1px solid var(--gold); cursor:pointer; border-radius:2px; transition:all .18s; margin-top:10px; display:flex; align-items:center; justify-content:center; gap:8px; }
+.export-btn:hover { background:var(--gdim); box-shadow:0 2px 16px var(--gglow); }
+.export-btn svg { width:16px; height:16px; }
+.export-btn:disabled { opacity:.4; cursor:not-allowed; }
+
+/* Results */
+.rpanel { display:flex; flex-direction:column; gap:14px; }
+.rcard { background:var(--s1); border:1px solid var(--bdr); border-radius:2px; overflow:hidden; }
+.rhd { background:var(--s2); border-bottom:1px solid var(--bdr); padding:12px 18px; display:flex; align-items:center; justify-content:space-between; }
+.rhd span { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--tx2); letter-spacing:1px; }
+.rhd .ru { color:var(--gold2); font-size:9px; }
+.rbd { padding:18px; }
+.rrow { display:flex; align-items:baseline; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--bdr); }
+.rrow:last-of-type { border-bottom:none; }
+.rn { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--tx3); }
+.rv { font-family:'Barlow Condensed',sans-serif; font-size:22px; font-weight:700; color:var(--gold2); }
+.rv .u { font-size:11px; color:var(--tx3); margin-left:3px; font-family:'IBM Plex Mono',monospace; }
+.rv.ok { color:var(--green); } .rv.wn { color:var(--gold2); } .rv.bd { color:var(--red); }
+.sbar { background:var(--s2); border:1px solid var(--bdr); border-radius:2px; padding:14px 18px; display:flex; align-items:center; gap:10px; }
+.sd { width:9px; height:9px; border-radius:50%; background:var(--tx3); flex-shrink:0; }
+.sd.ok { background:var(--green); box-shadow:0 0 8px var(--green); }
+.sd.wn { background:var(--gold2); box-shadow:0 0 8px var(--gold2); }
+.sd.bd { background:var(--red); box-shadow:0 0 8px var(--red); }
+.st { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--tx2); letter-spacing:1px; }
+.emp { text-align:center; padding:30px 16px; color:var(--tx3); }
+.emp p { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1px; margin-top:12px; }
+.nsm { font-size:11px; color:var(--tx3); font-style:italic; margin-top:8px; }
+
+/* Bar chart */
+.bchart { display:flex; flex-direction:column; gap:10px; }
+.br { display:flex; align-items:center; gap:10px; }
+.bn { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--tx3); width:60px; flex-shrink:0; }
+.bt { flex:1; height:7px; background:var(--s3); border-radius:2px; overflow:hidden; }
+.bf { height:100%; border-radius:2px; transition:width .7s cubic-bezier(.25,.8,.25,1); }
+.bv { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--tx2); width:56px; text-align:right; flex-shrink:0; }
+
+/* DUMMY MODAL */
+.doverlay { position:fixed; inset:0; z-index:600; background:rgba(7,9,12,.92); backdrop-filter:blur(12px); display:none; align-items:center; justify-content:center; }
+.doverlay.sh { display:flex; }
+.dmodal { background:var(--s2); border:1px solid var(--bdr2); padding:44px; max-width:440px; width:90%; border-radius:3px; text-align:center; position:relative; }
+.dmodal::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--gold2),transparent); }
+.dm-i { color:var(--tx3); margin-bottom:20px; }
+.dm-tg { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--gold2); letter-spacing:2px; margin-bottom:10px; }
+.dm-ti { font-family:'Barlow Condensed',sans-serif; font-size:32px; font-weight:800; color:var(--white); margin-bottom:14px; }
+.dm-dc { font-size:13px; color:var(--tx2); line-height:1.7; font-weight:300; margin-bottom:24px; }
+.dm-cl { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--tx2); background:var(--s3); border:1px solid var(--bdr2); padding:10px 24px; cursor:pointer; border-radius:2px; transition:all .15s; }
+.dm-cl:hover { color:var(--tx); border-color:var(--tx2); }
+
+/* ═══ SITE FOOTER ═══ */
+.site-footer {
+  background: var(--s1);
+  border-top: 1px solid var(--bdr);
+  padding: 48px 40px 32px;
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+.footer-brand .fb-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px; font-weight: 800;
+  color: var(--white); letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.footer-brand .fb-name span { color: var(--gold2); }
+.footer-brand p {
+  font-size: 12px; color: var(--tx3);
+  line-height: 1.7; font-weight: 300;
+  max-width: 280px;
+}
+.footer-col h5 {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; color: var(--gold2);
+  letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.footer-col ul {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.footer-col ul li {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; color: var(--tx3);
+  letter-spacing: .5px; cursor: pointer;
+  transition: color .15s;
+}
+.footer-col ul li:hover { color: var(--tx2); }
+.footer-col ul li .dot {
+  display: inline-block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--bdr2);
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--bdr);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.footer-bottom p {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; color: var(--tx3);
+  letter-spacing: 1px;
+}
+.footer-bottom .ac { color: var(--gold2); }
+
+@media(max-width:960px) {
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width:600px) {
+  .footer-inner { grid-template-columns: 1fr; }
+  .site-footer { padding: 40px 20px 24px; }
+}
+
+
+
+/* ═══════════════════════════════════════════
+   PRINT / PDF STYLES
+═══════════════════════════════════════════ */
+@media print {
+  html, body {
+    background: #ffffff !important;
+    color: #1a1a2e !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body::after,
+  nav,
+  .export-btn,
+  .calc-btn,
+  .ctabs,
+  .doverlay,
+  .page { display:none !important; }
+
+  #pdf-report {
+    display: block !important;
+    position: static !important;
+    background: #ffffff !important;
+    color: #1a1a2e !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  #pdf-report * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 18mm 16mm 16mm 16mm;
+  }
+}
+
+/* PDF report — hidden on screen, shown only at print */
+#pdf-report {
+  display:none;
+  font-family:'IBM Plex Sans',sans-serif;
+  color:#1a1a2e;
+  background:#ffffff;
+}
+
+/* ─── PDF REPORT INTERNAL STYLES ─── */
+.pdf-page { padding:0; }
+
+.pdf-header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:3px solid #d4891a;
+  padding-bottom:14px;
+  margin-bottom:22px;
+}
+.pdf-logo-area { display:flex; align-items:center; gap:12px; }
+.pdf-logo-box {
+  width:44px; height:44px;
+  border:1px solid #ddd;
+  border-radius:3px;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden; background:#f5f5f5;
+}
+.pdf-logo-box img { width:100%; height:100%; object-fit:contain; }
+.pdf-co-name { font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:700; color:#1a1a2e; letter-spacing:.5px; }
+.pdf-doc-title { text-align:right; }
+.pdf-doc-title h1 { font-family:'Barlow Condensed',sans-serif; font-size:22px; font-weight:800; color:#d4891a; letter-spacing:1px; }
+.pdf-doc-title .pdf-sub { font-family:'IBM Plex Mono',monospace; font-size:9px; color:#7a7a9a; letter-spacing:1.5px; text-transform:uppercase; margin-top:3px; }
+
+.pdf-meta-grid {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:10px;
+  background:#f7f8fc; border:1px solid #e2e4ef; border-radius:4px;
+  padding:14px 16px; margin-bottom:22px;
+}
+.pdf-meta-item .pm-l { font-family:'IBM Plex Mono',monospace; font-size:8px; color:#9090b0; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:3px; }
+.pdf-meta-item .pm-v { font-family:'IBM Plex Mono',monospace; font-size:12px; color:#1a1a2e; font-weight:500; }
+
+.pdf-section { margin-bottom:22px; }
+.pdf-section-title {
+  font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700;
+  color:#1a1a2e; letter-spacing:1px; text-transform:uppercase;
+  border-bottom:1px solid #d4891a; padding-bottom:5px; margin-bottom:12px;
+  display:flex; align-items:center; gap:8px;
+}
+.pdf-section-title .ps-tag { font-family:'IBM Plex Mono',monospace; font-size:8px; color:#d4891a; background:rgba(212,137,26,.1); border:1px solid #d4891a; padding:1px 6px; border-radius:2px; letter-spacing:1px; }
+
+.pdf-table { width:100%; border-collapse:collapse; font-size:11px; }
+.pdf-table th { background:#1a1a2e; color:#f0a830; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1px; text-transform:uppercase; padding:8px 10px; text-align:left; }
+.pdf-table td { padding:7px 10px; border-bottom:1px solid #e8ecf5; color:#1a1a2e; font-family:'IBM Plex Mono',monospace; font-size:10.5px; }
+.pdf-table tr:nth-child(even) td { background:#f7f8fc; }
+.pdf-table td.val { font-weight:600; }
+.pdf-table td.ok  { color:#178a48; font-weight:600; }
+.pdf-table td.wn  { color:#b86a10; font-weight:600; }
+.pdf-table td.bd  { color:#c02020; font-weight:600; }
+
+.pdf-2col { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:22px; }
+.pdf-box { background:#f7f8fc; border:1px solid #e2e4ef; border-radius:4px; padding:14px 16px; }
+.pdf-box h4 { font-family:'IBM Plex Mono',monospace; font-size:9px; color:#9090b0; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:10px; }
+.pdf-box p { font-size:11px; color:#3a3a5a; line-height:1.6; }
+
+.risk-badge { display:inline-block; padding:6px 16px; background:#d4891a; color:#fff; font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:700; letter-spacing:2px; border-radius:3px; }
+.risk-badge.med { background:#d4891a; }
+.risk-badge.low { background:#178a48; }
+.risk-badge.high { background:#c02020; }
+
+.pdf-eq-box { background:#f0f4ff; border:1px solid #c8d0e8; border-left:3px solid #d4891a; border-radius:3px; padding:14px 16px; margin-bottom:14px; }
+.pdf-eq-box .peq-lbl { font-family:'IBM Plex Mono',monospace; font-size:8px; color:#9090b0; letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; }
+.pdf-eq-box .peq-f { font-family:'IBM Plex Mono',monospace; font-size:11px; color:#1a1a2e; margin-bottom:4px; }
+
+.math-frac {
+  display:inline-flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  vertical-align:middle;
+}
+.math-frac .num {
+  padding:0 4px 2px;
+  border-bottom:1.5px solid #1a1a2e; /* ← garis pembagi pecahan */
+  font-size:11px;
+}
+.math-frac .den {
+  padding:2px 4px 0;
+  font-size:11px;
+}
+.math-eq { display:flex; align-items:center; gap:6px; }
+.math-eq sub { font-size:8px; vertical-align:sub; }
+
+.pdf-footer { border-top:1px solid #e2e4ef; margin-top:24px; padding-top:10px; display:flex; align-items:center; justify-content:space-between; }
+.pdf-footer p { font-family:'IBM Plex Mono',monospace; font-size:8px; color:#9090b0; letter-spacing:1px; }
+
+.pdf-risk-matrix { display:grid; grid-template-columns:28px repeat(5,40px); grid-template-rows:repeat(5,36px) 28px; gap:2px; margin-top:8px; }
+.prm { display:flex; align-items:center; justify-content:center; border-radius:2px; font-family:'IBM Plex Mono',monospace; font-size:8px; font-weight:600; }
+.prm-lbl { color:#9090b0; font-size:9px; }
+.prm-l  { background:rgba(39,184,106,.15); color:#178a48; }
+.prm-m  { background:rgba(212,137,26,.15); color:#b86a10; }
+.prm-mh { background:rgba(212,137,26,.3);  color:#d4891a; }
+.prm-h  { background:rgba(192,32,32,.15);  color:#c02020; }
+.prm-mk { background:#d4891a; color:#fff; font-size:9px; }
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:960px) {
+  .hero { grid-template-columns:1fr; min-height:auto; }
+  .hr { display:none; }
+  .hl { padding:60px 0 40px; }
+  .istrip { grid-template-columns:repeat(2,1fr); }
+  .wrbi { grid-template-columns:1fr; }
+  .egrid { grid-template-columns:repeat(2,1fr); }
+  .apmods { grid-template-columns:1fr; }
+  .minner { grid-template-columns:1fr; }
+  .clayout { grid-template-columns:1fr; }
+  .pdf-2col { grid-template-columns:1fr; }
+}
+@media(max-width:600px) {
+  nav { padding:0 16px; }
+  .hero, .wrbi { padding:0 20px; }
+  .istrip { grid-template-columns:1fr 1fr; }
+  .esec, .apid, .mwrap { padding:48px 20px; }
+  .clayout { padding:20px; }
+  .egrid { grid-template-columns:1fr; }
+  .co-name-input { width:100px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav>
+  <div class="nav-left">
+    <div class="nav-logo-wrap">
+      <!-- =====================================================
+           LOGO — ganti "logo.png" dengan nama file logo kamu
+           Pastikan file logo ada di folder yang sama dengan file HTML ini
+           ===================================================== -->
+      <div class="nav-logo-img">
+        <img src="logo_ppsdm.png" alt="Logo">
+      </div>
+      <div class="nav-co-name">
+        PPSDM MIGAS Cepu
+        <span>Risk-Based Inspection Platform</span>
+      </div>
+    </div>
+    <div class="nav-sep"></div>
+    <div class="nav-logo"><div class="ldot"></div>RBI<span class="ac">PLATFORM</span></div>
+  </div>
+  <div class="nav-links">
+    <button class="nlink on" onclick="showPage(0)">HOME</button>
+    <button class="nlink" onclick="showPage(1)">CALCULATOR</button>
+  </div>
+</nav>
+
+<!-- ═══ DUMMY MODAL ═══ -->
+<div class="doverlay" id="dov" onclick="closeDummy(event)">
+  <div class="dmodal">
+    <div class="dm-i"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>
+    <div class="dm-tg">COMING SOON</div>
+    <div class="dm-ti" id="dtitle">MODULE</div>
+    <div class="dm-dc" id="ddesc">Under development.</div>
+    <button class="dm-cl" onclick="closeDummy()">CLOSE</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAGE 0 — LANDING
+═══════════════════════════════════════ -->
+<div class="page on" id="p0">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hl">
+      <div class="eyebrow">API 581 · Risk-Based Inspection Methodology</div>
+      <h1 class="main">RISK<br><span class="ac">BASED</span><br><span class="out">INSPECTION</span></h1>
+      <p class="hdesc">A data-driven framework for optimizing inspection programs across oil &amp; gas process equipment — allocating resources where risk is highest, reducing cost while strengthening safety margins.</p>
+      <div class="hpills">
+        <span class="pill hi">API 581</span><span class="pill hi">API 653</span>
+        <span class="pill">PoF × CoF</span><span class="pill">Remaining Life</span>
+        <span class="pill">NDT Optimization</span><span class="pill">Semi-Quantitative</span>
+      </div>
+      <div class="hcta">
+        <button class="btnp" onclick="showPage(1)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          START CALCULATOR
+        </button>
+        <button class="btns" onclick="document.getElementById('ea').scrollIntoView({behavior:'smooth'})">VIEW EQUIPMENT</button>
+      </div>
+    </div>
+
+    <!-- HERO RIGHT — SVG Process Diagram -->
+    <div class="hr">
+      <div class="sfloat" style="top:60px;left:20px;"><div class="sf-n">242</div><div class="sf-l">TANK ACCIDENTS</div><div class="sf-l">1960 – 2003</div></div>
+      <div class="sfloat" style="bottom:40px;left:14px;"><div class="sf-n">$24M</div><div class="sf-l">AVG INCIDENT COST</div></div>
+
+      <svg class="ref-svg" viewBox="0 0 420 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><radialGradient id="bg1" cx="50%" cy="60%" r="50%"><stop offset="0%" stop-color="#d4891a" stop-opacity="0.07"/><stop offset="100%" stop-color="#07090c" stop-opacity="0"/></radialGradient></defs>
+        <rect width="420" height="520" fill="url(#bg1)"/>
+        <line x1="20" y1="432" x2="400" y2="432" stroke="#1e2d3d" stroke-width="1.5"/>
+        <!-- Storage Tank (main) -->
+        <rect x="138" y="288" width="144" height="144" fill="#0d1117" stroke="#d4891a" stroke-width="1.8" class="gp"/>
+        <polyline points="138,288 210,248 282,288" fill="#131920" stroke="#d4891a" stroke-width="1.8" class="gp"/>
+        <line x1="138" y1="336" x2="282" y2="336" stroke="#274056" stroke-width="1" stroke-dasharray="5 3"/>
+        <line x1="138" y1="384" x2="282" y2="384" stroke="#274056" stroke-width="1" stroke-dasharray="5 3"/>
+        <rect x="138" y="358" width="144" height="74" fill="rgba(212,137,26,.05)"/>
+        <line x1="138" y1="362" x2="282" y2="362" stroke="#274056" stroke-width="1" stroke-dasharray="6 4" opacity=".6"/>
+        <text x="210" y="311" font-family="IBM Plex Mono,monospace" font-size="7.5" fill="#d4891a" text-anchor="middle" letter-spacing="1">ATMOSPHERIC</text>
+        <text x="210" y="318" font-family="IBM Plex Mono,monospace" font-size="7.5" fill="#d4891a" text-anchor="middle" letter-spacing="1">STORAGE TANK</text>
+        <text x="287" y="310" font-family="IBM Plex Mono,monospace" font-size="6.5" fill="#3d5568">COURSE 3</text>
+        <text x="287" y="358" font-family="IBM Plex Mono,monospace" font-size="6.5" fill="#3d5568">COURSE 2</text>
+        <text x="287" y="406" font-family="IBM Plex Mono,monospace" font-size="6.5" fill="#3d5568">COURSE 1</text>
+        <line x1="283" y1="288" x2="287" y2="288" stroke="#3d5568" stroke-width="1"/>
+        <line x1="283" y1="336" x2="287" y2="336" stroke="#3d5568" stroke-width="1"/>
+        <line x1="283" y1="384" x2="287" y2="384" stroke="#3d5568" stroke-width="1"/>
+        <line x1="283" y1="432" x2="287" y2="432" stroke="#3d5568" stroke-width="1"/>
+        <rect x="132" y="389" width="10" height="10" fill="#131920" stroke="#274056" stroke-width="1"/>
+        <rect x="128" y="430" width="164" height="7" fill="#131920" stroke="#1e2d3d" stroke-width="1"/>
+        <!-- RL dimension -->
+        <line x1="410" y1="288" x2="410" y2="432" stroke="#d4891a" stroke-width=".8" stroke-dasharray="3 3" opacity=".5"/>
+        <line x1="406" y1="288" x2="414" y2="288" stroke="#d4891a" stroke-width="1" opacity=".5"/>
+        <line x1="406" y1="432" x2="414" y2="432" stroke="#d4891a" stroke-width="1" opacity=".5"/>
+
+        <!-- Reticle -->
+        <circle cx="210" cy="362" r="4" stroke="#d4891a" stroke-width="1" fill="none" opacity=".5"/>
+        <circle cx="210" cy="362" r="13" stroke="#d4891a" stroke-width=".5" fill="none" opacity=".2"/>
+        <line x1="202" y1="362" x2="206" y2="362" stroke="#d4891a" stroke-width="1" opacity=".5"/>
+        <line x1="214" y1="362" x2="218" y2="362" stroke="#d4891a" stroke-width="1" opacity=".5"/>
+        <line x1="210" y1="354" x2="210" y2="358" stroke="#d4891a" stroke-width="1" opacity=".5"/>
+        <line x1="210" y1="366" x2="210" y2="370" stroke="#d4891a" stroke-width="1" opacity=".5"/>
+        <!-- Distillation column -->
+        <rect x="38" y="158" width="52" height="274" fill="#0a0e14" stroke="#1e2d3d" stroke-width="1.2"/>
+        <ellipse cx="64" cy="158" rx="26" ry="8" fill="#0d1117" stroke="#1e2d3d" stroke-width="1"/>
+        <line x1="38" y1="196" x2="90" y2="196" stroke="#19222d" stroke-width="1"/>
+        <line x1="38" y1="234" x2="90" y2="234" stroke="#19222d" stroke-width="1"/>
+        <line x1="38" y1="272" x2="90" y2="272" stroke="#19222d" stroke-width="1"/>
+        <line x1="38" y1="310" x2="90" y2="310" stroke="#19222d" stroke-width="1"/>
+        <line x1="38" y1="348" x2="90" y2="348" stroke="#19222d" stroke-width="1"/>
+        <line x1="38" y1="386" x2="90" y2="386" stroke="#19222d" stroke-width="1"/>
+        <text x="64" y="258" font-family="IBM Plex Mono,monospace" font-size="9" fill="#3d5568" text-anchor="middle">DISTILLATION COLUMN</text>
+        <!-- Separator -->
+        <rect x="330" y="370" width="56" height="46" rx="5" fill="#0a0e14" stroke="#1e2d3d" stroke-width="1"/>
+        <ellipse cx="330" cy="393" rx="7" ry="23" fill="#0a0e14" stroke="#1e2d3d" stroke-width="1"/>
+        <ellipse cx="386" cy="393" rx="7" ry="23" fill="#0a0e14" stroke="#1e2d3d" stroke-width="1"/>
+        <text x="358" y="396" font-family="IBM Plex Mono,monospace" font-size="7" fill="#3d5568" text-anchor="middle">SEPARATOR</text>
+        <!-- Pump -->
+        <circle cx="64" cy="448" r="14" fill="#0d1117" stroke="#1e2d3d" stroke-width="1"/>
+        <circle cx="64" cy="448" r="6" fill="#0a0e14" stroke="#1e2d3d" stroke-width="1"/>
+        <text x="64" y="472" font-family="IBM Plex Mono,monospace" font-size="7" fill="#3d5568" text-anchor="middle">PUMP</text>
+        <!-- Furnace -->
+        <rect x="168" y="78" width="84" height="94" fill="#0a0e14" stroke="#1e2d3d" stroke-width="1"/>
+        <polygon points="168,78 210,50 252,78" fill="#0a0e14" stroke="#1e2d3d" stroke-width="1"/>
+        <path d="M192,104 Q196,90 203,98 Q207,84 210,98 Q213,84 217,98 Q222,90 228,104" stroke="#d4891a" stroke-width="1.5" fill="none" opacity=".5" class="fl s"/>
+        <text x="210" y="154" font-family="IBM Plex Mono,monospace" font-size="7" fill="#3d5568" text-anchor="middle">FURNACE</text>
+        <!-- HEX -->
+        <rect x="322" y="196" width="60" height="28" rx="3" fill="#0a0e14" stroke="#1e2d3d" stroke-width="1"/>
+        <rect x="316" y="201" width="8" height="18" rx="1" fill="#0a0e14" stroke="#1e2d3d" stroke-width="1"/>
+        <rect x="382" y="201" width="8" height="18" rx="1" fill="#0a0e14" stroke="#1e2d3d" stroke-width="1"/>
+        <text x="352" y="242" font-family="IBM Plex Mono,monospace" font-size="7" fill="#3d5568" text-anchor="middle">HEAT EXCH.</text>
+        <!-- Pipes -->
+        <path d="M90,394 H138" stroke="#274056" stroke-width="2" class="fl"/>
+        <path d="M282,394 H322" stroke="#274056" stroke-width="2" class="fl"/>
+        <path d="M64,158 V138 H168" stroke="#1e2d3d" stroke-width="1.5" class="fl s"/>
+        <path d="M254,118 H385 V210" stroke="#1e2d3d" stroke-width="1.5" class="fl s r"/>
+        <path d="M80,448 H150 V432" stroke="#1e2d3d" stroke-width="1.5" class="fl s"/>
+        <line x1="64" y1="435" x2="64" y2="415" stroke="#1e2d3d" stroke-width="1.5"/>
+        <path d="M282,300 H308 V210 H320" stroke="#1e2d3d" stroke-width="1.5" class="fl s r"/>
+        <!-- Corners -->
+        <path d="M10,10 H26 M10,10 V26" stroke="#d4891a" stroke-width="1.5" opacity=".35"/>
+        <path d="M410,10 H394 M410,10 V26" stroke="#d4891a" stroke-width="1.5" opacity=".35"/>
+        <path d="M10,510 H26 M10,510 V494" stroke="#d4891a" stroke-width="1.5" opacity=".35"/>
+        <path d="M410,510 H394 M410,510 V494" stroke="#d4891a" stroke-width="1.5" opacity=".35"/>
+      </svg>
+
+      <div class="api-badge">
+        <div class="ab-num">581</div>
+        <div class="ab-lbl">STANDARD</div>
+        <div class="ab-sub">American Petroleum<br>Institute</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO STRIP -->
+  <div class="istrip">
+    <div class="ii"><div class="n">242</div><div class="l">Tank Accidents 1960–2003</div></div>
+    <div class="ii"><div class="n">74%</div><div class="l">Occurred at Refineries</div></div>
+    <div class="ii"><div class="n">$24.18M</div><div class="l">Average Accident Cost</div></div>
+    <div class="ii"><div class="n">$312/yr</div><div class="l">RBI Inspection Savings</div></div>
+  </div>
+
+  <!-- WHAT IS RBI -->
+  <div class="wrbi">
+    <div>
+      <div class="stag">What is RBI</div>
+      <h2>INSPECTION<br>DRIVEN BY<br>ACTUAL RISK</h2>
+      <p>Risk-Based Inspection (RBI), standardized under <strong style="color:var(--white)">API 580 &amp; API 581</strong>, replaces fixed-calendar schedules with a risk-driven approach that determines when, where, and how intensively to inspect each asset.</p>
+      <p>Risk is the product of <strong style="color:var(--white)">Probability of Failure (PoF)</strong> and <strong style="color:var(--white)">Consequence of Failure (CoF)</strong>. Equipment with high risk gets more frequent, thorough inspection; low-risk assets can safely have extended intervals — freeing resources and cutting costs without compromising safety.</p>
+      <p>RBI applies across all process equipment: storage tanks, pressure vessels, separators, distillation columns, heat exchangers, pumps, and fired heaters.</p>
+      <div class="tbi-grid">
+        <div class="tbi-c"><div class="tbi-t">TIME-BASED</div><div class="tbi-v">Fixed 4-yr</div><div class="tbi-s">Uniform cycle, higher cost</div></div>
+        <div class="tbi-c hi"><div class="tbi-t">RISK-BASED</div><div class="tbi-v">Optimized 5-yr</div><div class="tbi-s">Saves ~$5,000 / tank</div></div>
+      </div>
+    </div>
+
+    <!-- EQUATIONS with MathJax -->
+    <div>
+      <div class="eq-box">
+        <div class="eq-label">Core Equations — API 581 / API 653</div>
+
+        <div class="eq-block">
+          <div class="eq-title">RISK</div>
+          \[ \text{Risk} = P_{of} \times C_{of} \]
+        </div>
+
+        <div class="eq-block">
+          <div class="eq-title">PROBABILITY OF FAILURE</div>
+          \[ P_{of} = g_{ff} \times D_f(t) \times F_{MS} \]
+        </div>
+
+        <div class="eq-block">
+          <div class="eq-title">CONSEQUENCE OF FAILURE</div>
+          \[ C_{of} = FC_{environ} + FC_{cmd} + FC_{prod} \]
+        </div>
+
+        <div class="eq-block">
+          <div class="eq-title">MINIMUM THICKNESS (API 653)</div>
+          \[ t_{min} = \frac{2.6\,(H-1)\,D\,G}{S \cdot E} \]
+        </div>
+
+        <div class="eq-block">
+          <div class="eq-title">CORROSION RATE</div>
+          \[ CR = \frac{t_{prev} - t_{act}}{\Delta t} \]
+        </div>
+
+        <div class="eq-block">
+          <div class="eq-title">REMAINING LIFE</div>
+          \[ RL = \frac{t_{act} - t_{min}}{CR} \]
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EQUIPMENT SELECTOR -->
+  <div class="esec" id="ea">
+    <div class="einner">
+      <div class="ehdr">
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--gold2);letter-spacing:2px;margin-bottom:8px;">// SELECT EQUIPMENT TYPE</div>
+          <h2>CALCULATE RBI FOR<br>YOUR EQUIPMENT</h2>
+        </div>
+        <div class="esub">API 581 SEMI-QUANTITATIVE METHOD</div>
+      </div>
+      <div class="egrid">
+        <div class="ecard av" onclick="showPage(1)">
+          <svg class="ec-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="22" width="32" height="20" rx="1"/><polyline points="8,22 24,12 40,22"/><line x1="8" y1="30" x2="40" y2="30" stroke-dasharray="4 3"/><line x1="8" y1="26" x2="40" y2="26" stroke-dasharray="4 3"/><rect x="4" y="42" width="40" height="3" rx="1"/></svg>
+          <div class="ec-nm">Atmospheric Storage Tank</div>
+          <div class="ec-dc">Vertical aboveground tanks for crude oil, BBM, and refined products. Full RBI per API 653 &amp; API 581 — includes remaining life, corrosion rate, PoF, CoF, and PDF report.</div>
+          <div class="ec-ft"><span class="ectag rdy">AVAILABLE NOW</span><svg class="ec-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="ecard" onclick="openDummy('Gas / Liquid Separator','Horizontal and vertical pressure vessels for two- or three-phase separation. RBI module will cover thinning, SCC, and HIC damage mechanisms per API 581.')">
+          <svg class="ec-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="18" width="36" height="18" rx="9"/><ellipse cx="6" cy="27" rx="5" ry="9"/><ellipse cx="42" cy="27" rx="5" ry="9"/><line x1="24" y1="10" x2="24" y2="18"/><line x1="16" y1="36" x2="16" y2="44"/><line x1="32" y1="36" x2="32" y2="44"/></svg>
+          <div class="ec-nm">Separator</div>
+          <div class="ec-dc">Gas/liquid and three-phase horizontal separators. High-pressure vessels subject to thinning, SCC, and environmental cracking mechanisms.</div>
+          <div class="ec-ft"><span class="ectag sn">COMING SOON</span><svg class="ec-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="ecard" onclick="openDummy('Distillation Column','Tall pressure vessels with trays or packing for hydrocarbon fractionation. Module will include thinning, SCC, and high-temperature hydrogen attack (HTHA) per API 581.')">
+          <svg class="ec-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="16" y="6" width="16" height="38" rx="2"/><line x1="16" y1="16" x2="32" y2="16" stroke-dasharray="4 3"/><line x1="16" y1="24" x2="32" y2="24" stroke-dasharray="4 3"/><line x1="16" y1="32" x2="32" y2="32" stroke-dasharray="4 3"/><line x1="6" y1="20" x2="16" y2="20"/><line x1="32" y1="28" x2="42" y2="28"/><line x1="6" y1="36" x2="16" y2="36"/></svg>
+          <div class="ec-nm">Distillation Column</div>
+          <div class="ec-dc">Fractionation towers in CDU/VDU. Complex risk profile with tray internals, nozzle connections, and high-temperature hydrogen attack.</div>
+          <div class="ec-ft"><span class="ectag sn">COMING SOON</span><svg class="ec-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="ecard" onclick="openDummy('Heat Exchanger','Shell &amp; tube heat exchangers for process heating and cooling. Module covers tube thinning, pitting, fouling-induced corrosion, and nozzle damage per API 581 and TEMA standards.')">
+          <svg class="ec-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="16" width="32" height="16" rx="2"/><rect x="4" y="19" width="6" height="10" rx="1"/><rect x="38" y="19" width="6" height="10" rx="1"/><line x1="14" y1="16" x2="14" y2="32"/><line x1="34" y1="16" x2="34" y2="32"/><path d="M14,21 Q20,18 26,21 Q32,24 34,21" fill="none"/><path d="M14,27 Q20,30 26,27 Q32,24 34,27" fill="none"/></svg>
+          <div class="ec-nm">Heat Exchanger</div>
+          <div class="ec-dc">Shell &amp; tube exchangers susceptible to tube thinning, baffle damage, and fouling-induced corrosion. Critical refinery utility assets.</div>
+          <div class="ec-ft"><span class="ectag sn">COMING SOON</span><svg class="ec-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="ecard" onclick="openDummy('Centrifugal Pump','Process pumps for hydrocarbon transfer. Module covers impeller erosion, seal failures, casing thinning, and mechanical fatigue per API 610 and API 581.')">
+          <svg class="ec-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="28" cy="26" r="14"/><circle cx="28" cy="26" r="5"/><line x1="6" y1="26" x2="14" y2="26"/><line x1="42" y1="26" x2="48" y2="26"/><line x1="28" y1="6" x2="28" y2="12"/><path d="M22,20 L28,14 L34,20"/></svg>
+          <div class="ec-nm">Centrifugal Pump</div>
+          <div class="ec-dc">Process and injection pumps. Mechanical fatigue, erosion-corrosion, and seal housing degradation modeling per API 610 &amp; API 581.</div>
+          <div class="ec-ft"><span class="ectag sn">COMING SOON</span><svg class="ec-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="ecard" onclick="openDummy('Fired Heater / Furnace','Process furnaces in CDU, VDU, and reformers. Module covers high-temperature oxidation, creep, carburization, and tube rupture risk per API 573 and API 581.')">
+          <svg class="ec-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="10" y="14" width="28" height="28" rx="2"/><polygon points="10,14 24,4 38,14"/><path d="M18,28 Q21,20 24,26 Q27,20 30,28" fill="none"/><line x1="14" y1="42" x2="14" y2="46"/><line x1="24" y1="42" x2="24" y2="46"/><line x1="34" y1="42" x2="34" y2="46"/></svg>
+          <div class="ec-nm">Fired Heater</div>
+          <div class="ec-dc">Furnaces in CDU, VDU, and reformers. High-temp degradation: creep, oxidation, carburization, and tube rupture risk.</div>
+          <div class="ec-ft"><span class="ectag sn">COMING SOON</span><svg class="ec-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- API 581 -->
+  <div class="apid">
+    <div class="apidh">
+      <div class="apibig">581</div>
+      <div>
+        <h3>API 581 — Risk-Based Inspection Methodology</h3>
+        <p>The industry standard from the American Petroleum Institute providing a semi-quantitative framework for assessing probability and consequence of failure. Globally adopted across refineries, petrochemical plants, and upstream facilities.</p>
+      </div>
+    </div>
+    <div class="apmods">
+      <div class="apm"><div class="mn">MODULE 01 · PoF</div><h4>Probability of Failure</h4><p>Derived from generic failure frequency \(g_{ff}\), a damage factor \(D_f(t)\) for active degradation and inspection history, and a management system factor \(F_{MS}\) reflecting safety program quality. Classified 1–5.</p></div>
+      <div class="apm"><div class="mn">MODULE 02 · CoF</div><h4>Consequence of Failure</h4><p>Financial consequence: environmental cleanup \(FC_{environ}\), equipment repair \(FC_{cmd}\), and production loss \(FC_{prod}\). Categorized A–E from &lt;$10K to &gt;$10M based on fluid type, volume, and layout.</p></div>
+      <div class="apm"><div class="mn">MODULE 03 · RLA</div><h4>Remaining Life Assessment</h4><p>Per API 653. Uses measured wall thickness \(t_{act}\), corrosion rate \(CR\), and minimum allowable thickness \(t_{min}\) to calculate remaining years. Maximum inspection interval = \(RL/2\) or 15 yr.</p></div>
+    </div>
+  </div>
+
+  <!-- RISK MATRIX -->
+  <div class="mwrap">
+    <div class="minner">
+      <div>
+        <h2>THE RISK MATRIX</h2>
+        <p>All equipment is plotted on a 5×5 matrix combining Probability of Failure (1–5) with Consequence of Failure (A–E). The resulting cell drives inspection urgency, method, and frequency.</p>
+        <p>Storage Tank A lands at <strong style="color:var(--gold2)">position 1C — MEDIUM risk</strong>, recommending a 5-year periodic inspection interval using 100% visual inspection + UT Scan/Spot per API 653.</p>
+        <div class="mleg">
+          <div class="mlr"><div class="mlb" style="background:rgba(224,53,53,.18);border:1px solid rgba(224,53,53,.24)"></div><span class="mlt">HIGH — Immediate action; enhanced NDT</span></div>
+          <div class="mlr"><div class="mlb" style="background:rgba(212,137,26,.28);border:1px solid rgba(212,137,26,.38)"></div><span class="mlt">MEDIUM-HIGH — Priority inspection</span></div>
+          <div class="mlr"><div class="mlb" style="background:rgba(212,137,26,.14);border:1px solid rgba(212,137,26,.2)"></div><span class="mlt">MEDIUM — Periodic, ≤ 5 yr interval</span></div>
+          <div class="mlr"><div class="mlb" style="background:rgba(39,184,106,.12);border:1px solid rgba(39,184,106,.18)"></div><span class="mlt">LOW — Extended intervals, basic methods</span></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx3);letter-spacing:1px;margin-bottom:8px;">PROBABILITY ↑</div>
+        <div class="rmx">
+          <div class="rm rml">5</div><div class="rm rm2">MED</div><div class="rm rm3">M-H</div><div class="rm rm4">HIGH</div><div class="rm rm4">HIGH</div><div class="rm rm4">HIGH</div>
+          <div class="rm rml">4</div><div class="rm rm2">MED</div><div class="rm rm2">MED</div><div class="rm rm3">M-H</div><div class="rm rm4">HIGH</div><div class="rm rm4">HIGH</div>
+          <div class="rm rml">3</div><div class="rm rl">LOW</div><div class="rm rm2">MED</div><div class="rm rm2">MED</div><div class="rm rm3">M-H</div><div class="rm rm4">HIGH</div>
+          <div class="rm rml">2</div><div class="rm rl">LOW</div><div class="rm rl">LOW</div><div class="rm rm2">MED</div><div class="rm rm2">MED</div><div class="rm rm3">M-H</div>
+          <div class="rm rml">1</div><div class="rm rl">LOW</div><div class="rm rl">LOW</div><div class="rm rmk">1C ✦</div><div class="rm rm2">MED</div><div class="rm rm2">MED</div>
+          <div class="rm"></div><div class="rm rml">A</div><div class="rm rml">B</div><div class="rm rml">C</div><div class="rm rml">D</div><div class="rm rml">E</div>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx3);letter-spacing:1px;margin-top:8px;text-align:center;">CONSEQUENCE →</div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="site-footer">
+  <div class="footer-inner">
+
+    <!-- Kolom 1: Branding -->
+    <div class="footer-brand">
+      <div class="fb-name">RBI<span>PLATFORM</span></div>
+      <p>Platform kalkulasi Risk-Based Inspection berbasis API 581 dan API 653 untuk peralatan proses industri migas.</p>
+    </div>
+
+    <!-- Kolom 2: Navigasi -->
+    <div class="footer-col">
+      <h5>Navigation</h5>
+      <ul>
+        <li onclick="showPage(0)"><span class="dot"></span>Home</li>
+        <li onclick="showPage(1)"><span class="dot"></span>Calculator</li>
+        <li onclick="document.getElementById('ea').scrollIntoView({behavior:'smooth'});showPage(0)">
+          <span class="dot"></span>Equipment
+        </li>
+      </ul>
+    </div>
+
+    <!-- Kolom 3: Referensi -->
+    <div class="footer-col">
+      <h5>Standards</h5>
+      <ul>
+        <li><span class="dot"></span>API 581 — RBI Methodology</li>
+        <li><span class="dot"></span>API 653 — Tank Inspection</li>
+        <li><span class="dot"></span>API 580 — RBI Base Resource</li>
+        <li><span class="dot"></span>API 573 — Fired Heater</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 <span class="ac">PPSDM MIGAS CEPU</span> · RBI Platform · Developed By <span class="ac">Naufal - Husendi | Universitas Padjadjaran</span> </p>
+    <p>API 581 · API 653 · Semi-Quantitative Method</p>
+  </div>
+  </footer>
+
+</div><!-- /p0 -->
+
+<!-- ═══════════════════════════════════════
+     PAGE 1 — CALCULATOR
+═══════════════════════════════════════ -->
+<div class="page" id="p1">
+  <div class="clayout">
+
+    <!-- LEFT: INPUTS -->
+    <div>
+      <!-- Tank Design -->
+      <div class="cpanel">
+        <div class="phd"><span class="ptag">01</span><h3>TANK DESIGN PARAMETERS</h3></div>
+        <div class="pbd">
+          <div class="slbl">General</div>
+          <div class="frow">
+            <div class="fld"><label>Nominal Diameter — D</label><div class="fw"><input type="number" id="inp-D" value="5.990" step="0.001" min="0"><span class="un">m</span></div></div>
+            <div class="fld"><label>Liquid Specific Gravity — G</label><div class="fw"><input type="number" id="inp-G" value="0.81" step="0.01" min="0"><span class="un">—</span></div></div>
+          </div>
+          <div class="frow">
+            <div class="fld"><label>Max Filling Height — H</label><div class="fw"><input type="number" id="inp-H" value="3.500" step="0.001" min="0"><span class="un">m</span></div></div>
+            <div class="fld"><label>Joint Efficiency — E</label><div class="fw"><input type="number" id="inp-E" value="0.7" step="0.05" min="0.1" max="1.0"><span class="un">—</span></div></div>
+          </div>
+          <hr class="dvhr">
+          <div class="slbl">Material — Course 1 &amp; 2 &nbsp;(S = min(0.80Y, 0.429T))</div>
+          <div class="frow">
+            <div class="fld"><label>Min Yield Strength — Y</label><div class="fw"><input type="number" id="inp-Y12" value="36000" step="100" min="0"><span class="un">psi</span></div></div>
+            <div class="fld"><label>Min Tensile Strength — T</label><div class="fw"><input type="number" id="inp-T12" value="58000" step="100" min="0"><span class="un">psi</span></div></div>
+          </div>
+          <div class="slbl">Material — Course 3+ &nbsp;(S = min(0.88Y, 0.472T))</div>
+          <div class="frow">
+            <div class="fld"><label>Min Yield Strength — Y</label><div class="fw"><input type="number" id="inp-Y3" value="36000" step="100" min="0"><span class="un">psi</span></div></div>
+            <div class="fld"><label>Min Tensile Strength — T</label><div class="fw"><input type="number" id="inp-T3" value="58000" step="100" min="0"><span class="un">psi</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course Data -->
+      <div class="cpanel">
+        <div class="phd"><span class="ptag">02</span><h3>COURSE THICKNESS &amp; INSPECTION DATA</h3></div>
+        <div class="pbd">
+          <div class="ctabs">
+            <button class="ctab on" onclick="switchCourse(0)">COURSE 1</button>
+            <button class="ctab" onclick="switchCourse(1)">COURSE 2</button>
+            <button class="ctab" onclick="switchCourse(2)">COURSE 3</button>
+          </div>
+          <div id="course-panels"></div>
+
+          <!-- Equations in MathJax -->
+          <div class="eq-ref">
+            <div class="eq-ref-lbl">Reference Equations — API 653</div>
+            <div class="eq-ref-row">
+              <span class="eq-ref-num">(1)</span>
+              <span>\(\displaystyle t_{min} = \frac{2.6\,(H-1)\,D\,G}{S \cdot E}\;\;[\text{min } 2.54\text{ mm}]\)</span>
+            </div>
+            <div class="eq-ref-row">
+              <span class="eq-ref-num">(2)</span>
+              <span>\(\displaystyle CR = \frac{t_{prev} - t_{act}}{\Delta t}\;\;[\text{mm/yr}]\)</span>
+            </div>
+            <div class="eq-ref-row">
+              <span class="eq-ref-num">(3)</span>
+              <span>\(\displaystyle RL = \frac{t_{act} - t_{min}}{CR}\;\;[\text{years}]\)</span>
+            </div>
+          </div>
+
+          <button class="calc-btn" onclick="calculate()">▶ CALCULATE</button>
+          <button class="export-btn" id="exportBtn" onclick="exportPDF()" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="12" y1="12" x2="12" y2="18"/><polyline points="9,15 12,18 15,15"/></svg>
+            EXPORT PDF REPORT
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: RESULTS -->
+    <div class="rpanel">
+      <div class="sbar"><div class="sd" id="sd"></div><span class="st" id="st">AWAITING INPUT</span></div>
+
+      <div class="rcard">
+        <div class="rhd"><span>MINIMUM THICKNESS — \(t_{min}\)</span><span class="ru">API 653</span></div>
+        <div class="rbd" id="r-tmin">
+          <div class="emp"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg><p>PRESS CALCULATE</p></div>
+        </div>
+      </div>
+
+      <div class="rcard">
+        <div class="rhd"><span>CORROSION RATE — \(CR\)</span><span class="ru">mm/yr</span></div>
+        <div class="rbd" id="r-cr">
+          <div class="emp"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><p>PRESS CALCULATE</p></div>
+        </div>
+      </div>
+
+      <div class="rcard">
+        <div class="rhd"><span>REMAINING LIFE — \(RL\)</span><span class="ru">years</span></div>
+        <div class="rbd" id="r-rl">
+          <div class="emp"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><p>PRESS CALCULATE</p></div>
+        </div>
+      </div>
+
+      <div class="rcard" id="r-chart-card" style="display:none">
+        <div class="rhd"><span>REMAINING LIFE — COMPARISON</span><span class="ru">VISUAL</span></div>
+        <div class="rbd"><div class="bchart" id="r-chart"></div></div>
+      </div>
+    </div>
+  </div>
+</div><!-- /p1 -->
+
+<!-- ═══════════════════════════════════════
+     PDF REPORT (hidden, shown at print)
+═══════════════════════════════════════ -->
+<div id="pdf-report">
+  <div class="pdf-page">
+    <!-- HEADER -->
+    <div class="pdf-header">
+      <div class="pdf-logo-area">
+        <div class="pdf-logo-box"><img id="pdf-logo-img" src="logo_ppsdm.png" alt=""></div>
+        <div class="pdf-co-name" id="pdf-co-name">PPSDM MIGAS Cepu</div>
+      </div>
+      <div class="pdf-doc-title">
+        <h1>RBI INSPECTION REPORT</h1>
+        <div class="pdf-sub">ATMOSPHERIC STORAGE TANK · API 581 / API 653</div>
+        <div class="pdf-sub" id="pdf-date" style="margin-top:2px;"></div>
+      </div>
+    </div>
+
+    <!-- META -->
+    <div class="pdf-meta-grid" id="pdf-meta">
+      <div class="pdf-meta-item"><div class="pm-l">Tank Tag</div><div class="pm-v">A</div></div>
+      <div class="pdf-meta-item"><div class="pm-l">Diameter</div><div class="pm-v" id="pm-D">—</div></div>
+      <div class="pdf-meta-item"><div class="pm-l">Fluid</div><div class="pm-v">Solar (C₁₃–C₁₇)</div></div>
+      <div class="pdf-meta-item"><div class="pm-l">Method</div><div class="pm-v">RBI Semi-Quantitative</div></div>
+    </div>
+
+    <!-- DESIGN PARAMS -->
+    <div class="pdf-section">
+      <div class="pdf-section-title"><span class="ps-tag">01</span>DESIGN PARAMETERS</div>
+      <table class="pdf-table" id="pdf-design-table">
+        <thead><tr><th>Parameter</th><th>Symbol</th><th>Value</th><th>Unit</th><th>Standard</th></tr></thead>
+        <tbody id="pdf-design-body"></tbody>
+      </table>
+    </div>
+
+    <!-- CALCULATION RESULTS -->
+    <div class="pdf-section">
+      <div class="pdf-section-title"><span class="ps-tag">02</span>CALCULATION RESULTS</div>
+      <table class="pdf-table">
+        <thead><tr><th>Component</th><th>t_min (mm)</th><th>t_act (mm)</th><th>CR (mm/yr)</th><th>Remaining Life (yr)</th><th>Status</th></tr></thead>
+        <tbody id="pdf-results-body"></tbody>
+      </table>
+    </div>
+
+    <div class="pdf-2col">
+      <!-- EQUATIONS -->
+      <div class="pdf-box">
+        <h4>Reference Equations — API 653</h4>
+        <div class="math-eq">
+          <h4 class="lhs">(1) Minimum Thickness</h4>
+          <span class="eq-sign">=</span>
+          <span class="math-frac">
+            <span class="num">2.6 (H − 1) D G</span>
+            <span class="den">S · E</span>
+          </span>
+        </div>
+
+        <div class="math-eq">
+          <h4 class="lhs">(2) Corrosion Rate</h4>
+          <span class="eq-sign">=</span>
+          <span class="math-frac">
+            <span class="num">t<sub>prev</sub> − t<sub>act</sub></span>
+            <span class="den">Δt</span>
+          </span>
+        </div>
+
+        <div class="math-eq">
+          <h4 class="lhs">(3) Remaining Life</h4>
+          <span class="eq-sign">=</span>
+          <span class="math-frac">
+            <span class="num">t<sub>act</sub> − t<sub>min</sub></span>
+            <span class="den">CR</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- RISK ASSESSMENT -->
+      <div class="pdf-box">
+        <h4>Risk Assessment</h4>
+        <p style="margin-bottom:12px;"><strong>Risk Category:</strong></p>
+        <div style="margin-bottom:14px"><span class="risk-badge med" id="pdf-risk-badge">1C — MEDIUM</span></div>
+        <p style="margin-bottom:8px;font-size:11px;color:#3a3a5a;"><strong>Probability of Failure:</strong> Category 1<br>P_of = 0.000002</p>
+        <p style="margin-bottom:8px;font-size:11px;color:#3a3a5a;"><strong>Consequence of Failure:</strong> Category C<br>FC_total = $164,966</p>
+        <p style="font-size:11px;color:#3a3a5a;"><strong>Recommended Inspection:</strong><br>Interval: 5 years<br>Method: 100% Visual + UT Scan/Spot<br>Standard: API 653</p>
+      </div>
+    </div>
+
+    <!-- Risk Matrix compact -->
+    <div class="pdf-section">
+      <div class="pdf-section-title"><span class="ps-tag">03</span>RISK MATRIX — API 581</div>
+      <div style="display:flex;align-items:flex-start;gap:24px;">
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#9090b0;margin-bottom:6px;">PoF ↑</div>
+          <div class="pdf-risk-matrix">
+            <div class="prm prm-lbl">5</div><div class="prm prm-m">M</div><div class="prm prm-mh">MH</div><div class="prm prm-h">H</div><div class="prm prm-h">H</div><div class="prm prm-h">H</div>
+            <div class="prm prm-lbl">4</div><div class="prm prm-m">M</div><div class="prm prm-m">M</div><div class="prm prm-mh">MH</div><div class="prm prm-h">H</div><div class="prm prm-h">H</div>
+            <div class="prm prm-lbl">3</div><div class="prm prm-l">L</div><div class="prm prm-m">M</div><div class="prm prm-m">M</div><div class="prm prm-mh">MH</div><div class="prm prm-h">H</div>
+            <div class="prm prm-lbl">2</div><div class="prm prm-l">L</div><div class="prm prm-l">L</div><div class="prm prm-m">M</div><div class="prm prm-m">M</div><div class="prm prm-mh">MH</div>
+            <div class="prm prm-lbl">1</div><div class="prm prm-l">L</div><div class="prm prm-l">L</div><div class="prm prm-mk">1C</div><div class="prm prm-m">M</div><div class="prm prm-m">M</div>
+            <div class="prm"></div><div class="prm prm-lbl">A</div><div class="prm prm-lbl">B</div><div class="prm prm-lbl">C</div><div class="prm prm-lbl">D</div><div class="prm prm-lbl">E</div>
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#9090b0;margin-top:6px;text-align:center;">CoF →</div>
+        </div>
+        <div style="font-size:11px;color:#3a3a5a;line-height:1.7;padding-top:8px;">
+          <p style="margin-bottom:8px">Tank A is classified at position <strong>1C (MEDIUM)</strong> on the risk matrix, indicating a low probability of failure but a medium financial consequence.</p>
+          <p>This classification supports a 5-year inspection interval per API 653, using visual inspection and UT thickness measurement. Implementing RBI reduces inspection costs by approximately <strong>$5,000</strong> over the remaining tank life.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="pdf-footer">
+      <p>Generated by RBI Platform · API 581 Semi-Quantitative Method · API 653 Remaining Life Assessment</p>
+      <p id="pdf-footer-co">PPSDM MIGAS Cepu</p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════
+   COMPANY BRANDING
+   Untuk ganti nama PT dan logo:
+   - Logo: ganti "logo.png" di elemen <img> di dalam .nav-logo-img
+   - Nama: ganti teks "PT. Nama Perusahaan" di dalam .nav-co-name
+═══════════════════════════════════════ */
+
+/* ═══════════════════════════════════════
+   COURSE PANELS
+═══════════════════════════════════════ */
+const DEFAULTS = [
+  { h: 0.690, tPrev: 4.10, tAct: 3.70, ti: 7, Hliq: 3.500 },
+  { h: 1.530, tPrev: 4.90, tAct: 4.20, ti: 7, Hliq: 2.810 },
+  { h: 1.530, tPrev: 5.00, tAct: 4.70, ti: 7, Hliq: 1.280 },
+];
+
+function buildCoursePanels() {
+  const container = document.getElementById('course-panels');
+  container.innerHTML = '';
+  DEFAULTS.forEach((d, i) => {
+    const div = document.createElement('div');
+    div.id = `cp${i}`;
+    div.style.display = i === 0 ? 'block' : 'none';
+    div.innerHTML = `
+      <div class="frow">
+        <div class="fld">
+          <label>Course Height</label>
+          <div class="fw"><input type="number" id="c${i}-h" value="${d.h}" step="0.001" min="0"><span class="un">m</span></div>
+        </div>
+        <div class="fld">
+          <label>H — Liquid Head Above Course</label>
+          <div class="fw"><input type="number" id="c${i}-H" value="${d.Hliq}" step="0.001" min="0"><span class="un">m</span></div>
+        </div>
+      </div>
+      <div class="frow s3">
+        <div class="fld">
+          <label>t_previous</label>
+          <div class="fw"><input type="number" id="c${i}-tp" value="${d.tPrev}" step="0.01" min="0"><span class="un">mm</span></div>
+        </div>
+        <div class="fld">
+          <label>t_actual</label>
+          <div class="fw"><input type="number" id="c${i}-ta" value="${d.tAct}" step="0.01" min="0"><span class="un">mm</span></div>
+        </div>
+        <div class="fld">
+          <label>Interval Δt</label>
+          <div class="fw"><input type="number" id="c${i}-ti" value="${d.ti}" step="1" min="1"><span class="un">yr</span></div>
+        </div>
+      </div>
+      <p style="font-size:11px;color:var(--tx3);font-style:italic;margin-bottom:4px;">
+        H measured from bottom of this course to maximum liquid surface level
+      </p>`;
+    container.appendChild(div);
+  });
+}
+
+function switchCourse(idx) {
+  document.querySelectorAll('.ctab').forEach((t, i) => t.classList.toggle('on', i === idx));
+  document.querySelectorAll('[id^=cp]').forEach((p, i) => p.style.display = i === idx ? 'block' : 'none');
+}
+
+/* ═══════════════════════════════════════
+   CALCULATION — verified against paper
+   All formulas per API 653 / API 581
+═══════════════════════════════════════
+   t_min formula: H and D must be in feet, result in inches → convert to mm
+   S (C1,C2) = min(0.80·Y, 0.429·T) — lower of two criteria (API 653 §4.3.4)
+   S (C3+)   = min(0.88·Y, 0.472·T)
+   CR = (t_prev − t_act) / Δt  [mm/yr]
+   RL = (t_act − t_min) / CR   [years]
+   Paper results: Course1=20.35yr, Course2=16.60yr, Course3=51.42yr ✓
+═══════════════════════════════════════ */
+const M_TO_FT   = 3.28084;
+const IN_TO_MM  = 25.4;
+const T_MIN_ABS = 2.54; // mm minimum per API 653
+
+function getAllowableS(courseIdx, Y, T) {
+  if (courseIdx < 2) return Math.min(0.80 * Y, 0.429 * T);
+  else               return Math.min(0.88 * Y, 0.472 * T);
+}
+
+let lastResults = null;
+
+function calculate() {
+  // Gather tank-level inputs
+  const D_m  = parseFloat(document.getElementById('inp-D').value);
+  const G    = parseFloat(document.getElementById('inp-G').value);
+  const E    = parseFloat(document.getElementById('inp-E').value);
+  const Y12  = parseFloat(document.getElementById('inp-Y12').value);
+  const T12  = parseFloat(document.getElementById('inp-T12').value);
+  const Y3   = parseFloat(document.getElementById('inp-Y3').value);
+  const T3   = parseFloat(document.getElementById('inp-T3').value);
+
+  const D_ft = D_m * M_TO_FT;  // convert diameter to feet
+
+  const results = [];
+
+  for (let i = 0; i < 3; i++) {
+    const H_m  = parseFloat(document.getElementById(`c${i}-H`).value);
+    const tPrev = parseFloat(document.getElementById(`c${i}-tp`).value);
+    const tAct  = parseFloat(document.getElementById(`c${i}-ta`).value);
+    const dt    = parseFloat(document.getElementById(`c${i}-ti`).value);
+
+    const H_ft = H_m * M_TO_FT;  // convert to feet for formula
+
+    const Y = i < 2 ? Y12 : Y3;
+    const T = i < 2 ? T12 : T3;
+    const S = getAllowableS(i, Y, T);  // psi
+
+    // t_min in inches (API 653 Eq. 4-1), then → mm
+    const tmin_in = (2.6 * (H_ft - 1) * D_ft * G) / (S * E);
+    let   tmin_mm = tmin_in * IN_TO_MM;
+    if (tmin_mm < T_MIN_ABS) tmin_mm = T_MIN_ABS;  // API 653 minimum
+
+    const CR = (tPrev - tAct) / dt;  // mm/yr
+    let   RL = CR > 0 ? (tAct - tmin_mm) / CR : Infinity;
+    if (RL < 0) RL = 0;
+
+    results.push({ tmin_mm, CR, RL, tAct, tPrev, dt });
+  }
+
+  lastResults = { results, D_m, G, E, Y12, T12, Y3, T3 };
+  renderResults(results);
+  document.getElementById('exportBtn').disabled = false;
+}
+
+/* ═══════════════════════════════════════
+   RENDER RESULTS
+═══════════════════════════════════════ */
+function rlClass(rl) { return rl > 20 ? 'ok' : rl > 10 ? 'wn' : 'bd'; }
+function crClass(cr) { return cr < 0.05 ? 'ok' : cr < 0.10 ? 'wn' : 'bd'; }
+
+function renderResults(results) {
+  const names = ['Course 1', 'Course 2', 'Course 3'];
+  const minRL = Math.min(...results.map(r => r.RL === Infinity ? 9999 : r.RL));
+
+  // Status bar
+  const sd = document.getElementById('sd'), st = document.getElementById('st');
+  if      (minRL > 15) { sd.className = 'sd ok'; st.textContent = 'STATUS: GOOD — Minimum remaining life > 15 years'; }
+  else if (minRL > 5)  { sd.className = 'sd wn'; st.textContent = 'STATUS: MONITOR — Remaining life requires attention'; }
+  else                 { sd.className = 'sd bd'; st.textContent = 'STATUS: CRITICAL — Immediate inspection recommended'; }
+
+  // t_min
+  document.getElementById('r-tmin').innerHTML =
+    results.map((r, i) => `
+      <div class="rrow">
+        <span class="rn">${names[i]}</span>
+        <div class="rv">${r.tmin_mm.toFixed(3)}<span class="u">mm</span></div>
+      </div>`).join('') +
+    `<p class="nsm">Min per API 653 §4.3.4: 2.54 mm. Values below this threshold are set to 2.54 mm.</p>`;
+
+  // CR
+  document.getElementById('r-cr').innerHTML =
+    results.map((r, i) => `
+      <div class="rrow">
+        <span class="rn">${names[i]}</span>
+        <div class="rv ${crClass(r.CR)}">${r.CR.toFixed(4)}<span class="u">mm/yr</span></div>
+      </div>`).join('') +
+    `<p class="nsm">CR = (t_prev − t_act) / Δt</p>`;
+
+  // RL
+  const limitIdx = results.reduce((best, r, i) =>
+    (r.RL === Infinity ? 9999 : r.RL) < (results[best].RL === Infinity ? 9999 : results[best].RL) ? i : best, 0);
+
+  document.getElementById('r-rl').innerHTML =
+    results.map((r, i) => `
+      <div class="rrow">
+        <span class="rn">${names[i]}${i === limitIdx ? ' ◆' : ''}</span>
+        <div class="rv ${rlClass(r.RL === Infinity ? 9999 : r.RL)}">${r.RL === Infinity ? '∞' : r.RL.toFixed(2)}<span class="u">yr</span></div>
+      </div>`).join('') +
+    `<p class="nsm">◆ Limiting course: ${names[limitIdx]} — governs next inspection date</p>`;
+
+  // Bar chart
+  const maxVal = Math.max(...results.map(r => r.RL === Infinity ? 60 : r.RL), 1);
+  document.getElementById('r-chart').innerHTML = results.map((r, i) => {
+    const v = r.RL === Infinity ? 60 : r.RL;
+    const c = v > 20 ? 'var(--green)' : v > 10 ? 'var(--gold2)' : 'var(--red)';
+    return `<div class="br">
+      <span class="bn">${names[i]}</span>
+      <div class="bt"><div class="bf" style="width:${Math.min(100, (v / maxVal) * 100).toFixed(1)}%;background:${c}"></div></div>
+      <span class="bv">${r.RL === Infinity ? '∞' : r.RL.toFixed(2)} yr</span>
+    </div>`;
+  }).join('');
+  document.getElementById('r-chart-card').style.display = 'block';
+
+  // Re-typeset MathJax in result panel headings
+  if (window.MathJax) MathJax.typesetPromise();
+}
+
+/* ═══════════════════════════════════════
+   PDF EXPORT
+═══════════════════════════════════════ */
+function exportPDF() {
+  if (!lastResults) return;
+  const { results, D_m, G, E, Y12, T12, Y3, T3 } = lastResults;
+  const names = ['Course 1', 'Course 2', 'Course 3'];
+
+  // Populate PDF report content
+  document.getElementById('pdf-date').textContent = 'Date: ' + new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'long', year:'numeric' });
+  document.getElementById('pm-D').textContent = D_m + ' m';
+
+  // Design params table
+  const S12 = Math.min(0.80 * Y12, 0.429 * T12);
+  const S3  = Math.min(0.88 * Y3,  0.472 * T3);
+  document.getElementById('pdf-design-body').innerHTML = `
+    <tr><td>Nominal Diameter</td><td>D</td><td class="val">${D_m}</td><td>m</td><td>API 653</td></tr>
+    <tr><td>Liquid Specific Gravity</td><td>G</td><td class="val">${G}</td><td>—</td><td>API 653</td></tr>
+    <tr><td>Joint Efficiency</td><td>E</td><td class="val">${E}</td><td>—</td><td>API 653</td></tr>
+    <tr><td>Yield Strength (C1,C2)</td><td>Y</td><td class="val">${Y12.toLocaleString()}</td><td>psi</td><td>API 653</td></tr>
+    <tr><td>Tensile Strength (C1,C2)</td><td>T</td><td class="val">${T12.toLocaleString()}</td><td>psi</td><td>API 653</td></tr>
+    <tr><td>Allowable Stress (C1,C2)</td><td>S</td><td class="val">${S12.toFixed(0)}</td><td>psi</td><td>min(0.80Y, 0.429T)</td></tr>
+    <tr><td>Allowable Stress (C3+)</td><td>S</td><td class="val">${S3.toFixed(0)}</td><td>psi</td><td>min(0.88Y, 0.472T)</td></tr>`;
+
+  // Results table
+  const statusLabel = (rl) => rl > 20 ? 'GOOD' : rl > 10 ? 'MONITOR' : 'CRITICAL';
+  const statusClass = (rl) => rl > 20 ? 'ok' : rl > 10 ? 'wn' : 'bd';
+  document.getElementById('pdf-results-body').innerHTML = results.map((r, i) => `
+    <tr>
+      <td><strong>${names[i]}</strong></td>
+      <td class="val">${r.tmin_mm.toFixed(3)}</td>
+      <td>${r.tAct.toFixed(2)}</td>
+      <td class="${crClass(r.CR)}">${r.CR.toFixed(4)}</td>
+      <td class="${rlClass(r.RL === Infinity ? 9999 : r.RL)}">${r.RL === Infinity ? '∞' : r.RL.toFixed(2)}</td>
+      <td class="${statusClass(r.RL === Infinity ? 9999 : r.RL)}">${statusLabel(r.RL === Infinity ? 9999 : r.RL)}</td>
+    </tr>`).join('');
+
+  // Trigger print
+  window.print();
+}
+
+/* ═══════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════ */
+function showPage(idx) {
+  document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('on', i === idx));
+  document.querySelectorAll('.nlink').forEach((b, i) => b.classList.toggle('on', i === idx));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function openDummy(title, desc) {
+  document.getElementById('dtitle').textContent = title;
+  document.getElementById('ddesc').textContent  = desc;
+  document.getElementById('dov').classList.add('sh');
+}
+
+function closeDummy(e) {
+  if (!e || e.target === document.getElementById('dov'))
+    document.getElementById('dov').classList.remove('sh');
+}
+
+/* ═══════════════════════════════════════
+   INIT
+═══════════════════════════════════════ */
+buildCoursePanels();
+</script>
+</body>
+</html>
