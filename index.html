@@ -253,7 +253,7 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
 .frow.s3 { grid-template-columns:1fr 1fr 1fr; }
 .frow.s1 { grid-template-columns:1fr; }
 .fld { display:flex; flex-direction:column; gap:5px; }
-.fld label { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--tx3); letter-spacing:1.5px; text-transform:uppercase; }
+.fld label { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--tx2); letter-spacing:1.5px; text-transform:uppercase; }
 .fw { position:relative; display:flex; align-items:center; }
 .fw input, .fw select { width:100%; background:var(--s3); border:1px solid var(--bdr2); color:var(--tx); font-family:'IBM Plex Mono',monospace; font-size:12px; padding:9px 44px 9px 12px; border-radius:2px; outline:none; transition:border-color .15s, background .15s; }
 .fw select { padding-right:12px; cursor:pointer; }
@@ -493,6 +493,120 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
 .pdf-footer { border-top:1px solid #e2e4ef; margin-top:24px; padding-top:10px; display:flex; align-items:center; justify-content:space-between; }
 .pdf-footer p { font-family:'IBM Plex Mono',monospace; font-size:8px; color:#9090b0; letter-spacing:1px; }
 
+/* ═══════════════════════════════════════════
+   Login
+═══════════════════════════════════════════ */
+.login-overlay {
+  position:fixed; inset:0; z-index:1000;
+  display:flex; align-items:center; justify-content:center;
+}
+.login-overlay.hidden { display:none; }
+
+.login-bg {
+  position:absolute; inset:0;
+  background-image: url('bg_kilang.jpg');
+  background-size:cover;
+  background-position:center;
+  filter: blur(1px) brightness(0.8);
+  z-index:0;
+}
+
+.login-overlay::after {
+  content:'';
+  position:absolute; inset:0;
+  background: repeating-linear-gradient(
+    0deg,rgba(0,0,0,.06) 0,rgba(0,0,0,.06) 1px,
+    transparent 1px,transparent 3px
+  );
+  z-index:1; pointer-events:none;
+}
+
+.login-card {
+  width:420px;
+  z-index:2; position:relative;
+  background: rgba(13,17,23,.88);
+  border:1px solid rgba(212,137,26,.4);
+  padding:48px 44px;
+  overflow:hidden;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.login-card::before {
+  content:''; position:absolute;
+  top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold2),transparent);
+}
+.login-scan {
+  position:absolute; top:0; left:0; right:0;
+  height:2px; background:rgba(212,137,26,.4);
+  animation:scan 3s ease-in-out infinite;
+}
+@keyframes scan {
+  0%{top:0;opacity:1} 100%{top:100%;opacity:0}
+}
+.login-eyebrow {
+  font-family:'IBM Plex Mono',monospace; font-size:9px;
+  color:var(--gold2); letter-spacing:3px; text-transform:uppercase;
+  display:flex; align-items:center; gap:10px; margin-bottom:24px;
+}
+.login-eyebrow::before { content:''; width:24px; height:1px; background:var(--gold); }
+.login-title {
+  font-family:'Barlow Condensed',sans-serif; font-size:42px;
+  font-weight:800; color:var(--white); line-height:1;
+  letter-spacing:-1px; margin-bottom:8px;
+}
+.login-title span { color:var(--gold2); }
+.login-sub {
+  font-family:'IBM Plex Mono',monospace; font-size:10px;
+  color:var(--tx3); letter-spacing:1.5px; margin-bottom:36px;
+}
+.login-field { display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
+.login-field label {
+  font-family:'IBM Plex Mono',monospace; font-size:9px;
+  color:#9db8cc; letter-spacing:2px; text-transform:uppercase;
+}
+.login-field input {
+  background:var(--s3); border:1px solid var(--bdr2);
+  color:var(--tx); font-family:'IBM Plex Mono',monospace; font-size:13px;
+  padding:12px 16px; outline:none; border-radius:2px;
+  transition:border-color .15s, background .15s;
+}
+.login-field input:focus {
+  border-color:var(--gold); background:rgba(212,137,26,.04);
+}
+.login-field input::placeholder { color:var(--tx3); }
+.login-error {
+  font-family:'IBM Plex Mono',monospace; font-size:10px;
+  color:var(--red); letter-spacing:1px;
+  margin-bottom:12px; display:none;
+}
+.login-error.show { display:block; }
+.login-btn {
+  width:100%; background:var(--gold2); color:#07090c;
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:16px; letter-spacing:3px; text-transform:uppercase;
+  padding:14px; border:none; cursor:pointer;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);
+  transition:all .18s; margin-top:8px;
+}
+.login-btn:hover { background:var(--gold3); box-shadow:0 4px 24px var(--gglow); }
+.login-footer {
+  margin-top:28px; padding-top:20px; border-top:1px solid var(--bdr);
+  font-family:'IBM Plex Mono',monospace; font-size:9px;
+  color:var(--tx3); letter-spacing:1px; text-align:center;
+}
+.login-corner {
+  position:absolute;
+  width:12px; height:12px;
+  border-color:var(--gold);
+  border-style:solid;
+}
+.login-corner.tl { top:12px; left:12px; border-width:1px 0 0 1px; }
+.login-corner.tr { top:12px; right:12px; border-width:1px 1px 0 0; }
+.login-corner.bl { bottom:12px; left:12px; border-width:0 0 1px 1px; }
+.login-corner.br { bottom:12px; right:12px; border-width:0 1px 1px 0; }
+
+
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:960px) {
   .hero { grid-template-columns:1fr; }
@@ -521,6 +635,42 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
 </style>
 </head>
 <body>
+    
+<!-- ═══ LOGIN PAGE ═══ -->
+<div id="login-page" class="login-overlay">
+  <div class="login-bg"></div>
+  <div class="login-card">
+    <div class="login-scan"></div>
+    <div class="login-corner tl"></div>
+    <div class="login-corner tr"></div>
+    <div class="login-corner bl"></div>
+    <div class="login-corner br"></div>
+
+    <div class="login-eyebrow">
+        <img src="logo_ppsdm.png" style="height:30px;width:auto;object-fit:contain;margin-right:2px;"> 
+            PPSDM MIGAS CEPU
+    </div>
+    <div class="login-title">RBI<br><span>PLATFORM</span></div>
+    <div class="login-sub">API 581 · RISK-BASED INSPECTION · AUTHORIZED ACCESS</div>
+
+    <div class="login-field">
+      <label>Username</label>
+      <input type="text" id="login-user" placeholder="Enter username" autocomplete="off">
+    </div>
+    <div class="login-field">
+      <label>Password</label>
+      <input type="password" id="login-pass" placeholder="Enter password"
+             onkeydown="if(event.key==='Enter') doLogin()">
+    </div>
+    <div class="login-error" id="login-err">⚠ Invalid credentials. Access denied.</div>
+    <button class="login-btn" onclick="doLogin()">ACCESS SYSTEM</button>
+
+    <div class="login-footer">
+      PPSDM MIGAS CEPU · RBI Platform v1.0<br>
+      Developed by Naufal - Husendi · Universitas Padjadjaran
+    </div>
+  </div>
+</div>
 
 <!-- ═══ NAVBAR ═══ -->
 <nav>
@@ -538,6 +688,7 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
     <div class="nav-logo"><div class="ldot"></div>RBI<span class="ac">PLATFORM</span></div>
   </div>
   <div class="nav-links">
+    <button class="nlink" onclick="doLogout()" style="margin-left:8px;border-color:rgba(224,53,53,.3);color:var(--red);" id="logout-btn">LOGOUT</button>
     <button class="nlink on" onclick="showPage(0)">HOME</button>
     <button class="nlink" onclick="showPage(1)">CALCULATOR</button>
   </div>
@@ -920,57 +1071,47 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
           <div class="phd"><span class="ptag">DF</span><h3>DAMAGE FACTOR — THINNING (AVAILABLE)</h3></div>
           <div class="pbd">
             <div class="info-box">
-              <div class="ib-title">API 581 — DF Thinning Formula</div>
-              <p>Damage Factor untuk mekanisme penipisan (thinning) dihitung berdasarkan Art (wall loss fraction), SRp (strength ratio), dan faktor inspeksi. Rumus DF Thinning (simplified untuk AST):</p>
-              <p style="margin-top:8px;">\[ D_f^{thin} = \frac{P_{op1}^{thin}\,\Phi(-\beta_1) + P_{op2}^{thin}\,\Phi(-\beta_2) + P_{op3}^{thin}\,\Phi(-\beta_3)}{1.56 \times 10^{-4}} \]</p>
+            <div class="ib-title">API 581 — DF Thinning Formula (Jurnal)</div>
+            <p>Damage Factor thinning dihitung dari Base DF dikalikan faktor-faktor koreksi, dibagi faktor monitoring online.</p>
+            <p style="margin-top:8px;">\[ D_f^{thin} = \frac{D_{fb}^{thin} \cdot F_{IP} \cdot F_{DL} \cdot F_{WD} \cdot F_{AM} \cdot F_{SM}}{F_{OM}} \]</p>
             </div>
-            <div class="slbl">Input — Thinning DF Parameters (Course Representative)</div>
-            <div class="frow">
-              <div class="fld"><label>Corrosion Rate Confidence</label>
-                <div class="fw">
-                  <select id="df-conf">
-                    <option value="high">High — measured &amp; verified (Low CR uncertainty)</option>
-                    <option value="medium" selected>Medium — estimated from similar</option>
-                    <option value="low">Low — assumed/literature</option>
-                  </select>
-                </div>
-              </div>
-              <div class="fld"><label>Thinning Type</label>
-                <div class="fw">
-                  <select id="df-type">
-                    <option value="general" selected>General — affects &gt;10% surface</option>
-                    <option value="localized">Localized — &lt;10% surface</option>
-                  </select>
-                </div>
-              </div>
+
+            <div class="slbl">Base Damage Factor</div>
+            <div class="frow s1">
+            <div class="fld"><label>D_fb — Base Damage Factor (Thinning)</label>
+                <div class="fw"><input type="number" id="df-fb" value="1.0" step="0.1" min="0"><span class="un">—</span></div>
+            </div>
+            </div>
+
+            <div class="slbl">Adjustment Factors</div>
+            <div class="frow s3">
+            <div class="fld"><label>F_IP — Injection / Mix Points</label>
+                <div class="fw"><input type="number" id="df-fip" value="1.0" step="0.1" min="1" max="10"><span class="un">—</span></div>
+            </div>
+            <div class="fld"><label>F_DL — Dead Legs</label>
+                <div class="fw"><input type="number" id="df-fdl" value="1.0" step="0.1" min="1" max="5"><span class="un">—</span></div>
+            </div>
+            <div class="fld"><label>F_WD — Welded Construction</label>
+                <div class="fw"><input type="number" id="df-fwd" value="1.0" step="0.1" min="1" max="2"><span class="un">—</span></div>
+            </div>
             </div>
             <div class="frow s3">
-              <div class="fld"><label>t_furnished — t</label><div class="fw"><input type="number" id="df-t" value="6.0" step="0.1" min="0"><span class="un">mm</span></div></div>
-              <div class="fld"><label>Art (wall loss fraction)</label><div class="fw"><input type="number" id="df-art" value="0.12" step="0.01" min="0" max="0.99"><span class="un">—</span></div></div>
-              <div class="fld"><label>Inspeksi Efektif (N past)</label><div class="fw"><input type="number" id="df-ninsp" value="1" step="1" min="0" max="10"><span class="un">insp</span></div></div>
+            <div class="fld"><label>F_AM — Maintenance Adjustment</label>
+                <div class="fw"><input type="number" id="df-fam" value="1.0" step="0.1" min="1" max="5"><span class="un">—</span></div>
             </div>
-            <div class="frow">
-              <div class="fld"><label>Inspection Level Past</label>
+            <div class="fld"><label>F_SM — Settlement Adjustment</label>
+                <div class="fw"><input type="number" id="df-fsm" value="1.0" step="0.1" min="1" max="3"><span class="un">—</span></div>
+            </div>
+            <div class="fld"><label>F_OM — Online Monitoring</label>
                 <div class="fw">
-                  <select id="df-level">
-                    <option value="A">A — Highly Effective</option>
-                    <option value="B" selected>B — Usually Effective</option>
-                    <option value="C">C — Fairly Effective</option>
-                    <option value="D">D — Poorly Effective</option>
-                    <option value="E">E — No Inspection</option>
-                  </select>
+                <select id="df-fom">
+                    <option value="1.0" selected>None — F_OM = 1.0</option>
+                    <option value="0.9">Coupon monitoring — F_OM = 0.9</option>
+                    <option value="0.8">ER probe — F_OM = 0.8</option>
+                    <option value="0.5">Key variable monitoring — F_OM = 0.5</option>
+                </select>
                 </div>
-              </div>
-              <div class="fld"><label>Online Monitoring (FOM)</label>
-                <div class="fw">
-                  <select id="df-fom">
-                    <option value="1.0" selected>None — FOM = 1.0</option>
-                    <option value="0.9">Coupon monitoring — FOM = 0.9</option>
-                    <option value="0.8">ER probe — FOM = 0.8</option>
-                    <option value="0.5">Key variable monitoring — FOM = 0.5</option>
-                  </select>
-                </div>
-              </div>
+            </div>
             </div>
 
             <hr class="dvhr">
@@ -1483,44 +1624,15 @@ function calcPoF() {
   const gffTotal = (gff1+gff2+gff3)/3;
 
   // Thinning DF
-  const conf  = document.getElementById('df-conf').value;
-  const nInsp = parseInt(document.getElementById('df-ninsp').value);
-  const level = document.getElementById('df-level').value;
-  const art   = parseFloat(document.getElementById('df-art').value);
-  const fom   = parseFloat(document.getElementById('df-fom').value);
-  const tType = document.getElementById('df-type').value;
+  const Dfb = parseFloat(document.getElementById('df-fb').value);
+  const Fip = parseFloat(document.getElementById('df-fip').value);
+  const Fdl = parseFloat(document.getElementById('df-fdl').value);
+  const Fwd = parseFloat(document.getElementById('df-fwd').value);
+  const Fam = parseFloat(document.getElementById('df-fam').value);
+  const Fsm = parseFloat(document.getElementById('df-fsm').value);
+  const fom = parseFloat(document.getElementById('df-fom').value);
 
-  const prior = PRIOR_PROBS[conf];
-  const cond  = COND_PROBS[level];
-
-  // Inspection effectiveness factors (Eq 2.16 simplified — single level)
-  const n = nInsp;
-  const I1 = prior.p1 * Math.pow(cond.s1[0], n);
-  const I2 = prior.p2 * Math.pow(cond.s1[1], n);
-  const I3 = prior.p3 * Math.pow(cond.s1[2], n);
-  const Isum = I1+I2+I3;
-
-  const Pop1 = I1/Isum, Pop2 = I2/Isum, Pop3 = I3/Isum;
-
-  // SRp — simplified using Art (localized vs general)
-  const SRp = tType==='localized' ? Math.min(0.9, 0.5+art) : Math.min(0.9, 0.3+art);
-  const COV_dt=0.20, COV_sf=0.20, COV_p=0.05;
-  const DS = [1,2,4];
-
-  function beta(ds) {
-    const num = 1 - ds*art - SRp;
-    const den = Math.sqrt(Math.pow(ds,2)*Math.pow(art,2)*Math.pow(COV_dt,2) +
-                Math.pow(1-ds*art,2)*Math.pow(COV_sf,2) +
-                Math.pow(SRp,2)*Math.pow(COV_p,2));
-    return num/den;
-  }
-
-  const b1=beta(DS[0]), b2=beta(DS[1]), b3=beta(DS[2]);
-  let DfB = (Pop1*normCDF(-b1) + Pop2*normCDF(-b2) + Pop3*normCDF(-b3)) / 1.56e-4;
-  if(isNaN(DfB)||DfB<0) DfB=0;
-
-  let Df = Math.max(DfB / fom, 0.1);
-  if(tType==='localized') Df *= 1.2; // localized adds 20% conservatism
+  const Df = (Dfb * Fip * Fdl * Fwd * Fam * Fsm) / fom;
 
   // FMS
   const pscore = parseFloat(document.getElementById('pms-score').value);
@@ -1837,6 +1949,57 @@ function closeDummy(e) {
 buildCoursePanels();
 updateFMSPreview();
 buildRiskMatrix(null,null);
+
+/* ══════════════════════════════════════════
+   AUTH
+══════════════════════════════════════════ */
+const USERS = {
+  'admin'   : 'rbi2025',
+  'ppsdm'   : 'migas123',
+  'inspector': 'api581',
+  'febrian':'workshop-mekanik',
+  'husendi':'jawirnyawit',
+  'naufal':'nyawit'
+};
+
+function checkLogin() {
+  const logged = sessionStorage.getItem('rbi_auth');
+  if (logged) {
+    document.getElementById('login-page').classList.add('hidden');
+    document.getElementById('logout-btn').style.display = 'inline-flex';
+  } else {
+    document.getElementById('login-page').classList.remove('hidden');
+    document.getElementById('logout-btn').style.display = 'none';
+  }
+}
+
+function doLogin() {
+  const user = document.getElementById('login-user').value.trim().toLowerCase();
+  const pass = document.getElementById('login-pass').value;
+  const err  = document.getElementById('login-err');
+
+  if (USERS[user] && USERS[user] === pass) {
+    sessionStorage.setItem('rbi_auth', user);
+    document.getElementById('login-page').classList.add('hidden');
+    document.getElementById('logout-btn').style.display = 'inline-flex';
+    err.classList.remove('show');
+  } else {
+    err.classList.add('show');
+    document.getElementById('login-pass').value = '';
+    document.getElementById('login-pass').focus();
+  }
+}
+
+function doLogout() {
+  sessionStorage.removeItem('rbi_auth');
+  document.getElementById('login-user').value = '';
+  document.getElementById('login-pass').value = '';
+  document.getElementById('login-err').classList.remove('show');
+  checkLogin();
+  showPage(0);
+}
+
+checkLogin();
 </script>
 </body>
 </html>
