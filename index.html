@@ -1967,9 +1967,12 @@ function checkLogin() {
   if (logged) {
     document.getElementById('login-page').classList.add('hidden');
     document.getElementById('logout-btn').style.display = 'inline-flex';
+    document.querySelector('nav').style.visibility = 'visible'; // ← tambah
+
   } else {
     document.getElementById('login-page').classList.remove('hidden');
     document.getElementById('logout-btn').style.display = 'none';
+    document.querySelector('nav').style.visibility = 'hidden'; // ← tambah
   }
 }
 
@@ -1977,6 +1980,8 @@ function doLogin() {
   const user = document.getElementById('login-user').value.trim().toLowerCase();
   const pass = document.getElementById('login-pass').value;
   const err  = document.getElementById('login-err');
+  document.querySelector('nav').style.visibility = 'visible'; // ← tambah
+
 
   if (USERS[user] && USERS[user] === pass) {
     sessionStorage.setItem('rbi_auth', user);
@@ -1995,6 +2000,7 @@ function doLogout() {
   document.getElementById('login-user').value = '';
   document.getElementById('login-pass').value = '';
   document.getElementById('login-err').classList.remove('show');
+  document.querySelector('nav').style.visibility = 'hidden'; // ← tambah
   checkLogin();
   showPage(0);
 }
