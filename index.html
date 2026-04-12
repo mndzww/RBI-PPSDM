@@ -709,7 +709,7 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
 <!-- ═══════════════════════════════════════
      PAGE 0 — LANDING
 ═══════════════════════════════════════ -->
-<div class="page on" id="p0">
+<div class="page" id="p0">
 
   <div class="hero">
     <div class="hl">
@@ -1969,7 +1969,7 @@ function checkLogin() {
     document.getElementById('login-page').classList.add('hidden');
     document.getElementById('logout-btn').style.display = 'inline-flex';
     document.querySelector('nav').style.visibility = 'visible'; // ← tambah
-
+    showPage(0);
   } else {
     document.getElementById('login-page').classList.remove('hidden');
     document.getElementById('logout-btn').style.display = 'none';
@@ -1981,13 +1981,12 @@ function doLogin() {
   const user = document.getElementById('login-user').value.trim().toLowerCase();
   const pass = document.getElementById('login-pass').value;
   const err  = document.getElementById('login-err');
-  document.querySelector('nav').style.visibility = 'visible'; // ← tambah
-
 
   if (USERS[user] && USERS[user] === pass) {
     sessionStorage.setItem('rbi_auth', user);
     document.getElementById('login-page').classList.add('hidden');
     document.getElementById('logout-btn').style.display = 'inline-flex';
+    document.querySelector('nav').style.visibility = 'visible'; // ← di sini
     err.classList.remove('show');
   } else {
     err.classList.add('show');
