@@ -508,18 +508,18 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
   background-image: url('bg_kilang.jpg');
   background-size:cover;
   background-position:center;
-  filter: blur(1px) brightness(0.8);
+  /* filter: blur(1px) brightness(1); */
   z-index:0;
 }
 
 .login-overlay::after {
   content:'';
-  position:absolute; inset:0;
-  background: repeating-linear-gradient(
+  /* position:absolute; inset:0; */
+  /* background: repeating-linear-gradient(
     0deg,rgba(0,0,0,.06) 0,rgba(0,0,0,.06) 1px,
     transparent 1px,transparent 3px
-  );
-  z-index:1; pointer-events:none;
+  ); */
+  /* z-index:1; pointer-events:none; */
 }
 
 .login-card {
@@ -548,18 +548,18 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
 .login-eyebrow {
   font-family:'IBM Plex Mono',monospace; font-size:9px;
   color:var(--gold2); letter-spacing:3px; text-transform:uppercase;
-  display:flex; align-items:center; gap:10px; margin-bottom:24px;
+  display:flex; align-items:center; gap:10px; margin-bottom:8px;
 }
-.login-eyebrow::before { content:''; width:24px; height:1px; background:var(--gold); }
+/* .login-eyebrow::before { content:''; width:24px; height:1px; background:var(--gold); } */
 .login-title {
   font-family:'Barlow Condensed',sans-serif; font-size:42px;
   font-weight:800; color:var(--white); line-height:1;
-  letter-spacing:-1px; margin-bottom:8px;
+  letter-spacing:-1px; margin-bottom:1px;
 }
 .login-title span { color:var(--gold2); }
 .login-sub {
   font-family:'IBM Plex Mono',monospace; font-size:10px;
-  color:var(--tx2); letter-spacing:1.5px; margin-bottom:36px;
+  color:var(--tx2); letter-spacing:1.5px; margin-bottom:16px;
 }
 .login-field { display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
 .login-field label {
@@ -648,11 +648,11 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
     <div class="login-corner br"></div>
 
     <div class="login-eyebrow">
-        <img src="logo_ppsdm.png" style="height:30px;width:auto;object-fit:contain;margin-right:2px;"> 
-            PPSDM MIGAS CEPU
+      <img src="logo_ppsdm.png" style="height:30px;width:auto;object-fit:contain;margin-right:2px;"> 
+        PPSDM MIGAS CEPU
     </div>
     <div class="login-title">RBI<br><span>PLATFORM</span></div>
-    <div class="login-sub">API 581 · RISK-BASED INSPECTION · AUTHORIZED ACCESS</div>
+    <div class="login-sub">RISK-BASED INSPECTION · AUTHORIZED ACCESS</div>
 
     <div class="login-field">
       <label>Username</label>
@@ -667,8 +667,13 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
     <button class="login-btn" onclick="doLogin()">ACCESS SYSTEM</button>
 
     <div class="login-footer">
+      <div style="display:flex;align-items:center;justify-content:center;margin-bottom:10px;">
+        <img src="logoapi.webp" style="height:45px;width:auto;mix-blend-mode:screen;opacity:1;">
+        <img src="logoasme.png" style="height:45px;width:auto;mix-blend-mode:screen;opacity:1;">
+      </div>
+      <br>
       PPSDM MIGAS CEPU · RBI Platform v1.0<br>
-      Developed by Naufal - Husendi <br> 
+      Developed by Naufal - Husendi <br>
       Universitas Padjadjaran
     </div>
   </div>
