@@ -31,14 +31,43 @@ MathJax = {
   --gold3: #ffc84a;
   --gdim:  rgba(212,137,26,.10);
   --gglow: rgba(212,137,26,.22);
-  --red:   #e03535;
-  --green: #27b86a;
-  --tx:    #c8d8e8;
-  --tx2:   #7a96b0;
-  --tx3:   #3d5568;
-  --white: #edf4fc;
+  --red:   #ff5c5c;
+  --green: #33cf82;
+  --tx:    #e4edf7;
+  --tx2:   #aec6db;
+  --tx3:   #86a2ba;
+  --white: #f7fafd;
   --nav-h: 62px;
+  --shadow: rgba(0,0,0,.4);
+  --nav-bg: rgba(7,9,12,.92);
 }
+/* ── LIGHT THEME OVERRIDE ── */
+html[data-theme="light"] {
+  --bg:    #eef2f6;
+  --s1:    #ffffff;
+  --s2:    #f7f9fb;
+  --s3:    #eef1f5;
+  --s4:    #e3e8ee;
+  --bdr:   #d5dde5;
+  --bdr2:  #c2ccd8;
+  --gold:  #b5700f;
+  --gold2: #96590a;
+  --gold3: #7a4808;
+  --gdim:  rgba(181,112,15,.09);
+  --gglow: rgba(181,112,15,.18);
+  --red:   #c62828;
+  --green: #1a8a4e;
+  --tx:    #16202b;
+  --tx2:   #33465a;
+  --tx3:   #4b6178;
+  --white: #0c141d;
+  --shadow: rgba(30,42,56,.12);
+  --nav-bg: rgba(255,255,255,.92);
+}
+html[data-theme="light"] body::after { opacity:.25; }
+html[data-theme="light"] .api-badge,
+html[data-theme="light"] .sfloat { background:rgba(255,255,255,.92); }
+html[data-theme="light"] .fw select option { background:#fff; color:#0a0e14; }
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 body { background:var(--bg); color:var(--tx); font-family:'IBM Plex Sans',sans-serif; min-height:100vh; overflow-x:hidden; }
@@ -56,7 +85,7 @@ body::after { content:''; position:fixed; inset:0; background:repeating-linear-g
 nav {
   position:fixed; top:0; left:0; right:0; z-index:500;
   height:var(--nav-h);
-  background:rgba(7,9,12,.92); backdrop-filter:blur(16px);
+  background:var(--nav-bg); backdrop-filter:blur(16px);
   border-bottom:1px solid var(--bdr);
   display:flex; align-items:center; justify-content:space-between;
   padding:0 32px;
@@ -183,7 +212,7 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
 .rmx { display:grid; grid-template-columns:32px repeat(5,1fr); grid-template-rows:repeat(5,44px) 32px; gap:3px; }
 .rm  { display:flex; align-items:center; justify-content:center; border-radius:2px; font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:500; }
 .rml { color:var(--tx3); font-size:10px; }
-.rl  { background:rgba(39,184,106,.12); color:#27b86a; border:1px solid rgba(39,184,106,.18); }
+.rl  { background:rgba(39,184,106,.12); color:var(--green); border:1px solid rgba(39,184,106,.18); }
 .rm2 { background:rgba(212,137,26,.14); color:var(--gold2); border:1px solid rgba(212,137,26,.2); }
 .rm3 { background:rgba(212,137,26,.28); color:var(--gold3); border:1px solid rgba(212,137,26,.38); }
 .rm4 { background:rgba(224,53,53,.18); color:var(--red); border:1px solid rgba(224,53,53,.24); }
@@ -241,7 +270,7 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
 .step-panel.on { display:block; }
 
 .clayout { max-width:1280px; margin:0 auto; padding:36px 40px; display:grid; grid-template-columns:1fr 380px; gap:28px; align-items:start; }
-.clayout.wide { grid-template-columns:1fr; max-width:900px; }
+.clayout.wide { grid-template-columns:1fr; max-width:1100px; }
 
 /* ── COMMON PANEL STYLES ── */
 .cpanel { background:var(--s1); border:1px solid var(--bdr); border-radius:2px; overflow:hidden; margin-bottom:20px; }
@@ -256,10 +285,11 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
 .fld { display:flex; flex-direction:column; gap:5px; }
 .fld label { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--tx2); letter-spacing:1.5px; text-transform:uppercase; }
 .fw { position:relative; display:flex; align-items:center; }
-.fw input, .fw select { width:100%; background:var(--s3); border:1px solid var(--bdr2); color:var(--tx); font-family:'IBM Plex Mono',monospace; font-size:12px; padding:9px 44px 9px 12px; border-radius:2px; outline:none; transition:border-color .15s, background .15s; }
+.fw input, .fw select { width:100%; background:var(--s3); border:1px solid var(--bdr2); color:var(--white); font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; padding:9px 44px 9px 12px; border-radius:2px; outline:none; transition:border-color .15s, background .15s; }
 .fw select { padding-right:12px; cursor:pointer; }
+.fw select option { color:#0a0e14; font-weight:600; background:#fff; }
 .fw input:focus, .fw select:focus { border-color:var(--gold); background:rgba(212,137,26,.04); }
-.fw input::placeholder { color:var(--tx3); }
+.fw input::placeholder { color:var(--tx3); font-weight:500; }
 .fw .un { position:absolute; right:9px; font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--tx3); pointer-events:none; background:var(--s3); padding:1px 5px; border-radius:2px; letter-spacing:1px; }
 .dvhr { border:none; border-top:1px solid var(--bdr); margin:20px 0; }
 .slbl { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--gold2); letter-spacing:2px; text-transform:uppercase; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
@@ -396,7 +426,7 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
 .rmx-large { display:grid; grid-template-columns:36px repeat(5,56px); grid-template-rows:repeat(5,48px) 36px; gap:4px; }
 .rmc { display:flex; align-items:center; justify-content:center; border-radius:3px; font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; transition:all .2s; }
 .rmc.lbl { color:var(--tx3); font-size:11px; }
-.rmc.rl  { background:rgba(39,184,106,.12); color:#27b86a; border:1px solid rgba(39,184,106,.18); }
+.rmc.rl  { background:rgba(39,184,106,.12); color:var(--green); border:1px solid rgba(39,184,106,.18); }
 .rmc.rm2 { background:rgba(212,137,26,.14); color:var(--gold2); border:1px solid rgba(212,137,26,.2); }
 .rmc.rm3 { background:rgba(212,137,26,.28); color:var(--gold3); border:1px solid rgba(212,137,26,.38); }
 .rmc.rm4 { background:rgba(224,53,53,.18); color:var(--red); border:1px solid rgba(224,53,53,.24); }
@@ -452,47 +482,6 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
 .footer-bottom { max-width:1200px; margin:0 auto; padding-top:20px; border-top:1px solid var(--bdr); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
 .footer-bottom p { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--tx3); letter-spacing:1px; }
 .footer-bottom .ac { color:var(--gold2); }
-
-/* ── PRINT STYLES (minimal) ── */
-@media print {
-  html,body { background:#fff !important; color:#1a1a2e !important; }
-  body::after, nav, .step-nav, .calc-btn, .nav-btn-row, .export-btn, .doverlay, .page { display:none !important; }
-  #pdf-report { display:block !important; }
-  @page { size:A4; margin:18mm 16mm; }
-}
-#pdf-report { display:none; font-family:'IBM Plex Sans',sans-serif; color:#1a1a2e; background:#fff; }
-.pdf-header { display:flex; align-items:center; justify-content:space-between; border-bottom:3px solid #d4891a; padding-bottom:14px; margin-bottom:22px; }
-.pdf-logo-area { display:flex; align-items:center; gap:12px; }
-.pdf-logo-box { width:44px; height:44px; border:1px solid #ddd; border-radius:3px; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#f5f5f5; }
-.pdf-logo-box img { width:100%; height:100%; object-fit:contain; }
-.pdf-co-name { font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:700; color:#1a1a2e; }
-.pdf-doc-title { text-align:right; }
-.pdf-doc-title h1 { font-family:'Barlow Condensed',sans-serif; font-size:22px; font-weight:800; color:#d4891a; }
-.pdf-doc-title .pdf-sub { font-family:'IBM Plex Mono',monospace; font-size:9px; color:#7a7a9a; letter-spacing:1.5px; text-transform:uppercase; margin-top:3px; }
-.pdf-meta-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; background:#f7f8fc; border:1px solid #e2e4ef; border-radius:4px; padding:14px 16px; margin-bottom:22px; }
-.pdf-meta-item .pm-l { font-family:'IBM Plex Mono',monospace; font-size:8px; color:#9090b0; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:3px; }
-.pdf-meta-item .pm-v { font-family:'IBM Plex Mono',monospace; font-size:12px; color:#1a1a2e; font-weight:500; }
-.pdf-section { margin-bottom:22px; }
-.pdf-section-title { font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700; color:#1a1a2e; letter-spacing:1px; text-transform:uppercase; border-bottom:1px solid #d4891a; padding-bottom:5px; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
-.pdf-section-title .ps-tag { font-family:'IBM Plex Mono',monospace; font-size:8px; color:#d4891a; background:rgba(212,137,26,.1); border:1px solid #d4891a; padding:1px 6px; border-radius:2px; }
-.pdf-table { width:100%; border-collapse:collapse; font-size:11px; }
-.pdf-table th { background:#1a1a2e; color:#f0a830; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1px; text-transform:uppercase; padding:8px 10px; text-align:left; }
-.pdf-table td { padding:7px 10px; border-bottom:1px solid #e8ecf5; color:#1a1a2e; font-family:'IBM Plex Mono',monospace; font-size:10.5px; }
-.pdf-table tr:nth-child(even) td { background:#f7f8fc; }
-.pdf-table td.val { font-weight:600; }
-.pdf-table td.ok { color:#178a48; font-weight:600; }
-.pdf-table td.wn { color:#b86a10; font-weight:600; }
-.pdf-table td.bd { color:#c02020; font-weight:600; }
-.pdf-2col { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:22px; }
-.pdf-box { background:#f7f8fc; border:1px solid #e2e4ef; border-radius:4px; padding:14px 16px; }
-.pdf-box h4 { font-family:'IBM Plex Mono',monospace; font-size:9px; color:#9090b0; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:10px; }
-.pdf-box p { font-size:11px; color:#3a3a5a; line-height:1.6; }
-.risk-badge-pdf { display:inline-block; padding:6px 16px; font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:700; letter-spacing:2px; border-radius:3px; }
-.risk-badge-pdf.med { background:#d4891a; color:#fff; }
-.risk-badge-pdf.low { background:#178a48; color:#fff; }
-.risk-badge-pdf.high { background:#c02020; color:#fff; }
-.pdf-footer { border-top:1px solid #e2e4ef; margin-top:24px; padding-top:10px; display:flex; align-items:center; justify-content:space-between; }
-.pdf-footer p { font-family:'IBM Plex Mono',monospace; font-size:8px; color:#9090b0; letter-spacing:1px; }
 
 /* ═══════════════════════════════════════════
    Login
@@ -563,8 +552,8 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
 }
 .login-field { display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
 .login-field label {
-  font-family:'IBM Plex Mono',monospace; font-size:9px;
-  color:#9db8cc; letter-spacing:2px; text-transform:uppercase;
+  font-family:'IBM Plex Mono',monospace; font-size:9px; font-weight:600;
+  color:var(--tx2); letter-spacing:2px; text-transform:uppercase;
 }
 .login-field input {
   background:var(--s3); border:1px solid var(--bdr2);
@@ -633,10 +622,107 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
   .egrid { grid-template-columns:1fr; }
   .footer-inner { grid-template-columns:1fr; }
 }
+/* ═══════════════════════════════════════════
+   PAGE 2 — TANK DATABASE
+═══════════════════════════════════════════ */
+.fw textarea { width:100%; background:var(--s3); border:1px solid var(--bdr2); color:var(--white); font-family:'IBM Plex Sans',sans-serif; font-size:12px; font-weight:600; line-height:1.6; padding:10px 12px; border-radius:2px; outline:none; resize:vertical; min-height:76px; transition:border-color .15s, background .15s; }
+.fw textarea:focus { border-color:var(--gold); background:rgba(212,137,26,.04); }
+.fw input[readonly] { color:var(--gold3); background:var(--s2); cursor:default; }
+
+.db-sticky-head { position:sticky; top:var(--nav-h); z-index:450; }
+.db-toolbar { background:var(--s1); border-bottom:1px solid var(--bdr); padding:22px 40px; display:flex; align-items:flex-end; gap:16px; flex-wrap:wrap; }
+.db-toolbar .fld { min-width:240px; }
+.db-toolbar .fld label { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--gold2); letter-spacing:2px; text-transform:uppercase; margin-bottom:5px; display:block; }
+.db-btnrow { display:flex; gap:10px; flex-wrap:wrap; }
+.db-btn { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; padding:11px 22px; border:1px solid var(--bdr2); background:var(--s3); color:var(--tx2); cursor:pointer; border-radius:2px; transition:all .15s; white-space:nowrap; }
+.db-btn:hover { color:var(--tx); border-color:var(--tx2); }
+.db-btn.pri { background:var(--gold2); color:#07090c; border-color:var(--gold2); }
+.db-btn.pri:hover { background:var(--gold3); box-shadow:0 4px 18px var(--gglow); }
+.db-btn.danger { border-color:rgba(224,53,53,.35); color:var(--red); }
+.db-btn.danger:hover { background:rgba(224,53,53,.1); border-color:var(--red); }
+.db-empty { text-align:center; padding:80px 20px; color:var(--tx3); }
+.db-empty p { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:1.5px; margin-top:16px; text-transform:uppercase; }
+.db-sub { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--tx3); letter-spacing:1.5px; text-transform:uppercase; }
+
+.db-risk-badge { width:100%; text-align:center; font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:20px; letter-spacing:2px; padding:12px; border-radius:2px; text-transform:uppercase; border:1px solid var(--bdr2); background:var(--s3); color:var(--tx2); pointer-events:none; }
+.db-risk-badge.low { background:rgba(39,184,106,.15); color:var(--green); border-color:rgba(39,184,106,.3); }
+.db-risk-badge.medium { background:rgba(212,137,26,.15); color:var(--gold2); border-color:rgba(212,137,26,.3); }
+.db-risk-badge.medium-high { background:rgba(255,200,74,.12); color:var(--gold3); border-color:rgba(255,200,74,.3); }
+.db-risk-badge.high { background:rgba(224,53,53,.15); color:var(--red); border-color:rgba(224,53,53,.3); }
+
+.db-riwayat-table-wrap { overflow-x:auto; margin-top:18px; }
+.db-toast { position:fixed; bottom:26px; right:26px; background:var(--s2); border:1px solid var(--gold); color:var(--gold2); font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:1px; padding:13px 22px; border-radius:2px; z-index:900; opacity:0; transform:translateY(12px); transition:all .25s ease; pointer-events:none; box-shadow:0 8px 28px rgba(0,0,0,.5); }
+.db-toast.show { opacity:1; transform:translateY(0); }
+
+/* ── General tab: tank photo & engineering drawing ── */
+.tv-photorow { display:flex; gap:16px; flex-wrap:wrap; }
+.tv-photobox { position:relative; background:var(--s2); border:1px solid var(--bdr2); border-radius:2px; overflow:hidden; flex:0 0 260px; height:300px; display:flex; align-items:center; justify-content:center; }
+.tv-photobox.wide { flex:2 1 520px; min-width:420px; height:480px; }
+.tv-photobox img { width:100%; height:100%; object-fit:contain; display:block; }
+.tv-photo-empty { font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600; color:var(--tx3); text-align:center; letter-spacing:1px; padding:20px; line-height:1.8; }
+.tv-photo-empty span { display:block; font-size:8.5px; margin-top:4px; }
+
+/* ═══════════════════════════════════════════
+   READABILITY PASS — bold all labels/headers/nav/UI chrome text
+   (colors already brightened via --tx2/--tx3 above; this adds weight)
+═══════════════════════════════════════════ */
+.nav-co-name span, .nlink, .hdesc, .pill, .btns,
+.ab-lbl, .ab-sub, .sf-l, .ii .l, .stag, .eq-title, .tbi-t, .tbi-s,
+.ehdr .esub, .ec-dc, .apidh p, .apm p, .minner p, .rml, .mlt,
+.step-label, .step-sub, .fld label, .fw .un, .ctab, .eq-ref-num,
+.nav-prev, .rhd span, .rn, .rv .u, .st, .emp, .nsm, .bn, .bv,
+.info-box p, .score-desc, .score-bands span, .summary-val .su, .summary-label,
+.risk-info p, .rk-lbl, .rk-sub, .rmc.lbl, .matrix-legend-title, .recom-text,
+.dm-i, .dm-dc, .dm-cl, .footer-brand p, .footer-col ul li, .footer-bottom p,
+.login-sub, .login-field input::placeholder, .fw input::placeholder,
+.db-toolbar .fld label, .db-btn, .db-empty, .db-empty p, .db-sub, .db-risk-badge,
+th, thead th, .gff-table th, .summary-table th,
+.wrbi p, .rd-desc, .rmc.rl, .rmc.rm2, .rmc.rm3, .rmc.rm4 {
+  font-weight:600 !important;
+}
+h1, h2, h3, h4, h5, .ec-nm, .footer-col h5, .footer-brand .fb-name,
+.eq-label, .slbl, .tbi-v, .db-toast, .login-title {
+  font-weight:700 !important;
+}
+body { color:var(--tx); }
+.fw input, .fw select, .fw textarea { font-weight:600; }
+
+/* ── Theme toggle switch ── */
+.theme-toggle {
+  display:inline-flex; align-items:center; gap:6px;
+  font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--tx2); background:transparent; border:1px solid var(--bdr2); padding:7px 14px;
+  cursor:pointer; border-radius:2px; transition:all .18s; margin-right:8px; font-weight:600;
+}
+.theme-toggle:hover { color:var(--gold2); border-color:var(--gold); background:var(--gdim); }
+.theme-toggle .ti { width:13px; height:13px; flex-shrink:0; }
+
+/* ── Tank visualization: interactive on-sketch callouts (no legend — every
+   course band, the liquid line, and every nozzle marker is itself the
+   clickable/hoverable element) ── */
+.tv-callout { cursor:pointer; }
+.tv-callout .tv-dot { transition:r .15s ease; }
+.tv-callout .tv-leader { transition:stroke-width .15s ease; }
+.tv-callout text, .tv-callout textPath { transition:opacity .15s ease; }
+.tv-callout:hover .tv-dot { r:4.5; }
+.tv-callout:hover .tv-leader { stroke-width:1.8; }
+.tv-callout:hover text { opacity:.7; }
+.tv-liqline { transition:stroke-width .15s ease; }
+.tv-callout:hover .tv-liqline { stroke-width:2.4; }
+@keyframes tvFlash { 0%{box-shadow:0 0 0 3px rgba(230,178,60,.6);} 100%{box-shadow:0 0 0 0 rgba(230,178,60,0);} }
+.tv-flash { animation:tvFlash .9s ease-out; }
 </style>
+<script>
+(function(){
+  try {
+    var t = localStorage.getItem('dbTheme');
+    if(t === 'light') document.documentElement.setAttribute('data-theme','light');
+  } catch(e) {}
+})();
+</script>
 </head>
 <body>
-    
+
 <!-- ═══ LOGIN PAGE ═══ -->
 <div id="login-page" class="login-overlay">
   <div class="login-bg"></div>
@@ -695,6 +781,11 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
     <div class="nav-logo"><div class="ldot"></div>RBI<span class="ac">PLATFORM</span></div>
   </div>
   <div class="nav-links">
+    <button class="theme-toggle" onclick="dbToggleTheme()" id="theme-toggle-btn" title="Ganti mode terang/gelap">
+      <svg class="ti" id="theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      <svg class="ti" id="theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+      <span id="theme-label">GELAP</span>
+    </button>
     <button class="nlink" onclick="doLogout()" style="margin-left:8px;border-color:rgba(224,53,53,.3);color:var(--red);" id="logout-btn">LOGOUT</button>
     <button class="nlink on" onclick="showPage(0)">HOME</button>
     <button class="nlink" onclick="showPage(1)">CALCULATOR</button>
@@ -728,11 +819,11 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
         <span class="pill">NDT Optimization</span><span class="pill">Semi-Quantitative</span>
       </div>
       <div class="hcta">
-        <button class="btnp" onclick="showPage(1)">
+        <button class="btnp" onclick="document.getElementById('ea').scrollIntoView({behavior:'smooth'})">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           START CALCULATOR
         </button>
-        <button class="btns" onclick="document.getElementById('ea').scrollIntoView({behavior:'smooth'})">VIEW EQUIPMENT</button>
+        <button class="btns" onclick="document.getElementById('what-is-rbi').scrollIntoView({behavior:'smooth'})">DETAILED CALCULATION</button>
       </div>
     </div>
     <div class="hr">
@@ -789,7 +880,7 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
     <div class="ii"><div class="n">$312/yr</div><div class="l">RBI Inspection Savings</div></div>
   </div>
 
-  <div class="wrbi">
+  <div class="wrbi" id="what-is-rbi">
     <div>
       <div class="stag">What is RBI</div>
       <h2>INSPECTION<br>DRIVEN BY<br>ACTUAL RISK</h2>
@@ -940,504 +1031,387 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
 ═══════════════════════════════════════ -->
 <div class="page" id="p1">
 
-  <!-- STEP NAVIGATION -->
-  <div class="step-nav">
-    <button class="step-btn on" id="sb0" onclick="goStep(0)">
-      <div class="step-num" id="sn0">1</div>
-      <div><div class="step-label">RLA</div><div class="step-sub">Remaining Life</div></div>
-    </button>
-    <div class="step-sep"></div>
-    <button class="step-btn" id="sb1" onclick="goStep(1)">
-      <div class="step-num" id="sn1">2</div>
-      <div><div class="step-label">PoF</div><div class="step-sub">Probability of Failure</div></div>
-    </button>
-    <div class="step-sep"></div>
-    <button class="step-btn" id="sb2" onclick="goStep(2)">
-      <div class="step-num" id="sn2">3</div>
-      <div><div class="step-label">CoF</div><div class="step-sub">Consequence of Failure</div></div>
-    </button>
-    <div class="step-sep"></div>
-    <button class="step-btn" id="sb3" onclick="goStep(3)">
-      <div class="step-num" id="sn3">4</div>
-      <div><div class="step-label">Risk Assessment</div><div class="step-sub">Matrix & Result</div></div>
-    </button>
-  </div>
-
-  <!-- ════════════════════
-       STEP 1 — RLA
-  ════════════════════ -->
-  <div class="step-panel on" id="sp0">
-    <div class="clayout">
-      <div>
-        <div class="cpanel">
-          <div class="phd"><span class="ptag">01</span><h3>TANK DESIGN PARAMETERS</h3></div>
-          <div class="pbd">
-            <div class="slbl">General</div>
-            <div class="frow">
-              <div class="fld"><label>Nominal Diameter — D</label><div class="fw"><input type="number" id="inp-D" value="5.990" step="0.001" min="0"><span class="un">m</span></div></div>
-              <div class="fld"><label>Liquid Specific Gravity — G</label><div class="fw"><input type="number" id="inp-G" value="0.81" step="0.01" min="0"><span class="un">—</span></div></div>
-            </div>
-            <div class="frow">
-              <div class="fld"><label>Max Filling Height — H</label><div class="fw"><input type="number" id="inp-H" value="3.500" step="0.001" min="0"><span class="un">m</span></div></div>
-              <div class="fld"><label>Joint Efficiency — E</label><div class="fw"><input type="number" id="inp-E" value="0.7" step="0.05" min="0.1" max="1.0"><span class="un">—</span></div></div>
-            </div>
-            <hr class="dvhr">
-            <div class="slbl">Material — Course 1 &amp; 2 &nbsp;(S = min(0.80Y, 0.429T))</div>
-            <div class="frow">
-              <div class="fld"><label>Min Yield Strength — Y</label><div class="fw"><input type="number" id="inp-Y12" value="36000" step="100" min="0"><span class="un">psi</span></div></div>
-              <div class="fld"><label>Min Tensile Strength — T</label><div class="fw"><input type="number" id="inp-T12" value="58000" step="100" min="0"><span class="un">psi</span></div></div>
-            </div>
-            <div class="slbl">Material — Course 3+ &nbsp;(S = min(0.88Y, 0.472T))</div>
-            <div class="frow">
-              <div class="fld"><label>Min Yield Strength — Y</label><div class="fw"><input type="number" id="inp-Y3" value="36000" step="100" min="0"><span class="un">psi</span></div></div>
-              <div class="fld"><label>Min Tensile Strength — T</label><div class="fw"><input type="number" id="inp-T3" value="58000" step="100" min="0"><span class="un">psi</span></div></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="cpanel">
-          <div class="phd"><span class="ptag">02</span><h3>COURSE THICKNESS &amp; INSPECTION DATA</h3></div>
-          <div class="pbd">
-            <div class="ctabs">
-              <button class="ctab on" onclick="switchCourse(0)">COURSE 1</button>
-              <button class="ctab" onclick="switchCourse(1)">COURSE 2</button>
-              <button class="ctab" onclick="switchCourse(2)">COURSE 3</button>
-            </div>
-            <div id="course-panels"></div>
-
-            <div class="eq-ref">
-              <div class="eq-ref-lbl">Reference Equations — API 653</div>
-              <div class="eq-ref-row"><span class="eq-ref-num">(1)</span><span>\(\displaystyle t_{min} = \frac{2.6\,(H-1)\,D\,G}{S \cdot E}\;\;[\text{min } 2.54\text{ mm}]\)</span></div>
-              <div class="eq-ref-row"><span class="eq-ref-num">(2)</span><span>\(\displaystyle CR = \frac{t_{prev} - t_{act}}{\Delta t}\;\;[\text{mm/yr}]\)</span></div>
-              <div class="eq-ref-row"><span class="eq-ref-num">(3)</span><span>\(\displaystyle RL = \frac{t_{act} - t_{min}}{CR}\;\;[\text{years}]\)</span></div>
-            </div>
-
-            <button class="calc-btn" onclick="calcRLA()">▶ CALCULATE RLA</button>
-            <div class="nav-btn-row">
-              <button class="nav-next" id="nextRLA" onclick="goStep(1)" disabled>
-                NEXT — PROBABILITY OF FAILURE <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-            </div>
-          </div>
-        </div>
+  <div class="db-sticky-head" id="db-sticky-head">
+    <div class="db-toolbar">
+      <div class="fld">
+        <label>Tag No — Pilih Tangki</label>
+        <div class="fw"><select id="db-tagno" onchange="dbLoadTank()"></select></div>
       </div>
-
-      <div class="rpanel">
-        <div class="sbar"><div class="sd" id="sd"></div><span class="st" id="st">AWAITING INPUT</span></div>
-        <div class="rcard">
-          <div class="rhd"><span>MINIMUM THICKNESS — \(t_{min}\)</span><span class="ru">API 653</span></div>
-          <div class="rbd" id="r-tmin"><div class="emp"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg><p>PRESS CALCULATE</p></div></div>
-        </div>
-        <div class="rcard">
-          <div class="rhd"><span>CORROSION RATE — \(CR\)</span><span class="ru">mm/yr</span></div>
-          <div class="rbd" id="r-cr"><div class="emp"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><p>PRESS CALCULATE</p></div></div>
-        </div>
-        <div class="rcard">
-          <div class="rhd"><span>REMAINING LIFE — \(RL\)</span><span class="ru">years</span></div>
-          <div class="rbd" id="r-rl"><div class="emp"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><p>PRESS CALCULATE</p></div></div>
-        </div>
-        <div class="rcard" id="r-chart-card" style="display:none">
-          <div class="rhd"><span>REMAINING LIFE — COMPARISON</span><span class="ru">VISUAL</span></div>
-          <div class="rbd"><div class="bchart" id="r-chart"></div></div>
+      <div class="db-btnrow">
+        <button class="db-btn pri" onclick="dbLoadTank()">▶ LOAD</button>
+        <button class="db-btn" onclick="dbOpenAddModal()">+ ADD TANK</button>
+        <button class="db-btn danger" onclick="dbDeleteTank()">DELETE TANK</button>
+      </div>
+      <div class="fld" style="min-width:auto;">
+        <label>Satuan — Diameter/Tinggi/Ketebalan</label>
+        <div class="db-btnrow">
+          <button class="db-btn pri" id="unit-si" onclick="dbSetUnitSystem('SI')">SI (m / mm)</button>
+          <button class="db-btn" id="unit-usc" onclick="dbSetUnitSystem('USC')">USC (ft / in)</button>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- ════════════════════
-       STEP 2 — PoF
-  ════════════════════ -->
-  <div class="step-panel" id="sp1">
-    <div class="clayout">
-      <div>
-
-        <!-- GFF Section -->
-        <div class="cpanel">
-          <div class="phd"><span class="ptag">GFF</span><h3>GENERIC FAILURE FREQUENCY</h3></div>
-          <div class="pbd">
-            <div class="info-box">
-              <div class="ib-title">API 581 — GFF for AST Shell Course</div>
-              <p>GFF adalah frekuensi kegagalan generik per komponen berdasarkan data industri. Untuk AST Shell Course, masukkan nilai GFF per course. Nilai dirata-ratakan untuk mendapatkan \(g_{ff,total}\) sesuai jurnal.</p>
-              <p style="margin-top:8px;">\[ g_{ff,total} = \frac{g_{ff,C1} + g_{ff,C2} + g_{ff,C3}}{3} \]</p>
-            </div>
-            <div class="slbl">GFF per Course (events/year)</div>
-            <div class="frow s3">
-              <div class="fld"><label>GFF Course 1</label><div class="fw"><input type="number" id="gff-c1" value="8.0e-6" step="1e-7" min="0"><span class="un">evt/yr</span></div></div>
-              <div class="fld"><label>GFF Course 2</label><div class="fw"><input type="number" id="gff-c2" value="8.0e-6" step="1e-7" min="0"><span class="un">evt/yr</span></div></div>
-              <div class="fld"><label>GFF Course 3</label><div class="fw"><input type="number" id="gff-c3" value="8.0e-6" step="1e-7" min="0"><span class="un">evt/yr</span></div></div>
-            </div>
-            <div class="info-box" style="margin-top:8px;">
-              <div class="ib-title">Referensi API 581 Table 3.1</div>
-              <p>Nilai GFF typical untuk AST Course (COURSE-1 s/d COURSE-10): <strong style="color:var(--gold2)">8.0 × 10⁻⁶ events/yr</strong> per course. Nilai ini sudah diisi sebagai default.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- DF Thinning Section -->
-        <div class="cpanel">
-          <div class="phd"><span class="ptag">DF</span><h3>DAMAGE FACTOR — THINNING (AVAILABLE)</h3></div>
-          <div class="pbd">
-            <div class="info-box">
-            <div class="ib-title">API 581 — DF Thinning Formula (Jurnal)</div>
-            <p>Damage Factor thinning dihitung dari Base DF dikalikan faktor-faktor koreksi, dibagi faktor monitoring online.</p>
-            <p style="margin-top:8px;">\[ D_f^{thin} = \frac{D_{fb}^{thin} \cdot F_{IP} \cdot F_{DL} \cdot F_{WD} \cdot F_{AM} \cdot F_{SM}}{F_{OM}} \]</p>
-            </div>
-
-            <div class="slbl">Base Damage Factor</div>
-            <div class="frow s1">
-            <div class="fld"><label>D_fb — Base Damage Factor (Thinning)</label>
-                <div class="fw"><input type="number" id="df-fb" value="1.0" step="0.1" min="0"><span class="un">—</span></div>
-            </div>
-            </div>
-
-            <div class="slbl">Adjustment Factors</div>
-            <div class="frow s3">
-            <div class="fld"><label>F_IP — Injection / Mix Points</label>
-                <div class="fw"><input type="number" id="df-fip" value="1.0" step="0.1" min="1" max="10"><span class="un">—</span></div>
-            </div>
-            <div class="fld"><label>F_DL — Dead Legs</label>
-                <div class="fw"><input type="number" id="df-fdl" value="1.0" step="0.1" min="1" max="5"><span class="un">—</span></div>
-            </div>
-            <div class="fld"><label>F_WD — Welded Construction</label>
-                <div class="fw"><input type="number" id="df-fwd" value="1.0" step="0.1" min="1" max="2"><span class="un">—</span></div>
-            </div>
-            </div>
-            <div class="frow s3">
-            <div class="fld"><label>F_AM — Maintenance Adjustment</label>
-                <div class="fw"><input type="number" id="df-fam" value="1.0" step="0.1" min="1" max="5"><span class="un">—</span></div>
-            </div>
-            <div class="fld"><label>F_SM — Settlement Adjustment</label>
-                <div class="fw"><input type="number" id="df-fsm" value="1.0" step="0.1" min="1" max="3"><span class="un">—</span></div>
-            </div>
-            <div class="fld"><label>F_OM — Online Monitoring</label>
-                <div class="fw">
-                <select id="df-fom">
-                    <option value="1.0" selected>None — F_OM = 1.0</option>
-                    <option value="0.9">Coupon monitoring — F_OM = 0.9</option>
-                    <option value="0.8">ER probe — F_OM = 0.8</option>
-                    <option value="0.5">Key variable monitoring — F_OM = 0.5</option>
-                </select>
-                </div>
-            </div>
-            </div>
-
-            <hr class="dvhr">
-            <div style="background:var(--s3);border:1px solid var(--bdr2);border-radius:2px;padding:14px 16px;margin-bottom:12px;">
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">OTHER DAMAGE MECHANISMS</div>
-              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
-                <div style="background:var(--s2);border:1px solid var(--bdr);border-radius:2px;padding:10px;text-align:center;">
-                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx3);margin-bottom:4px;">EXTERNAL DAMAGE</div>
-                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gold2);">COMING SOON</div>
-                </div>
-                <div style="background:var(--s2);border:1px solid var(--bdr);border-radius:2px;padding:10px;text-align:center;">
-                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx3);margin-bottom:4px;">SCC / HIC</div>
-                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gold2);">COMING SOON</div>
-                </div>
-                <div style="background:var(--s2);border:1px solid var(--bdr);border-radius:2px;padding:10px;text-align:center;">
-                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx3);margin-bottom:4px;">BRIT. FRACTURE</div>
-                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gold2);">COMING SOON</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- FMS Section -->
-        <div class="cpanel">
-          <div class="phd"><span class="ptag">FMS</span><h3>MANAGEMENT SYSTEMS FACTOR</h3></div>
-          <div class="pbd">
-            <div class="info-box">
-              <div class="ib-title">API 581 — FMS Formula</div>
-              <p>FMS menyesuaikan PoF berdasarkan kualitas program manajemen keselamatan fasilitas. Skor 72 = industri rata-rata (FMS = 1.0). Skor lebih tinggi menurunkan PoF, skor lebih rendah meningkatkan PoF.</p>
-              <p style="margin-top:8px;">\[ F_{MS} = 2.38 \cdot e^{-0.012 \cdot p_{score}} \]</p>
-            </div>
-            <div class="score-section">
-              <div class="score-title">Management Systems Score (p<sub>score</sub>)</div>
-              <div class="score-desc">Nilai pscore berdasarkan audit PSM fasilitas. Skor 72 = industri rata-rata. Skor 100 = best-in-industry. Skor di bawah 72 = ada isu yang meningkatkan risiko.</div>
-              <div class="score-slider-wrap">
-                <input type="range" class="score-slider" id="pms-score" min="0" max="100" value="72" oninput="updateFMSPreview()">
-                <div class="score-val" id="pms-display">72</div>
-              </div>
-              <div class="score-bands">
-                <span>0 — Kritis</span>
-                <span>72 — Avg</span>
-                <span>100 — Best</span>
-              </div>
-              <div style="margin-top:14px;display:flex;gap:16px;flex-wrap:wrap;">
-                <div><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx3);letter-spacing:1px;margin-bottom:4px;">FMS CALCULATED</div><div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:var(--gold2);" id="fms-preview">1.000</div></div>
-                <div><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx3);letter-spacing:1px;margin-bottom:4px;">EFFECT ON PoF</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--tx2);margin-top:6px;" id="fms-effect">Skor rata-rata — PoF tidak berubah</div></div>
-              </div>
-            </div>
-
-            <button class="calc-btn" onclick="calcPoF()">▶ CALCULATE PoF</button>
-            <div class="nav-btn-row">
-              <button class="nav-prev" onclick="goStep(0)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> BACK</button>
-              <button class="nav-next" id="nextPoF" onclick="goStep(2)" disabled>
-                NEXT — CONSEQUENCE OF FAILURE <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT: PoF Results -->
-      <div class="rpanel">
-        <div class="sbar"><div class="sd" id="sd-pof"></div><span class="st" id="st-pof">AWAITING INPUT</span></div>
-        <div class="rcard">
-          <div class="rhd"><span>GFF TOTAL</span><span class="ru">events/yr</span></div>
-          <div class="rbd" id="r-gff"><div class="emp"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg><p>PRESS CALCULATE</p></div></div>
-        </div>
-        <div class="rcard">
-          <div class="rhd"><span>DAMAGE FACTOR — D<sub>f</sub></span><span class="ru">dimensionless</span></div>
-          <div class="rbd" id="r-df"><div class="emp"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><p>PRESS CALCULATE</p></div></div>
-        </div>
-        <div class="rcard">
-          <div class="rhd"><span>MANAGEMENT SYSTEMS FACTOR — F<sub>MS</sub></span><span class="ru">—</span></div>
-          <div class="rbd" id="r-fms"><div class="emp"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg><p>PRESS CALCULATE</p></div></div>
-        </div>
-        <div class="rcard">
-          <div class="rhd"><span>PROBABILITY OF FAILURE — P<sub>f</sub></span><span class="ru">API 581</span></div>
-          <div class="rbd" id="r-pof"><div class="emp"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><p>PRESS CALCULATE</p></div></div>
-        </div>
-      </div>
+    <div class="step-nav" id="db-tabnav">
+      <button class="step-btn on" onclick="goDbTab(0)">
+        <div class="step-num">1</div>
+        <div><div class="step-label">GENERAL</div><div class="step-sub">Info Umum</div></div>
+      </button>
+      <div class="step-sep"></div>
+      <button class="step-btn" onclick="goDbTab(1)">
+        <div class="step-num">2</div>
+        <div><div class="step-label">DESAIN</div><div class="step-sub">Operasi &amp; Konstruksi</div></div>
+      </button>
+      <div class="step-sep"></div>
+      <button class="step-btn" onclick="goDbTab(2)">
+        <div class="step-num">3</div>
+        <div><div class="step-label">INSPEKSI</div><div class="step-sub">Ketebalan &amp; Sisa Umur</div></div>
+      </button>
+      <div class="step-sep"></div>
+      <button class="step-btn" onclick="goDbTab(3)">
+        <div class="step-num">4</div>
+        <div><div class="step-label">RIWAYAT</div><div class="step-sub">Pemeliharaan</div></div>
+      </button>
+      <div class="step-sep"></div>
+      <button class="step-btn" onclick="goDbTab(4)">
+        <div class="step-num">5</div>
+        <div><div class="step-label">RBI</div><div class="step-sub">PoF · CoF · Risiko</div></div>
+      </button>
     </div>
   </div>
 
-  <!-- ════════════════════
-       STEP 3 — CoF
-  ════════════════════ -->
-  <div class="step-panel" id="sp2">
-    <div class="clayout">
-      <div>
-        <div class="cpanel">
-          <div class="phd"><span class="ptag">CoF</span><h3>CONSEQUENCE OF FAILURE — FINANCIAL</h3></div>
-          <div class="pbd">
-            <div class="info-box">
-              <div class="ib-title">API 581 — Financial Consequence of Failure</div>
-              <p>CoF finansial adalah total biaya yang muncul akibat kegagalan peralatan, mencakup tiga komponen utama. Masukkan estimasi biaya dalam USD untuk setiap komponen.</p>
-              <p style="margin-top:8px;">\[ C_{of}^{fin} = FC_{environ} + FC_{cmd} + FC_{prod} \]</p>
-            </div>
-
-            <div class="slbl">FC_environ — Biaya Lingkungan</div>
-            <div class="frow">
-              <div class="fld"><label>Biaya Cleanup Lingkungan</label><div class="fw"><input type="number" id="cof-env" value="20000" step="1000" min="0"><span class="un">USD</span></div></div>
-              <div class="fld"><label>Biaya Denda / Penalti Regulasi</label><div class="fw"><input type="number" id="cof-env2" value="5000" step="500" min="0"><span class="un">USD</span></div></div>
-            </div>
-
-            <div class="slbl">FC_cmd — Biaya Perbaikan Equipment</div>
-            <div class="frow">
-              <div class="fld"><label>Biaya Repair / Penggantian Tangki</label><div class="fw"><input type="number" id="cof-cmd1" value="50000" step="1000" min="0"><span class="un">USD</span></div></div>
-              <div class="fld"><label>Biaya Decontaminasi / Downtime</label><div class="fw"><input type="number" id="cof-cmd2" value="30000" step="1000" min="0"><span class="un">USD</span></div></div>
-            </div>
-
-            <div class="slbl">FC_prod — Biaya Kehilangan Produksi</div>
-            <div class="frow">
-              <div class="fld"><label>Nilai Kehilangan Produksi</label><div class="fw"><input type="number" id="cof-prod1" value="40000" step="1000" min="0"><span class="un">USD</span></div></div>
-              <div class="fld"><label>Biaya Penggantian Produk</label><div class="fw"><input type="number" id="cof-prod2" value="19966" step="500" min="0"><span class="un">USD</span></div></div>
-            </div>
-
-            <div class="info-box" style="margin-top:8px;">
-              <div class="ib-title">Kategori CoF Financial — API 581 Table 1.3</div>
-              <p>
-                <strong style="color:var(--white)">A:</strong> CoF &lt; $10,000 &nbsp;|&nbsp;
-                <strong style="color:var(--white)">B:</strong> $10K–$100K &nbsp;|&nbsp;
-                <strong style="color:var(--white)">C:</strong> $100K–$1M &nbsp;|&nbsp;
-                <strong style="color:var(--white)">D:</strong> $1M–$10M &nbsp;|&nbsp;
-                <strong style="color:var(--white)">E:</strong> &gt; $10M
-              </p>
-            </div>
-
-            <button class="calc-btn" onclick="calcCoF()">▶ CALCULATE CoF</button>
-            <div class="nav-btn-row">
-              <button class="nav-prev" onclick="goStep(1)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> BACK</button>
-              <button class="nav-next" id="nextCoF" onclick="goStep(3)" disabled>
-                NEXT — RISK ASSESSMENT <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT: CoF Results -->
-      <div class="rpanel">
-        <div class="sbar"><div class="sd" id="sd-cof"></div><span class="st" id="st-cof">AWAITING INPUT</span></div>
-        <div class="rcard">
-          <div class="rhd"><span>FC_environ</span><span class="ru">USD</span></div>
-          <div class="rbd" id="r-fcenv"><div class="emp"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 8v4l3 3"/></svg><p>PRESS CALCULATE</p></div></div>
-        </div>
-        <div class="rcard">
-          <div class="rhd"><span>FC_cmd</span><span class="ru">USD</span></div>
-          <div class="rbd" id="r-fccmd"><div class="emp"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><p>PRESS CALCULATE</p></div></div>
-        </div>
-        <div class="rcard">
-          <div class="rhd"><span>FC_prod</span><span class="ru">USD</span></div>
-          <div class="rbd" id="r-fcprod"><div class="emp"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg><p>PRESS CALCULATE</p></div></div>
-        </div>
-        <div class="rcard">
-          <div class="rhd"><span>TOTAL CoF (C<sub>f</sub><sup>fin</sup>)</span><span class="ru">USD</span></div>
-          <div class="rbd" id="r-coftotal"><div class="emp"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg><p>PRESS CALCULATE</p></div></div>
-        </div>
-      </div>
-    </div>
+  <div class="db-empty" id="db-empty" style="display:none">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+    <p>Belum ada data tangki. Klik "ADD TANK" untuk menambah data baru.</p>
   </div>
 
-  <!-- ════════════════════
-       STEP 4 — RISK ASSESSMENT
-  ════════════════════ -->
-  <div class="step-panel" id="sp3">
-    <div class="risk-layout">
+  <div id="db-tabcontent">
 
-      <div class="risk-banner medium" id="risk-banner">
-        <div class="risk-badge-big medium" id="risk-badge">—</div>
-        <div class="risk-info">
-          <h2 id="risk-title">Run all calculations first</h2>
-          <p id="risk-desc">Complete Steps 1–3 to generate the full risk assessment and matrix plot.</p>
-        </div>
-      </div>
-
-      <!-- KPI Row -->
-      <div class="risk-grid">
-        <div class="risk-kpi">
-          <div class="rk-lbl">Probability of Failure — P<sub>f</sub></div>
-          <div class="rk-val" id="rk-pof">—</div>
-          <div class="rk-sub">events/year</div>
-          <div class="rk-cat" id="rk-pof-cat" style="background:var(--s3);border:1px solid var(--bdr);color:var(--tx3);">Kategori —</div>
-        </div>
-        <div class="risk-kpi">
-          <div class="rk-lbl">Consequence of Failure — C<sub>f</sub></div>
-          <div class="rk-val" id="rk-cof">—</div>
-          <div class="rk-sub">USD</div>
-          <div class="rk-cat" id="rk-cof-cat" style="background:var(--s3);border:1px solid var(--bdr);color:var(--tx3);">Kategori —</div>
-        </div>
-        <div class="risk-kpi">
-          <div class="rk-lbl">Remaining Life (Limiting Course)</div>
-          <div class="rk-val" id="rk-rl">—</div>
-          <div class="rk-sub">years</div>
-          <div class="rk-cat" id="rk-rl-sub" style="background:var(--s3);border:1px solid var(--bdr);color:var(--tx3);">—</div>
-        </div>
-        <div class="risk-kpi">
-          <div class="rk-lbl">Recommended Inspection Interval</div>
-          <div class="rk-val" id="rk-interval">—</div>
-          <div class="rk-sub">years</div>
-          <div class="rk-cat" id="rk-interval-sub" style="background:var(--s3);border:1px solid var(--bdr);color:var(--tx3);">—</div>
-        </div>
-      </div>
-
-      <!-- Risk Matrix -->
-      <div class="matrix-container">
-        <div class="matrix-title">RISK MATRIX — API 581</div>
-        <div class="matrix-wrap">
-          <div>
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx3);letter-spacing:1px;margin-bottom:8px;">PROBABILITY ↑</div>
-            <div class="rmx-large" id="risk-matrix">
-              <!-- Built by JS -->
-            </div>
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx3);letter-spacing:1px;margin-top:8px;text-align:center;">CONSEQUENCE →</div>
-          </div>
-          <div>
-            <div class="matrix-legend-title">RISK LEVEL</div>
-            <div class="matrix-legend">
-              <div class="mlr"><div class="mlb" style="background:rgba(224,53,53,.18);border:1px solid rgba(224,53,53,.24)"></div><span class="mlt">HIGH — Immediate action</span></div>
-              <div class="mlr"><div class="mlb" style="background:rgba(212,137,26,.28);border:1px solid rgba(212,137,26,.38)"></div><span class="mlt">MEDIUM-HIGH — Priority</span></div>
-              <div class="mlr"><div class="mlb" style="background:rgba(212,137,26,.14);border:1px solid rgba(212,137,26,.2)"></div><span class="mlt">MEDIUM — Periodic ≤5yr</span></div>
-              <div class="mlr"><div class="mlb" style="background:rgba(39,184,106,.12);border:1px solid rgba(39,184,106,.18)"></div><span class="mlt">LOW — Extended interval</span></div>
-            </div>
-            <div style="margin-top:20px;padding:14px;background:var(--s2);border:1px solid var(--bdr);border-radius:2px;">
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--gold2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">CURRENT POSITION</div>
-              <div id="matrix-pos-label" style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:var(--white);">—</div>
-              <div id="matrix-pos-sub" style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--tx3);margin-top:4px;">Run calculations first</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Summary Table -->
+  <!-- ══ TAB 1 — GENERAL ══ -->
+  <div class="step-panel on" id="dbp0">
+    <div class="clayout wide">
       <div class="cpanel">
-        <div class="phd"><span class="ptag">SUMMARY</span><h3>COMPLETE ASSESSMENT TABLE</h3></div>
+        <div class="phd"><span class="ptag">00</span><h3>FOTO &amp; GAMBAR TEKNIK</h3></div>
         <div class="pbd">
-          <table class="summary-table">
-            <thead>
-              <tr><th>Parameter</th><th>Symbol</th><th>Value</th><th>Unit</th><th>Category/Status</th></tr>
-            </thead>
-            <tbody id="summary-tbody">
-              <tr><td colspan="5" style="text-align:center;color:var(--tx3);font-style:italic;padding:20px;">Complete all calculation steps to see full summary</td></tr>
-            </tbody>
-          </table>
+          <div class="tv-photorow">
+            <div class="tv-photobox">
+              <img id="db-g-photo" alt="Foto tangki" style="display:none;">
+              <div class="tv-photo-empty" id="db-g-photo-empty">Tidak ada foto<br><span>tank/eq/&lt;TAG&gt;.jpg</span></div>
+            </div>
+            <div class="tv-photobox wide">
+              <img id="db-g-drawing" alt="Gambar teknik tangki (top &amp; front view)" style="display:none;">
+              <div class="tv-photo-empty" id="db-g-drawing-empty">Tidak ada gambar teknik<br><span>tank/3d/&lt;TAG&gt;.jpg</span></div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Recommendations -->
-      <div class="recom-box" id="recom-box" style="display:none">
-        <h4>INSPECTION RECOMMENDATIONS</h4>
-        <div class="recom-list" id="recom-list"></div>
-      </div>
-
-      <!-- Export -->
-      <div class="nav-btn-row" style="margin-top:0;">
-        <button class="nav-prev" onclick="goStep(2)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> BACK</button>
-        <button class="export-btn" id="exportBtn" onclick="exportPDF()" disabled style="flex:1;margin-top:0;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="12" y1="12" x2="12" y2="18"/><polyline points="9,15 12,18 15,15"/></svg>
-          EXPORT PDF REPORT
-        </button>
+      <div class="cpanel">
+        <div class="phd"><span class="ptag">01</span><h3>INFORMASI UMUM TANGKI</h3></div>
+        <div class="pbd">
+          <div class="frow">
+            <div class="fld"><label>Tag No</label><div class="fw"><input type="text" id="db-g-tagno" readonly></div></div>
+            <div class="fld"><label>Tahun Pembuatan</label><div class="fw"><input type="number" id="db-g-tahun" step="1"></div></div>
+          </div>
+          <div class="frow">
+            <div class="fld"><label>Kepemilikan</label><div class="fw"><input type="text" id="db-g-kepemilikan"></div></div>
+            <div class="fld"><label>Manufaktur</label><div class="fw"><input type="text" id="db-g-manufaktur"></div></div>
+          </div>
+          <div class="frow s1">
+            <div class="fld"><label>Lokasi</label><div class="fw"><input type="text" id="db-g-lokasi"></div></div>
+          </div>
+          <hr class="dvhr">
+          <div class="slbl">Konstruksi</div>
+          <div class="frow s3">
+            <div class="fld"><label>Tipe Tank</label><div class="fw"><select id="db-g-tipe"><option>Vertical</option><option>Horizontal</option></select></div></div>
+            <div class="fld"><label>Welding Type</label><div class="fw"><select id="db-g-welding" onchange="dbToggleRivetRow()"><option>Welded</option><option>Riveted</option></select></div></div>
+            <div class="fld" id="db-g-rivetrow-wrap"><label>Number of Rivet Row</label><div class="fw"><select id="db-g-rivetrow"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div></div>
+          </div>
+          <button class="calc-btn" onclick="dbSaveGeneral()">▶ SAVE GENERAL</button>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- ══ TAB 2 — DESAIN ══ -->
+  <div class="step-panel" id="dbp1">
+    <div class="clayout">
+      <div>
+      <div class="cpanel">
+        <div class="phd"><span class="ptag">02</span><h3>DESAIN OPERASI</h3></div>
+        <div class="pbd">
+          <div class="frow">
+            <div class="fld"><label>Fluid Service</label><div class="fw"><input type="text" id="db-d-fluid"></div></div>
+            <div class="fld"><label>Joint Type</label><div class="fw"><select id="db-d-joint"><option>Butt</option><option>Lap</option></select></div></div>
+          </div>
+          <div class="frow s3">
+            <div class="fld"><label>Liquid Specific Gravity</label><div class="fw"><input type="number" id="db-d-liquid" step="0.01"></div></div>
+            <div class="fld"><label>Temperature Operasi</label><div class="fw"><input type="number" id="db-d-temp" step="1"><span class="un">°C</span></div></div>
+            <div class="fld"><label>Flash Point</label><div class="fw"><input type="number" id="db-d-flash" step="1"><span class="un">°C</span></div></div>
+          </div>
+          <div class="frow s1">
+            <div class="fld"><label>Tekanan</label><div class="fw"><input type="number" id="db-d-tekanan" step="1"><span class="un">Atm</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cpanel">
+        <div class="phd"><span class="ptag">03</span><h3>DESAIN KONSTRUKSI</h3></div>
+        <div class="pbd">
+          <div class="frow s3">
+            <div class="fld"><label>Material Roof</label><div class="fw"><select id="db-d-matroof" onchange="dbRecalcInspeksi()"><option value="A 283-C">A 283-C</option><option value="A285-C">A285-C</option><option value="A36">A36</option><option value="A131-A, B, CS">A131-A, B, CS</option><option value="A131-EH 36">A131-EH 36</option><option value="A573-58">A573-58</option><option value="A573-65">A573-65</option><option value="A573-70">A573-70</option><option value="A516-55">A516-55</option><option value="A516-60">A516-60</option><option value="A516-65">A516-65</option><option value="A516-70">A516-70</option><option value="A662-B">A662-B</option><option value="A662-C">A662-C</option><option value="A537-Class 1">A537-Class 1</option><option value="A537-Class 2">A537-Class 2</option><option value="A633-C, D">A633-C, D</option><option value="A678-A">A678-A</option><option value="A678-B">A678-B</option><option value="A737-B A841">A737-B A841</option><option value="A10 (Note 1)">A10 (Note 1)</option><option value="A7 (Note 1)">A7 (Note 1)</option><option value="A442-55 (Note 1)">A442-55 (Note 1)</option><option value="A442-60 (Note 1)">A442-60 (Note 1)</option><option value="G40.21, 38W">G40.21, 38W</option><option value="G40.21, 44W">G40.21, 44W</option><option value="G40.21, 50W">G40.21, 50W</option><option value="G40.21, 50WT">G40.21, 50WT</option><option value="Unknown">Unknown</option></select></div></div>
+            <div class="fld"><label>Material Shell</label><div class="fw"><select id="db-d-matshell" onchange="dbRecalcInspeksi()"><option value="A 283-C">A 283-C</option><option value="A285-C">A285-C</option><option value="A36">A36</option><option value="A131-A, B, CS">A131-A, B, CS</option><option value="A131-EH 36">A131-EH 36</option><option value="A573-58">A573-58</option><option value="A573-65">A573-65</option><option value="A573-70">A573-70</option><option value="A516-55">A516-55</option><option value="A516-60">A516-60</option><option value="A516-65">A516-65</option><option value="A516-70">A516-70</option><option value="A662-B">A662-B</option><option value="A662-C">A662-C</option><option value="A537-Class 1">A537-Class 1</option><option value="A537-Class 2">A537-Class 2</option><option value="A633-C, D">A633-C, D</option><option value="A678-A">A678-A</option><option value="A678-B">A678-B</option><option value="A737-B A841">A737-B A841</option><option value="A10 (Note 1)">A10 (Note 1)</option><option value="A7 (Note 1)">A7 (Note 1)</option><option value="A442-55 (Note 1)">A442-55 (Note 1)</option><option value="A442-60 (Note 1)">A442-60 (Note 1)</option><option value="G40.21, 38W">G40.21, 38W</option><option value="G40.21, 44W">G40.21, 44W</option><option value="G40.21, 50W">G40.21, 50W</option><option value="G40.21, 50WT">G40.21, 50WT</option><option value="Unknown">Unknown</option></select></div></div>
+            <div class="fld"><label>Standard</label><div class="fw"><select id="db-d-standard" onchange="dbRecalcInspeksi()"><option>API 650</option><option>API 12C</option><option>Unknown</option></select></div></div>
+          </div>
+          <div class="frow s3">
+            <div class="fld"><label>Diameter — D</label><div class="fw"><input type="number" id="db-d-diameter" step="0.001" onchange="dbRecalcInspeksi()"><span class="un un-len">m</span></div></div>
+            <div class="fld"><label>Tinggi — H</label><div class="fw"><input type="number" id="db-d-tinggi" step="0.001"><span class="un un-len">m</span></div></div>
+            <div class="fld"><label>Tinggi Maksimum Isi</label><div class="fw"><input type="number" id="db-d-tinggimax" step="0.001" onchange="dbRecalcInspeksi()"><span class="un un-len">m</span></div></div>
+          </div>
+          <div class="frow s1">
+            <div class="fld"><label>Kapasitas</label><div class="fw"><input type="number" id="db-d-kapasitas" step="1"><span class="un">Liter</span></div></div>
+          </div>
+          <hr class="dvhr">
+          <div class="slbl">Diameter Nozzle &amp; Manhole (inch)</div>
+          <div class="frow s3">
+            <div class="fld"><label>Shell Manhole</label><div class="fw"><input type="number" id="db-d-manhole-shell" step="0.5"><span class="un">In</span></div></div>
+            <div class="fld"><label>Roof Manhole</label><div class="fw"><input type="number" id="db-d-manhole-roof" step="0.5"><span class="un">In</span></div></div>
+            <div class="fld"><label>Filling Nozzle</label><div class="fw"><input type="number" id="db-d-nozzle-filling" step="0.5"><span class="un">In</span></div></div>
+          </div>
+          <div class="frow s3">
+            <div class="fld"><label>Suction Nozzle</label><div class="fw"><input type="number" id="db-d-nozzle-suction" step="0.5"><span class="un">In</span></div></div>
+            <div class="fld"><label>Foal Nozzle</label><div class="fw"><input type="number" id="db-d-nozzle-foal" step="0.5"><span class="un">In</span></div></div>
+            <div class="fld"><label>Water Drawoff Nozzle</label><div class="fw"><input type="number" id="db-d-nozzle-water" step="0.5"><span class="un">In</span></div></div>
+          </div>
+          <div class="frow">
+            <div class="fld"><label>Filling In Rate</label><div class="fw"><input type="number" id="db-d-fillrate" step="0.1"><span class="un">m³/hr</span></div></div>
+            <div class="fld"><label>Emptying In Rate</label><div class="fw"><input type="number" id="db-d-emptyrate" step="0.1"><span class="un">m³/hr</span></div></div>
+          </div>
+          <hr class="dvhr">
+          <div class="slbl">Tinggi Course — kosongkan/0 jika course tidak ada (satuan sesuai toggle di atas)</div>
+          <div class="frow s3">
+            <div class="fld"><label>Course 1</label><div class="fw"><input type="number" id="db-d-c1" step="1" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+            <div class="fld"><label>Course 2</label><div class="fw"><input type="number" id="db-d-c2" step="1" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+            <div class="fld"><label>Course 3</label><div class="fw"><input type="number" id="db-d-c3" step="1" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+          </div>
+          <div class="frow s3">
+            <div class="fld"><label>Course 4</label><div class="fw"><input type="number" id="db-d-c4" step="1" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+            <div class="fld"><label>Course 5</label><div class="fw"><input type="number" id="db-d-c5" step="1" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+            <div class="fld"><label>Course 6</label><div class="fw"><input type="number" id="db-d-c6" step="1" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+          </div>
+          <button class="calc-btn" onclick="dbSaveDesain()">▶ SAVE DESAIN</button>
+        </div>
+      </div>
+      </div>
+
+      <div class="rpanel">
+        <div class="rcard">
+          <div class="rhd"><span>VISUALISASI TANGKI</span><span class="ru" id="tv-tipe-badge">VERTICAL</span></div>
+          <div class="rbd" style="padding:14px;">
+            <figure style="margin:0;">
+              <svg id="tank-viz-svg" viewBox="0 0 380 430" role="img" aria-label="Sketsa tangki menampilkan diameter, tinggi, course, level isi maksimum, serta posisi nozzle dan manhole" style="width:100%;height:auto;display:block;"></svg>
+              <figcaption style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:var(--tx3);text-align:center;margin-top:8px;letter-spacing:.5px;">Sketsa proporsional — bukan gambar teknik skala penuh</figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="info-box" style="margin-bottom:0;">
+          <div class="ib-title">Catatan</div>
+          <p>Sketsa mengikuti nilai Diameter, Tinggi, Tinggi Maks. Isi, dan Tinggi Course secara proporsional dan ter-update otomatis. Posisi nozzle/manhole bersifat skematik (bukan azimuth sebenarnya) — hanya nozzle dengan diameter &gt; 0 yang ditampilkan.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TAB 3 — INSPEKSI ══ -->
+  <div class="step-panel" id="dbp2">
+    <div class="clayout">
+      <div>
+        <div class="cpanel">
+          <div class="phd"><span class="ptag">A</span><h3>BASELINE INSPECTION (A)</h3></div>
+          <div class="pbd">
+            <div class="frow">
+              <div class="fld"><label>Date Inspection A</label><div class="fw"><input type="date" id="db-i-dateA" onchange="dbRecalcInspeksi()"></div></div>
+              <div class="fld"><label>Min Roof Plate A</label><div class="fw"><input type="number" id="db-i-roofA" step="0.01" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+            </div>
+            <div class="frow s3">
+              <div class="fld"><label>Min C1 A</label><div class="fw"><input type="number" id="db-i-c1A" step="0.01" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+              <div class="fld"><label>Min C2 A</label><div class="fw"><input type="number" id="db-i-c2A" step="0.01" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+              <div class="fld"><label>Min C3 A</label><div class="fw"><input type="number" id="db-i-c3A" step="0.01" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+            </div>
+            <div class="frow s3">
+              <div class="fld"><label>Min C4 A</label><div class="fw"><input type="number" id="db-i-c4A" step="0.01" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+              <div class="fld"><label>Min C5 A</label><div class="fw"><input type="number" id="db-i-c5A" step="0.01" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+              <div class="fld"><label>Min C6 A</label><div class="fw"><input type="number" id="db-i-c6A" step="0.01" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cpanel">
+          <div class="phd"><span class="ptag">B</span><h3>LATEST INSPECTION (B)</h3></div>
+          <div class="pbd">
+            <div class="frow">
+              <div class="fld"><label>Date Inspection B</label><div class="fw"><input type="date" id="db-i-dateB" onchange="dbRecalcInspeksi()"></div></div>
+              <div class="fld"><label>Min Roof Plate B</label><div class="fw"><input type="number" id="db-i-roofB" step="0.01" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+            </div>
+            <div class="frow s3">
+              <div class="fld"><label>Min C1 B</label><div class="fw"><input type="number" id="db-i-c1B" step="0.01" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+              <div class="fld"><label>Min C2 B</label><div class="fw"><input type="number" id="db-i-c2B" step="0.01" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+              <div class="fld"><label>Min C3 B</label><div class="fw"><input type="number" id="db-i-c3B" step="0.01" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+            </div>
+            <div class="frow s3">
+              <div class="fld"><label>Min C4 B</label><div class="fw"><input type="number" id="db-i-c4B" step="0.01" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+              <div class="fld"><label>Min C5 B</label><div class="fw"><input type="number" id="db-i-c5B" step="0.01" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+              <div class="fld"><label>Min C6 B</label><div class="fw"><input type="number" id="db-i-c6B" step="0.01" onchange="dbRecalcInspeksi()"><span class="un un-thick">mm</span></div></div>
+            </div>
+            <hr class="dvhr">
+            <div class="frow">
+              <div class="fld"><label>Date Valid Certificate</label><div class="fw"><input type="date" id="db-i-datecert"></div></div>
+            </div>
+            <div class="frow s1">
+              <div class="fld"><label>Kesimpulan</label><div class="fw"><textarea id="db-i-kesimpulan"></textarea></div></div>
+            </div>
+            <button class="calc-btn" onclick="dbSaveInspeksi()">▶ SAVE INSPEKSI</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="rpanel">
+        <div class="rcard">
+          <div class="rhd"><span>CORROSION RATE &amp; REMAINING LIFE</span><span class="ru">API 653</span></div>
+          <div class="rbd" style="padding:0;">
+            <div class="gff-table-wrap" style="margin:0;">
+              <table class="gff-table" style="margin:0;">
+                <thead><tr><th>Course</th><th>t_min (mm)</th><th>t_act B (mm)</th><th>CR (mm/yr)</th><th>RL (yr)</th></tr></thead>
+                <tbody id="db-i-results"><tr><td colspan="5" style="text-align:center;color:var(--tx3);">Isi data desain &amp; inspeksi terlebih dahulu</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="info-box">
+          <div class="ib-title">Formula — API 653</div>
+          <p>t_min dihitung dari diameter, tinggi cairan per course, material, dan efisiensi sambungan. CR = (t_A − t_B) / (tahun_B − tahun_A). RL = (t_act − t_min) / CR.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TAB 4 — RIWAYAT PEMELIHARAAN ══ -->
+  <div class="step-panel" id="dbp3">
+    <div class="clayout wide">
+      <div class="cpanel">
+        <div class="phd"><span class="ptag">04</span><h3>RIWAYAT PEMELIHARAAN</h3></div>
+        <div class="pbd">
+          <div class="frow s1">
+            <div class="fld"><label>Pilih Tanggal (lihat detail riwayat)</label><div class="fw"><select id="db-r-dateselect" onchange="dbRiwayatSelectChange()"></select></div></div>
+          </div>
+          <div class="frow">
+            <div class="fld"><label>Date of Inspection</label><div class="fw"><input type="date" id="db-r-date"></div></div>
+            <div class="fld"><label>Scope of Inspection</label><div class="fw"><input type="text" id="db-r-scope"></div></div>
+          </div>
+          <div class="frow">
+            <div class="fld"><label>Uninspection Report Reference</label><div class="fw"><input type="text" id="db-r-uninspection"></div></div>
+            <div class="fld"><label>Authorization Letter</label><div class="fw"><input type="text" id="db-r-al"></div></div>
+          </div>
+          <div class="frow s1">
+            <div class="fld"><label>Result of Inspection</label><div class="fw"><textarea id="db-r-result"></textarea></div></div>
+          </div>
+          <div class="frow s1">
+            <div class="fld"><label>3rd Party</label><div class="fw"><input type="text" id="db-r-3rdparty"></div></div>
+          </div>
+          <div class="nav-btn-row">
+            <button class="nav-prev" onclick="dbResetRiwayatForm()">RESET</button>
+            <button class="nav-next" onclick="dbAddRiwayat()" style="flex:1;">+ ADD DATA</button>
+          </div>
+
+          <div class="db-riwayat-table-wrap">
+            <table class="summary-table">
+              <thead><tr><th>Tanggal</th><th>Scope</th><th>Report Reference</th><th>3rd Party</th></tr></thead>
+              <tbody id="db-r-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TAB 5 — RBI ══ -->
+  <div class="step-panel" id="dbp4">
+    <div class="clayout">
+      <div>
+        <div class="cpanel">
+          <div class="phd"><span class="ptag">PoF</span><h3>PROBABILITY OF FAILURE</h3></div>
+          <div class="pbd">
+            <div class="frow">
+              <div class="fld"><label>Jenis</label><div class="fw"><select id="db-rbi-jenis" onchange="dbJenisChange()">
+                <option>Course -1</option><option>Course -2</option><option>Course -3</option><option>Course -4</option><option>Course -5</option>
+                <option>Course -6</option><option>Course -7</option><option>Course -8</option><option>Course -9</option><option>Course -10</option>
+                <option>Roof</option><option selected>Bottom</option>
+              </select></div></div>
+              <div class="fld"><label>Generic Failure Frequency</label><div class="fw"><input type="number" id="db-rbi-gff" step="0.00001" onchange="dbRecalcRBI()"></div></div>
+            </div>
+            <div class="frow">
+              <div class="fld"><label>Damage Factor</label><div class="fw"><input type="number" id="db-rbi-df" step="1" onchange="dbRecalcRBI()"></div></div>
+              <div class="fld"><label>Management System Factor</label><div class="fw"><input type="number" id="db-rbi-msf" step="0.001" onchange="dbRecalcRBI()"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cpanel">
+          <div class="phd"><span class="ptag">CoF</span><h3>CONSEQUENCE OF FAILURE</h3></div>
+          <div class="pbd">
+            <div class="frow">
+              <div class="fld"><label>Component Damage Cost</label><div class="fw"><input type="number" id="db-rbi-cdc" step="100" onchange="dbRecalcRBI()"><span class="un">USD</span></div></div>
+              <div class="fld"><label>Damage Cost — Surrounding Equip.</label><div class="fw"><input type="number" id="db-rbi-dcs" step="100" onchange="dbRecalcRBI()"><span class="un">USD</span></div></div>
+            </div>
+            <div class="frow">
+              <div class="fld"><label>Business Interruption Cost</label><div class="fw"><input type="number" id="db-rbi-bic" step="100" onchange="dbRecalcRBI()"><span class="un">USD</span></div></div>
+              <div class="fld"><label>Potential Injury Costs</label><div class="fw"><input type="number" id="db-rbi-pic" step="100" onchange="dbRecalcRBI()"><span class="un">USD</span></div></div>
+            </div>
+            <div class="frow s1">
+              <div class="fld"><label>Environmental Cleanup Cost</label><div class="fw"><input type="number" id="db-rbi-ecc" step="100" onchange="dbRecalcRBI()"><span class="un">USD</span></div></div>
+            </div>
+            <button class="calc-btn" onclick="dbSaveRBI()">▶ SAVE RBI</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="rpanel">
+        <div class="rcard">
+          <div class="rhd"><span>PoF VALUE</span><span class="ru">events/yr</span></div>
+          <div class="rbd"><div class="frow"><div class="fld"><label>Value</label><div class="fw"><input type="text" id="db-rbi-pofval" readonly></div></div><div class="fld"><label>Category</label><div class="fw"><input type="text" id="db-rbi-pofcat" readonly></div></div></div></div>
+        </div>
+        <div class="rcard">
+          <div class="rhd"><span>CoF VALUE</span><span class="ru">USD</span></div>
+          <div class="rbd"><div class="frow"><div class="fld"><label>Value</label><div class="fw"><input type="text" id="db-rbi-cofval" readonly></div></div><div class="fld"><label>Category</label><div class="fw"><input type="text" id="db-rbi-cofcat" readonly></div></div></div></div>
+        </div>
+        <div class="rcard">
+          <div class="rhd"><span>RISK CATEGORY</span><span class="ru">MATRIX</span></div>
+          <div class="rbd"><input type="text" id="db-rbi-riskcat" readonly class="db-risk-badge"></div>
+        </div>
+        <div class="matrix-container" style="padding:18px;">
+          <div class="matrix-title" style="font-size:14px;">RISK MATRIX</div>
+          <div class="rmx-large" id="db-rbi-matrix"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- /db-tabcontent -->
 </div><!-- /p1 -->
 
-<!-- ═══ PDF REPORT ═══ -->
-<div id="pdf-report">
-  <div class="pdf-header">
-    <div class="pdf-logo-area">
-      <div class="pdf-logo-box"><img src="logo_ppsdm.png" alt=""></div>
-      <div class="pdf-co-name">PPSDM MIGAS Cepu</div>
+<!-- ═══ ADD TANK MODAL ═══ -->
+<div class="doverlay" id="db-add-overlay" onclick="dbCloseAddModal(event)">
+  <div class="dmodal">
+    <div class="dm-i"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></div>
+    <div class="dm-tg">TANGKI BARU</div>
+    <div class="dm-ti">ADD TANK</div>
+    <div style="text-align:left;margin-bottom:20px;">
+      <div class="fld" style="margin-bottom:14px;"><label style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx2);letter-spacing:1.5px;text-transform:uppercase;">Tag No</label><div class="fw"><input type="text" id="db-add-tagno" placeholder="mis. T-200"></div></div>
+      <div class="fld"><label style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx2);letter-spacing:1.5px;text-transform:uppercase;">Kepemilikan</label><div class="fw"><input type="text" id="db-add-kepemilikan" placeholder="mis. Pusdiklat Migas"></div></div>
     </div>
-    <div class="pdf-doc-title">
-      <h1>RBI INSPECTION REPORT</h1>
-      <div class="pdf-sub">ATMOSPHERIC STORAGE TANK · API 581 / API 653</div>
-      <div class="pdf-sub" id="pdf-date" style="margin-top:2px;"></div>
+    <div style="display:flex;gap:10px;justify-content:center;">
+      <button class="dm-cl" onclick="dbCloseAddModal()">BATAL</button>
+      <button class="calc-btn" style="margin-top:0;flex:none;padding:10px 26px;" onclick="dbConfirmAddTank()">TAMBAH</button>
     </div>
-  </div>
-  <div class="pdf-meta-grid">
-    <div class="pdf-meta-item"><div class="pm-l">Tank Tag</div><div class="pm-v">A</div></div>
-    <div class="pdf-meta-item"><div class="pm-l">Diameter</div><div class="pm-v" id="pm-D">—</div></div>
-    <div class="pdf-meta-item"><div class="pm-l">Method</div><div class="pm-v">RBI Semi-Quant.</div></div>
-    <div class="pdf-meta-item"><div class="pm-l">Risk Category</div><div class="pm-v" id="pm-risk">—</div></div>
-  </div>
-  <div class="pdf-section">
-    <div class="pdf-section-title"><span class="ps-tag">01</span>REMAINING LIFE ASSESSMENT</div>
-    <table class="pdf-table">
-      <thead><tr><th>Component</th><th>t_min (mm)</th><th>t_act (mm)</th><th>CR (mm/yr)</th><th>RL (yr)</th><th>Status</th></tr></thead>
-      <tbody id="pdf-rla-body"></tbody>
-    </table>
-  </div>
-  <div class="pdf-2col">
-    <div class="pdf-box">
-      <h4>Probability of Failure — API 581</h4>
-      <p id="pdf-pof-text">—</p>
-    </div>
-    <div class="pdf-box">
-      <h4>Consequence of Failure — API 581</h4>
-      <p id="pdf-cof-text">—</p>
-    </div>
-  </div>
-  <div class="pdf-section">
-    <div class="pdf-section-title"><span class="ps-tag">02</span>RISK ASSESSMENT</div>
-    <div class="pdf-2col">
-      <div class="pdf-box">
-        <h4>Risk Matrix Position</h4>
-        <p style="margin-bottom:10px">Equipment position: <strong id="pdf-matrix-pos">—</strong></p>
-        <p id="pdf-risk-desc">—</p>
-      </div>
-      <div class="pdf-box">
-        <h4>Inspection Recommendation</h4>
-        <p id="pdf-recom">—</p>
-      </div>
-    </div>
-  </div>
-  <div class="pdf-footer">
-    <p>Generated by RBI Platform · API 581 Semi-Quantitative Method · API 653 Remaining Life Assessment</p>
-    <p>PPSDM MIGAS Cepu</p>
   </div>
 </div>
 
@@ -1445,498 +1419,905 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
 /* ══════════════════════════════════════════
    STATE
 ══════════════════════════════════════════ */
-const STATE = {
-  rla: null,   // { results, D_m, G, E, Y12, T12, Y3, T3 }
-  pof: null,   // { gff, df, fms, pof, pofCat }
-  cof: null,   // { fcEnv, fcCmd, fcProd, total, cofCat }
-};
 
 /* ══════════════════════════════════════════
    NAVIGATION
 ══════════════════════════════════════════ */
 function showPage(idx) {
   document.querySelectorAll('.page').forEach((p,i) => p.classList.toggle('on', i===idx));
-  document.querySelectorAll('.nlink').forEach((b,i) => b.classList.toggle('on', i===idx));
+  document.querySelectorAll('.nav-links .nlink:not(#logout-btn)').forEach((b,i) => b.classList.toggle('on', i===idx));
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function goStep(idx) {
-  document.querySelectorAll('.step-panel').forEach((p,i) => p.classList.toggle('on', i===idx));
-  document.querySelectorAll('.step-btn').forEach((b,i) => b.classList.toggle('on', i===idx));
-  if (idx===3) buildRiskAssessment();
+function goDbTab(idx) {
+  document.querySelectorAll('#p1 .step-panel').forEach((p,i) => p.classList.toggle('on', i===idx));
+  document.querySelectorAll('#p1 .step-btn').forEach((b,i) => b.classList.toggle('on', i===idx));
   window.scrollTo({top:62,behavior:'smooth'});
-  if (window.MathJax) MathJax.typesetPromise();
+}
+
+
+/* ══════════════════════════════════════════
+   PAGE 2 — TANK DATABASE (ported from
+   PPSDM Migas Cepu "AIM Software" VBA app,
+   same formulas/lookup tables as the original)
+══════════════════════════════════════════ */
+
+/* ── built-in dataset (from db_app.accdb) ── */
+const BUILTIN_TANKS = {"T-101": {"tag_no": "T-101", "kepemilikan": "Pusdiklat Migas", "tahunPembuatan": 1913, "tipe": "Vertical", "fluidService": "Crude Oil", "temperatureOperasi": 34, "flashPoint": 38, "tekanan": 1, "materialRoof": "Unknown", "materialSheel": "Unknown", "kapasitas": 2500480, "minRoofPlateA": 2.6, "dateInspectionA": "2011-10-19", "dateInspectionB": "2016-05-25", "dateValidCertificate": "2021-05-25", "kesimpulan": "Tangki Penyimpanan tidak layak dioperasikan sampai ditutup Ketidaksesuaian Utama", "Lokasi": "Kilang Pusdiklat Migas", "liquid": 0.86, "diameter": 19.431, "tinggi": 8.749, "tinggiMaksimumIsi": 8.0, "minC1A": 8.2, "minC2A": 7.2, "minC3A": 6.3, "minC4A": 5.6, "minC5A": 6.1, "minC1B": 8.0, "minC2B": 7.0, "minC4B": 5.4, "minC5B": 5.5, "corrate1": 0.04, "corrate2": 0.04, "corrate3": 0.04, "corrate4": 0.04, "corrate5": 0.12, "minC3B": 6.1, "diametershellManhole": 20.0, "diameterRoofManHole": 20.0, "diameterFilingNozzle": 2.0, "suctionNozzle": 3.0, "weldingType": "Welded", "jointType": "Butt", "standard": "Unknown", "tinggiCourse1": 1250.0, "tinggiCourse2": 1450.0, "tinggiCourse3": 1450.0, "tinggiCourse4": 1450.0, "tinggiCourse5": 1450.0, "tinggiCourse6": 1450.0, "minC6A": 5.0, "minC6B": 4.8, "corrate6": 0.04, "corrateR": 0.03, "remainingLifeR": 5.47, "remainingLife1": 61.62, "remainingLife2": 59.13, "remainingLife3": 70.85, "remainingLife4": 71.5, "remainingLife5": 24.67, "remainingLife6": 56.5, "minRoofPlateB": 2.45, "Gff": 1, "DemageFactor": 22, "Msf": 1, "Cdc": 200, "DCS": 100, "BIC": 200, "Pic": 1000, "ECC": 10000, "POFVal": 22, "POFCa": 3, "COFVal": 11500, "COFCat": "B", "RiskCat": "Low"}, "T-103": {"tag_no": "T-103", "kepemilikan": "Pusdiklat Migas", "tahunPembuatan": 1913, "tipe": "Vertical", "fluidService": "Slop Oil", "temperatureOperasi": 50, "flashPoint": 38, "tekanan": 1, "materialRoof": "Unknown", "materialSheel": "Unknown", "kapasitas": 73, "minRoofPlateA": 3.2, "dateInspectionA": "2011-10-19", "dateInspectionB": "2016-05-25", "dateValidCertificate": "2021-05-25", "Lokasi": "Kilang Pusdiklat Migas", "liquid": 0.9, "diameter": 5.992, "tinggi": 2.73, "tinggiMaksimumIsi": 2.6, "minC1A": 6.1, "minC2A": 6.3, "minC3A": 0.0, "minC4A": 0.0, "minC5A": 0.0, "minC1B": 6.0, "minC2B": 6.1, "minC4B": 0.0, "minC5B": 0.0, "corrate1": 0.02, "corrate2": 0.04, "corrate3": 0.0, "corrate4": 0.0, "corrate5": 0.0, "minC3B": 0.0, "diametershellManhole": 20.0, "diameterRoofManHole": 20.0, "diameterFilingNozzle": 2.0, "suctionNozzle": 3.0, "weldingType": "Riveted", "jointType": "Lap", "numberofRivetRow": "1", "standard": "Unknown", "tinggiCourse1": 1370.0, "tinggiCourse2": 1380.0, "tinggiCourse3": 0.0, "tinggiCourse4": 0.0, "tinggiCourse5": 0.0, "tinggiCourse6": 0.0, "minC6A": 0.0, "minC6B": 0.0, "corrate6": 0.0, "corrateR": 0.04, "remainingLifeR": 17.85, "remainingLife1": 173.0, "remainingLife2": 89.0, "remainingLife3": 0.0, "remainingLife4": 0.0, "remainingLife5": 0.0, "remainingLife6": 0.0, "minRoofPlateB": 3.0, "Gff": 1, "DemageFactor": 22, "Msf": 1, "Cdc": 200, "DCS": 100, "BIC": 200, "Pic": 1000, "ECC": 10000, "POFVal": 22, "POFCa": 3, "COFVal": 11500, "COFCat": "B", "RiskCat": "Low"}, "T-100": {"tag_no": "T-100", "kepemilikan": "Pusdiklat Migas", "tahunPembuatan": 1989, "tipe": "Vertical", "fluidService": "Residu", "temperatureOperasi": 50, "flashPoint": 38, "tekanan": 1, "materialRoof": "Unknown", "materialSheel": "Unknown", "kapasitas": 2479400, "minRoofPlateA": 6.2, "dateInspectionA": "2011-10-19", "dateInspectionB": "2016-05-25", "dateValidCertificate": "2021-05-25", "kesimpulan": "Tanki Penyimpanan baik di operasikan dengan level 7.35 m", "Lokasi": "Kilang Pusdiklat Migas", "liquid": 0.9, "diameter": 21.236, "tinggi": 7.35, "tinggiMaksimumIsi": 7.0, "minC1A": 10.2, "minC2A": 9.2, "minC3A": 8.3, "minC4A": 7.0, "minC5A": 0.0, "minC1B": 9.6, "minC2B": 8.4, "minC4B": 6.1, "minC5B": 0.0, "corrate1": 0.12, "corrate2": 0.16, "corrate3": 0.24, "corrate4": 0.18, "corrate5": 0.0, "minC3B": 7.1, "diametershellManhole": 20.0, "diameterRoofManHole": 20.0, "diameterFilingNozzle": 3.0, "suctionNozzle": 4.0, "diameterFoalNozzle": 4.0, "diameterWaterDraw": 4.0, "weldingType": "Welded", "jointType": "Butt", "standard": "Unknown", "tinggiCourse1": 1830.0, "tinggiCourse2": 1830.0, "tinggiCourse3": 1830.0, "tinggiCourse4": 1830.0, "tinggiCourse5": 0.0, "tinggiCourse6": 0.0, "minC6A": 0.0, "minC6B": 0.0, "corrate6": 0.0, "corrateR": 0.04, "remainingLifeR": 144.28, "remainingLife1": 34.09, "remainingLife2": 27.5, "remainingLife3": 20.12, "remainingLife4": 28.89, "remainingLife5": 0.0, "remainingLife6": 0.0, "minRoofPlateB": 6.0, "Gff": 1, "DemageFactor": 22, "Msf": 1, "Cdc": 200, "DCS": 100, "BIC": 200, "Pic": 100000, "ECC": 10000, "POFVal": 22, "POFCa": 3, "COFVal": 110500, "COFCat": "C", "RiskCat": "Medium"}, "T-107": {"tag_no": "T-107", "kepemilikan": "Pusdiklat Migas", "tahunPembuatan": 1913, "tipe": "Vertical", "fluidService": "HGO", "temperatureOperasi": 50, "flashPoint": 38, "tekanan": 1, "materialRoof": "Unknown", "materialSheel": "Unknown", "kapasitas": 73, "minRoofPlateA": 4.8, "dateInspectionA": "2011-10-19", "dateInspectionB": "2016-05-25", "dateValidCertificate": "2021-05-25", "Lokasi": "Kilang Pusdiklat Migas", "liquid": 0.84, "diameter": 5.992, "tinggi": 2.68, "tinggiMaksimumIsi": 2.6, "minC1A": 4.4, "minC2A": 3.9, "minC3A": 0.0, "minC4A": 0.0, "minC5A": 0.0, "minC1B": 3.5, "minC2B": 3.4, "minC4B": 0.0, "minC5B": 0.0, "corrate1": 0.18, "corrate2": 0.1, "corrate3": 0.0, "corrate4": 0.0, "corrate5": 0.0, "minC3B": 0.0, "diametershellManhole": 20.0, "diameterRoofManHole": 20.0, "diameterFilingNozzle": 2.0, "suctionNozzle": 2.0, "weldingType": "Welded", "jointType": "Butt", "standard": "Unknown", "tinggiCourse1": 1360.0, "tinggiCourse2": 1390.0, "tinggiCourse3": 0.0, "tinggiCourse4": 0.0, "tinggiCourse5": 0.0, "tinggiCourse6": 0.0, "minC6A": 0.0, "minC6B": 0.0, "corrate6": 0.0, "corrateR": 0.1, "remainingLifeR": 20.14, "remainingLife1": 5.33, "remainingLife2": 8.6, "remainingLife3": 0.0, "remainingLife4": 0.0, "remainingLife5": 0.0, "remainingLife6": 0.0, "minRoofPlateB": 4.3, "Gff": 1, "DemageFactor": 22, "Msf": 1, "Cdc": 200, "DCS": 100, "BIC": 200, "Pic": 1000, "ECC": 10000, "POFVal": 22, "POFCa": 3, "COFVal": 11500, "COFCat": "B", "RiskCat": "Low"}, "T-109": {"tag_no": "T-109", "kepemilikan": "Pusdiklat Migas", "tahunPembuatan": 1984, "tipe": "Vertical", "fluidService": "Pertasol CB", "temperatureOperasi": 34, "flashPoint": 38, "tekanan": 1, "materialRoof": "Unknown", "materialSheel": "Unknown", "kapasitas": 77, "minRoofPlateA": 3.8, "dateInspectionA": "2011-10-19", "dateInspectionB": "2016-05-25", "dateValidCertificate": "2021-05-25", "Lokasi": "Kilang Pusdiklat Migas", "liquid": 0.76, "diameter": 6.087, "tinggi": 2.75, "tinggiMaksimumIsi": 2.6, "minC1A": 4.5, "minC2A": 4.1, "minC3A": 3.5, "minC4A": 0.0, "minC5A": 0.0, "minC1B": 4.3, "minC2B": 4.0, "minC4B": 0.0, "minC5B": 0.0, "corrate1": 0.04, "corrate2": 0.02, "corrate3": 0.04, "corrate4": 0.0, "corrate5": 0.0, "minC3B": 3.3, "diametershellManhole": 20.0, "diameterRoofManHole": 20.0, "diameterFilingNozzle": 2.0, "suctionNozzle": 3.0, "weldingType": "Welded", "jointType": "Butt", "standard": "Unknown", "tinggiCourse1": 1530.0, "tinggiCourse2": 730.0, "tinggiCourse3": 490.0, "tinggiCourse4": 0.0, "tinggiCourse5": 0.0, "tinggiCourse6": 0.0, "minC6A": 0.0, "minC6B": 0.0, "corrate6": 0.0, "corrateR": 0.1, "remainingLifeR": 10.14, "remainingLife1": 44.0, "remainingLife2": 73.0, "remainingLife3": 19.0, "remainingLife4": 0.0, "remainingLife5": 0.0, "remainingLife6": 0.0, "minRoofPlateB": 3.3, "Gff": 1, "DemageFactor": 22, "Msf": 1, "Cdc": 200, "DCS": 100, "BIC": 200, "Pic": 1000, "ECC": 10000, "POFVal": 22, "POFCa": 3, "COFVal": 11500, "COFCat": "B", "RiskCat": "Low"}, "T-114": {"tag_no": "T-114", "kepemilikan": "Pusdiklat Migas", "tahunPembuatan": 1984, "tipe": "Vertical", "fluidService": "Pertasol CA", "temperatureOperasi": 34, "flashPoint": 38, "tekanan": 1, "materialRoof": "Unknown", "materialSheel": "Unknown", "kapasitas": 67750, "minRoofPlateA": 2.5, "dateInspectionA": "2011-10-19", "dateInspectionB": "2016-05-25", "dateValidCertificate": "2021-05-25", "kesimpulan": "Tangki Penyimpanan tidak layak dioperasikan sampai ditutup Ketidaksesuaian Utama", "Lokasi": "Kilang Pusdiklat Migas", "liquid": 0.71, "diameter": 5.874, "tinggi": 2.65, "tinggiMaksimumIsi": 2.5, "minC1A": 4.4, "minC2A": 3.3, "minC3A": 0.0, "minC4A": 0.0, "minC5A": 0.0, "minC1B": 3.7, "minC2B": 3.0, "minC4B": 0.0, "minC5B": 0.0, "corrate1": 0.14, "corrate2": 0.06, "corrate3": 0.0, "corrate4": 0.0, "corrate5": 0.0, "minC3B": 0.0, "diametershellManhole": 20.0, "diameterRoofManHole": 20.0, "diameterFilingNozzle": 2.0, "suctionNozzle": 3.0, "weldingType": "Welded", "jointType": "Butt", "standard": "Unknown", "tinggiCourse1": 1830.0, "tinggiCourse2": 920.0, "tinggiCourse3": 0.0, "tinggiCourse4": 0.0, "tinggiCourse5": 0.0, "tinggiCourse6": 0.0, "minC6A": 0.0, "minC6B": 0.0, "corrate6": 0.0, "corrateR": 0.02, "remainingLifeR": 108.57, "remainingLife1": 23.61, "remainingLife2": 48.9, "remainingLife3": 0.0, "remainingLife4": 0.0, "remainingLife5": 0.0, "remainingLife6": 0.0, "minRoofPlateB": 2.4, "Gff": 1, "DemageFactor": 22, "Msf": 1, "Cdc": 200, "DCS": 100, "BIC": 200, "Pic": 1000, "ECC": 10000, "POFVal": 22, "POFCa": 3, "COFVal": 11500, "COFCat": "B", "RiskCat": "Low"}, "T-112": {"tag_no": "T-112", "kepemilikan": "Pusdiklat Migas", "tahunPembuatan": 1984, "tipe": "Vertical", "fluidService": "Pertasol CC", "temperatureOperasi": 34, "flashPoint": 38, "tekanan": 1, "materialRoof": "Unknown", "materialSheel": "Unknown", "kapasitas": 77115, "minRoofPlateA": 4.4, "dateInspectionA": "2011-10-19", "dateInspectionB": "2016-05-25", "dateValidCertificate": "2021-05-25", "kesimpulan": "Tanki Penyimpanan baik di operasikan dengan level 2.647 m", "Lokasi": "Kilang Pusdiklat Migas", "liquid": 0.77, "diameter": 6.087, "tinggi": 2.75, "tinggiMaksimumIsi": 2.65, "minC1A": 3.0, "minC2A": 3.0, "minC3A": 3.2, "minC4A": 0.0, "minC5A": 0.0, "minC1B": 2.8, "minC2B": 2.8, "minC4B": 0.0, "minC5B": 0.0, "corrate1": 0.04, "corrate2": 0.04, "corrate3": 0.06, "corrate4": 0.0, "corrate5": 0.0, "minC3B": 2.9, "diametershellManhole": 20.0, "diameterRoofManHole": 20.0, "diameterFilingNozzle": 2.0, "suctionNozzle": 3.0, "weldingType": "Welded", "jointType": "Butt", "standard": "Unknown", "tinggiCourse1": 1530.0, "tinggiCourse2": 840.0, "tinggiCourse3": 380.0, "tinggiCourse4": 0.0, "tinggiCourse5": 0.0, "tinggiCourse6": 0.0, "minC6A": 0.0, "minC6B": 0.0, "corrate6": 0.0, "corrateR": 0.1, "remainingLifeR": 16.14, "remainingLife1": 6.5, "remainingLife2": 6.5, "remainingLife3": 6.0, "remainingLife4": 0.0, "remainingLife5": 0.0, "remainingLife6": 0.0, "minRoofPlateB": 3.9, "Gff": 1, "DemageFactor": 22, "Msf": 1, "Cdc": 20000000, "DCS": 100, "BIC": 200, "Pic": 1000, "ECC": 1000000, "POFVal": 22, "POFCa": 3, "COFVal": 21001300, "COFCat": "E", "RiskCat": "High"}, "T-120": {"tag_no": "T-120", "kepemilikan": "Pusdiklat Migas", "tahunPembuatan": 1913, "tipe": "Vertical", "fluidService": "Solar", "temperatureOperasi": 50, "flashPoint": 38, "tekanan": 1, "materialRoof": "Unknown", "materialSheel": "Unknown", "kapasitas": 95, "minRoofPlateA": 3.4, "dateInspectionA": "2011-10-19", "dateInspectionB": "2016-05-25", "dateValidCertificate": "2021-05-25", "Lokasi": "Kilang Pusdiklat Migas", "liquid": 0.81, "diameter": 5.493, "tinggi": 4.5, "tinggiMaksimumIsi": 4.05, "minC1A": 5.2, "minC2A": 4.5, "minC3A": 4.8, "minC4A": 0.0, "minC5A": 0.0, "minC1B": 5.1, "minC2B": 4.1, "minC4B": 0.0, "minC5B": 0.0, "corrate1": 0.02, "corrate2": 0.08, "corrate3": 0.12, "corrate4": 0.0, "corrate5": 0.0, "minC3B": 4.2, "diametershellManhole": 20.0, "diameterRoofManHole": 20.0, "diameterFilingNozzle": 2.0, "suctionNozzle": 3.0, "weldingType": "Welded", "jointType": "Butt", "standard": "Unknown", "tinggiCourse1": 1530.0, "tinggiCourse2": 1530.0, "tinggiCourse3": 1530.0, "tinggiCourse4": 0.0, "tinggiCourse5": 0.0, "tinggiCourse6": 0.0, "minC6A": 0.0, "minC6B": 0.0, "corrate6": 0.0, "corrateR": 0.08, "remainingLifeR": 34.64, "remainingLife1": 219.2, "remainingLife2": 45.95, "remainingLife3": 34.01, "remainingLife4": 0.0, "remainingLife5": 0.0, "remainingLife6": 0.0, "minRoofPlateB": 3.0, "Gff": 0, "DemageFactor": 1, "Msf": 0, "Cdc": 200, "DCS": 100, "BIC": 200, "Pic": 1000, "ECC": 1000, "POFVal": 0, "POFCa": 1, "COFVal": 2500, "COFCat": "A", "RiskCat": "Low"}};
+const BUILTIN_RIWAYAT = [{"id": 63, "tag_no": "T-100", "dateInspection": "2002-06-01", "scopeInspection": "Pembersihan dan perbaikan fasilitas tangki", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "CV. Sinar Mustika"}, {"id": 62, "tag_no": "T-100", "dateInspection": "2004-01-01", "scopeInspection": "Perbaikan dan Pengecatan", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "CV. Purnama Jaya Cepu"}, {"id": 61, "tag_no": "T-100", "dateInspection": "2007-09-01", "scopeInspection": "Ultrasonic Thickness Inspection", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "Lembaga Inspeksi Migas Cepu"}, {"id": 60, "tag_no": "T-100", "dateInspection": "2011-07-01", "scopeInspection": "Onstream inspection", "uninspection": "Pemeriksaan berkala", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "PT. Sucopindo(Persero)"}, {"id": 59, "tag_no": "T-100", "dateInspection": "2016-05-01", "scopeInspection": "Onstream inspection", "uninspection": "Pemeriksaan berkala", "aL": "Pusdiklat Migas Cepu", "result": "Visual, Pengukuran Ketebalan, Pengukuran Grounding", "thirdParty": "PT. BKI(Persero)"}, {"id": 68, "tag_no": "T-101", "dateInspection": "2002-06-01", "scopeInspection": "Pembersihan dan perbaikan fasilitas tangki", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "CV. Sinar Mustika"}, {"id": 67, "tag_no": "T-101", "dateInspection": "2004-01-01", "scopeInspection": "Perbaikan dan Pengecatan", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "CV. Purnama Jaya Cepu"}, {"id": 66, "tag_no": "T-101", "dateInspection": "2007-09-01", "scopeInspection": "Ultrasonic Thickness Inspection", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "Lembaga Inspeksi Migas Cepu"}, {"id": 65, "tag_no": "T-101", "dateInspection": "2011-07-01", "scopeInspection": "Onstream inspection", "uninspection": "Pemeriksaan berkala", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "PT. Sucopindo(Persero)"}, {"id": 64, "tag_no": "T-101", "dateInspection": "2016-05-01", "scopeInspection": "Onstream inspection", "uninspection": "Pemeriksaan berkala", "aL": "Pusdiklat Migas Cepu", "result": "Visual, Pengukuran Ketebalan, Pengukuran Grounding", "thirdParty": "PT. BKI(Persero)"}, {"id": 73, "tag_no": "T-103", "dateInspection": "2002-06-01", "scopeInspection": "Pembersihan dan perbaikan fasilitas tangki", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "CV. Sinar Mustika"}, {"id": 72, "tag_no": "T-103", "dateInspection": "2004-01-01", "scopeInspection": "Perbaikan dan Pengecatan", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "CV. Purnama Jaya Cepu"}, {"id": 71, "tag_no": "T-103", "dateInspection": "2007-09-01", "scopeInspection": "Ultrasonic Thickness Inspection", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "Lembaga Inspeksi Migas Cepu"}, {"id": 70, "tag_no": "T-103", "dateInspection": "2011-07-01", "scopeInspection": "Onstream inspection", "uninspection": "Pemeriksaan berkala", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "PT. Sucopindo(Persero)"}, {"id": 69, "tag_no": "T-103", "dateInspection": "2016-05-01", "scopeInspection": "Onstream inspection", "uninspection": "Pemeriksaan berkala", "aL": "Pusdiklat Migas Cepu", "result": "Visual, Pengukuran Ketebalan, Pengukuran Grounding", "thirdParty": "PT. BKI(Persero)"}, {"id": 78, "tag_no": "T-107", "dateInspection": "2002-06-01", "scopeInspection": "Pembersihan dan perbaikan fasilitas tangki", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "CV. Sinar Mustika"}, {"id": 77, "tag_no": "T-107", "dateInspection": "2004-01-01", "scopeInspection": "Perbaikan dan Pengecatan", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "CV. Purnama Jaya Cepu"}, {"id": 76, "tag_no": "T-107", "dateInspection": "2007-09-01", "scopeInspection": "Ultrasonic Thickness Inspection", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "Lembaga Inspeksi Migas Cepu"}, {"id": 75, "tag_no": "T-107", "dateInspection": "2011-07-01", "scopeInspection": "Onstream inspection", "uninspection": "Pemeriksaan berkala", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "PT. Sucopindo(Persero)"}, {"id": 74, "tag_no": "T-107", "dateInspection": "2016-05-01", "scopeInspection": "Onstream inspection", "uninspection": "Pemeriksaan berkala", "aL": "Pusdiklat Migas Cepu", "result": "Visual, Pengukuran Ketebalan, Pengukuran Grounding", "thirdParty": "PT. BKI(Persero)"}, {"id": 83, "tag_no": "T-112", "dateInspection": "2002-06-01", "scopeInspection": "Pembersihan dan perbaikan fasilitas tangki", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "CV. Sinar Mustika"}, {"id": 82, "tag_no": "T-112", "dateInspection": "2004-01-01", "scopeInspection": "Perbaikan dan Pengecatan", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "CV. Purnama Jaya Cepu"}, {"id": 81, "tag_no": "T-112", "dateInspection": "2007-09-01", "scopeInspection": "Ultrasonic Thickness Inspection", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "Lembaga Inspeksi Migas Cepu"}, {"id": 80, "tag_no": "T-112", "dateInspection": "2011-07-01", "scopeInspection": "Onstream inspection", "uninspection": "Pemeriksaan berkala", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "PT. Sucopindo(Persero)"}, {"id": 79, "tag_no": "T-112", "dateInspection": "2016-05-01", "scopeInspection": "Onstream inspection", "uninspection": "Pemeriksaan berkala", "aL": "Pusdiklat Migas Cepu", "result": "Visual, Pengukuran Ketebalan, Pengukuran Grounding", "thirdParty": "PT. BKI(Persero)"}, {"id": 88, "tag_no": "T-114", "dateInspection": "2002-06-01", "scopeInspection": "Pembersihan dan perbaikan fasilitas tangki", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "CV. Sinar Mustika"}, {"id": 87, "tag_no": "T-114", "dateInspection": "2004-01-01", "scopeInspection": "Perbaikan dan Pengecatan", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "CV. Purnama Jaya Cepu"}, {"id": 86, "tag_no": "T-114", "dateInspection": "2007-09-01", "scopeInspection": "Ultrasonic Thickness Inspection", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "Lembaga Inspeksi Migas Cepu"}, {"id": 85, "tag_no": "T-114", "dateInspection": "2011-07-01", "scopeInspection": "Onstream inspection", "uninspection": "Pemeriksaan berkala", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "PT. Sucopindo(Persero)"}, {"id": 84, "tag_no": "T-114", "dateInspection": "2016-05-01", "scopeInspection": "Onstream inspection", "uninspection": "Pemeriksaan berkala", "aL": "Pusdiklat Migas Cepu", "result": "Visual, Pengukuran Ketebalan, Pengukuran Grounding", "thirdParty": "PT. BKI(Persero)"}, {"id": 93, "tag_no": "T-120", "dateInspection": "2002-06-01", "scopeInspection": "Pembersihan dan perbaikan fasilitas tangki", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "CV. Sinar Mustika"}, {"id": 92, "tag_no": "T-120", "dateInspection": "2004-01-01", "scopeInspection": "Perbaikan dan Pengecatan", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "CV. Purnama Jaya Cepu"}, {"id": 91, "tag_no": "T-120", "dateInspection": "2007-09-01", "scopeInspection": "Ultrasonic Thickness Inspection", "uninspection": "Operasi dan pemeliharaan/perawatan", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "Lembaga Inspeksi Migas Cepu"}, {"id": 90, "tag_no": "T-120", "dateInspection": "2011-07-01", "scopeInspection": "Onstream inspection", "uninspection": "Pemeriksaan berkala", "aL": "Pusdiklat Migas Cepu", "result": "Storage tank dalam kondisi baik. tidak mengalami kerusakan yang kritikal dan masih dapat digunakan.", "thirdParty": "PT. Sucopindo(Persero)"}, {"id": 89, "tag_no": "T-120", "dateInspection": "2016-05-01", "scopeInspection": "Onstream inspection", "uninspection": "Pemeriksaan berkala", "aL": "Pusdiklat Migas Cepu", "result": "Visual, Pengukuran Ketebalan, Pengukuran Grounding", "thirdParty": "PT. BKI(Persero)"}];
+const DB_MATERIALS = [{"name": "A 283-C", "Y": 30000, "T": 55000}, {"name": "A285-C", "Y": 30000, "T": 55000}, {"name": "A36", "Y": 36000, "T": 58000}, {"name": "A131-A, B, CS", "Y": 34000, "T": 58000}, {"name": "A131-EH 36", "Y": 51000, "T": 71000}, {"name": "A573-58", "Y": 32000, "T": 58000}, {"name": "A573-65", "Y": 35000, "T": 65000}, {"name": "A573-70", "Y": 42000, "T": 70000}, {"name": "A516-55", "Y": 30000, "T": 55000}, {"name": "A516-60", "Y": 32000, "T": 60000}, {"name": "A516-65", "Y": 35000, "T": 65000}, {"name": "A516-70", "Y": 38000, "T": 70000}, {"name": "A662-B", "Y": 40000, "T": 65000}, {"name": "A662-C", "Y": 43000, "T": 70000}, {"name": "A537-Class 1", "Y": 50000, "T": 70000}, {"name": "A537-Class 2", "Y": 60000, "T": 80000}, {"name": "A633-C, D", "Y": 50000, "T": 70000}, {"name": "A678-A", "Y": 50000, "T": 70000}, {"name": "A678-B", "Y": 60000, "T": 80000}, {"name": "A737-B A841", "Y": 50000, "T": 70000}, {"name": "A10 (Note 1)", "Y": 30000, "T": 55000}, {"name": "A7 (Note 1)", "Y": 33000, "T": 60000}, {"name": "A442-55 (Note 1)", "Y": 30000, "T": 55000}, {"name": "A442-60 (Note 1)", "Y": 32000, "T": 60000}, {"name": "G40.21, 38W", "Y": 38000, "T": 60000}, {"name": "G40.21, 44W", "Y": 44000, "T": 65000}, {"name": "G40.21, 50W", "Y": 50000, "T": 65000}, {"name": "G40.21, 50WT", "Y": 50000, "T": 70000}, {"name": "Unknown", "Y": 30000, "T": 55000}];
+const DB_RIVETED = [{"type": "Lap", "rows": 1, "E": 0.45}, {"type": "Lap", "rows": 2, "E": 0.6}, {"type": "Lap", "rows": 3, "E": 0.7}, {"type": "Lap", "rows": 4, "E": 0.75}, {"type": "Butt", "rows": 2, "E": 0.75}, {"type": "Butt", "rows": 3, "E": 0.85}, {"type": "Butt", "rows": 4, "E": 0.9}, {"type": "Butt", "rows": 5, "E": 0.91}, {"type": "Butt", "rows": 6, "E": 0.92}];
+const DB_WELDED = [{"standard": "API 650", "type": "Butt", "E": 1}, {"standard": "API 12C", "type": "Butt", "E": 0.85}, {"standard": "API 12C", "type": "Lap", "E": 0.75}, {"standard": "Unknown", "type": "Lap", "E": 0.7}, {"standard": "Unknown", "type": "Butt", "E": 0.7}];
+
+const DB_RISK_MATRIX = {
+  A: {1:'Low', 2:'Low', 3:'Low', 4:'Medium', 5:'Medium High'},
+  B: {1:'Low', 2:'Low', 3:'Low', 4:'Medium', 5:'Medium High'},
+  C: {1:'Medium', 2:'Medium', 3:'Medium', 4:'Medium High', 5:'Medium High'},
+  D: {1:'Medium', 2:'Medium', 3:'Medium High', 4:'Medium High', 5:'High'},
+  E: {1:'Medium High', 2:'Medium High', 3:'High', 4:'High', 5:'High'},
+};
+
+/* ── Generic Failure Frequency table (API RP 581 Part 2 / Konfigurasi sheet) ──
+   Equipment Type / Component Type / gff by hole size (failures/yr) / gff total */
+const DB_GFF_TABLE = [
+  {equip:'Tank650', comp:'TANKBOTTOM', small:7.2e-4, medium:0,     large:0,    rupture:2e-6, total:7.2e-4},
+  {equip:'Tank650', comp:'COURSE-1',   small:7e-5,   medium:2.5e-5, large:5e-6, rupture:1e-7, total:1e-4},
+  {equip:'Tank650', comp:'COURSE-2',   small:7e-5,   medium:2.5e-5, large:5e-6, rupture:1e-7, total:1e-4},
+  {equip:'Tank650', comp:'COURSE-3',   small:7e-5,   medium:2.5e-5, large:5e-6, rupture:1e-7, total:1e-4},
+  {equip:'Tank650', comp:'COURSE-4',   small:7e-5,   medium:2.5e-5, large:5e-6, rupture:1e-7, total:1e-4},
+  {equip:'Tank650', comp:'COURSE-5',   small:7e-5,   medium:2.5e-5, large:5e-6, rupture:1e-7, total:1e-4},
+  {equip:'Tank650', comp:'COURSE-6',   small:7e-5,   medium:2.5e-5, large:5e-6, rupture:1e-7, total:1e-4},
+  {equip:'Tank650', comp:'COURSE-7',   small:7e-5,   medium:2.5e-5, large:5e-6, rupture:1e-7, total:1e-4},
+  {equip:'Tank650', comp:'COURSE-8',   small:7e-5,   medium:2.5e-5, large:5e-6, rupture:1e-7, total:1e-4},
+  {equip:'Tank650', comp:'COURSE-9',   small:7e-5,   medium:2.5e-5, large:5e-6, rupture:1e-7, total:1e-4},
+  {equip:'Tank650', comp:'COURSE-10',  small:7e-5,   medium:2.5e-5, large:5e-6, rupture:1e-7, total:1e-4},
+  {equip:'Tank620', comp:'TANKBOTTOM',   small:7.2e-4, medium:0,     large:0,    rupture:2e-6, total:7.2e-4},
+  {equip:'Tank620', comp:'COURSE 1-10',  small:7e-5,   medium:2.5e-5, large:5e-6, rupture:1e-7, total:1e-4},
+];
+function dbGetGffFromTable(equip, comp){
+  const row = DB_GFF_TABLE.find(r=>r.equip===equip && r.comp===comp);
+  return row ? row.total : null;
+}
+
+/* ── Unit system (SI m/mm ⇄ USC ft/in) — display-layer only;
+   canonical stored values stay in meters / millimeters ── */
+let UNIT_SYS = (function(){ try{ return localStorage.getItem('rbi_unit_sys')||'SI'; }catch(e){ return 'SI'; } })();
+function feetToMeter(ft){ return dbRound(ft/3.28084,4); }
+function mmToInch(mm){ return dbRound(mm/25.4,4); }
+function dispLen(m){ if(m===null||m===undefined||m==='') return ''; return UNIT_SYS==='USC' ? meterToFeet(m) : dbRound(m,4); }
+function readLen(id){ const v=numVal(id); return UNIT_SYS==='USC' ? feetToMeter(v) : v; }
+function dispThick(mm){ if(mm===null||mm===undefined||mm==='') return ''; return UNIT_SYS==='USC' ? mmToInch(mm) : dbRound(mm,3); }
+function readThick(id){ const v=numVal(id); return UNIT_SYS==='USC' ? inchToMm(v) : v; }
+function dbApplyUnitLabels(){
+  document.querySelectorAll('.un-len').forEach(el=>el.textContent = UNIT_SYS==='USC'?'ft':'m');
+  document.querySelectorAll('.un-thick').forEach(el=>el.textContent = UNIT_SYS==='USC'?'in':'mm');
+  const si = document.getElementById('unit-si'), usc = document.getElementById('unit-usc');
+  if(si) si.classList.toggle('pri', UNIT_SYS==='SI');
+  if(usc) usc.classList.toggle('pri', UNIT_SYS==='USC');
+}
+function dbSetUnitSystem(sys){
+  if(sys!==UNIT_SYS){
+    UNIT_SYS = sys;
+    try{ localStorage.setItem('rbi_unit_sys', sys); }catch(e){}
+  }
+  dbApplyUnitLabels();
+  if(dbCurrentTag) dbLoadTank(); // re-render currently loaded tank's fields in the new unit system
+}
+
+let dbCurrentTag = null;
+let dbComputedInspeksi = {};
+
+/* ── tiny DOM + storage helpers ── */
+function val(id){ const el=document.getElementById(id); return el ? el.value : ''; }
+function numVal(id){ const v=parseFloat(val(id)); return isNaN(v) ? 0 : v; }
+function setVal(id,v){ const el=document.getElementById(id); if(el) el.value = (v===null||v===undefined) ? '' : v; }
+
+function dbOverrides(){ try{ return JSON.parse(localStorage.getItem('rbi_db_tanks')||'{}'); }catch(e){ return {}; } }
+function dbSetOverrides(o){ localStorage.setItem('rbi_db_tanks', JSON.stringify(o)); }
+function dbDeletedTags(){ try{ return JSON.parse(localStorage.getItem('rbi_db_tanks_deleted')||'[]'); }catch(e){ return []; } }
+function dbSetDeletedTags(a){ localStorage.setItem('rbi_db_tanks_deleted', JSON.stringify(a)); }
+function dbRiwayatAdded(){ try{ return JSON.parse(localStorage.getItem('rbi_db_riwayat')||'[]'); }catch(e){ return []; } }
+function dbSetRiwayatAdded(a){ localStorage.setItem('rbi_db_riwayat', JSON.stringify(a)); }
+
+function dbTagList(){
+  const deleted = new Set(dbDeletedTags());
+  const ov = dbOverrides();
+  const set = new Set([...Object.keys(BUILTIN_TANKS), ...Object.keys(ov)]);
+  return [...set].filter(t=>!deleted.has(t)).sort();
+}
+function dbGetTank(tag){
+  return {...(BUILTIN_TANKS[tag]||{}), ...(dbOverrides()[tag]||{})};
+}
+function dbSaveFields(tag, fields){
+  const ov = dbOverrides();
+  ov[tag] = {...(ov[tag]||{}), ...fields};
+  dbSetOverrides(ov);
+}
+function dbGetRiwayat(tag){
+  return [...BUILTIN_RIWAYAT.filter(r=>r.tag_no===tag), ...dbRiwayatAdded().filter(r=>r.tag_no===tag)]
+    .sort((a,b)=>(a.dateInspection||'').localeCompare(b.dateInspection||''));
+}
+
+let dbToastTimer=null;
+function dbToast(msg){
+  let el = document.getElementById('db-toast');
+  if(!el){ el=document.createElement('div'); el.id='db-toast'; el.className='db-toast'; document.body.appendChild(el); }
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(dbToastTimer);
+  dbToastTimer = setTimeout(()=>el.classList.remove('show'), 2200);
+}
+
+/* ── calc helpers (mirrors DBUtil.bas exactly) ── */
+function dbRound(v,n){ const f=Math.pow(10,n); return Math.round((v+Number.EPSILON)*f)/f; }
+function meterToFeet(m){ return dbRound(m*3.28084,3); }
+function mmToFeet(mm){ return dbRound(mm*0.0032808,3); }
+function inchToMm(inch){ return dbRound(inch*25.4,3); }
+
+function dbGetY(materialName){ const m=DB_MATERIALS.find(x=>x.name===materialName); return m? m.Y : 0; }
+function dbGetT(materialName){ const m=DB_MATERIALS.find(x=>x.name===materialName); return m? m.T : 0; }
+function dbGetS(courseType, Y, T){
+  if(courseType==='Roof') return 0.09*2.54;
+  if(courseType==='1'||courseType==='2') return Math.min(0.8*Y, 0.429*T);
+  return Math.min(0.88*Y, 0.472*T);
+}
+function dbGetE(weldingType, jointType, rivetRow, standard){
+  if(weldingType==='Welded'){
+    const w = DB_WELDED.find(x=>x.standard===standard && x.type.trim()===String(jointType).trim());
+    return w ? w.E : 0;
+  }
+  const r = DB_RIVETED.find(x=>x.type===jointType && String(x.rows)===String(rivetRow));
+  return r ? r.E : 0;
+}
+function dbGetTmin(courseType,H,D,G,S,E){
+  if(courseType==='Roof') return dbRound(0.09*25.4,3);
+  const DFeet = meterToFeet(D);
+  if(!S || !E) return 0;
+  let result = inchToMm(dbRound((2.6*(H-1)*DFeet*G)/(S*E),4));
+  if(result<=2.54) result=2.54;
+  return result;
+}
+function dbGetHForCourse(courseType, tinggiMaxIsi_m, c1,c2,c3,c4,c5,c6){
+  const hFeet = 3.28084*(tinggiMaxIsi_m||0);
+  let result=0;
+  if(courseType==='1') result = hFeet;
+  else if(courseType==='2') result = hFeet - mmToFeet(c1);
+  else if(courseType==='3') result = hFeet - (mmToFeet(c1)+mmToFeet(c2));
+  else if(courseType==='4') result = hFeet - (mmToFeet(c1)+mmToFeet(c2)+mmToFeet(c3));
+  else if(courseType==='5') result = hFeet - (mmToFeet(c1)+mmToFeet(c2)+mmToFeet(c3)+mmToFeet(c4));
+  else if(courseType==='6') result = hFeet - (mmToFeet(c1)+mmToFeet(c2)+mmToFeet(c3)+mmToFeet(c4)+mmToFeet(c5));
+  else result = 0;
+  return dbRound(result,2);
+}
+function dbGetCorrRate(tPrev,tAct,dateA,dateB){
+  const yA = new Date(dateA).getFullYear();
+  const yB = new Date(dateB).getFullYear();
+  const dy = yB-yA;
+  if(!dy || isNaN(dy)) return 0;
+  return dbRound((tPrev-tAct)/dy,3);
+}
+function dbGetRemainingLife(tActual,tMin,corrRate){
+  if(!corrRate) return 0;
+  return dbRound((tActual-tMin)/corrRate,2);
+}
+function dbGetPOFValue(gff,df,msf){ return gff*df*msf; }
+function dbGetPoFCategory(v){
+  if(v<=0.0001) return 1;
+  if(v<=0.001) return 2;
+  if(v<=0.01) return 3;
+  if(v<=0.1) return 4;
+  return 5;
+}
+function dbGetCOFValue(cdc,dcs,bic,pic,ecc){ return cdc+dcs+bic+pic+ecc; }
+function dbGetCoFCategory(v){
+  if(v<=10000) return 'A';
+  if(v<=100000) return 'B';
+  if(v<=1000000) return 'C';
+  if(v<=10000000) return 'D';
+  return 'E';
+}
+function dbGetRiskCategory(pofCat,cofCat){
+  return (DB_RISK_MATRIX[cofCat]||{})[pofCat] || '—';
+}
+function dbRiskClass(cat){
+  return {'Low':'low','Medium':'medium','Medium High':'medium-high','High':'high'}[cat] || '';
+}
+
+/* ── init / list / load ── */
+function dbInit(){
+  dbPopulateMaterialSelects();
+  dbRefreshTagSelect();
+  const list = dbTagList();
+  if(list.length){
+    document.getElementById('db-tagno').value = list[0];
+    dbLoadTank();
+  } else {
+    dbShowEmpty();
+  }
+}
+function dbPopulateMaterialSelects(){
+  // options already rendered server-side in HTML; nothing to do, kept for future dynamic use
+}
+function dbRefreshTagSelect(){
+  const sel = document.getElementById('db-tagno');
+  const list = dbTagList();
+  sel.innerHTML = list.map(t=>`<option value="${t}">${t}</option>`).join('');
+}
+function dbShowEmpty(){
+  document.getElementById('db-empty').style.display='';
+  document.getElementById('db-tabnav').style.display='none';
+  document.getElementById('db-tabcontent').style.display='none';
+}
+function dbShowContent(){
+  document.getElementById('db-empty').style.display='none';
+  document.getElementById('db-tabnav').style.display='';
+  document.getElementById('db-tabcontent').style.display='';
+}
+
+function dbToggleRivetRow(){
+  const w = val('db-g-welding');
+  document.getElementById('db-g-rivetrow-wrap').style.display = (w==='Welded') ? 'none' : '';
 }
 
 /* ══════════════════════════════════════════
-   COURSE PANELS (RLA)
+   GENERAL TAB — tank photo & engineering drawing
+   loaded from relative folders 3d/<TAG>.jpg and 3d/eq/<TAG>.jpg
+   next to this HTML file (falls back to a "no image" placeholder,
+   and tries both .jpg/.JPG casing since source folders mix the two)
 ══════════════════════════════════════════ */
-const DEFAULTS = [
-  {h:0.690, tPrev:4.10, tAct:3.70, ti:7, Hliq:3.500},
-  {h:1.530, tPrev:4.90, tAct:4.20, ti:7, Hliq:2.810},
-  {h:1.530, tPrev:5.00, tAct:4.70, ti:7, Hliq:1.280},
-];
+function dbSetImgWithFallback(imgId, emptyId, candidates){
+  const img = document.getElementById(imgId);
+  const empty = document.getElementById(emptyId);
+  if(!img) return;
+  let i = 0;
+  img.style.display = 'none';
+  if(empty) empty.style.display = '';
+  img.onload = function(){ img.style.display='block'; if(empty) empty.style.display='none'; };
+  img.onerror = function(){
+    i++;
+    if(i < candidates.length){ img.src = candidates[i]; }
+    else { img.style.display='none'; if(empty) empty.style.display=''; }
+  };
+  img.src = candidates[i];
+}
+function dbLoadTankImages(tag){
+  if(!tag) return;
+  const ext = ['.jpg','.JPG','.jpeg','.JPEG'];
+  // Folder convention confirmed from the user's actual files: "eq/" holds the tank
+  // PHOTOGRAPHS, "3d/" holds the ENGINEERING DRAWING scans (top/front view sheets).
+  // Try a few common folder layouts relative to this HTML file, since exact placement varies:
+  //   tank/eq/<TAG>.jpg + tank/3d/<TAG>.jpg   (HTML sits OUTSIDE the tank/ folder)
+  //   eq/<TAG>.jpg + 3d/<TAG>.jpg              (HTML sits INSIDE the tank/ folder)
+  const photoPrefixes = ['tank/eq/', 'eq/', 'tank/3d/eq/', '3d/eq/'];
+  const drawingPrefixes = ['tank/3d/', '3d/'];
+  const build = (prefixes) => prefixes.flatMap(p => ext.map(e => p+tag+e));
+  dbSetImgWithFallback('db-g-photo', 'db-g-photo-empty', build(photoPrefixes));
+  dbSetImgWithFallback('db-g-drawing', 'db-g-drawing-empty', build(drawingPrefixes));
+}
 
-function buildCoursePanels() {
-  const container = document.getElementById('course-panels');
-  container.innerHTML = '';
-  DEFAULTS.forEach((d,i) => {
-    const div = document.createElement('div');
-    div.id = `cp${i}`;
-    div.style.display = i===0 ? 'block':'none';
-    div.innerHTML = `
-      <div class="frow">
-        <div class="fld"><label>Course Height</label><div class="fw"><input type="number" id="c${i}-h" value="${d.h}" step="0.001" min="0"><span class="un">m</span></div></div>
-        <div class="fld"><label>H — Liquid Head Above Course Bottom</label><div class="fw"><input type="number" id="c${i}-H" value="${d.Hliq}" step="0.001" min="0"><span class="un">m</span></div></div>
-      </div>
-      <div class="frow s3">
-        <div class="fld"><label>t_previous</label><div class="fw"><input type="number" id="c${i}-tp" value="${d.tPrev}" step="0.01" min="0"><span class="un">mm</span></div></div>
-        <div class="fld"><label>t_actual</label><div class="fw"><input type="number" id="c${i}-ta" value="${d.tAct}" step="0.01" min="0"><span class="un">mm</span></div></div>
-        <div class="fld"><label>Interval Δt</label><div class="fw"><input type="number" id="c${i}-ti" value="${d.ti}" step="1" min="1"><span class="un">yr</span></div></div>
-      </div>
-      <p style="font-size:11px;color:var(--tx3);font-style:italic;margin-bottom:4px;">H diukur dari dasar course ini ke permukaan cairan maksimum</p>`;
-    container.appendChild(div);
+/* ══════════════════════════════════════════
+   TANK VISUALIZATION (Desain tab) — live SVG sketch
+   driven by Diameter/Tinggi/Course/Nozzle fields
+══════════════════════════════════════════ */
+function tvEsc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+function tvFmt(v){ if(v===''||v===null||v===undefined||isNaN(v)) return '—'; const n=Math.round(Number(v)*100)/100; return String(n); }
+function tvUnitLen(){ return (typeof UNIT_SYS!=='undefined' && UNIT_SYS==='USC') ? 'ft' : 'm'; }
+function tvUnitThick(){ return (typeof UNIT_SYS!=='undefined' && UNIT_SYS==='USC') ? 'in' : 'mm'; }
+
+function dbWireTankViz(){
+  const ids = ['db-d-diameter','db-d-tinggi','db-d-tinggimax','db-d-c1','db-d-c2','db-d-c3','db-d-c4','db-d-c5','db-d-c6',
+    'db-d-manhole-shell','db-d-manhole-roof','db-d-nozzle-filling','db-d-nozzle-suction','db-d-nozzle-foal','db-d-nozzle-water'];
+  ids.forEach(id=>{
+    const el = document.getElementById(id);
+    if(el && !el.dataset.tvWired){ el.addEventListener('input', dbDrawTankViz); el.dataset.tvWired='1'; }
+  });
+  const tipeEl = document.getElementById('db-g-tipe');
+  if(tipeEl && !tipeEl.dataset.tvWired){ tipeEl.addEventListener('change', dbDrawTankViz); tipeEl.dataset.tvWired='1'; }
+}
+
+function dbDrawTankViz(){
+  const svg = document.getElementById('tank-viz-svg');
+  if(!svg) return;
+  const tipe = val('db-g-tipe') || 'Vertical';
+  const badge = document.getElementById('tv-tipe-badge');
+  if(badge) badge.textContent = tipe.toUpperCase();
+
+  const D = numVal('db-d-diameter');
+  const H = numVal('db-d-tinggi');
+  const Hmax = numVal('db-d-tinggimax');
+  const cRaw = [1,2,3,4,5,6].map(i=>numVal('db-d-c'+i));
+  const lenU = tvUnitLen(), thU = tvUnitThick();
+  const nozzles = [
+    {label:'Roof Manhole',  v:numVal('db-d-manhole-roof'),   field:'db-d-manhole-roof'},
+    {label:'Filling Nozzle',v:numVal('db-d-nozzle-filling'), field:'db-d-nozzle-filling'},
+    {label:'Foam Nozzle',   v:numVal('db-d-nozzle-foal'),    field:'db-d-nozzle-foal'},
+    {label:'Shell Manhole', v:numVal('db-d-manhole-shell'),  field:'db-d-manhole-shell'},
+    {label:'Suction Nozzle',v:numVal('db-d-nozzle-suction'), field:'db-d-nozzle-suction'},
+    {label:'Water Drawoff', v:numVal('db-d-nozzle-water'),   field:'db-d-nozzle-water'},
+  ].filter(n=>n.v>0);
+
+  const defs = `<defs><marker id="tvArrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--tx2)"/></marker></defs>`;
+  svg.innerHTML = defs + ((tipe==='Horizontal')
+    ? tvBuildHorizontalSvg(D,H,nozzles,lenU)
+    : tvBuildVerticalSvg(D,H,Hmax,cRaw,nozzles,lenU,thU));
+  tvWireCallouts(svg);
+}
+
+// Every course band, the liquid-level line, and every nozzle/manhole marker
+// is wrapped in a <g data-tvfield="..."> group — this makes the sketch
+// itself directly interactive (no separate legend needed): hovering a
+// group enlarges/brightens it (pure CSS via .tv-callout), and clicking it
+// jumps to and briefly flashes the matching input field below.
+function tvWireCallouts(svg){
+  svg.querySelectorAll('[data-tvfield]').forEach(g=>{
+    const fieldId = g.dataset.tvfield;
+    const jump = ()=>{
+      const fld = document.getElementById(fieldId);
+      if(!fld) return;
+      fld.focus();
+      fld.scrollIntoView({behavior:'smooth', block:'center'});
+      fld.classList.add('tv-flash');
+      setTimeout(()=>fld.classList.remove('tv-flash'), 900);
+    };
+    g.setAttribute('tabindex','0');
+    g.addEventListener('click', jump);
+    g.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); jump(); } });
   });
 }
 
-function switchCourse(idx) {
-  document.querySelectorAll('.ctab').forEach((t,i) => t.classList.toggle('on', i===idx));
-  document.querySelectorAll('[id^=cp]').forEach((p,i) => p.style.display = i===idx ? 'block':'none');
-}
+function tvBuildVerticalSvg(D,H,Hmax,cRaw,nozzles,lenU,thU){
+  const cx=150, rx=55, ry=16, shellL=cx-rx, shellR=cx+rx, shellW=shellR-shellL;
+  const topY=74, baseY=330, shellH=baseY-topY;
+  const Dtxt=tvFmt(D), Htxt=tvFmt(H);
+  // front-facing lower arc of an ellipse at (cx,y) — the curved "seam" of a
+  // horizontal ring as seen on a 3D cylinder (used for the bottom, course
+  // dividers, and the liquid level line). Reused as an (invisible where
+  // needed) <textPath> guide so labels sitting on the shell bend with it.
+  const frontArc = (y) => `M ${shellL},${y.toFixed(1)} A ${rx},${ry} 0 0,0 ${shellR},${y.toFixed(1)}`;
+  let arcSeq = 0;
+  const curvedLabel = (y, text, color, weight) => {
+    const id = 'tvta'+(arcSeq++);
+    return `<path id="${id}" d="${frontArc(y)}" style="fill:none;stroke:none"/>`+
+      `<text text-anchor="middle" style="font:${weight||600} 9px 'IBM Plex Mono',monospace;fill:${color}">`+
+      `<textPath href="#${id}" startOffset="50%" text-anchor="middle">${tvEsc(text)}</textPath></text>`;
+  };
 
-/* ══════════════════════════════════════════
-   STEP 1 — RLA CALCULATION
-══════════════════════════════════════════ */
-const M_TO_FT = 3.28084;
-const IN_TO_MM = 25.4;
-const T_MIN_ABS = 2.54;
-
-function getAllowableS(idx, Y, T) {
-  return idx < 2 ? Math.min(0.80*Y, 0.429*T) : Math.min(0.88*Y, 0.472*T);
-}
-
-function rlClass(rl) { return rl>20?'ok':rl>10?'wn':'bd'; }
-function crClass(cr) { return cr<0.05?'ok':cr<0.10?'wn':'bd'; }
-
-function calcRLA() {
-  const D_m = parseFloat(document.getElementById('inp-D').value);
-  const G   = parseFloat(document.getElementById('inp-G').value);
-  const E   = parseFloat(document.getElementById('inp-E').value);
-  const Y12 = parseFloat(document.getElementById('inp-Y12').value);
-  const T12 = parseFloat(document.getElementById('inp-T12').value);
-  const Y3  = parseFloat(document.getElementById('inp-Y3').value);
-  const T3  = parseFloat(document.getElementById('inp-T3').value);
-  const D_ft = D_m * M_TO_FT;
-
-  const results = [];
-  for (let i=0; i<3; i++) {
-    const H_m   = parseFloat(document.getElementById(`c${i}-H`).value);
-    const tPrev = parseFloat(document.getElementById(`c${i}-tp`).value);
-    const tAct  = parseFloat(document.getElementById(`c${i}-ta`).value);
-    const dt    = parseFloat(document.getElementById(`c${i}-ti`).value);
-    const H_ft  = H_m * M_TO_FT;
-    const Y = i<2?Y12:Y3, T = i<2?T12:T3;
-    const S = getAllowableS(i,Y,T);
-    let tmin_mm = (2.6*(H_ft-1)*D_ft*G)/(S*E)*IN_TO_MM;
-    if (tmin_mm < T_MIN_ABS) tmin_mm = T_MIN_ABS;
-    const CR = (tPrev-tAct)/dt;
-    let RL = CR>0 ? (tAct-tmin_mm)/CR : Infinity;
-    if (RL<0) RL=0;
-    results.push({tmin_mm, CR, RL, tAct, tPrev, dt});
+  const courses = cRaw.map((v,i)=>({n:i+1,v:Number(v)||0})).filter(c=>c.v>0);
+  const sumC = courses.reduce((a,c)=>a+c.v,0);
+  const courseGeom = [];
+  if(courses.length && sumC>0){
+    let y=baseY;
+    courses.forEach(c=>{
+      const h=shellH*(c.v/sumC), yTop=y-h, yMid=y-h/2;
+      // clamp the label so a very thin top course never places its curved
+      // text under the opaque roof cap (same reasoning as the liquid label)
+      courseGeom.push({n:c.n, v:c.v, yTop, h, labelY: Math.max(yMid-4, topY+ry+6)});
+      y=yTop;
+    });
   }
 
-  STATE.rla = {results, D_m, G, E, Y12, T12, Y3, T3};
-  renderRLA(results);
-  document.getElementById('nextRLA').disabled = false;
-  document.getElementById('sn0').textContent = '✓';
-  document.getElementById('sb0').classList.add('done');
+  let liqGeom = null;
+  if(Hmax>0 && H>0){
+    const frac=Math.min(Hmax/H,1), liqY=baseY-shellH*frac;
+    // clamped for the same roof-cap-occlusion reason as course labels above
+    liqGeom = {liqY, labelY: Math.max(liqY-9, topY+ry+6)};
+  }
+
+  // Course labels and the liquid label all curve around the same narrow
+  // band near the top when the fill height sits inside the top course —
+  // nudge them apart (moving away from the cap, never back under it) so
+  // their curved text never overlaps.
+  const curveLabels = courseGeom.map(c=>c).concat(liqGeom ? [liqGeom] : []);
+  curveLabels.sort((a,b)=>a.labelY-b.labelY);
+  for(let i=1;i<curveLabels.length;i++){
+    if(curveLabels[i].labelY - curveLabels[i-1].labelY < 13) curveLabels[i].labelY = curveLabels[i-1].labelY + 13;
+  }
+
+  let bandSvg='';
+  courseGeom.forEach(c=>{
+    bandSvg += `<g class="tv-callout" data-tvfield="db-d-c${c.n}">`+
+      `<rect x="${shellL}" y="${c.yTop.toFixed(1)}" width="${shellW}" height="${c.h.toFixed(1)}" fill="transparent"/>`+
+      `<path d="${frontArc(c.yTop)}" style="fill:none;stroke:var(--bdr2);stroke-width:1"/>`+
+      curvedLabel(c.labelY, `C${c.n} · ${tvFmt(c.v)}${thU}`, 'var(--tx2)')+
+      `<title>Course ${c.n} — ${tvFmt(c.v)} ${thU}</title>`+
+      '</g>';
+  });
+
+  let liquidRectSvg='', liquidLineSvg='';
+  if(liqGeom){
+    const {liqY, labelY} = liqGeom;
+    liquidRectSvg = `<rect x="${shellL}" y="${liqY.toFixed(1)}" width="${shellW}" height="${(baseY+ry-liqY).toFixed(1)}" clip-path="url(#tvBodyClip)" style="fill:#3f8fd9;fill-opacity:.16"/>`;
+    liquidLineSvg = `<g class="tv-callout" data-tvfield="db-d-tinggimax">`+
+      `<rect x="${shellL}" y="${(Math.min(liqY,labelY)-7).toFixed(1)}" width="${shellW}" height="${(Math.abs(labelY-liqY)+14).toFixed(1)}" fill="transparent"/>`+
+      `<path d="${frontArc(liqY)}" class="tv-liqline" stroke-dasharray="4 3" style="fill:none;stroke:#3f8fd9;stroke-width:1.4"/>`+
+      curvedLabel(labelY, `Isi Maks ${tvFmt(Hmax)} ${lenU}`, '#3f8fd9', 700)+
+      `<title>Isi Maks ${tvFmt(Hmax)} ${lenU}</title>`+
+      '</g>';
+  }
+
+  // Nozzle/manhole labels sit off the shell in the right-hand gutter (they
+  // are point fittings, not rings, so they stay flat) — sorted by their
+  // true height on the shell, then nudged apart just enough that the text
+  // never overlaps.
+  const posMap = {'Filling Nozzle':0.88,'Foam Nozzle':0.72,'Shell Manhole':0.4,'Suction Nozzle':0.15,'Water Drawoff':0.04};
+  const callouts = nozzles.map((n,i)=>{
+    const isRoof = n.label==='Roof Manhole';
+    const shellY = isRoof ? (topY-6) : (baseY - shellH*(posMap[n.label] ?? 0.5));
+    const shellX = isRoof ? (cx+26) : shellR;
+    return {shellX, shellY, label:n.label, valueText:`Ø${tvFmt(n.v)}"`, field:n.field};
+  });
+  callouts.sort((a,b)=>a.shellY-b.shellY);
+  callouts.forEach(c=>{ c.by = c.shellY; });
+  for(let i=1;i<callouts.length;i++){
+    if(callouts[i].by - callouts[i-1].by < 15) callouts[i].by = callouts[i-1].by + 15;
+  }
+  let markSvg='';
+  callouts.forEach(c=>{
+    const hitTop = Math.min(c.shellY, c.by)-7;
+    const hitH = Math.abs(c.by-c.shellY)+14;
+    markSvg += `<g class="tv-callout" data-tvfield="${c.field}">`+
+      `<rect x="${(c.shellX-4).toFixed(1)}" y="${hitTop.toFixed(1)}" width="140" height="${hitH.toFixed(1)}" fill="transparent"/>`+
+      `<circle cx="${c.shellX}" cy="${c.shellY.toFixed(1)}" r="3" class="tv-dot" style="fill:var(--gold2)"/>`+
+      `<line x1="${c.shellX}" y1="${c.shellY.toFixed(1)}" x2="${(c.shellX+14).toFixed(1)}" y2="${c.by.toFixed(1)}" class="tv-leader" style="stroke:var(--gold2);stroke-width:1"/>`+
+      `<text x="${(c.shellX+18).toFixed(1)}" y="${(c.by+3).toFixed(1)}" style="font:600 9px 'IBM Plex Mono',monospace;fill:var(--gold2)">${tvEsc(c.label)} ${tvEsc(c.valueText)}</text>`+
+      `<title>${tvEsc(c.label)} ${tvEsc(c.valueText)}</title>`+
+      '</g>';
+  });
+
+  const bodyPath = `M ${shellL},${topY} L ${shellL},${baseY} A ${rx},${ry} 0 0,0 ${shellR},${baseY} L ${shellR},${topY}`;
+  const gid = 'tvg'+Math.random().toString(36).slice(2,8);
+
+  return `
+    <defs>
+      <linearGradient id="${gid}" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" style="stop-color:var(--s3)"/>
+        <stop offset="45%" style="stop-color:var(--s2)"/>
+        <stop offset="100%" style="stop-color:var(--s4)"/>
+      </linearGradient>
+      <clipPath id="tvBodyClip"><path d="${bodyPath} Z"/></clipPath>
+    </defs>
+    <path d="${bodyPath}" style="fill:url(#${gid});stroke:var(--bdr2);stroke-width:1.2"/>
+    ${liquidRectSvg}
+    ${bandSvg}
+    ${liquidLineSvg}
+    <ellipse cx="${cx}" cy="${topY}" rx="${rx}" ry="${ry}" style="fill:var(--s3);stroke:var(--bdr2);stroke-width:1.2"/>
+    <ellipse cx="${cx}" cy="${topY}" rx="${(rx*0.94).toFixed(1)}" ry="${(ry*0.72).toFixed(1)}" style="fill:none;stroke:var(--bdr);stroke-width:1;opacity:.6"/>
+    <line x1="${shellL-14}" y1="${(baseY+ry).toFixed(1)}" x2="${shellR+14}" y2="${(baseY+ry).toFixed(1)}" style="stroke:var(--tx3);stroke-width:1.2"/>
+    <line x1="70" y1="${topY}" x2="70" y2="${baseY}" marker-start="url(#tvArrow)" marker-end="url(#tvArrow)" style="stroke:var(--tx2);stroke-width:1.2"/>
+    <text x="55" y="${(topY+shellH/2).toFixed(1)}" text-anchor="middle" transform="rotate(-90 55 ${(topY+shellH/2).toFixed(1)})" style="font:700 10px 'IBM Plex Mono',monospace;fill:var(--tx)">H = ${Htxt} ${lenU}</text>
+    <line x1="${shellL}" y1="${(baseY+ry+20).toFixed(1)}" x2="${shellR}" y2="${(baseY+ry+20).toFixed(1)}" marker-start="url(#tvArrow)" marker-end="url(#tvArrow)" style="stroke:var(--tx2);stroke-width:1.2"/>
+    <text x="${cx}" y="${(baseY+ry+36).toFixed(1)}" text-anchor="middle" style="font:700 10px 'IBM Plex Mono',monospace;fill:var(--tx)">D = ${Dtxt} ${lenU}</text>
+    ${markSvg}
+  `;
 }
 
-function renderRLA(results) {
-  const names = ['Course 1','Course 2','Course 3'];
-  const minRL = Math.min(...results.map(r=>r.RL===Infinity?9999:r.RL));
-  const sd=document.getElementById('sd'), st=document.getElementById('st');
-  if (minRL>15){sd.className='sd ok';st.textContent='STATUS: GOOD — Minimum remaining life > 15 years';}
-  else if(minRL>5){sd.className='sd wn';st.textContent='STATUS: MONITOR — Remaining life requires attention';}
-  else{sd.className='sd bd';st.textContent='STATUS: CRITICAL — Immediate inspection recommended';}
+function tvBuildHorizontalSvg(D,H,nozzles,lenU){
+  const left=90, right=260, width=right-left, cy=190, ry=64, erx=16;
+  const bodyTop=cy-ry, bodyBot=cy+ry;
+  const Dtxt=tvFmt(D), Htxt=tvFmt(H);
+  const gid = 'tvgh'+Math.random().toString(36).slice(2,8);
 
-  document.getElementById('r-tmin').innerHTML =
-    results.map((r,i)=>`<div class="rrow"><span class="rn">${names[i]}</span><div class="rv">${r.tmin_mm.toFixed(3)}<span class="u">mm</span></div></div>`).join('')+
-    `<p class="nsm">Min per API 653 §4.3.4: 2.54 mm</p>`;
+  const bodySvg = `
+    <linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" style="stop-color:var(--s3)"/>
+      <stop offset="45%" style="stop-color:var(--s2)"/>
+      <stop offset="100%" style="stop-color:var(--s4)"/>
+    </linearGradient>
+    <rect x="${left}" y="${bodyTop}" width="${width}" height="${ry*2}" style="fill:url(#${gid});stroke:var(--bdr2);stroke-width:1.2"/>
+    <ellipse cx="${left}" cy="${cy}" rx="${erx}" ry="${ry}" style="fill:var(--s3);stroke:var(--bdr2);stroke-width:1.2"/>
+    <ellipse cx="${right}" cy="${cy}" rx="${erx}" ry="${ry}" style="fill:var(--s2);stroke:var(--bdr2);stroke-width:1.2"/>
+  `;
+  const s1x=left+width*0.28, s2x=left+width*0.72;
+  const saddleSvg = [s1x,s2x].map(x=>`<rect x="${(x-16).toFixed(1)}" y="${bodyBot}" width="32" height="26" style="fill:var(--s3);stroke:var(--bdr2);stroke-width:1"/>`).join('');
+  const groundY=bodyBot+26;
+  const groundSvg = `<line x1="${left-erx-14}" y1="${groundY}" x2="${right+erx+14}" y2="${groundY}" style="stroke:var(--tx3);stroke-width:1.2"/>`;
 
-  document.getElementById('r-cr').innerHTML =
-    results.map((r,i)=>`<div class="rrow"><span class="rn">${names[i]}</span><div class="rv ${crClass(r.CR)}">${r.CR.toFixed(4)}<span class="u">mm/yr</span></div></div>`).join('')+
-    `<p class="nsm">CR = (t_prev − t_act) / Δt</p>`;
+  const dimSvg = `
+    <line x1="${left}" y1="${groundY+22}" x2="${right}" y2="${groundY+22}" marker-start="url(#tvArrow)" marker-end="url(#tvArrow)" style="stroke:var(--tx2);stroke-width:1.2"/>
+    <text x="${(left+right)/2}" y="${groundY+38}" text-anchor="middle" style="font:700 10px 'IBM Plex Mono',monospace;fill:var(--tx)">L = ${Htxt} ${lenU}</text>
+    <line x1="${right+erx+28}" y1="${bodyTop}" x2="${right+erx+28}" y2="${bodyBot}" marker-start="url(#tvArrow)" marker-end="url(#tvArrow)" style="stroke:var(--tx2);stroke-width:1.2"/>
+    <text x="${right+erx+36}" y="${(cy+3).toFixed(1)}" style="font:700 10px 'IBM Plex Mono',monospace;fill:var(--tx)">D = ${Dtxt} ${lenU}</text>
+  `;
 
-  const limitIdx = results.reduce((best,r,i)=>(r.RL===Infinity?9999:r.RL)<(results[best].RL===Infinity?9999:results[best].RL)?i:best,0);
-  document.getElementById('r-rl').innerHTML =
-    results.map((r,i)=>`<div class="rrow"><span class="rn">${names[i]}${i===limitIdx?' ◆':''}</span><div class="rv ${rlClass(r.RL===Infinity?9999:r.RL)}">${r.RL===Infinity?'∞':r.RL.toFixed(2)}<span class="u">yr</span></div></div>`).join('')+
-    `<p class="nsm">◆ Limiting course: ${names[limitIdx]}</p>`;
+  // Nozzle labels are rotated 90° and read upward off a short stem — that
+  // keeps each label's footprint to a single narrow column, so several
+  // nozzles can sit close together along the top edge without their text
+  // ever colliding (no legend needed to keep them apart).
+  let nozSvg='';
+  const n = nozzles.length;
+  nozzles.forEach((noz,i)=>{
+    const fx = left + width*((i+1)/(n+1));
+    const markY = bodyTop-16;
+    const txtAnchorY = markY-4;
+    nozSvg += `<g class="tv-callout" data-tvfield="${noz.field}">`+
+      `<rect x="${(fx-5).toFixed(1)}" y="${(txtAnchorY-110).toFixed(1)}" width="14" height="118" fill="transparent" transform="rotate(-90 ${(fx+2).toFixed(1)} ${txtAnchorY.toFixed(1)})"/>`+
+      `<line x1="${fx.toFixed(1)}" y1="${bodyTop.toFixed(1)}" x2="${fx.toFixed(1)}" y2="${markY.toFixed(1)}" class="tv-leader" style="stroke:var(--gold2);stroke-width:1"/>`+
+      `<circle cx="${fx.toFixed(1)}" cy="${markY.toFixed(1)}" r="3" class="tv-dot" style="fill:var(--gold2)"/>`+
+      `<text x="${(fx+2).toFixed(1)}" y="${txtAnchorY.toFixed(1)}" transform="rotate(-90 ${(fx+2).toFixed(1)} ${txtAnchorY.toFixed(1)})" style="font:600 9px 'IBM Plex Mono',monospace;fill:var(--gold2)">${tvEsc(noz.label)} Ø${tvFmt(noz.v)}"</text>`+
+      `<title>${tvEsc(noz.label)} Ø${tvFmt(noz.v)}"</title>`+
+      '</g>';
+  });
 
-  const maxVal = Math.max(...results.map(r=>r.RL===Infinity?60:r.RL),1);
-  document.getElementById('r-chart').innerHTML = results.map((r,i)=>{
-    const v = r.RL===Infinity?60:r.RL;
-    const c = v>20?'var(--green)':v>10?'var(--gold2)':'var(--red)';
-    return `<div class="br"><span class="bn">${names[i]}</span><div class="bt"><div class="bf" style="width:${Math.min(100,(v/maxVal)*100).toFixed(1)}%;background:${c}"></div></div><span class="bv">${r.RL===Infinity?'∞':r.RL.toFixed(2)} yr</span></div>`;
-  }).join('');
-  document.getElementById('r-chart-card').style.display='block';
-  if(window.MathJax) MathJax.typesetPromise();
+  return groundSvg + bodySvg + saddleSvg + dimSvg + nozSvg;
 }
 
-/* ══════════════════════════════════════════
-   STEP 2 — PoF CALCULATION
-══════════════════════════════════════════ */
-function updateFMSPreview() {
-  const pscore = parseFloat(document.getElementById('pms-score').value);
-  document.getElementById('pms-display').textContent = pscore;
-  const fms = 2.38 * Math.exp(-0.012 * pscore);
-  document.getElementById('fms-preview').textContent = fms.toFixed(4);
-  const eff = document.getElementById('fms-effect');
-  if(pscore>72) eff.textContent='Di atas rata-rata — PoF berkurang (favorable)';
-  else if(pscore<72) eff.textContent='Di bawah rata-rata — PoF meningkat (unfavorable)';
-  else eff.textContent='Skor rata-rata — PoF tidak berubah';
+function dbLoadTank(){
+  const sel = document.getElementById('db-tagno');
+  const tag = sel.value;
+  if(!tag){ dbShowEmpty(); return; }
+  dbCurrentTag = tag;
+  dbShowContent();
+  const t = dbGetTank(tag);
+
+  // General
+  setVal('db-g-tagno', t.tag_no||tag);
+  setVal('db-g-kepemilikan', t.kepemilikan||'');
+  setVal('db-g-manufaktur', t.manufacture||'');
+  setVal('db-g-lokasi', t.Lokasi||'');
+  setVal('db-g-tahun', t.tahunPembuatan ?? '');
+  setVal('db-g-tipe', t.tipe||'Vertical');
+  setVal('db-g-welding', t.weldingType||'Welded');
+  setVal('db-g-rivetrow', t.numberofRivetRow||'1');
+  dbToggleRivetRow();
+  dbLoadTankImages(t.tag_no||tag);
+
+  // Desain
+  setVal('db-d-fluid', t.fluidService||'');
+  setVal('db-d-liquid', t.liquid ?? '');
+  setVal('db-d-temp', t.temperatureOperasi ?? '');
+  setVal('db-d-flash', t.flashPoint ?? '');
+  setVal('db-d-tekanan', t.tekanan ?? '');
+  setVal('db-d-joint', t.jointType||'Butt');
+  setVal('db-d-matroof', t.materialRoof||'Unknown');
+  setVal('db-d-matshell', t.materialSheel||'Unknown');
+  setVal('db-d-standard', t.standard||'Unknown');
+  setVal('db-d-diameter', dispLen(t.diameter));
+  setVal('db-d-tinggi', dispLen(t.tinggi));
+  setVal('db-d-tinggimax', dispLen(t.tinggiMaksimumIsi));
+  setVal('db-d-kapasitas', t.kapasitas ?? '');
+  setVal('db-d-manhole-shell', t.diametershellManhole ?? '');
+  setVal('db-d-manhole-roof', t.diameterRoofManHole ?? '');
+  setVal('db-d-nozzle-filling', t.diameterFilingNozzle ?? '');
+  setVal('db-d-nozzle-suction', t.suctionNozzle ?? '');
+  setVal('db-d-nozzle-foal', t.diameterFoalNozzle ?? '');
+  setVal('db-d-nozzle-water', t.diameterWaterDraw ?? '');
+  setVal('db-d-fillrate', t.fillingInRate ?? '');
+  setVal('db-d-emptyrate', t.emptyingInRate ?? '');
+  for(let i=1;i<=6;i++) setVal('db-d-c'+i, dispThick(t['tinggiCourse'+i]));
+
+  // Inspeksi
+  setVal('db-i-dateA', t.dateInspectionA||'');
+  setVal('db-i-roofA', dispThick(t.minRoofPlateA));
+  setVal('db-i-dateB', t.dateInspectionB||'');
+  setVal('db-i-roofB', dispThick(t.minRoofPlateB));
+  for(let i=1;i<=6;i++){
+    setVal('db-i-c'+i+'A', dispThick(t['minC'+i+'A']));
+    setVal('db-i-c'+i+'B', dispThick(t['minC'+i+'B']));
+  }
+  setVal('db-i-datecert', t.dateValidCertificate||'');
+  setVal('db-i-kesimpulan', t.kesimpulan||'');
+  dbRecalcInspeksi();
+
+  // Riwayat
+  dbRefreshRiwayatSelect();
+  dbResetRiwayatForm();
+  dbRenderRiwayatTable();
+
+  // RBI
+  setVal('db-rbi-gff', t.Gff ?? 0.0001);
+  setVal('db-rbi-df', t.DemageFactor ?? 1);
+  setVal('db-rbi-msf', t.Msf ?? 0.572796031);
+  setVal('db-rbi-cdc', t.Cdc ?? 0);
+  setVal('db-rbi-dcs', t.DCS ?? 0);
+  setVal('db-rbi-bic', t.BIC ?? 0);
+  setVal('db-rbi-pic', t.Pic ?? 0);
+  setVal('db-rbi-ecc', t.ECC ?? 0);
+  dbRecalcRBI();
+
+  dbWireTankViz();
+  dbDrawTankViz();
 }
 
-// Prior probabilities per confidence level (API 581 Table 4.5)
-const PRIOR_PROBS = {
-  high:   {p1:0.50, p2:0.40, p3:0.10},
-  medium: {p1:0.33, p2:0.33, p3:0.34},
-  low:    {p1:0.20, p2:0.30, p3:0.50},
-};
-
-// Conditional probabilities for inspection effectiveness (simplified API 581 Table 4.6)
-const COND_PROBS = {
-  A: {s1:[0.9,0.3,0.1], s2:[0.08,0.5,0.3], s3:[0.02,0.2,0.6]},
-  B: {s1:[0.8,0.4,0.2], s2:[0.15,0.45,0.3], s3:[0.05,0.15,0.5]},
-  C: {s1:[0.6,0.5,0.3], s2:[0.3,0.35,0.35], s3:[0.10,0.15,0.35]},
-  D: {s1:[0.4,0.5,0.4], s2:[0.4,0.35,0.3], s3:[0.20,0.15,0.3]},
-  E: {s1:[0.20,0.33,0.33], s2:[0.40,0.34,0.34], s3:[0.40,0.33,0.33]},
-};
-
-function normCDF(z) {
-  // Rational approximation of standard normal CDF
-  const a1=0.254829592, a2=-0.284496736, a3=1.421413741, a4=-1.453152027, a5=1.061405429, p=0.3275911;
-  const sign = z<0?-1:1;
-  const x = Math.abs(z)/Math.sqrt(2);
-  const t = 1/(1+p*x);
-  const y = 1-(((((a5*t+a4)*t)+a3)*t+a2)*t+a1)*t*Math.exp(-x*x);
-  return 0.5*(1+sign*y);
+/* ── Tab 1: General ── */
+function dbSaveGeneral(){
+  if(!dbCurrentTag) return;
+  dbSaveFields(dbCurrentTag, {
+    kepemilikan: val('db-g-kepemilikan'),
+    manufacture: val('db-g-manufaktur'),
+    Lokasi: val('db-g-lokasi'),
+    tahunPembuatan: numVal('db-g-tahun'),
+    weldingType: val('db-g-welding'),
+    numberofRivetRow: val('db-g-rivetrow'),
+    tipe: val('db-g-tipe'),
+  });
+  dbRefreshTagSelect();
+  document.getElementById('db-tagno').value = dbCurrentTag;
+  dbDrawTankViz();
+  dbToast('Data General tersimpan');
 }
 
-function calcPoF() {
-  // GFF
-  const gff1 = parseFloat(document.getElementById('gff-c1').value);
-  const gff2 = parseFloat(document.getElementById('gff-c2').value);
-  const gff3 = parseFloat(document.getElementById('gff-c3').value);
-  const gffTotal = (gff1+gff2+gff3)/3;
-
-  // Thinning DF
-  const Dfb = parseFloat(document.getElementById('df-fb').value);
-  const Fip = parseFloat(document.getElementById('df-fip').value);
-  const Fdl = parseFloat(document.getElementById('df-fdl').value);
-  const Fwd = parseFloat(document.getElementById('df-fwd').value);
-  const Fam = parseFloat(document.getElementById('df-fam').value);
-  const Fsm = parseFloat(document.getElementById('df-fsm').value);
-  const fom = parseFloat(document.getElementById('df-fom').value);
-
-  const Df = (Dfb * Fip * Fdl * Fwd * Fam * Fsm) / fom;
-
-  // FMS
-  const pscore = parseFloat(document.getElementById('pms-score').value);
-  const fms = 2.38 * Math.exp(-0.012*pscore);
-
-  // PoF
-  const pof = gffTotal * Df * fms;
-
-  // PoF Category (API 581 Table 1.3)
-  const pofCat = pof<=3.06e-5?1:pof<=3.06e-4?2:pof<=3.06e-3?3:pof<=3.06e-2?4:5;
-
-  STATE.pof = {gffTotal, Df, fms, pof, pofCat};
-  renderPoF();
-  document.getElementById('nextPoF').disabled = false;
-  document.getElementById('sn1').textContent = '✓';
-  document.getElementById('sb1').classList.add('done');
+/* ── Tab 2: Desain ── */
+function dbSaveDesain(){
+  if(!dbCurrentTag) return;
+  const fields = {
+    fluidService: val('db-d-fluid'),
+    liquid: numVal('db-d-liquid'),
+    temperatureOperasi: numVal('db-d-temp'),
+    flashPoint: numVal('db-d-flash'),
+    tekanan: numVal('db-d-tekanan'),
+    jointType: val('db-d-joint'),
+    materialRoof: val('db-d-matroof'),
+    materialSheel: val('db-d-matshell'),
+    standard: val('db-d-standard'),
+    diameter: readLen('db-d-diameter'),
+    tinggi: readLen('db-d-tinggi'),
+    tinggiMaksimumIsi: readLen('db-d-tinggimax'),
+    kapasitas: numVal('db-d-kapasitas'),
+    diametershellManhole: numVal('db-d-manhole-shell'),
+    diameterRoofManHole: numVal('db-d-manhole-roof'),
+    diameterFilingNozzle: numVal('db-d-nozzle-filling'),
+    suctionNozzle: numVal('db-d-nozzle-suction'),
+    diameterFoalNozzle: numVal('db-d-nozzle-foal'),
+    diameterWaterDraw: numVal('db-d-nozzle-water'),
+    fillingInRate: numVal('db-d-fillrate'),
+    emptyingInRate: numVal('db-d-emptyrate'),
+  };
+  for(let i=1;i<=6;i++) fields['tinggiCourse'+i] = readThick('db-d-c'+i);
+  dbSaveFields(dbCurrentTag, fields);
+  dbRecalcInspeksi();
+  dbDrawTankViz();
+  dbToast('Data Desain tersimpan');
 }
 
-function renderPoF() {
-  const {gffTotal, Df, fms, pof, pofCat} = STATE.pof;
+/* ── Tab 3: Inspeksi ──
+   Note: t_min/t_act/CR results table below is always shown in mm (metric) —
+   the unit toggle affects the raw dimension/thickness INPUT fields only. */
+function dbRecalcInspeksi(){
+  const D = readLen('db-d-diameter');
+  const G = numVal('db-d-liquid');
+  const tinggiMax = readLen('db-d-tinggimax');
+  const matRoof = val('db-d-matroof');
+  const matShell = val('db-d-matshell');
+  const weldingType = val('db-g-welding');
+  const jointType = val('db-d-joint');
+  const rivetRow = val('db-g-rivetrow');
+  const standard = val('db-d-standard');
+  const c = [1,2,3,4,5,6].map(i=>readThick('db-d-c'+i));
+  const dateA = val('db-i-dateA');
+  const dateB = val('db-i-dateB');
 
-  const sd=document.getElementById('sd-pof'), st=document.getElementById('st-pof');
-  sd.className='sd wn'; st.textContent=`PoF Category ${pofCat} — ${pof.toExponential(3)} events/yr`;
+  const courses = [
+    {key:'R', label:'Roof', type:'Roof', tA:readThick('db-i-roofA'), tB:readThick('db-i-roofB'), exists:true},
+    {key:'1', label:'Course 1', type:'1', tA:readThick('db-i-c1A'), tB:readThick('db-i-c1B'), exists:!!c[0]},
+    {key:'2', label:'Course 2', type:'2', tA:readThick('db-i-c2A'), tB:readThick('db-i-c2B'), exists:!!c[1]},
+    {key:'3', label:'Course 3', type:'3', tA:readThick('db-i-c3A'), tB:readThick('db-i-c3B'), exists:!!c[2]},
+    {key:'4', label:'Course 4', type:'4', tA:readThick('db-i-c4A'), tB:readThick('db-i-c4B'), exists:!!c[3]},
+    {key:'5', label:'Course 5', type:'5', tA:readThick('db-i-c5A'), tB:readThick('db-i-c5B'), exists:!!c[4]},
+    {key:'6', label:'Course 6', type:'6', tA:readThick('db-i-c6A'), tB:readThick('db-i-c6B'), exists:!!c[5]},
+  ];
 
-  document.getElementById('r-gff').innerHTML=`
-    <div class="rrow"><span class="rn">g_ff,total</span><div class="rv">${gffTotal.toExponential(3)}<span class="u">evt/yr</span></div></div>
-    <p class="nsm">Rata-rata GFF 3 course</p>`;
-
-  document.getElementById('r-df').innerHTML=`
-    <div class="rrow"><span class="rn">D_f (thinning)</span><div class="rv ${Df>100?'bd':Df>10?'wn':'ok'}">${Df.toFixed(3)}<span class="u">—</span></div></div>
-    <p class="nsm">DF Kategori: ${Df<=1?1:Df<=10?2:Df<=100?3:Df<=1000?4:5}</p>`;
-
-  document.getElementById('r-fms').innerHTML=`
-    <div class="rrow"><span class="rn">F_MS</span><div class="rv">${fms.toFixed(4)}</div></div>
-    <p class="nsm">p_score = ${document.getElementById('pms-score').value}</p>`;
-
-  const pofColor = pofCat<=2?'ok':pofCat===3?'wn':'bd';
-  document.getElementById('r-pof').innerHTML=`
-    <div class="rrow"><span class="rn">P_f(t)</span><div class="rv ${pofColor}">${pof.toExponential(4)}<span class="u">evt/yr</span></div></div>
-    <div class="rrow"><span class="rn">Kategori PoF</span><div class="rv ${pofColor}">${pofCat}</div></div>
-    <p class="nsm">P_f = g_ff × D_f × F_MS</p>`;
-
-  if(window.MathJax) MathJax.typesetPromise();
+  dbComputedInspeksi = {};
+  const rowsHtml = [];
+  courses.forEach(cs => {
+    if(!cs.exists) return;
+    const material = cs.type==='Roof' ? matRoof : matShell;
+    const Y = dbGetY(material), T = dbGetT(material);
+    const S = dbGetS(cs.type, Y, T);
+    const E = dbGetE(weldingType, jointType, rivetRow, standard);
+    const H = dbGetHForCourse(cs.type, tinggiMax, c[0],c[1],c[2],c[3],c[4],c[5]);
+    const tMin = dbGetTmin(cs.type, H, D, G, S, E);
+    let corr = 0;
+    if(cs.tA && cs.tB && dateA && dateB) corr = dbGetCorrRate(cs.tA, cs.tB, dateA, dateB);
+    const rl = corr ? dbGetRemainingLife(cs.tB, tMin, corr) : 0;
+    dbComputedInspeksi[cs.key] = {tMin, corr, rl};
+    rowsHtml.push(`<tr><td>${cs.label}</td><td>${tMin.toFixed(2)}</td><td>${cs.tB||'—'}</td><td>${corr?corr.toFixed(3):'—'}</td><td>${corr? (rl>=9999?'∞':rl.toFixed(2)) : '—'}</td></tr>`);
+  });
+  const tbody = document.getElementById('db-i-results');
+  if(tbody) tbody.innerHTML = rowsHtml.length ? rowsHtml.join('') : '<tr><td colspan="5" style="text-align:center;color:var(--tx3);">Isi data desain &amp; inspeksi terlebih dahulu</td></tr>';
 }
 
-/* ══════════════════════════════════════════
-   STEP 3 — CoF CALCULATION
-══════════════════════════════════════════ */
-function calcCoF() {
-  const fcEnv  = parseFloat(document.getElementById('cof-env').value) + parseFloat(document.getElementById('cof-env2').value);
-  const fcCmd  = parseFloat(document.getElementById('cof-cmd1').value) + parseFloat(document.getElementById('cof-cmd2').value);
-  const fcProd = parseFloat(document.getElementById('cof-prod1').value) + parseFloat(document.getElementById('cof-prod2').value);
-  const total  = fcEnv + fcCmd + fcProd;
-
-  // CoF Category (API 581 Table 1.3)
-  const cofCat = total<=10000?'A':total<=100000?'B':total<=1000000?'C':total<=10000000?'D':'E';
-
-  STATE.cof = {fcEnv, fcCmd, fcProd, total, cofCat};
-  renderCoF();
-  document.getElementById('nextCoF').disabled = false;
-  document.getElementById('sn2').textContent = '✓';
-  document.getElementById('sb2').classList.add('done');
+function dbSaveInspeksi(){
+  if(!dbCurrentTag) return;
+  const fields = {
+    dateInspectionA: val('db-i-dateA'),
+    minRoofPlateA: readThick('db-i-roofA'),
+    dateInspectionB: val('db-i-dateB'),
+    minRoofPlateB: readThick('db-i-roofB'),
+    dateValidCertificate: val('db-i-datecert'),
+    kesimpulan: val('db-i-kesimpulan'),
+  };
+  for(let i=1;i<=6;i++){
+    fields['minC'+i+'A'] = readThick('db-i-c'+i+'A');
+    fields['minC'+i+'B'] = readThick('db-i-c'+i+'B');
+  }
+  const corrMap = {R:'corrateR',1:'corrate1',2:'corrate2',3:'corrate3',4:'corrate4',5:'corrate5',6:'corrate6'};
+  const rlMap = {R:'remainingLifeR',1:'remainingLife1',2:'remainingLife2',3:'remainingLife3',4:'remainingLife4',5:'remainingLife5',6:'remainingLife6'};
+  Object.keys(dbComputedInspeksi).forEach(k=>{
+    fields[corrMap[k]] = dbComputedInspeksi[k].corr;
+    fields[rlMap[k]] = dbComputedInspeksi[k].rl;
+  });
+  dbSaveFields(dbCurrentTag, fields);
+  dbToast('Data Inspeksi tersimpan');
 }
 
-function fmt$(v){ return '$'+(v>=1e6?(v/1e6).toFixed(2)+'M':v>=1e3?(v/1e3).toFixed(1)+'K':v.toFixed(0)); }
-
-function renderCoF() {
-  const {fcEnv, fcCmd, fcProd, total, cofCat} = STATE.cof;
-
-  const sd=document.getElementById('sd-cof'), st=document.getElementById('st-cof');
-  sd.className='sd wn'; st.textContent=`CoF Category ${cofCat} — Total ${fmt$(total)}`;
-
-  document.getElementById('r-fcenv').innerHTML=`<div class="rrow"><span class="rn">FC_environ</span><div class="rv">${fmt$(fcEnv)}</div></div>`;
-  document.getElementById('r-fccmd').innerHTML=`<div class="rrow"><span class="rn">FC_cmd</span><div class="rv">${fmt$(fcCmd)}</div></div>`;
-  document.getElementById('r-fcprod').innerHTML=`<div class="rrow"><span class="rn">FC_prod</span><div class="rv">${fmt$(fcProd)}</div></div>`;
-
-  const cofColor = cofCat==='A'||cofCat==='B'?'ok':cofCat==='C'?'wn':'bd';
-  document.getElementById('r-coftotal').innerHTML=`
-    <div class="rrow"><span class="rn">C_f^fin</span><div class="rv ${cofColor}">${fmt$(total)}</div></div>
-    <div class="rrow"><span class="rn">Kategori CoF</span><div class="rv ${cofColor}">${cofCat}</div></div>
-    <p class="nsm">Total = FC_environ + FC_cmd + FC_prod</p>`;
+/* ── Tab 4: Riwayat Pemeliharaan ── */
+function dbRefreshRiwayatSelect(){
+  const sel = document.getElementById('db-r-dateselect');
+  const list = dbGetRiwayat(dbCurrentTag);
+  sel.innerHTML = '<option value="">— pilih tanggal untuk lihat detail —</option>' +
+    list.map(r=>`<option value="${r.id}">${r.dateInspection||'—'} — ${(r.scopeInspection||'').slice(0,40)}</option>`).join('');
+}
+function dbRiwayatSelectChange(){
+  const id = val('db-r-dateselect');
+  if(!id){ dbResetRiwayatForm(); return; }
+  const r = dbGetRiwayat(dbCurrentTag).find(x=>String(x.id)===String(id));
+  if(!r) return;
+  setVal('db-r-date', r.dateInspection);
+  setVal('db-r-scope', r.scopeInspection);
+  setVal('db-r-uninspection', r.uninspection);
+  setVal('db-r-al', r.aL);
+  setVal('db-r-result', r.result);
+  setVal('db-r-3rdparty', r.thirdParty);
+}
+function dbResetRiwayatForm(){
+  ['db-r-date','db-r-scope','db-r-uninspection','db-r-al','db-r-result','db-r-3rdparty'].forEach(id=>setVal(id,''));
+  const sel = document.getElementById('db-r-dateselect');
+  if(sel) sel.value='';
+}
+function dbAddRiwayat(){
+  if(!dbCurrentTag){ alert('Pilih tangki terlebih dahulu'); return; }
+  const dateInspection = val('db-r-date');
+  if(!dateInspection){ alert('Tanggal inspeksi wajib diisi'); return; }
+  const added = dbRiwayatAdded();
+  const nextId = 10000 + added.length;
+  added.push({
+    id: nextId,
+    tag_no: dbCurrentTag,
+    dateInspection,
+    scopeInspection: val('db-r-scope'),
+    uninspection: val('db-r-uninspection'),
+    aL: val('db-r-al'),
+    result: val('db-r-result'),
+    thirdParty: val('db-r-3rdparty'),
+  });
+  dbSetRiwayatAdded(added);
+  dbResetRiwayatForm();
+  dbRefreshRiwayatSelect();
+  dbRenderRiwayatTable();
+  dbToast('Riwayat pemeliharaan ditambahkan');
+}
+function dbRenderRiwayatTable(){
+  const tbody = document.getElementById('db-r-table');
+  const list = dbGetRiwayat(dbCurrentTag);
+  if(!list.length){ tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--tx3);padding:16px;">Belum ada riwayat</td></tr>'; return; }
+  tbody.innerHTML = list.map(r=>`<tr><td>${r.dateInspection||'—'}</td><td>${r.scopeInspection||''}</td><td>${r.uninspection||''}</td><td>${r.thirdParty||''}</td></tr>`).join('');
 }
 
-/* ══════════════════════════════════════════
-   STEP 4 — RISK ASSESSMENT
-══════════════════════════════════════════ */
-// Risk matrix definition [row=PoF1-5 bottom-top, col=CoF A-E left-right]
-const RISK_MAP = [
-  ['low','low','medium','medium','medium-high'],   // PoF 1
-  ['low','low','medium','medium','medium-high'],   // PoF 2
-  ['low','medium','medium','medium-high','high'],  // PoF 3
-  ['medium','medium','medium-high','high','high'], // PoF 4
-  ['medium','medium-high','high','high','high'],   // PoF 5
-];
+/* ── Tab 5: RBI ──
+   Generic Failure Frequency is looked up from DB_GFF_TABLE (API RP 581
+   Equipment Type = Tank650 / Component Type), matching the Konfigurasi
+   sheet supplied. Management System Factor (Msf) is a separate,
+   facility-wide input and is NOT tied to the component/course selected —
+   it is left as-is here (earlier versions incorrectly overwrote it). */
+function dbJenisChange(){
+  const j = val('db-rbi-jenis');
+  let gff = null;
+  const m = j.match(/^Course -(\d+)$/);
+  if(j==='Bottom') gff = dbGetGffFromTable('Tank650','TANKBOTTOM');
+  else if(m) gff = dbGetGffFromTable('Tank650','COURSE-'+m[1]);
+  // 'Roof' has no entry in the API 581 GFF table for AST — gff for Roof
+  // is left as whatever value is currently in the field for manual input.
+  if(gff!==null) setVal('db-rbi-gff', gff);
+  dbRecalcRBI();
+}
+function dbRecalcRBI(){
+  const gff=numVal('db-rbi-gff'), df=numVal('db-rbi-df'), msf=numVal('db-rbi-msf');
+  const pofVal = dbGetPOFValue(gff,df,msf);
+  const pofCat = dbGetPoFCategory(pofVal);
+  setVal('db-rbi-pofval', dbRound(pofVal,6));
+  setVal('db-rbi-pofcat', pofCat);
 
-const RISK_LABEL = {'low':'LOW','medium':'MED','medium-high':'M-H','high':'HIGH'};
-const RISK_CLASS = {'low':'rl','medium':'rm2','medium-high':'rm3','high':'rm4'};
+  const cdc=numVal('db-rbi-cdc'), dcs=numVal('db-rbi-dcs'), bic=numVal('db-rbi-bic'), pic=numVal('db-rbi-pic'), ecc=numVal('db-rbi-ecc');
+  const cofVal = dbGetCOFValue(cdc,dcs,bic,pic,ecc);
+  const cofCat = dbGetCoFCategory(cofVal);
+  setVal('db-rbi-cofval', cofVal);
+  setVal('db-rbi-cofcat', cofCat);
 
-function getCofColIdx(cat) { return {A:0,B:1,C:2,D:3,E:4}[cat]??2; }
-
-function buildRiskMatrix(pofCat, cofCat) {
-  const mx = document.getElementById('risk-matrix');
+  const riskCat = dbGetRiskCategory(pofCat, cofCat);
+  const riskEl = document.getElementById('db-rbi-riskcat');
+  if(riskEl){
+    riskEl.value = riskCat;
+    riskEl.className = 'db-risk-badge ' + dbRiskClass(riskCat);
+  }
+  dbRenderRiskMatrix(pofCat, cofCat);
+}
+function dbRenderRiskMatrix(pofCat, cofCat){
+  const mx = document.getElementById('db-rbi-matrix');
+  if(!mx) return;
   mx.innerHTML='';
-  const pofCatNum = pofCat??1;
-  const cofColIdx = getCofColIdx(cofCat??'A');
-
-  // Build rows from top (PoF 5) to bottom (PoF 1)
-  for (let row=4; row>=0; row--) {
-    // row label
-    const lbl = document.createElement('div');
-    lbl.className='rmc lbl'; lbl.textContent=row+1;
-    mx.appendChild(lbl);
-    // cells A-E
-    for (let col=0; col<5; col++) {
-      const riskLevel = RISK_MAP[row][col];
-      const cell = document.createElement('div');
-      const isHighlight = (row+1===pofCatNum && col===cofColIdx);
-      cell.className='rmc '+RISK_CLASS[riskLevel]+(isHighlight?' highlight gmark':'');
-      cell.textContent = isHighlight ? `${pofCatNum}${['A','B','C','D','E'][cofColIdx]} ✦` : RISK_LABEL[riskLevel];
+  const cofIdx = {A:0,B:1,C:2,D:3,E:4}[cofCat] ?? -1;
+  const letters = ['A','B','C','D','E'];
+  for(let row=5; row>=1; row--){
+    const lbl=document.createElement('div'); lbl.className='rmc lbl'; lbl.textContent=row; mx.appendChild(lbl);
+    for(let col=0; col<5; col++){
+      const letter = letters[col];
+      const cat = dbGetRiskCategory(row, letter);
+      const cell=document.createElement('div');
+      const isHi = (row===pofCat && col===cofIdx);
+      cell.className = 'rmc ' + dbRiskClass(cat) + (isHi ? ' highlight gmark' : '');
+      cell.textContent = isHi ? `${pofCat}${letter} ✦` : {'Low':'LOW','Medium':'MED','Medium High':'M-H','High':'HIGH'}[cat];
       mx.appendChild(cell);
     }
   }
-  // Bottom CoF labels
-  const empty = document.createElement('div'); empty.className='rmc'; mx.appendChild(empty);
-  ['A','B','C','D','E'].forEach(l=>{
-    const d=document.createElement('div'); d.className='rmc lbl'; d.textContent=l; mx.appendChild(d);
+  const blank=document.createElement('div'); blank.className='rmc'; mx.appendChild(blank);
+  letters.forEach(l=>{ const d=document.createElement('div'); d.className='rmc lbl'; d.textContent=l; mx.appendChild(d); });
+}
+function dbSaveRBI(){
+  if(!dbCurrentTag) return;
+  dbSaveFields(dbCurrentTag, {
+    Gff: numVal('db-rbi-gff'),
+    DemageFactor: numVal('db-rbi-df'),
+    Msf: numVal('db-rbi-msf'),
+    Cdc: numVal('db-rbi-cdc'),
+    DCS: numVal('db-rbi-dcs'),
+    BIC: numVal('db-rbi-bic'),
+    Pic: numVal('db-rbi-pic'),
+    ECC: numVal('db-rbi-ecc'),
+    POFVal: numVal('db-rbi-pofval'),
+    POFCa: numVal('db-rbi-pofcat'),
+    COFVal: numVal('db-rbi-cofval'),
+    COFCat: val('db-rbi-cofcat'),
+    RiskCat: val('db-rbi-riskcat'),
   });
+  dbToast('Data RBI tersimpan');
 }
 
-function buildRiskAssessment() {
-  const {pof, pofCat} = STATE.pof??{pof:null, pofCat:null};
-  const {cofCat, total} = STATE.cof??{cofCat:null, total:null};
-  const rla = STATE.rla;
-
-  buildRiskMatrix(pofCat, cofCat);
-
-  const pofC = pofCat??'—', cofC = cofCat??'—';
-  const riskLevel = (pofCat&&cofCat) ? RISK_MAP[pofCat-1][getCofColIdx(cofCat)] : 'medium';
-  const riskLabel = RISK_LABEL[riskLevel]??'—';
-  const pos = (pofCat&&cofCat)?`${pofCat}${cofCat}`:'—';
-
-  // Update banner
-  const banner = document.getElementById('risk-banner');
-  const badge  = document.getElementById('risk-badge');
-  banner.className = `risk-banner ${riskLevel}`;
-  badge.className  = `risk-badge-big ${riskLevel}`;
-  badge.textContent = pos!=='—'?`${pos} — ${riskLabel}`:riskLabel;
-
-  // Titles
-  const riskTitles = {
-    low:'RISIKO RENDAH — Interval inspeksi dapat diperpanjang',
-    medium:'RISIKO MENENGAH — Inspeksi periodik sesuai API 653',
-    'medium-high':'RISIKO MENENGAH-TINGGI — Prioritas inspeksi diperlukan',
-    high:'RISIKO TINGGI — Tindakan segera diperlukan'
-  };
-  document.getElementById('risk-title').textContent = riskTitles[riskLevel]??'Run calculations first';
-  document.getElementById('risk-desc').textContent  = `Posisi matrix: ${pos} · PoF Kategori ${pofC} · CoF Kategori ${cofC}`;
-
-  // KPIs
-  document.getElementById('rk-pof').textContent = pof?pof.toExponential(3):'—';
-  document.getElementById('rk-cof').textContent = total?fmt$(total):'—';
-
-  const pofCatEl = document.getElementById('rk-pof-cat');
-  pofCatEl.textContent = pofCat?`Kategori ${pofCat}`:'—';
-  pofCatEl.style.cssText = pofCat?`background:var(--gdim);border:1px solid var(--gold);color:var(--gold2);padding:2px 10px;border-radius:2px;`:'background:var(--s3);border:1px solid var(--bdr);color:var(--tx3);padding:2px 10px;border-radius:2px;';
-
-  const cofCatEl = document.getElementById('rk-cof-cat');
-  cofCatEl.textContent = cofCat?`Kategori ${cofCat}`:'—';
-  cofCatEl.style.cssText = cofCat?`background:var(--gdim);border:1px solid var(--gold);color:var(--gold2);padding:2px 10px;border-radius:2px;`:'background:var(--s3);border:1px solid var(--bdr);color:var(--tx3);padding:2px 10px;border-radius:2px;';
-
-  // RL
-  if (rla) {
-    const minRL = Math.min(...rla.results.map(r=>r.RL===Infinity?9999:r.RL));
-    document.getElementById('rk-rl').textContent = minRL===9999?'∞':minRL.toFixed(2);
+/* ── Add / Delete tank ── */
+function dbOpenAddModal(){
+  setVal('db-add-tagno','');
+  setVal('db-add-kepemilikan','');
+  document.getElementById('db-add-overlay').classList.add('sh');
+}
+function dbCloseAddModal(e){
+  if(!e || e.target===document.getElementById('db-add-overlay')) document.getElementById('db-add-overlay').classList.remove('sh');
+}
+function dbConfirmAddTank(){
+  const tag = val('db-add-tagno').trim().toUpperCase();
+  if(!tag){ alert('Tag No wajib diisi'); return; }
+  if(dbTagList().includes(tag)){ alert('Tag No sudah ada'); return; }
+  dbSaveFields(tag, { tag_no: tag, kepemilikan: val('db-add-kepemilikan') });
+  dbSetDeletedTags(dbDeletedTags().filter(t=>t!==tag));
+  dbCloseAddModal();
+  dbRefreshTagSelect();
+  document.getElementById('db-tagno').value = tag;
+  dbLoadTank();
+  goDbTab(0);
+  dbToast('Tangki '+tag+' ditambahkan');
+}
+function dbDeleteTank(){
+  if(!dbCurrentTag){ alert('Pilih tangki terlebih dahulu'); return; }
+  if(!confirm('Yakin hapus data tangki '+dbCurrentTag+'? Tindakan ini tidak bisa dibatalkan.')) return;
+  const tag = dbCurrentTag;
+  if(BUILTIN_TANKS[tag]){
+    const del = dbDeletedTags();
+    if(!del.includes(tag)) del.push(tag);
+    dbSetDeletedTags(del);
   }
-
-  // Inspection interval recommendation
-  const intervals = {low:'10 yr',medium:'5 yr','medium-high':'3 yr',high:'1 yr'};
-  const intv = intervals[riskLevel];
-  document.getElementById('rk-interval').textContent = intv?.split(' ')[0]??'—';
-  document.getElementById('rk-interval-sub').textContent = `Max interval: ${intv??'—'} per API 653`;
-  document.getElementById('rk-interval-sub').style.cssText='background:var(--gdim);border:1px solid var(--gold);color:var(--gold2);padding:2px 10px;border-radius:2px;';
-
-  // Matrix position label
-  document.getElementById('matrix-pos-label').textContent = pos;
-  document.getElementById('matrix-pos-sub').textContent = `${riskLabel} RISK — PoF ${pofC} × CoF ${cofC}`;
-
-  // Summary table
-  const names = ['Course 1','Course 2','Course 3'];
-  let tbody = '';
-  if (rla) {
-    rla.results.forEach((r,i)=>{
-      const rl = r.RL===Infinity?9999:r.RL;
-      const status = rl>20?'GOOD':rl>10?'MONITOR':'CRITICAL';
-      const cls = rl>20?'ok':rl>10?'wn':'bd';
-      tbody+=`<tr><td>${names[i]}</td><td>t_min</td><td>${r.tmin_mm.toFixed(3)} mm</td><td>mm</td><td class="${cls}">${status}</td></tr>`;
-      tbody+=`<tr><td></td><td>CR</td><td>${r.CR.toFixed(4)} mm/yr</td><td>mm/yr</td><td></td></tr>`;
-      tbody+=`<tr><td></td><td>RL</td><td>${r.RL===Infinity?'∞':r.RL.toFixed(2)} yr</td><td>yr</td><td class="${cls}">${status}</td></tr>`;
-    });
+  const ov = dbOverrides();
+  delete ov[tag];
+  dbSetOverrides(ov);
+  dbCurrentTag = null;
+  dbRefreshTagSelect();
+  const list = dbTagList();
+  if(list.length){
+    document.getElementById('db-tagno').value = list[0];
+    dbLoadTank();
+  } else {
+    dbShowEmpty();
   }
-  if (STATE.pof) {
-    tbody+=`<tr style="border-top:2px solid var(--gold)"><td>PoF</td><td>P_f</td><td>${STATE.pof.pof.toExponential(4)}</td><td>evt/yr</td><td>${STATE.pof.pofCat}</td></tr>`;
-    tbody+=`<tr><td></td><td>D_f</td><td>${STATE.pof.Df.toFixed(3)}</td><td>—</td><td></td></tr>`;
-    tbody+=`<tr><td></td><td>F_MS</td><td>${STATE.pof.fms.toFixed(4)}</td><td>—</td><td></td></tr>`;
-  }
-  if (STATE.cof) {
-    tbody+=`<tr style="border-top:2px solid var(--gold)"><td>CoF</td><td>C_f^fin</td><td>${fmt$(STATE.cof.total)}</td><td>USD</td><td>${STATE.cof.cofCat}</td></tr>`;
-  }
-  if(!tbody) tbody='<tr><td colspan="5" style="text-align:center;color:var(--tx3);font-style:italic;padding:20px;">Complete all calculation steps</td></tr>';
-  document.getElementById('summary-tbody').innerHTML=tbody;
-
-  // Recommendations
-  const recomData = {
-    low: [
-      {icon:'<svg class="recom-icon" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8"><path d="M20 7l-8 8-4-4"/><circle cx="12" cy="12" r="10"/></svg>', text:'<strong>Interval Inspeksi:</strong> Dapat diperpanjang hingga 10 tahun sesuai API 653.'},
-      {icon:'<svg class="recom-icon" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>', text:'<strong>Metode NDT:</strong> Visual inspection dan UT spot check di area berisiko.'},
-      {icon:'<svg class="recom-icon" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>', text:'<strong>Monitoring:</strong> Pengukuran ketebalan berkala tiap 5 tahun sudah memadai.'},
-    ],
-    medium: [
-      {icon:'<svg class="recom-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gold2)" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>', text:'<strong>Interval Inspeksi:</strong> Inspeksi periodik setiap 5 tahun per API 653 §6.4.'},
-      {icon:'<svg class="recom-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gold2)" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>', text:'<strong>Metode NDT:</strong> 100% Visual Inspection + UT Scan/Spot pada seluruh shell course.'},
-      {icon:'<svg class="recom-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gold2)" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>', text:'<strong>Dokumentasi:</strong> Catat data ketebalan aktual tiap inspeksi untuk update analisis RBI.'},
-    ],
-    'medium-high': [
-      {icon:'<svg class="recom-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gold3)" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg>', text:'<strong>Interval Inspeksi:</strong> Inspeksi diprioritaskan setiap 3 tahun atau kurang.'},
-      {icon:'<svg class="recom-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gold3)" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>', text:'<strong>Metode NDT Enhanced:</strong> UT Scan 100% + MFL (Magnetic Flux Leakage) bottom plate.'},
-      {icon:'<svg class="recom-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gold3)" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>', text:'<strong>Monitoring Aktif:</strong> Pertimbangkan corrosion coupon atau ER probe online monitoring.'},
-    ],
-    high: [
-      {icon:'<svg class="recom-icon" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>', text:'<strong>Tindakan Segera:</strong> Inspeksi segera diperlukan. Pertimbangkan shutdown untuk pemeriksaan menyeluruh.'},
-      {icon:'<svg class="recom-icon" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>', text:'<strong>Interval Inspeksi:</strong> Interval tidak lebih dari 1 tahun sampai risiko diturunkan.'},
-      {icon:'<svg class="recom-icon" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>', text:'<strong>Engineering Review:</strong> Lakukan Fitness-For-Service (FFS) assessment per API 579-1/ASME FFS-1.'},
-    ],
-  };
-
-  const recoms = recomData[riskLevel]??recomData['medium'];
-  document.getElementById('recom-box').style.display='block';
-  document.getElementById('recom-list').innerHTML=recoms.map(r=>`
-    <div class="recom-item">${r.icon}<div class="recom-text">${r.text}</div></div>`).join('');
-
-  // Enable export if all steps done
-  const allDone = STATE.rla&&STATE.pof&&STATE.cof;
-  document.getElementById('exportBtn').disabled=!allDone;
-  if(allDone){document.getElementById('sn3').textContent='✓';document.getElementById('sb3').classList.add('done');}
+  dbToast('Tangki '+tag+' dihapus');
 }
 
-/* ══════════════════════════════════════════
-   PDF EXPORT
-══════════════════════════════════════════ */
-function exportPDF() {
-  if(!STATE.rla||!STATE.pof||!STATE.cof) {
-    alert('Selesaikan semua langkah kalkulasi terlebih dahulu.');
-    return;
-  }
-  const {results, D_m} = STATE.rla;
-  const {pof, pofCat, Df, fms} = STATE.pof;
-  const {total, cofCat, fcEnv, fcCmd, fcProd} = STATE.cof;
-  const names=['Course 1','Course 2','Course 3'];
-  const riskLevel = RISK_MAP[pofCat-1][getCofColIdx(cofCat)];
-  const pos = `${pofCat}${cofCat}`;
-
-  document.getElementById('pdf-date').textContent='Date: '+new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'});
-  document.getElementById('pm-D').textContent = D_m+' m';
-  document.getElementById('pm-risk').textContent = pos+' — '+RISK_LABEL[riskLevel];
-
-  const sts=(rl)=>rl>20?'GOOD':rl>10?'MONITOR':'CRITICAL';
-  const cls2=(rl)=>rl>20?'ok':rl>10?'wn':'bd';
-  document.getElementById('pdf-rla-body').innerHTML=results.map((r,i)=>{
-    const rl=r.RL===Infinity?9999:r.RL;
-    return`<tr><td>${names[i]}</td><td>${r.tmin_mm.toFixed(3)}</td><td>${r.tAct.toFixed(2)}</td><td>${r.CR.toFixed(4)}</td><td>${r.RL===Infinity?'∞':r.RL.toFixed(2)}</td><td class="${cls2(rl)}">${sts(rl)}</td></tr>`;
-  }).join('');
-
-  document.getElementById('pdf-pof-text').innerHTML=
-    `g_ff,total: ${STATE.pof.gffTotal.toExponential(3)} events/yr<br>`+
-    `D_f (thinning): ${Df.toFixed(3)}<br>`+
-    `F_MS: ${fms.toFixed(4)}<br>`+
-    `<strong>P_f = ${pof.toExponential(4)} events/yr → Kategori ${pofCat}</strong>`;
-
-  document.getElementById('pdf-cof-text').innerHTML=
-    `FC_environ: ${fmt$(fcEnv)}<br>`+
-    `FC_cmd: ${fmt$(fcCmd)}<br>`+
-    `FC_prod: ${fmt$(fcProd)}<br>`+
-    `<strong>C_f^fin = ${fmt$(total)} → Kategori ${cofCat}</strong>`;
-
-  document.getElementById('pdf-matrix-pos').textContent=pos;
-  document.getElementById('pdf-risk-desc').textContent=`Risiko ${RISK_LABEL[riskLevel]} berdasarkan PoF Kategori ${pofCat} dan CoF Kategori ${cofCat} per API 581.`;
-
-  const intervals={low:'10 tahun',medium:'5 tahun','medium-high':'3 tahun',high:'1 tahun'};
-  const methods={low:'Visual inspection + UT spot check',medium:'100% Visual + UT Scan/Spot per API 653',
-    'medium-high':'100% Visual + UT Scan + MFL bottom plate',high:'Segera — FFS assessment API 579-1'};
-  document.getElementById('pdf-recom').innerHTML=
-    `Interval: <strong>${intervals[riskLevel]}</strong><br>`+
-    `Metode: ${methods[riskLevel]}<br>`+
-    `Standard: API 653 / API 581`;
-
-  window.print();
-}
 
 /* ══════════════════════════════════════════
    DUMMY MODAL
@@ -1953,9 +2334,7 @@ function closeDummy(e) {
 /* ══════════════════════════════════════════
    INIT
 ══════════════════════════════════════════ */
-buildCoursePanels();
-updateFMSPreview();
-buildRiskMatrix(null,null);
+dbInit();
 
 /* ══════════════════════════════════════════
    AUTH
@@ -1994,6 +2373,7 @@ function doLogin() {
     document.getElementById('logout-btn').style.display = 'inline-flex';
     document.querySelector('nav').style.visibility = 'visible'; // ← di sini
     err.classList.remove('show');
+    showPage(0); // tampilkan landing page langsung, tanpa perlu refresh
   } else {
     err.classList.add('show');
     document.getElementById('login-pass').value = '';
@@ -2010,6 +2390,34 @@ function doLogout() {
   checkLogin();
   showPage(0);
 }
+
+/* ══════════════════════════════════════════
+   LIGHT / DARK THEME TOGGLE
+══════════════════════════════════════════ */
+function dbSyncThemeUI(){
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  const dark = document.getElementById('theme-icon-dark');
+  const light = document.getElementById('theme-icon-light');
+  const label = document.getElementById('theme-label');
+  if(!dark||!light||!label) return;
+  dark.style.display  = isLight ? 'none' : '';
+  light.style.display = isLight ? '' : 'none';
+  label.textContent = isLight ? 'TERANG' : 'GELAP';
+}
+function dbSetTheme(theme){
+  if(theme === 'light'){
+    document.documentElement.setAttribute('data-theme','light');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+  try { localStorage.setItem('dbTheme', theme); } catch(e) {}
+  dbSyncThemeUI();
+}
+function dbToggleTheme(){
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  dbSetTheme(isLight ? 'dark' : 'light');
+}
+dbSyncThemeUI();
 
 checkLogin();
 </script>
