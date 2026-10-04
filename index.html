@@ -352,6 +352,73 @@ h1.main .out { -webkit-text-stroke:1.5px rgba(240,168,48,.5); color:transparent;
 .info-box .ib-title { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--gold2); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; }
 .info-box p { font-size:12px; color:var(--tx2); line-height:1.65; font-weight:300; }
 
+/* ── DF SCREENING ACCORDION ── */
+details.df-acc, details.df-cat { background:var(--s3); border:1px solid var(--bdr2); border-radius:2px; margin-bottom:10px; }
+details.df-acc > summary, details.df-cat > summary { cursor:pointer; padding:12px 16px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:1px; color:var(--gold2); list-style:none; display:flex; align-items:center; gap:8px; user-select:none; }
+details.df-acc > summary::-webkit-details-marker, details.df-cat > summary::-webkit-details-marker { display:none; }
+details.df-acc > summary::before, details.df-cat > summary::before { content:'▸'; display:inline-block; transition:transform .15s; }
+details.df-acc[open] > summary::before, details.df-cat[open] > summary::before { transform:rotate(90deg); }
+.df-acc-body, .df-cat-body { padding:4px 16px 16px; border-top:1px solid var(--bdr2); }
+details.df-mech { background:var(--s2); border:1px solid var(--bdr2); border-radius:2px; margin:10px 0; }
+details.df-mech > summary { cursor:pointer; padding:10px 14px; font-size:12px; color:var(--tx); list-style:none; display:flex; align-items:center; gap:8px; user-select:none; flex-wrap:wrap; }
+details.df-mech > summary::-webkit-details-marker { display:none; }
+details.df-mech > summary::before { content:'▸'; display:inline-block; transition:transform .15s; color:var(--gold2); }
+details.df-mech[open] > summary::before { transform:rotate(90deg); }
+.df-mlabel { flex:1 1 200px; min-width:0; }
+.df-mech-body { padding:4px 14px 14px; border-top:1px solid var(--bdr2); }
+.df-row { display:flex; align-items:flex-start; gap:10px; padding:7px 0; border-bottom:1px dashed var(--bdr2); font-size:11.5px; color:var(--tx2); }
+.df-row:last-child { border-bottom:none; }
+.df-row .df-q { flex:1; line-height:1.5; min-width:0; }
+.df-req { font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--gold2); margin-left:4px; white-space:nowrap; }
+.df-in { margin-top:3px; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--tx); opacity:.85; }
+.df-in::before { content:'↳ '; color:var(--gold2); }
+/* ── DF THINNING CALC PANEL ── */
+.dft { margin-top:12px; border-top:1px solid var(--bdr2); padding-top:12px; }
+.dft-top { display:flex; justify-content:space-between; align-items:flex-end; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+.dft-h { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:1.5px; color:var(--gold2); }
+.dft-sub { font-size:10.5px; color:var(--tx3); margin-top:3px; font-style:italic; }
+.dft-sel-l { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--tx3); display:flex; gap:8px; align-items:center; }
+.dft-step { border:1px solid var(--bdr2); border-left:3px solid var(--green); border-radius:2px; padding:10px 12px; margin-bottom:8px; background:var(--s3); }
+.dft-step.is-na { border-left-color:var(--bdr2); opacity:.92; }
+.dft-head { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.dft-n { font-family:'IBM Plex Mono',monospace; font-size:10px; min-width:22px; height:22px; display:inline-flex; align-items:center; justify-content:center; border:1px solid var(--gold); color:var(--gold2); border-radius:50%; }
+.dft-title { flex:1 1 240px; font-size:12px; color:var(--tx); }
+.dft-st { font-family:'IBM Plex Mono',monospace; font-size:9px; padding:2px 7px; border:1px solid; border-radius:2px; letter-spacing:.5px; }
+.dft-st.ok { color:var(--green); border-color:var(--green); }
+.dft-st.info { color:var(--gold2); border-color:var(--gold); }
+.dft-st.na { color:var(--red); border-color:var(--red); }
+.dft-ref { font-size:10px; color:var(--tx3); font-style:italic; margin:4px 0 6px 30px; }
+.dft-body { margin-left:30px; overflow-x:auto; }
+.dft-body mjx-container { font-size:92% !important; }
+.dft-kv { border-collapse:collapse; font-family:'IBM Plex Mono',monospace; font-size:10.5px; margin:4px 0; }
+.dft-kv td { padding:3px 10px 3px 0; color:var(--tx2); vertical-align:top; }
+.dft-kv td:nth-child(2) { color:var(--tx); white-space:nowrap; }
+.dft-kv td:nth-child(3) { color:var(--tx3); }
+.dft-na { font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--red); padding:6px 0 2px; }
+.dft-note { font-size:10.5px; color:var(--tx3); font-style:italic; margin-top:4px; }
+.dft-result { display:flex; flex-direction:column; gap:3px; border:1px dashed var(--red); padding:10px 14px; margin-top:6px; font-family:'IBM Plex Mono',monospace; }
+.dft-result span { font-size:11px; color:var(--tx2); }
+.dft-result b { color:var(--red); font-size:13px; letter-spacing:1px; }
+.dft-result small { font-size:10px; color:var(--tx3); }
+@media (max-width:600px){ .dft-ref, .dft-body { margin-left:0; } }
+.df-badge.src-form { color:#8ab4f8; border-color:#3a5a8c; background:rgba(58,90,140,.15); }
+.df-form { margin-top:5px; }
+.df-sel { background:var(--s3); border:1px solid var(--bdr2); color:var(--white); font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; padding:5px 8px; border-radius:2px; cursor:pointer; min-width:130px; }
+.df-sel:focus { outline:none; border-color:var(--gold); }
+html[data-theme="light"] .df-sel option { background:#fff; color:#0a0e14; }
+.df-badge.src-pending { color:var(--tx3); border-color:var(--bdr2); border-style:dashed; }
+.df-badge { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.5px; padding:2px 7px; border-radius:2px; white-space:nowrap; border:1px solid; }
+.df-badge.src-auto { color:var(--gold2); border-color:var(--gold); background:var(--gdim); }
+.df-badge.src-manual { color:#8ab4f8; border-color:#3a5a8c; background:rgba(58,90,140,.15); }
+.df-badge.val-ya { color:var(--green); border-color:var(--green); }
+.df-badge.val-tidak { color:var(--red); border-color:var(--red); }
+.df-badge.val-na { color:var(--tx3); border-color:var(--bdr2); }
+.df-verdict { font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.5px; padding:4px 10px; border-radius:2px; margin-left:auto; }
+.df-verdict.go { color:var(--green); border:1px solid var(--green); background:rgba(107,168,116,.1); }
+.df-verdict.skip { color:var(--tx3); border:1px solid var(--bdr2); }
+.df-verdict.pending { color:var(--gold2); border:1px solid var(--gold); }
+.df-note { font-size:11px; color:var(--tx3); font-style:italic; padding:6px 0 2px; }
+
 /* ── GFF TABLE ── */
 .gff-table-wrap { overflow-x:auto; margin-bottom:16px; }
 .gff-table { width:100%; border-collapse:collapse; font-family:'IBM Plex Mono',monospace; font-size:11px; }
@@ -1074,6 +1141,11 @@ body { color:var(--tx); }
       <div class="step-sep"></div>
       <button class="step-btn" onclick="goDbTab(4)">
         <div class="step-num">5</div>
+        <div><div class="step-label">DF SCREENING</div><div class="step-sub">Damage Factor</div></div>
+      </button>
+      <div class="step-sep"></div>
+      <button class="step-btn" onclick="goDbTab(5)">
+        <div class="step-num">6</div>
         <div><div class="step-label">RBI</div><div class="step-sub">PoF · CoF · Risiko</div></div>
       </button>
     </div>
@@ -1140,16 +1212,37 @@ body { color:var(--tx); }
         <div class="phd"><span class="ptag">02</span><h3>DESAIN OPERASI</h3></div>
         <div class="pbd">
           <div class="frow">
-            <div class="fld"><label>Fluid Service</label><div class="fw"><input type="text" id="db-d-fluid"></div></div>
+            <div class="fld"><label>Fluid Service</label><div class="fw"><select id="db-d-fluid">
+              <option value="">— pilih fluid service —</option>
+              <option value="Pertasol CA">Pertasol CA (C5-C8)</option>
+              <option value="Pertasol CB">Pertasol CB (C7-C10)</option>
+              <option value="Pertasol CC">Pertasol CC (C8-C12)</option>
+              <option value="Kerosin">Kerosin (C9-C13)</option>
+              <option value="Solar">Solar (C13-C17)</option>
+              <option value="Residu">Residu (C18-C60)</option>
+              <optgroup label="Lainnya (belum ada nilai a-b)">
+                <option value="HGO">HGO</option>
+                <option value="Slop Oil">Slop Oil</option>
+                <option value="Crude Oil">Crude Oil</option>
+              </optgroup>
+            </select></div></div>
             <div class="fld"><label>Joint Type</label><div class="fw"><select id="db-d-joint"><option>Butt</option><option>Lap</option></select></div></div>
           </div>
-          <div class="frow s3">
+          <div class="frow">
+            <div class="fld"><label>Additional Fluid (Amina)</label><div class="fw"><select id="db-d-addfluid" onchange="dfRenderScreening()"><option value="">— pilih —</option><option value="Tidak ada">Tidak ada</option><option value="MEA">MEA</option><option value="DEA">DEA</option><option value="DIPA">DIPA</option><option value="MDEA">MDEA</option></select></div></div>
+            <div class="fld"><label>Fluida Mengandung Kaustik?</label><div class="fw"><select id="db-d-kaustik" onchange="dfRenderScreening()"><option value="">— pilih —</option><option value="Ya">Ya</option><option value="Tidak">Tidak</option></select></div></div>
+          </div>
+          <div class="frow">
             <div class="fld"><label>Liquid Specific Gravity</label><div class="fw"><input type="number" id="db-d-liquid" step="0.01"></div></div>
-            <div class="fld"><label>Temperature Operasi</label><div class="fw"><input type="number" id="db-d-temp" step="1"><span class="un">°C</span></div></div>
             <div class="fld"><label>Flash Point</label><div class="fw"><input type="number" id="db-d-flash" step="1"><span class="un">°C</span></div></div>
           </div>
-          <div class="frow s1">
-            <div class="fld"><label>Tekanan</label><div class="fw"><input type="number" id="db-d-tekanan" step="1"><span class="un">Atm</span></div></div>
+          <div class="frow">
+            <div class="fld"><label>Temperature Desain</label><div class="fw"><input type="number" id="db-d-tempdesain" step="1" oninput="dfRenderScreening()"><span class="un">°C</span></div></div>
+            <div class="fld"><label>Temperature Operasi</label><div class="fw"><input type="number" id="db-d-temp" step="1" oninput="dfRenderScreening()"><span class="un">°C</span></div></div>
+          </div>
+          <div class="frow">
+            <div class="fld"><label>Tekanan Desain</label><div class="fw"><input type="number" id="db-d-tekanandesain" step="0.01"><span class="un">Atm</span></div></div>
+            <div class="fld"><label>Tekanan Operasi</label><div class="fw"><input type="number" id="db-d-tekanan" step="0.01"><span class="un">Atm</span></div></div>
           </div>
         </div>
       </div>
@@ -1161,6 +1254,11 @@ body { color:var(--tx); }
             <div class="fld"><label>Material Roof</label><div class="fw"><select id="db-d-matroof" onchange="dbRecalcInspeksi()"><option value="A 283-C">A 283-C</option><option value="A285-C">A285-C</option><option value="A36">A36</option><option value="A131-A, B, CS">A131-A, B, CS</option><option value="A131-EH 36">A131-EH 36</option><option value="A573-58">A573-58</option><option value="A573-65">A573-65</option><option value="A573-70">A573-70</option><option value="A516-55">A516-55</option><option value="A516-60">A516-60</option><option value="A516-65">A516-65</option><option value="A516-70">A516-70</option><option value="A662-B">A662-B</option><option value="A662-C">A662-C</option><option value="A537-Class 1">A537-Class 1</option><option value="A537-Class 2">A537-Class 2</option><option value="A633-C, D">A633-C, D</option><option value="A678-A">A678-A</option><option value="A678-B">A678-B</option><option value="A737-B A841">A737-B A841</option><option value="A10 (Note 1)">A10 (Note 1)</option><option value="A7 (Note 1)">A7 (Note 1)</option><option value="A442-55 (Note 1)">A442-55 (Note 1)</option><option value="A442-60 (Note 1)">A442-60 (Note 1)</option><option value="G40.21, 38W">G40.21, 38W</option><option value="G40.21, 44W">G40.21, 44W</option><option value="G40.21, 50W">G40.21, 50W</option><option value="G40.21, 50WT">G40.21, 50WT</option><option value="Unknown">Unknown</option></select></div></div>
             <div class="fld"><label>Material Shell</label><div class="fw"><select id="db-d-matshell" onchange="dbRecalcInspeksi()"><option value="A 283-C">A 283-C</option><option value="A285-C">A285-C</option><option value="A36">A36</option><option value="A131-A, B, CS">A131-A, B, CS</option><option value="A131-EH 36">A131-EH 36</option><option value="A573-58">A573-58</option><option value="A573-65">A573-65</option><option value="A573-70">A573-70</option><option value="A516-55">A516-55</option><option value="A516-60">A516-60</option><option value="A516-65">A516-65</option><option value="A516-70">A516-70</option><option value="A662-B">A662-B</option><option value="A662-C">A662-C</option><option value="A537-Class 1">A537-Class 1</option><option value="A537-Class 2">A537-Class 2</option><option value="A633-C, D">A633-C, D</option><option value="A678-A">A678-A</option><option value="A678-B">A678-B</option><option value="A737-B A841">A737-B A841</option><option value="A10 (Note 1)">A10 (Note 1)</option><option value="A7 (Note 1)">A7 (Note 1)</option><option value="A442-55 (Note 1)">A442-55 (Note 1)</option><option value="A442-60 (Note 1)">A442-60 (Note 1)</option><option value="G40.21, 38W">G40.21, 38W</option><option value="G40.21, 44W">G40.21, 44W</option><option value="G40.21, 50W">G40.21, 50W</option><option value="G40.21, 50WT">G40.21, 50WT</option><option value="Unknown">Unknown</option></select></div></div>
             <div class="fld"><label>Standard</label><div class="fw"><select id="db-d-standard" onchange="dbRecalcInspeksi()"><option>API 650</option><option>API 12C</option><option>Unknown</option></select></div></div>
+          </div>
+          <div class="frow s3">
+            <div class="fld"><label>Komponen Berinsulasi?</label><div class="fw"><select id="db-d-insulasi" onchange="dfRenderScreening()"><option value="">— pilih —</option><option value="Insulated">Insulated</option><option value="Uninsulated">Uninsulated</option></select></div></div>
+            <div class="fld"><label>pH (opsional)</label><div class="fw"><input type="number" id="db-d-ph" step="0.1" min="0" max="14" oninput="dfRenderScreening()"></div></div>
+            <div class="fld"><label>Tekanan Parsial H₂S (opsional)</label><div class="fw"><input type="number" id="db-d-h2spp" step="0.01" min="0" oninput="dfRenderScreening()"><span class="un">psia</span></div></div>
           </div>
           <div class="frow s3">
             <div class="fld"><label>Diameter — D</label><div class="fw"><input type="number" id="db-d-diameter" step="0.001" onchange="dbRecalcInspeksi()"><span class="un un-len">m</span></div></div>
@@ -1333,8 +1431,40 @@ body { color:var(--tx); }
     </div>
   </div>
 
-  <!-- ══ TAB 5 — RBI ══ -->
+  <!-- ══ TAB 5 — DF SCREENING ══ -->
   <div class="step-panel" id="dbp4">
+    <div class="clayout wide">
+      <div class="cpanel">
+        <div class="phd"><span class="ptag">DF</span><h3>SCREENING DAMAGE FACTOR (API 581)</h3></div>
+        <div class="pbd">
+          <div class="info-box" style="margin-bottom:14px;">
+            <div class="ib-title">Cara kerja</div>
+            <p>Setiap mekanisme kerusakan (damage mechanism) API 581 punya pertanyaan screening sebelum lanjut ke kalkulasi Damage Factor (DF). Jawaban <b>AUTO</b> diambil langsung dari tab Desain Operasi &amp; Konstruksi (Material Shell/Roof, Temperature Operasi, Komponen Berinsulasi) — nilai yang dipakai ditampilkan di bawah tiap pertanyaan, jadi tidak perlu isi ulang di sini. Pertanyaan bertanda <b>FORM</b> dijawab langsung di halaman ini (Ya/Tidak, tersimpan otomatis per tangki). Pertanyaan bertanda <b>BELUM TERSEDIA</b> datanya baru akan ditambahkan di tahap berikutnya. Mekanisme hanya <i>lanjut ke kalkulasi</i> kalau semua jawabannya Ya. Klik judul kategori/mekanisme untuk buka-tutup.</p>
+          </div>
+
+          <details class="df-cat" open>
+            <summary>A. DF THINNING</summary>
+            <div class="df-cat-body" id="df-cat-A"></div>
+          </details>
+          <details class="df-cat">
+            <summary>B. EXTERNAL DAMAGE SUSCEPTIBILITIES</summary>
+            <div class="df-cat-body" id="df-cat-B"></div>
+          </details>
+          <details class="df-cat">
+            <summary>C. INTERNAL STRESS CORROSION CRACKING SUSCEPTIBILITIES</summary>
+            <div class="df-cat-body" id="df-cat-C"></div>
+          </details>
+          <details class="df-cat">
+            <summary>D. MECHANICAL &amp; METALLURGICAL DAMAGE MECHANISMS</summary>
+            <div class="df-cat-body" id="df-cat-D"></div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TAB 6 — RBI ══ -->
+  <div class="step-panel" id="dbp5">
     <div class="clayout">
       <div>
         <div class="cpanel">
@@ -1479,6 +1609,494 @@ function dbGetGffFromTable(equip, comp){
   return row ? row.total : null;
 }
 
+/* ── Personnel Injury Flammable Consequence Equation Constants
+   (API RP 581, Table 4.9M) — selected from Fluid Service (db-d-fluid),
+   read later by the CoF module. Each phase key holds {a,b} or null when
+   that cell is blank in the source table (that release/phase combination
+   does not apply to the fluid).
+   ancg/ancl = Autoignition Not Likely, Continuous release, Gas/Liquid
+   alcg/alcl = Autoignition Likely,     Continuous release, Gas/Liquid
+   anig/anil = Autoignition Not Likely, Instantaneous release, Gas/Liquid
+   alig/alil = Autoignition Likely,     Instantaneous release, Gas/Liquid
+   Labels shown to the user are the plant's own process-stream names
+   (Pertasol CA/CB/CC, Kerosin, Solar, Residu — per the plant document),
+   not the raw Table 4.9M carbon-number rows. Each stream's a/b values are
+   taken from the Table 4.9M row that contains that stream's LOWEST
+   carbon number (per confirmed rule: Pertasol CA = C5-C8 -> uses the C5
+   row). apiRef records which Table 4.9M row each stream's numbers were
+   copied from, for traceability:
+     Pertasol CA (C5-C8)   -> C5 row
+     Pertasol CB (C7-C10)  -> C6-C8 row  (C7 falls in C6-C8)
+     Pertasol CC (C8-C12)  -> C6-C8 row  (C8 falls in C6-C8)
+     Kerosin (C9-C13)      -> C9-C12 row (C9 falls in C9-C12)
+     Solar (C13-C17)       -> C13-C16 row (C13 falls in C13-C16)
+     Residu (C18-C60)      -> C17-C25 row (C18 falls in C17-C25)
+   Nafta and PH Solar are left out for now — the plant document does not
+   give them an explicit carbon-number range to map from. ── */
+const DB_FLAM_CONSEQ = [
+  {fluid:'Pertasol CA', range:'C5-C8',   apiRef:'C5',      type:0, ancg:{a:12.71,b:1.00},  ancl:{a:290.1,b:0.89}, alcg:{a:166.1,b:1.00}, alcl:null,             anig:{a:4.820,b:0.76}, anil:{a:0.790,b:0.85}, alig:{a:146.7,b:0.63}, alil:null},
+  {fluid:'Pertasol CB', range:'C7-C10',  apiRef:'C6-C8',   type:0, ancg:{a:13.49,b:0.96},  ancl:{a:96.88,b:0.89}, alcg:{a:169.7,b:0.89}, alcl:{a:252.8,b:0.92}, anig:{a:4.216,b:0.67}, anil:{a:2.186,b:0.78}, alig:{a:147.2,b:0.63}, alil:{a:31.89,b:0.54}},
+  {fluid:'Pertasol CC', range:'C8-C12',  apiRef:'C6-C8',   type:0, ancg:{a:13.49,b:0.96},  ancl:{a:96.88,b:0.89}, alcg:{a:169.7,b:0.89}, alcl:{a:252.8,b:0.92}, anig:{a:4.216,b:0.67}, anil:{a:2.186,b:0.78}, alig:{a:147.2,b:0.63}, alil:{a:31.89,b:0.54}},
+  {fluid:'Kerosin',     range:'C9-C13',  apiRef:'C9-C12',  type:0, ancg:{a:5.755,b:0.96},  ancl:{a:70.03,b:0.89}, alcg:{a:188.6,b:0.92}, alcl:{a:269.4,b:0.92}, anig:{a:2.035,b:0.66}, anil:{a:1.609,b:0.76}, alig:{a:151.0,b:0.63}, alil:{a:2.847,b:0.54}},
+  {fluid:'Solar',       range:'C13-C17', apiRef:'C13-C16', type:0, ancg:null,              ancl:{a:34.36,b:0.89}, alcg:null,             alcl:{a:539.4,b:0.90}, anig:null,             anil:{a:0.242,b:0.88}, alig:null,             alil:{a:4.843,b:0.88}},
+  {fluid:'Residu',      range:'C18-C60', apiRef:'C17-C25', type:0, ancg:null,              ancl:{a:10.70,b:0.89}, alcg:null,             alcl:{a:458.0,b:0.90}, anig:null,             anil:{a:0.061,b:0.91}, alig:null,             alil:{a:3.052,b:0.91}},
+];
+// Fluids known to the plant but not yet mapped to Table 4.9M constants —
+// dbGetFlamConseq() returns null for these (no a/b to reference yet), per
+// user instruction, instead of guessing a mapping.
+const DB_FLAM_UNMAPPED = ['HGO', 'Slop Oil', 'Crude Oil'];
+function dbGetFlamConseq(fluidName){
+  return DB_FLAM_CONSEQ.find(r=>r.fluid===fluidName) || null;
+}
+
+/* ══════════════════════════════════════════
+   DF SCREENING (API 581, Lampiran I — Perhitungan
+   Damage Factor, brief user rev.2) — screening
+   questions per damage mechanism.
+
+   Every answer is fetched live from the Desain
+   Operasi & Konstruksi tab (no separate input form on
+   this page): material Shell/Roof, temperatur operasi
+   (temperatur desain shown alongside for reference),
+   and Komponen Berinsulasi. The fetched value is shown
+   next to each question so the user can see what the
+   Ya/Tidak came from.
+
+   Stage 1 (done): A. Thinning, B. External Damage.
+   C. Internal SCC and D. Mechanical & Metallurgical
+   still have questions whose data fields don't exist
+   yet (pH, H2S, HF, MDMT, dst. — per brief rev.2 these
+   get added to Desain Operasi/Konstruksi in a later
+   stage); those questions show "BELUM TERSEDIA" and
+   keep the mechanism at "DATA BELUM LENGKAP" unless a
+   material/temperature answer already rules it out.
+
+   This only decides which mechanisms proceed to DF
+   calculation vs are skipped — not the DF value itself.
+
+   Sources (brief rev.2):
+   - A: §1.2 — thinning applies to all components.
+   - B: "Screening" list at the start of the External
+     Damage section (3 questions per mechanism, all
+     must be Ya).
+   - C: Tabel 3.1 Pertanyaan Screening Internal SCC.
+   - D: Tabel 4.1 Screening Questions for Mechanical
+     and Metallurgical Damage.
+   ══════════════════════════════════════════ */
+
+// Material classification. All DB_MATERIALS grades (API 650 plate grades,
+// "Unknown" included — confirmed by user) are carbon steel / low-alloy
+// steel. The sets below are kept explicit so that if stainless / Cr-Mo
+// grades are ever added to Material Roof/Shell, screening follows
+// automatically instead of silently staying wrong.
+const DF_AUSTENITIC_GRADES = [];      // e.g. 'TP304','TP316L', ...
+const DF_NI_ALLOY_GRADES = [];        // nickel-based alloys
+const DF_CRMO_LOWALLOY_GRADES = [];   // 1Cr-0.5Mo, 1.25Cr-0.5Mo, 2.25Cr-1Mo, 3Cr-1Mo
+const DF_HIGHCR_FERRITIC_GRADES = []; // >12% Cr ferritic (e.g. Type 410/430)
+
+function dfMaterials(){ return [val('db-d-matshell'), val('db-d-matroof')].filter(Boolean); }
+function dfMatIn(set){ return dfMaterials().some(m=>set.includes(m)); }
+function dfMatFerritic(){ const m=dfMaterials(); return m.length ? !dfMatIn(DF_AUSTENITIC_GRADES) && !dfMatIn(DF_NI_ALLOY_GRADES) : null; }
+function dfMatAustenitic(){ return dfMaterials().length ? dfMatIn(DF_AUSTENITIC_GRADES) : null; }
+function dfMatAustOrNi(){ return dfMaterials().length ? (dfMatIn(DF_AUSTENITIC_GRADES) || dfMatIn(DF_NI_ALLOY_GRADES)) : null; }
+function dfMatCrMoLowAlloy(){ return dfMaterials().length ? dfMatIn(DF_CRMO_LOWALLOY_GRADES) : null; }
+function dfMatHighCrFerritic(){ return dfMaterials().length ? dfMatIn(DF_HIGHCR_FERRITIC_GRADES) : null; }
+function dfMatClass(name){
+  if (DF_AUSTENITIC_GRADES.includes(name)) return 'stainless austenitik';
+  if (DF_NI_ALLOY_GRADES.includes(name)) return 'paduan nikel';
+  return 'baja karbon / paduan rendah';
+}
+function dfShowMaterial(){
+  const s=val('db-d-matshell'), r=val('db-d-matroof');
+  if (!s && !r) return 'Material belum diisi';
+  const parts=[];
+  if (s) parts.push(`Shell: ${s}`);
+  if (r) parts.push(`Roof: ${r}`);
+  const cls=[...new Set(dfMaterials().map(dfMatClass))].join(' / ');
+  return `${parts.join(' · ')} → ${cls}`;
+}
+
+function dfNum(id){ const n=parseFloat(val(id)); return isNaN(n)?null:n; }
+function dfTempC(){ return dfNum('db-d-temp'); }
+function dfTempInRangeC(loC,hiC){ const t=dfTempC(); return t===null?null:(t>=loC && t<=hiC); }
+function dfTempAboveC(threshC){ const t=dfTempC(); return t===null?null:(t>threshC); }
+function dfFmtTemp(c){ return c===null ? '—' : `${c} °C (${Math.round(c*9/5+32)} °F)`; }
+function dfShowTemp(){
+  const op=dfTempC(), ds=dfNum('db-d-tempdesain');
+  if (op===null) return 'Temp. operasi belum diisi' + (ds!==null ? ` · Desain: ${dfFmtTemp(ds)}` : '');
+  return `Operasi: ${dfFmtTemp(op)}` + (ds!==null ? ` · Desain: ${dfFmtTemp(ds)}` : '');
+}
+
+// Komponen Berinsulasi (Desain Konstruksi): true / false / null (belum diisi)
+// Komponen Berinsulasi (Desain Konstruksi): 'Insulated' / 'Uninsulated' / '' (belum diisi).
+// Older saves used Ya/Tidak — normalised on load (dbNormInsulasi).
+function dbNormInsulasi(v){ return v==='Ya' ? 'Insulated' : v==='Tidak' ? 'Uninsulated' : (v||''); }
+function dfInsulasiVal(){ return dbNormInsulasi(val('db-d-insulasi')); }
+function dfShowInsulasi(){ return dfInsulasiVal() ? `Komponen berinsulasi: ${dfInsulasiVal()}` : 'Komponen berinsulasi belum diisi'; }
+// One question for all four external mechanisms; each mechanism states which
+// answer it requires. The badge shows the actual answer (Insulated /
+// Uninsulated), green when it meets that mechanism's requirement, red if not.
+function dfQInsulation(required){
+  return {q:`Apakah komponen insulated atau uninsulated? <span class="df-req">syarat: ${required}</span>`, src:'auto',
+    get:()=>{ const v=dfInsulasiVal(); return v ? v===required : null; },
+    show:dfShowInsulasi, badge:()=>dfInsulasiVal().toUpperCase() };
+}
+
+// Not-yet-available data (added in a later stage per brief rev.2)
+const DF_PENDING = ()=>null;
+
+// AND: false if any false; null (belum lengkap) if any unknown and none false; else true.
+function dfAll(vals){ if(vals.some(v=>v===false)) return false; if(vals.some(v=>v===null)) return null; return true; }
+
+// Reusable criteria
+const DF_Q_FERRITIC = {q:'Apakah materialnya berupa baja karbon atau baja paduan rendah?', src:'auto', get:dfMatFerritic, show:dfShowMaterial};
+const DF_Q_AUSTENITIC = {q:'Apakah materialnya berupa stainless steel austenitik?', src:'auto', get:dfMatAustenitic, show:dfShowMaterial};
+const DF_Q_AUST_NI = {q:'Apakah material berupa baja tahan karat austenitik atau paduan berbasis nikel?', src:'auto', get:dfMatAustOrNi, show:dfShowMaterial};
+const DF_Q_INSULATED = dfQInsulation('Insulated');
+const DF_Q_UNINSULATED = dfQInsulation('Uninsulated');
+const dfQTempRange = (lo,hi,loF,hiF)=>({q:`Apakah temperatur operasi berada antara ${loF} °F hingga ${hiF} °F (${lo} °C hingga ${hi} °C)?`, src:'auto', get:()=>dfTempInRangeC(lo,hi), show:dfShowTemp});
+const dfQTempAbove = (c,f)=>({q:`Apakah temperatur operasi > ${f} °F (${c} °C)?`, src:'auto', get:()=>dfTempAboveC(c), show:dfShowTemp});
+const dfQPending = (q, where)=>({q, src:'pending', get:DF_PENDING, show:()=>where});
+
+// pH & H2S partial pressure (Desain Konstruksi, optional)
+function dfPH(){ return dfNum('db-d-ph'); }
+function dfShowPH(){ const v=dfPH(); return v===null ? 'pH belum diisi (opsional — Desain Konstruksi)' : `pH: ${v}`; }
+function dfH2sPP(){ return dfNum('db-d-h2spp'); }
+function dfShowH2sPP(){ const v=dfH2sPP(); return v===null ? 'Tekanan parsial H₂S belum diisi (opsional — Desain Konstruksi)' : `Tekanan parsial H₂S: ${v} psia (${(v*6.89476).toFixed(2)} kPa)`; }
+// Additional Fluid (amina) & kaustik (Desain Operasi)
+function dfAmine(){ const v=val('db-d-addfluid'); return !v ? null : v!=='Tidak ada'; }
+function dfShowAmine(){ const v=val('db-d-addfluid'); return v ? `Additional fluid: ${v}` : 'Additional fluid belum dipilih (Desain Operasi)'; }
+function dfYN(id){ const v=val(id); return v==='Ya' ? true : v==='Tidak' ? false : null; }
+function dfShowYN(id,label){ const v=val(id); return v ? `${label}: ${v}` : `${label} belum diisi (Desain Operasi)`; }
+
+// Ya/Tidak questions answered directly on the DF Screening page (FORM).
+// Stored per tank under these keys; one answer is shared by every mechanism
+// that asks the same question (e.g. HF for HIC/SOHIC-HF and HSC-HF).
+const DF_FORM_FIELDS = {
+  freeWater:'scrFreeWater',   // ACSCC — air bebas (free water)
+  clWater:'scrClWater',       // ClSCC — air bebas mengandung klorida
+  hf:'scrHF',                 // HIC/SOHIC-HF, HSC-HF
+  sulfur:'scrSulfur',         // PASCC
+  h2s:'scrH2S',               // HIC/SOHIC-H2S, SSC
+  dewWater:'scrDewWater',     // HIC/SOHIC-H2S, SSC — air bebas / kondensasi dew point
+};
+let dfForm = {};
+function dfFormLoad(t){ dfForm={}; Object.entries(DF_FORM_FIELDS).forEach(([k,f])=>{ dfForm[k]=(t&&t[f])||''; }); }
+function dfFormSet(key, v){
+  dfForm[key]=v;
+  if (typeof dbCurrentTag!=='undefined' && dbCurrentTag) dbSaveFields(dbCurrentTag, {[DF_FORM_FIELDS[key]]: v});
+  dfRenderScreening();
+}
+function dfFormVal(key){ const v=dfForm[key]; return v==='Ya' ? true : v==='Tidak' ? false : null; }
+const dfQForm = (q,key)=>({q, src:'form', key, get:()=>dfFormVal(key)});
+
+const DF_MECHANISMS = [
+  // ── A. THINNING ──
+  { cat:'A', id:'thinning', label:'DF Thinning (Penipisan)',
+    note:'Berlaku untuk seluruh komponen — tidak ada kriteria screening tambahan (brief §1.2).',
+    criteria: [], always:true },
+
+  // ── B. EXTERNAL DAMAGE SUSCEPTIBILITIES (brief rev.2, all 3 must be Ya) ──
+  { cat:'B', id:'extcorr', label:'External Corrosion – Ferritic Component',
+    criteria:[ DF_Q_FERRITIC, dfQTempRange(-12,121,10,250), DF_Q_UNINSULATED ] },
+  { cat:'B', id:'cui', label:'Corrosion Under Insulation (CUI) – Ferritic Component',
+    criteria:[ DF_Q_FERRITIC, dfQTempRange(-12,177,10,350), DF_Q_INSULATED ] },
+  { cat:'B', id:'extclscc', label:'External Chloride SCC (ExtClSCC) – Austenitic Component',
+    criteria:[ DF_Q_AUSTENITIC, DF_Q_UNINSULATED, dfQTempRange(50,150,120,300) ] },
+  { cat:'B', id:'cuiclscc', label:'External CUI Chloride SCC (CUI ClSCC) – Austenitic Component',
+    criteria:[ DF_Q_AUSTENITIC, DF_Q_INSULATED, dfQTempRange(50,150,120,300) ] },
+
+  // ── C. INTERNAL SCC SUSCEPTIBILITIES (Tabel 3.1) ──
+  { cat:'C', id:'acscc', label:'Alkaline Carbonate SCC (ACSCC)',
+    criteria:[ DF_Q_FERRITIC,
+      dfQForm('Apakah terdapat air bebas (free water) di dalam aliran proses, termasuk pada kondisi awal terjadinya kondensasi?', 'freeWater'),
+      {q:'Apakah pH > 7,5?', src:'auto', get:()=>{ const v=dfPH(); return v===null?null:v>7.5; }, show:dfShowPH} ] },
+  { cat:'C', id:'amine', label:'Amine Cracking',
+    criteria:[ DF_Q_FERRITIC, dfQTempAbove(51,100),
+      {q:'Apakah peralatan terpapar amina untuk pengolahan gas asam, seperti MEA, DEA, DIPA, atau MDEA?', src:'auto', get:dfAmine, show:dfShowAmine} ] },
+  { cat:'C', id:'caustic', label:'Caustic Stress Corrosion Cracking (Caustic SCC)',
+    criteria:[ DF_Q_FERRITIC,
+      {q:'Apakah fluida proses mengandung kaustik (caustic)?', src:'auto', get:()=>dfYN('db-d-kaustik'), show:()=>dfShowYN('db-d-kaustik','Mengandung kaustik')},
+      dfQTempAbove(51,100) ] },
+  { cat:'C', id:'clscc', label:'Chloride Stress Corrosion Cracking (ClSCC)',
+    criteria:[ DF_Q_AUST_NI,
+      dfQForm('Apakah terdapat air bebas yang mengandung klorida di dalam aliran proses, termasuk pada kondisi awal kondensasi?', 'clWater'),
+      {q:'Apakah temperatur berada pada rentang 75 °F (23,9 °C) hingga 345 °F (173,9 °C) serta pH > 2,5 dan < 10,5?', src:'auto',
+        get:()=>{ const ph=dfPH(); return dfAll([dfTempInRangeC(23.9,173.9), ph===null?null:(ph>2.5 && ph<10.5)]); },
+        show:()=>dfShowTemp()+' · '+(dfPH()===null ? 'pH belum diisi' : `pH: ${dfPH()}`)} ] },
+  { cat:'C', id:'hicsohichf', label:'Hydrofluoric Acid — HIC/SOHIC-HF',
+    criteria:[ DF_Q_FERRITIC, dfQForm('Apakah fluida proses mengandung asam fluorida (HF)?', 'hf') ] },
+  { cat:'C', id:'hschf', label:'Hydrofluoric Acid — Hydrogen Stress Cracking (HSC-HF)',
+    criteria:[ DF_Q_FERRITIC, dfQForm('Apakah fluida proses mengandung asam fluorida (HF)?', 'hf') ] },
+  { cat:'C', id:'pascc', label:'Polythionic Acid Stress Corrosion Cracking (PASCC)',
+    criteria:[ DF_Q_AUST_NI, dfQForm('Apakah proses terpapar senyawa yang mengandung sulfur?', 'sulfur') ] },
+  { cat:'C', id:'hicsohich2s', label:'Wet H₂S — HIC / SOHIC-H₂S',
+    criteria:[ DF_Q_FERRITIC,
+      dfQForm('Apakah fluida proses mengandung H₂S?', 'h2s'),
+      {q:'Apakah tekanan parsial H₂S > 0,05 psia (0,3 kPa)?', src:'auto', get:()=>{ const v=dfH2sPP(); return v===null?null:v>0.05; }, show:dfShowH2sPP},
+      dfQForm('Apakah terdapat air bebas, termasuk kemungkinan terbentuknya kondensasi pada titik embun (dew point condensation)?', 'dewWater') ] },
+  { cat:'C', id:'ssc', label:'Wet H₂S — Sulfide Stress Cracking (SSC)',
+    criteria:[ DF_Q_FERRITIC,
+      dfQForm('Apakah fluida proses mengandung H₂S?', 'h2s'),
+      {q:'Apakah tekanan parsial H₂S > 0,05 psia (0,3 kPa)?', src:'auto', get:()=>{ const v=dfH2sPP(); return v===null?null:v>0.05; }, show:dfShowH2sPP},
+      dfQForm('Apakah terdapat air bebas, termasuk kemungkinan terbentuknya kondensasi pada titik embun (dew point condensation)?', 'dewWater') ] },
+
+  // ── D. MECHANICAL & METALLURGICAL DAMAGE (Tabel 4.1) ──
+  { cat:'D', id:'htha', label:'High-Temperature Hydrogen Attack (HTHA)',
+    criteria:[
+      {q:'Apakah material berupa baja karbon, C-½Mo, atau baja paduan rendah Cr-Mo (s.d. 9Cr-1Mo)?', src:'auto', get:dfMatFerritic, show:dfShowMaterial},
+      dfQTempAbove(177,350),
+      dfQPending('Apakah tekanan parsial hidrogen selama operasi > 50 psia (0,345 MPa)?', 'Belum ada field — tahap berikutnya') ] },
+  { cat:'D', id:'brittle', label:'Brittle Fracture (Patah Getas)',
+    criteria:[ DF_Q_FERRITIC,
+      dfQPending('Apakah MDMT / temperatur minimum yang diizinkan tidak diketahui atau lebih rendah dari temperatur operasi / upset?', 'Field MDMT di Desain Konstruksi — tahap berikutnya') ] },
+  { cat:'D', id:'lowalloy', label:'Low-Alloy Steel Embrittlement',
+    criteria:[
+      {q:'Apakah material berupa baja paduan rendah 1Cr-0.5Mo, 1.25Cr-0.5Mo, 2.25Cr-1Mo, atau 3Cr-1Mo?', src:'auto', get:dfMatCrMoLowAlloy, show:dfShowMaterial},
+      dfQTempRange(343,577,650,1070) ] },
+  { cat:'D', id:'e885', label:'885 °F Embrittlement',
+    criteria:[
+      {q:'Apakah material berupa baja feritik berkadar kromium tinggi (>12% Cr)?', src:'auto', get:dfMatHighCrFerritic, show:dfShowMaterial},
+      dfQTempRange(371,566,700,1050) ] },
+  { cat:'D', id:'sigma', label:'Sigma Phase Embrittlement',
+    criteria:[
+      {q:'Apakah material berupa baja tahan karat austenitik (Austenitic Stainless Steel)?', src:'auto', get:dfMatAustenitic, show:dfShowMaterial},
+      dfQTempRange(593,927,1100,1700) ] },
+  { cat:'D', id:'pipefatigue', label:'Mechanical Fatigue (Perpipaan)', fixedSkip:true,
+    note:'Platform ini mengelola komponen tangki (shell/roof/bottom), bukan sistem perpipaan — pertanyaan pertama ("apakah komponen berupa piping?") selalu Tidak, jadi mekanisme ini tidak berlaku.' },
+];
+
+function dfBadge(cls, text){ return `<span class="df-badge ${cls}">${text}</span>`; }
+function dfValBadge(v, text){
+  if (v===true) return dfBadge('val-ya', text||'YA');
+  if (v===false) return dfBadge('val-tidak', text||'TIDAK');
+  return dfBadge('val-na','?');
+}
+function dfSrcBadge(src){
+  if (src==='pending') return dfBadge('src-pending','BELUM TERSEDIA');
+  if (src==='form') return dfBadge('src-form','FORM');
+  return dfBadge('src-auto','AUTO');
+}
+
+function dfFormSelect(key){
+  const v=dfForm[key]||'';
+  const opt=(x,l)=>`<option value="${x}"${v===x?' selected':''}>${l}</option>`;
+  return `<div class="df-form"><select class="df-sel" onchange="dfFormSet('${key}', this.value)">${opt('','— pilih —')}${opt('Ya','Ya')}${opt('Tidak','Tidak')}</select></div>`;
+}
+
+function dfRenderMechanism(m){
+  if (m.always){
+    return `<details class="df-mech" data-mech="${m.id}"><summary><span class="df-mlabel">${m.label}</span><span class="df-verdict go">☑ LANJUT KE KALKULASI</span></summary>
+      <div class="df-mech-body"><div class="df-note">${m.note}</div>${m.id==='thinning' ? dfThinPanel() : ''}</div></details>`;
+  }
+  if (m.fixedSkip){
+    return `<details class="df-mech" data-mech="${m.id}"><summary><span class="df-mlabel">${m.label}</span><span class="df-verdict skip">✕ TIDAK BERLAKU</span></summary>
+      <div class="df-mech-body"><div class="df-note">${m.note}</div></div></details>`;
+  }
+  const results = m.criteria.map(c=>c.get());
+  const verdict = dfAll(results);
+  const verdictHtml = verdict===true ? '<span class="df-verdict go">☑ LANJUT KE KALKULASI</span>'
+    : verdict===false ? '<span class="df-verdict skip">✕ SKIP — TIDAK BERLAKU</span>'
+    : '<span class="df-verdict pending">… DATA BELUM LENGKAP</span>';
+  const rows = m.criteria.map((c,i)=>
+    `<div class="df-row">${dfSrcBadge(c.src)}<div class="df-q">${c.q}${c.src==='form' ? dfFormSelect(c.key) : `<div class="df-in">${tvEsc(c.show())}</div>`}</div>${dfValBadge(results[i], c.badge && c.badge())}</div>`
+  ).join('');
+  return `<details class="df-mech" data-mech="${m.id}"><summary><span class="df-mlabel">${m.label}</span>${verdictHtml}</summary><div class="df-mech-body">${rows}</div></details>`;
+}
+
+/* ══════════════════════════════════════════
+   DF THINNING — step-by-step calculation (brief rev.2 §1.4,
+   13 langkah; equations referred from API RP 581 Part 2).
+   Steps whose inputs exist in the app are computed and shown
+   with formula + substitution + result. Steps whose inputs do
+   not exist yet (8, 9, 10, 12-final, 13) show "CALCULATION
+   UNAVAILABLE" with the missing data named — no defaults are
+   assumed for them.
+   Component scope: shell courses only (API 581 Tabel 4.2:
+   COURSE-1-10). Roof is not a component in that table and
+   TANKBOTTOM has no thickness/material data in the app yet.
+   ══════════════════════════════════════════ */
+const DF_THIN_CONST = { COVdt:0.20, COVsf:0.20, COVp:0.05, DS:[1,2,4], ref:1.56e-4 };
+let dfThinComp = '1';
+
+// Standard normal CDF via complementary error function (Numerical Recipes
+// erfcc, fractional error < 1.2e-7 everywhere — keeps relative accuracy in
+// the far tail, which matters because DfB divides by 1.56e-4).
+function dfErfc(x){
+  const z=Math.abs(x), t=1/(1+0.5*z);
+  const r=t*Math.exp(-z*z-1.26551223+t*(1.00002368+t*(0.37409196+t*(0.09678418+t*(-0.18628806+t*(0.27886807+t*(-1.13520398+t*(1.48851587+t*(-0.82215223+t*0.17087277)))))))));
+  return x>=0 ? r : 2-r;
+}
+function dfPhi(x){ return 0.5*dfErfc(-x/Math.SQRT2); }
+
+function dfFmt(v,d=4){
+  if (v===null || v===undefined || !isFinite(v)) return '—';
+  const a=Math.abs(v);
+  if (a!==0 && (a<1e-3 || a>=1e6)) return v.toExponential(3);
+  return (+v.toFixed(d)).toString();
+}
+
+function dfThinCompute(key){
+  const r = { key, ok:true, missing:[] };
+  const ci = dbComputedInspeksi[key];
+  r.today = new Date();
+  r.dateB = val('db-i-dateB'); r.dateA = val('db-i-dateA');
+  r.tahun = dfNum('db-g-tahun');
+  r.age = (r.tahun && r.tahun>0) ? r.today.getFullYear()-r.tahun : null;
+  if (!ci){ r.ok=false; r.missing.push('Data course ini belum ada (tinggi course = 0)'); return r; }
+  Object.assign(r, ci);
+  // Step 2 & 3
+  r.Cr = ci.corr || 0;
+  r.trdi = ci.tB || 0;
+  r.agetk = r.dateB ? (r.today - new Date(r.dateB)) / (365.25*24*3600*1000) : null;
+  r.agerc = 0;
+  if (!r.trdi) r.missing.push('Ketebalan terukur inspeksi B (trdi)');
+  if (r.agetk===null) r.missing.push('Date Inspection B');
+  if (!r.dateA || !ci.tA) r.missing.push('Inspeksi A (untuk laju korosi)');
+  if (!ci.Y || !ci.T) r.missing.push('Material shell (YS/TS)');
+  if (!ci.E) r.missing.push('Joint efficiency E (kombinasi Standard/Joint tidak ada di tabel)');
+  if (!ci.tMin) r.missing.push('t_min');
+  if (r.missing.length){ r.ok=false; return r; }
+  // Step 5
+  r.Art = Math.max(r.Cr*(r.agetk-r.agerc)/r.trdi, 0);
+  // Step 6
+  r.FS = (ci.Y+ci.T)/2 * ci.E * 1.1;
+  // Step 7 (Persamaan 1.5; t_c belum ada → max(t_min, t_c) = t_min)
+  r.SRp = (ci.S*ci.E/r.FS) * (ci.tMin / r.trdi);
+  // Step 11
+  const C=DF_THIN_CONST;
+  r.beta = C.DS.map(ds=>{
+    const num = 1 - ds*r.Art - r.SRp;
+    const den = Math.sqrt(ds*ds*r.Art*r.Art*C.COVdt*C.COVdt + Math.pow(1-ds*r.Art,2)*C.COVsf*C.COVsf + r.SRp*r.SRp*C.COVp*C.COVp);
+    return num/den;
+  });
+  r.phi = r.beta.map(b=>dfPhi(-b));
+  return r;
+}
+
+function dfStep(n, title, ref, body, status){
+  const st = status==='na' ? '<span class="dft-st na">CALCULATION UNAVAILABLE</span>'
+           : status==='info' ? '<span class="dft-st info">DATA INPUT</span>'
+           : '<span class="dft-st ok">DIHITUNG</span>';
+  return `<div class="dft-step ${status==='na'?'is-na':''}"><div class="dft-head"><span class="dft-n">${n}</span><span class="dft-title">${title}</span>${st}</div>
+    <div class="dft-ref">Referred from ${ref}</div><div class="dft-body">${body}</div></div>`;
+}
+function dfKV(rows){ return '<table class="dft-kv">'+rows.map(([k,v,u])=>`<tr><td>${k}</td><td>${v}</td><td>${u||''}</td></tr>`).join('')+'</table>'; }
+function dfNA(text){ return `<div class="dft-na">⚠ ${text}</div>`; }
+
+function dfThinPanel(){
+  const keys = Object.keys(dbComputedInspeksi||{}).filter(k=>k!=='R').sort();
+  if (!keys.includes(dfThinComp)) dfThinComp = keys[0] || '1';
+  const opts = keys.map(k=>`<option value="${k}"${k===dfThinComp?' selected':''}>Course ${k}</option>`).join('')
+    + '<option value="R" disabled>Roof — tidak tercantum di API 581 Tabel 4.2</option>'
+    + '<option value="B" disabled>Bottom — data ketebalan/material belum ada</option>';
+  const head = `<div class="dft-top"><div><div class="dft-h">KALKULASI DF THINNING</div>
+      <div class="dft-sub">Referred from API RP 581 Part 2 — Thinning Damage Factor (brief §1.4, 13 langkah)</div></div>
+      <label class="dft-sel-l">Komponen <select class="df-sel" onchange="dfThinComp=this.value; dfRenderScreening()">${opts}</select></label></div>`;
+  if (!keys.length) return `<div class="dft">${head}${dfNA('Belum ada course dengan data — isi tinggi course di Desain Konstruksi dan ketebalan di Inspeksi.')}</div>`;
+
+  const r = dfThinCompute(dfThinComp);
+  const C = DF_THIN_CONST;
+  const s = [];
+  const blocked = !r.ok;
+  const blockMsg = blocked ? dfNA('Data belum lengkap: '+r.missing.join(', ')+'.') : '';
+
+  // 1
+  s.push(dfStep(1,'Ketebalan awal (t), umur komponen (age), cladding & liner','API RP 581 Part 2 — Thinning, Step 1',
+    dfKV([
+      ['Ketebalan awal / furnished (t)','tidak tersedia','— tidak dipakai, ketebalan terukur (trdi) tersedia (Langkah 3)'],
+      ['Umur komponen (age)', r.age!==null ? r.age : '—', r.age!==null ? `tahun (${r.today.getFullYear()} − ${r.tahun})` : 'Tahun Pembuatan belum diisi'],
+      ['Ketebalan cladding (t<sub>cm</sub>)','0','mm — tidak ada cladding'],
+      ['Internal liner','tidak ada','']
+    ]),'info'));
+  // 2
+  s.push(dfStep(2,'Laju korosi material dasar (C<sub>r,bm</sub>) dan cladding (C<sub>r,cm</sub>)','API RP 581 Part 2 — Step 2 (C<sub>r,bm</sub> dari data inspeksi A→B, API 653)',
+    `\\[ C_{r,bm} = \\frac{t_A - t_B}{\\text{tahun}_B - \\text{tahun}_A} \\]`+
+    (r.tA!==undefined ? dfKV([
+      ['t<sub>A</sub> / t<sub>B</sub>', `${dfFmt(r.tA,2)} / ${dfFmt(r.tB,2)}`, 'mm'],
+      ['Tanggal A / B', `${r.dateA||'—'} / ${r.dateB||'—'}`, ''],
+      ['<b>C<sub>r,bm</sub></b>', `<b>${dfFmt(r.Cr,3)}</b>`, 'mm/tahun'],
+      ['C<sub>r,cm</sub>', '0', 'mm/tahun — tidak ada cladding']]) : blockMsg),'ok'));
+  // 3
+  s.push(dfStep(3,'Waktu sejak inspeksi terakhir (age<sub>tk</sub>), ketebalan terukur (t<sub>rdi</sub>), sisa umur cladding/liner (age<sub>rc</sub>)','API RP 581 Part 2 — Step 3, Persamaan (1.1)',
+    `\\[ age_{rc} = \\max\\left( \\frac{t_{cm}}{C_{r,cm}},\\ 0 \\right) \\]`+
+    dfKV([
+      ['Tanggal kalkulasi', r.today.toISOString().slice(0,10), ''],
+      ['age<sub>tk</sub> = tanggal kalkulasi − Date Inspection B', dfFmt(r.agetk,2), 'tahun'],
+      ['t<sub>rdi</sub> = Min C'+dfThinComp+' B', dfFmt(r.trdi,2), 'mm'],
+      ['age<sub>rc</sub>', '0', 'tahun — tidak ada cladding/liner']]),'ok'));
+  // 4
+  s.push(dfStep(4,'Tegangan ijin (S), efisiensi las (E), ketebalan minimum (t<sub>min</sub>)','API RP 581 Step 4 → kode konstruksi asli: API 653 §4.3.3 (t<sub>min</sub>, S) dan Tabel 4-2/4-3 (E)',
+    `\\[ t_{min} = \\frac{2.6\\,(H-1)\\,D\\,G}{S \\cdot E}, \\qquad S = \\min(${(dfThinComp==='1'||dfThinComp==='2')?'0.80\\,Y,\\ 0.429\\,T':'0.88\\,Y,\\ 0.472\\,T'}) \\]`+
+    (r.tMin!==undefined ? dfKV([
+      ['Material shell', r.material||'—', ''],
+      ['Y (YS) / T (TS)', `${r.Y} / ${r.T}`, 'psi'],
+      ['S', dfFmt(r.S,1), 'psi'],
+      ['E', dfFmt(r.E,2), ''],
+      ['H (tinggi cairan di atas dasar course)', dfFmt(r.H,3), 'ft'],
+      ['<b>t<sub>min</sub></b>', `<b>${dfFmt(r.tMin,2)}</b>`, 'mm (min. 2,54 mm / 0,1 in)']]) : blockMsg),'ok'));
+  // 5
+  s.push(dfStep(5,'Parameter A<sub>rt</sub> (fraksi kehilangan ketebalan)','API RP 581 Part 2 — Persamaan (1.3)',
+    `\\[ A_{rt} = \\max\\left[ \\frac{C_{r,bm}\\,(age_{tk} - age_{rc})}{t_{rdi}},\\ 0 \\right] \\]`+
+    (r.ok ? dfKV([['Substitusi', `max[ ${dfFmt(r.Cr,3)} × (${dfFmt(r.agetk,2)} − 0) / ${dfFmt(r.trdi,2)} , 0 ]`,''],['<b>A<sub>rt</sub></b>', `<b>${dfFmt(r.Art,4)}</b>`, '']]) : blockMsg), r.ok?'ok':'na'));
+  // 6
+  s.push(dfStep(6,'Flow stress (FS<sub>Thin</sub>)','API RP 581 Part 2 — Persamaan (1.4)',
+    `\\[ FS^{Thin} = \\frac{YS + TS}{2} \\times E \\times 1.1 \\]`+
+    (r.ok ? dfKV([['Substitusi', `(${r.Y} + ${r.T}) / 2 × ${dfFmt(r.E,2)} × 1,1`,''],['<b>FS<sub>Thin</sub></b>', `<b>${dfFmt(r.FS,1)}</b>`, 'psi']]) : blockMsg), r.ok?'ok':'na'));
+  // 7
+  s.push(dfStep(7,'Strength ratio (SR<sub>P</sub><sup>Thin</sup>)','API RP 581 Part 2 — Persamaan (1.5)',
+    `\\[ SR_P^{Thin} = \\frac{S \\cdot E}{FS^{Thin}} \\cdot \\frac{\\max(t_{min},\\ t_c)}{t_{rdi}} \\]`+
+    (r.ok ? dfKV([['t<sub>c</sub> (tebal minimum struktural)','tidak tersedia','— dipakai t<sub>min</sub>'],
+      ['Substitusi', `(${dfFmt(r.S,1)} × ${dfFmt(r.E,2)} / ${dfFmt(r.FS,1)}) × (${dfFmt(r.tMin,2)} / ${dfFmt(r.trdi,2)})`,''],
+      ['<b>SR<sub>P</sub></b>', `<b>${dfFmt(r.SRp,4)}</b>`, '']])
+      + '<div class="dft-note">Persamaan (1.6) berbasis tekanan internal tidak dipakai — shell tangki dibebani tekanan hidrostatis, sesuai Catatan 5 brief.</div>' : blockMsg), r.ok?'ok':'na'));
+  // 8
+  s.push(dfStep(8,'Jumlah inspeksi per tingkat efektivitas (N<sub>A</sub>, N<sub>B</sub>, N<sub>C</sub>, N<sub>D</sub>)','API RP 581 Part 2 — §4.5.6, Annex 2.C (inspection effectiveness)',
+    dfNA('CALCULATION UNAVAILABLE — Riwayat Pemeliharaan belum memiliki kategori efektivitas inspeksi (A–E) per entri.'),'na'));
+  // 9
+  s.push(dfStep(9,'Faktor efektivitas inspeksi (I<sub>1</sub>, I<sub>2</sub>, I<sub>3</sub>)','API RP 581 Part 2 — Persamaan (1.7), Tabel 1.6 & 1.7',
+    `\\[ I_i^{Thin} = Pr_{p,i}^{Thin}\\,(Co_{p,i}^{ThinA})^{N_A}\\,(Co_{p,i}^{ThinB})^{N_B}\\,(Co_{p,i}^{ThinC})^{N_C}\\,(Co_{p,i}^{ThinD})^{N_D} \\]`+
+    dfNA('CALCULATION UNAVAILABLE — membutuhkan N<sub>A</sub>–N<sub>D</sub> (Langkah 8) dan tingkat keyakinan data laju korosi (Low/Medium/High) untuk prior probability Tabel 1.6.'),'na'));
+  // 10
+  s.push(dfStep(10,'Probabilitas posterior (Po<sub>1</sub>, Po<sub>2</sub>, Po<sub>3</sub>)','API RP 581 Part 2 — Persamaan (1.8)',
+    `\\[ Po_{p,i}^{Thin} = \\frac{I_i^{Thin}}{I_1^{Thin} + I_2^{Thin} + I_3^{Thin}} \\]`+
+    dfNA('CALCULATION UNAVAILABLE — bergantung pada Langkah 9.'),'na'));
+  // 11
+  s.push(dfStep(11,'Indeks keandalan (β<sub>1</sub>, β<sub>2</sub>, β<sub>3</sub>)','API RP 581 Part 2 — Persamaan (1.9)',
+    `\\[ \\beta_i^{Thin} = \\frac{1 - D_{S_i} A_{rt} - SR_P^{Thin}}{\\sqrt{D_{S_i}^2 A_{rt}^2\\,COV_{\\Delta t}^2 + (1 - D_{S_i} A_{rt})^2\\,COV_{Sf}^2 + (SR_P^{Thin})^2\\,COV_P^2}} \\]`+
+    dfKV([['COV<sub>Δt</sub> / COV<sub>Sf</sub> / COV<sub>P</sub>', `${C.COVdt} / ${C.COVsf} / ${C.COVp}`, ''],
+          ['D<sub>S1</sub> / D<sub>S2</sub> / D<sub>S3</sub>', C.DS.join(' / '), '']])+
+    (r.ok ? dfKV(r.beta.map((b,i)=>[`<b>β<sub>${i+1}</sub></b>`, `<b>${dfFmt(b,4)}</b>`, ''])) : blockMsg), r.ok?'ok':'na'));
+  // 12
+  s.push(dfStep(12,'Base damage factor (D<sub>fB</sub><sup>Thin</sup>)','API RP 581 Part 2 — Persamaan (1.10)',
+    `\\[ D_{fB}^{Thin} = \\frac{Po_{p1}\\,\\Phi(-\\beta_1) + Po_{p2}\\,\\Phi(-\\beta_2) + Po_{p3}\\,\\Phi(-\\beta_3)}{1.56 \\times 10^{-4}} \\]`+
+    (r.ok ? dfKV(r.phi.map((p,i)=>[`Φ(−β<sub>${i+1}</sub>)`, dfFmt(p,6), ''])) : '')+
+    dfNA('CALCULATION UNAVAILABLE — Φ(−β) sudah dihitung, tetapi Po<sub>p1</sub>–Po<sub>p3</sub> (Langkah 10) belum tersedia.'),'na'));
+  // 13
+  s.push(dfStep(13,'Damage factor thinning (D<sub>f</sub><sup>Thin</sup>)','API RP 581 Part 2 — Persamaan (1.11), Tabel 1.8',
+    `\\[ D_f^{Thin} = \\max\\left[ \\frac{D_{fB}^{Thin} \\cdot F_{IP} \\cdot F_{DL}}{F_{OM}},\\ 0.1 \\right] \\]`+
+    dfKV([['F<sub>IP</sub> / F<sub>DL</sub>','1 / 1','— khusus perpipaan, tidak berlaku untuk tangki'],
+          ['F<sub>OM</sub> (online monitoring)','tidak tersedia','']])+
+    dfNA('CALCULATION UNAVAILABLE — bergantung pada Langkah 12 dan data online monitoring (F<sub>OM</sub>, Tabel 1.8).'),'na'));
+
+  const result = `<div class="dft-result"><span>D<sub>f</sub><sup>Thin</sup> — Course ${dfThinComp}</span><b>CALCULATION UNAVAILABLE</b><small>Menunggu: efektivitas inspeksi (Langkah 8), confidence level laju korosi (Langkah 9), online monitoring (Langkah 13)</small></div>`;
+  return `<div class="dft">${head}${s.join('')}${result}</div>`;
+}
+
+function dfRenderScreening(){
+  ['A','B','C','D'].forEach(cat=>{
+    const el = document.getElementById('df-cat-'+cat);
+    if (!el) return;
+    // keep whichever mechanisms the user has expanded open across re-renders
+    const openIds = new Set([...el.querySelectorAll('details.df-mech[open]')].map(d=>d.dataset.mech));
+    if (window.MathJax && MathJax.typesetClear) MathJax.typesetClear([el]);
+    el.innerHTML = DF_MECHANISMS.filter(m=>m.cat===cat).map(dfRenderMechanism).join('');
+    el.querySelectorAll('details.df-mech').forEach(d=>{ if (openIds.has(d.dataset.mech)) d.open = true; });
+  });
+  const a=document.getElementById('df-cat-A');
+  if (a && window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([a]).catch(()=>{});
+}
+
 /* ── Unit system (SI m/mm ⇄ USC ft/in) — display-layer only;
    canonical stored values stay in meters / millimeters ── */
 let UNIT_SYS = (function(){ try{ return localStorage.getItem('rbi_unit_sys')||'SI'; }catch(e){ return 'SI'; } })();
@@ -1510,6 +2128,8 @@ let dbComputedInspeksi = {};
 /* ── tiny DOM + storage helpers ── */
 function val(id){ const el=document.getElementById(id); return el ? el.value : ''; }
 function numVal(id){ const v=parseFloat(val(id)); return isNaN(v) ? 0 : v; }
+// For optional fields: keep 'not filled in' distinct from 0
+function numOrNull(id){ const v=parseFloat(val(id)); return isNaN(v) ? null : v; }
 function setVal(id,v){ const el=document.getElementById(id); if(el) el.value = (v===null||v===undefined) ? '' : v; }
 
 function dbOverrides(){ try{ return JSON.parse(localStorage.getItem('rbi_db_tanks')||'{}'); }catch(e){ return {}; } }
@@ -1965,12 +2585,19 @@ function dbLoadTank(){
   setVal('db-d-fluid', t.fluidService||'');
   setVal('db-d-liquid', t.liquid ?? '');
   setVal('db-d-temp', t.temperatureOperasi ?? '');
+  setVal('db-d-tempdesain', t.temperatureDesain ?? '');
   setVal('db-d-flash', t.flashPoint ?? '');
   setVal('db-d-tekanan', t.tekanan ?? '');
+  setVal('db-d-tekanandesain', t.tekananDesain ?? '');
   setVal('db-d-joint', t.jointType||'Butt');
   setVal('db-d-matroof', t.materialRoof||'Unknown');
   setVal('db-d-matshell', t.materialSheel||'Unknown');
   setVal('db-d-standard', t.standard||'Unknown');
+  setVal('db-d-insulasi', dbNormInsulasi(t.insulasi));
+  setVal('db-d-ph', t.ph ?? t.scrPH ?? '');
+  setVal('db-d-h2spp', t.h2sPP ?? t.scrH2sPP ?? '');
+  setVal('db-d-addfluid', t.additionalFluid||'');
+  setVal('db-d-kaustik', t.kaustik||'');
   setVal('db-d-diameter', dispLen(t.diameter));
   setVal('db-d-tinggi', dispLen(t.tinggi));
   setVal('db-d-tinggimax', dispLen(t.tinggiMaksimumIsi));
@@ -2002,6 +2629,11 @@ function dbLoadTank(){
   dbRefreshRiwayatSelect();
   dbResetRiwayatForm();
   dbRenderRiwayatTable();
+
+  // DF Screening — auto answers come from the Desain fields above; the
+  // Ya/Tidak questions answered on the DF Screening page itself are kept here.
+  dfFormLoad(t);
+  dfRenderScreening();
 
   // RBI
   setVal('db-rbi-gff', t.Gff ?? 0.0001);
@@ -2043,12 +2675,19 @@ function dbSaveDesain(){
     fluidService: val('db-d-fluid'),
     liquid: numVal('db-d-liquid'),
     temperatureOperasi: numVal('db-d-temp'),
+    temperatureDesain: numOrNull('db-d-tempdesain'),
     flashPoint: numVal('db-d-flash'),
     tekanan: numVal('db-d-tekanan'),
+    tekananDesain: numOrNull('db-d-tekanandesain'),
     jointType: val('db-d-joint'),
     materialRoof: val('db-d-matroof'),
     materialSheel: val('db-d-matshell'),
     standard: val('db-d-standard'),
+    insulasi: val('db-d-insulasi'),
+    ph: numOrNull('db-d-ph'),
+    h2sPP: numOrNull('db-d-h2spp'),
+    additionalFluid: val('db-d-addfluid'),
+    kaustik: val('db-d-kaustik'),
     diameter: readLen('db-d-diameter'),
     tinggi: readLen('db-d-tinggi'),
     tinggiMaksimumIsi: readLen('db-d-tinggimax'),
@@ -2109,11 +2748,13 @@ function dbRecalcInspeksi(){
     let corr = 0;
     if(cs.tA && cs.tB && dateA && dateB) corr = dbGetCorrRate(cs.tA, cs.tB, dateA, dateB);
     const rl = corr ? dbGetRemainingLife(cs.tB, tMin, corr) : 0;
-    dbComputedInspeksi[cs.key] = {tMin, corr, rl};
+    dbComputedInspeksi[cs.key] = {tMin, corr, rl, S, E, Y, T, H, tA:cs.tA, tB:cs.tB, material, label:cs.label};
     rowsHtml.push(`<tr><td>${cs.label}</td><td>${tMin.toFixed(2)}</td><td>${cs.tB||'—'}</td><td>${corr?corr.toFixed(3):'—'}</td><td>${corr? (rl>=9999?'∞':rl.toFixed(2)) : '—'}</td></tr>`);
   });
   const tbody = document.getElementById('db-i-results');
   if(tbody) tbody.innerHTML = rowsHtml.length ? rowsHtml.join('') : '<tr><td colspan="5" style="text-align:center;color:var(--tx3);">Isi data desain &amp; inspeksi terlebih dahulu</td></tr>';
+  // DF screening/thinning reads dbComputedInspeksi — refresh after it's rebuilt
+  if (typeof dfRenderScreening === 'function') dfRenderScreening();
 }
 
 function dbSaveInspeksi(){
