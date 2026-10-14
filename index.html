@@ -1311,6 +1311,209 @@ html[data-theme="light"] .eb-code { color:#b45309; border-color:rgba(180,83,9,.4
 .nav-mark { width:16px; height:16px; color:var(--gold2); flex:none; }
 @media (max-width:600px){ .eb-txt::before { width:14px; } .eyebrow { flex-wrap:wrap; row-gap:8px; } }
 
+/* ===== Bigger hero illustration (desktop) ===== */
+@media (min-width:961px) {
+  .hero { grid-template-columns:minmax(0,1fr) minmax(0,1.12fr); max-width:1280px; padding:0 40px; gap:32px; }
+  .hl { padding-right:0; }
+  .istrip { max-width:1280px; }
+  h1.main { font-size:clamp(52px,5.2vw,88px); }
+  .hr { min-height:0; flex-direction:column; justify-content:center; align-items:center; gap:18px; padding:28px 0; }
+  .hr-cards { display:flex; justify-content:space-between; align-items:flex-end; max-width:760px; gap:16px; width:min(100%, calc((100vh - var(--nav-h) - 230px) * 1.4286)); min-width:min(100%,460px); }
+  .hr-cards .sfloat, .hr-cards .api-badge { position:relative; top:auto; left:auto; right:auto; bottom:auto; }
+  .hero-scene { max-width:760px; width:min(100%, calc((100vh - var(--nav-h) - 230px) * 1.4286)); min-width:min(100%,460px); }
+}
+/* ===== Equipment inventory cards + risk matrix card ===== */
+.eqinv { max-width:1200px; margin:28px auto 0; padding:0 40px; }
+.eqinv-hd { display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:18px; }
+.eqinv-hd h3 { font-family:'Rajdhani',sans-serif; font-size:28px; font-weight:800; color:var(--white); letter-spacing:-.2px; }
+.eqinv-hd p { max-width:420px; font-size:13px; color:var(--tx2); line-height:1.6; }
+.eqinv-grid { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:12px; }
+.eqi { position:relative; overflow:hidden; display:flex; flex-direction:column; border-radius:var(--r-lg); padding:16px 16px 14px;
+  background:radial-gradient(120% 90% at 0% 0%, rgba(255,138,31,.09), transparent 55%), var(--glass); border:1px solid var(--bdr);
+  transition:transform .35s var(--ease), border-color .35s, box-shadow .35s; }
+.eqi:hover { transform:translateY(-4px); border-color:rgba(255,160,67,.4); box-shadow:0 22px 40px -26px rgba(255,138,31,.45); }
+.eqi-wm { position:absolute; right:-14px; bottom:-14px; width:96px; height:96px; color:var(--gold2); opacity:.06; transition:opacity .35s, transform .5s var(--ease); pointer-events:none; }
+.eqi:hover .eqi-wm { opacity:.12; transform:rotate(-6deg) scale(1.05); }
+.eqi-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; }
+.eqi-ico { width:52px; height:52px; border-radius:14px; display:grid; place-items:center; color:var(--gold2);
+  background:linear-gradient(160deg,rgba(255,138,31,.2),rgba(255,138,31,.04)); border:1px solid rgba(255,160,67,.3); box-shadow:inset 0 1px 0 rgba(255,255,255,.06), 0 10px 24px -14px rgba(255,138,31,.6); }
+.eqi-ico svg { width:36px; height:36px; }
+.eqi-no { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:1px; color:var(--tx3); padding:3px 7px; border-radius:999px; border:1px solid var(--bdr); }
+.eqi-nm { font-family:'Rajdhani',sans-serif; font-size:17px; font-weight:700; color:var(--white); line-height:1.15; }
+.eqi-std { margin-top:5px; font-family:'JetBrains Mono',monospace; font-size:8.5px; letter-spacing:.6px; color:var(--cyan,#2dd4ef); }
+.eqi-ft { margin-top:auto; padding-top:16px; display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+.eqi-u { font-family:'JetBrains Mono',monospace; font-size:8.5px; letter-spacing:1.1px; color:var(--tx3); text-transform:uppercase; }
+.eqi-n { font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:700; line-height:1; color:var(--tx2); min-width:46px; text-align:center; padding:7px 10px; border-radius:8px; background:rgba(5,10,18,.55); border:1px solid var(--bdr2); }
+html[data-theme="light"] .eqi-n { background:#fff; }
+.eqi-ft { align-items:center !important; }
+.eqi > *:not(.eqi-wm) { position:relative; z-index:1; }
+html[data-theme="light"] .eqi-std { color:#0e7490; }
+html[data-theme="light"] .eqi-ico, html[data-theme="light"] .eqi-wm { color:#c2410c; }
+.rmx-card .rmx-intro { font-size:13px; color:var(--tx2); line-height:1.7; margin:-6px 0 18px; }
+.rmx-card .rmx { margin:0 auto; max-width:440px; }
+.rmx-card .mleg { margin-top:20px; display:grid; grid-template-columns:1fr 1fr; gap:8px 14px; }
+@media (max-width:1100px) { .eqinv-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media (max-width:600px) {
+  .eqinv { padding:0 16px; } .eqinv-hd { flex-direction:column; align-items:flex-start; gap:8px; }
+  .eqinv-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+  .eqi { padding:14px 12px 12px; } .eqi-ico { width:44px; height:44px; } .eqi-ico svg { width:30px; height:30px; }
+  .rmx-card .mleg { grid-template-columns:1fr; }
+}
+@media (min-width:961px){ .wrbi, .apid, .eqinv { max-width:1280px; } }
+/* ===== Standards switcher ===== */
+.api-tabs-wrap { display:flex; justify-content:space-between; align-items:center; gap:18px; margin-bottom:34px; flex-wrap:wrap; }
+.api-tabs-wrap .stag { margin:0; }
+.api-tabs { display:flex; gap:6px; padding:5px; border-radius:999px; background:var(--glass); border:1px solid var(--bdr); overflow-x:auto; scrollbar-width:none; max-width:100%; }
+.api-tabs::-webkit-scrollbar { display:none; }
+.api-tab { flex:none; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; letter-spacing:1px; color:var(--tx2); background:transparent; border:1px solid transparent; padding:8px 14px; border-radius:999px; cursor:pointer; transition:color .2s, background .25s, border-color .2s, box-shadow .25s; }
+.api-tab:hover { color:var(--white); background:var(--s3); }
+.api-tab.on { color:#1b0d00; background:var(--grad); box-shadow:0 6px 18px -6px var(--gglow); }
+html[data-theme="light"] .api-tab.on { color:#fff; }
+.api-tab:focus-visible { outline:none; box-shadow:var(--ring); }
+.api-pane { display:none; }
+.api-pane.on { display:block; animation:apiIn .45s var(--ease) both; }
+.api-pane.on .apm { animation:apiIn .5s var(--ease) both; }
+.api-pane.on .apm:nth-child(2) { animation-delay:.06s; } .api-pane.on .apm:nth-child(3) { animation-delay:.12s; }
+@keyframes apiIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+.api-pane .apibig { min-width:2.6ch; }
+@media (max-width:600px){ .api-tabs-wrap { margin-bottom:22px; } .api-tab { padding:7px 11px; font-size:10px; } }
+/* ===== Standards card deck ===== */
+.std-head { display:flex; justify-content:space-between; align-items:baseline; gap:16px; margin-bottom:8px; }
+.std-head .stag { margin:0; } .std-head p { font-size:12px; color:var(--tx3); }
+.std-deck { --sp:44px; --rot:3deg; --dy:2.5px; position:relative; height:340px; margin:0 auto 64px; perspective:1400px; max-width:980px; }
+.std-deck:hover { --sp:104px; --rot:5.5deg; --dy:4.5px; }
+.std-deck.picked:not(:hover) { --sp:52px; }
+.std-card { --w:160px; --h:240px; position:absolute; left:50%; bottom:18px; width:var(--w); height:var(--h); margin-left:calc(var(--w) / -2);
+  border-radius:16px; cursor:pointer; text-align:left; color:var(--tx); font:inherit; padding:0;
+  background:radial-gradient(130% 80% at 0% 0%, rgba(255,138,31,.16), transparent 55%), linear-gradient(165deg,#15233a,#0b1424 70%);
+  border:1px solid rgba(140,180,220,.22); box-shadow:0 18px 34px -18px rgba(0,0,0,.85), inset 0 1px 0 rgba(255,255,255,.05);
+  transform-origin:50% 120%;
+  transform:translateX(calc(var(--o) * var(--sp))) translateY(calc(var(--o) * var(--o) * var(--dy))) rotate(calc(var(--o) * var(--rot)));
+  transition:transform .55s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .35s, filter .35s;
+  z-index:calc(10 + var(--i)); overflow:hidden; }
+.std-card::before { content:''; position:absolute; inset:10px; border-radius:10px; border:1px dashed rgba(140,180,220,.14); pointer-events:none; }
+.std-card::after { content:''; position:absolute; inset:0; background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.08) 50%,transparent 65%); transform:translateX(-120%); transition:transform .8s ease; pointer-events:none; }
+.std-card:hover { transform:translateX(calc(var(--o) * var(--sp))) translateY(calc(var(--o) * var(--o) * var(--dy) - 16px)) rotate(calc(var(--o) * var(--rot))); border-color:rgba(255,160,67,.45); }
+.std-card:hover::after { transform:translateX(120%); }
+.std-card.on { transform:translateX(calc(var(--o) * var(--sp))) translateY(-44px) rotate(0deg) scale(1.08); z-index:40; border-color:rgba(255,160,67,.75);
+  box-shadow:0 30px 60px -22px rgba(255,138,31,.55), 0 0 0 1px rgba(255,160,67,.35), inset 0 1px 0 rgba(255,255,255,.08);
+  background:radial-gradient(130% 80% at 0% 0%, rgba(255,138,31,.32), transparent 60%), linear-gradient(165deg,#1d2c45,#0d1729 70%); }
+.std-card:focus-visible { outline:none; box-shadow:var(--ring); }
+.sc-corner { position:absolute; top:14px; left:16px; display:flex; flex-direction:column; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:var(--gold2); line-height:1.15; }
+.sc-corner b { font-size:8px; letter-spacing:1.2px; color:var(--tx3); font-weight:700; }
+.sc-corner.br { top:auto; left:auto; bottom:14px; right:16px; transform:rotate(180deg); font-size:9.5px; opacity:.7; }
+.sc-cat { position:absolute; top:16px; right:14px; font-family:'JetBrains Mono',monospace; font-size:7.5px; letter-spacing:.8px; color:var(--cyan,#2dd4ef); text-transform:uppercase; max-width:80px; text-align:right; line-height:1.3; }
+.sc-num { position:absolute; left:0; right:0; top:72px; text-align:center; font-family:'Rajdhani',sans-serif; font-size:52px; font-weight:800; line-height:1;
+  background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.sc-nm { position:absolute; left:14px; right:14px; top:134px; text-align:center; font-family:'Rajdhani',sans-serif; font-size:15px; font-weight:700; color:var(--white); line-height:1.15; }
+/* deal-in when the section is revealed */
+.apid:not(.in) .std-card { transform:translateY(40px) rotate(0deg); opacity:0; }
+.apid.in .std-card { opacity:1; transition:transform .55s cubic-bezier(.2,.8,.2,1), opacity .4s, box-shadow .35s, border-color .35s; transition-delay:calc(var(--i) * 55ms), calc(var(--i) * 55ms), 0s, 0s; }
+.apid.in .std-card:hover, .apid.in .std-card.on { transition-delay:0s; }
+html[data-theme="light"] .std-card { background:radial-gradient(130% 80% at 0% 0%, rgba(255,138,31,.12), transparent 55%), linear-gradient(165deg,#ffffff,#eef3f8 70%); border-color:#c3d1e0; box-shadow:0 18px 30px -20px rgba(30,60,100,.45); }
+html[data-theme="light"] .std-card.on { background:radial-gradient(130% 80% at 0% 0%, rgba(255,138,31,.22), transparent 60%), linear-gradient(165deg,#ffffff,#f4f7fb 70%); box-shadow:0 30px 50px -24px rgba(224,112,15,.5), 0 0 0 1px rgba(224,112,15,.4); }
+html[data-theme="light"] .sc-cat { color:#0e7490; } html[data-theme="light"] .sc-corner { color:#c2410c; }
+@media (max-width:1100px) { .std-card { --w:136px; --h:212px; transform:translateX(calc(var(--o) * var(--sp))) translateY(calc(var(--o) * var(--o) * var(--dy))) rotate(calc(var(--o) * var(--rot))); }
+  .std-card:hover { transform:translateX(calc(var(--o) * var(--sp))) translateY(calc(var(--o) * var(--o) * var(--dy) - 14px)) rotate(calc(var(--o) * var(--rot))); }
+  .std-card.on { transform:translateX(calc(var(--o) * var(--sp))) translateY(-36px) scale(1.07); }
+  .sc-num { top:62px; font-size:44px; } .sc-nm { top:116px; font-size:13.5px; } .std-deck { height:300px; } .std-deck:hover { --sp:86px; } }
+@media (max-width:760px), (hover:none) and (pointer:coarse) {
+  .std-head { flex-direction:column; gap:4px; }
+  .std-deck { height:auto; display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; padding:22px 4px 14px; margin:0 -4px 22px; scrollbar-width:none; perspective:none; }
+  .std-deck::-webkit-scrollbar { display:none; }
+  .std-card, .std-card:hover, .apid.in .std-card { position:relative; left:auto; bottom:auto; margin:0; flex:none; --w:136px; --h:206px; transform:none; scroll-snap-align:center; }
+  .std-card.on { transform:translateY(-10px) !important; }
+  .apid:not(.in) .std-card { transform:translateY(20px); }
+}
+.std-detail { position:relative; }
+@media (max-width:960px) {
+  .hero { min-height:auto; padding-bottom:28px; }
+  .hl { padding:48px 0 12px; }
+  .hr { display:flex !important; flex-direction:column; gap:14px; min-height:0; height:auto; padding:8px 0 20px; border-left:none; }
+  .hr-cards { display:flex; justify-content:space-between; gap:12px; width:100%; }
+  .hr-cards .sfloat, .hr-cards .api-badge { position:relative; top:auto; left:auto; right:auto; bottom:auto; }
+  .hero-scene { max-width:100%; width:100%; transform:none !important; }
+}
+@media (max-width:600px) { .hr-cards { display:none; } .hl { padding:36px 0 8px; } }
+
+@media (max-width:380px) { h1.main { font-size:44px; letter-spacing:-.5px; } }
+.t-touch { display:none; }
+@media (max-width:760px), (hover:none) and (pointer:coarse) { .t-desk { display:none; } .t-touch { display:inline; } }
+.std-hint { display:flex; align-items:center; justify-content:center; gap:10px; padding:22px; border:1px dashed var(--bdr2); border-radius:var(--r-lg); color:var(--tx3); font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1px; }
+.std-hint svg { width:16px; height:16px; color:var(--gold2); animation:hintBob 1.6s ease-in-out infinite; }
+@keyframes hintBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+.std-detail.has .std-hint { display:none; }
+.api-pane.on { animation:paneDrop .55s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes paneDrop { from { opacity:0; transform:translateY(-18px) scale(.985); filter:blur(4px); } to { opacity:1; transform:none; filter:none; } }
+/* card logos + org highlight */
+.sc-head { flex-direction:row !important; align-items:center; gap:8px; }
+.sc-logo, .ap-logo { display:grid; place-items:center; width:34px; height:34px; border-radius:9px; background:#fff; box-shadow:0 4px 12px -4px rgba(0,0,0,.6), inset 0 0 0 1px rgba(0,0,0,.06); overflow:hidden; flex:none; }
+.sc-logo img, .ap-logo img { width:84%; height:84%; object-fit:contain; display:block; }
+.sc-logo em, .ap-logo em { display:none; font-style:normal; font-family:'Rajdhani',sans-serif; font-weight:800; font-size:11px; color:#0b1a33; letter-spacing:.5px; }
+.sc-logo.nologo img, .ap-logo.nologo img { display:none; } .sc-logo.nologo em, .ap-logo.nologo em { display:block; }
+.sc-id { display:flex; flex-direction:column; line-height:1.15; }
+.std-card .sc-cat { top:auto; right:auto; bottom:16px; left:16px; text-align:left; max-width:90px; }
+.std-card::before { inset:10px; }
+.std-card { --org:255,138,31; }
+.std-card.asme { --org:45,170,239; }
+.std-card .sc-hl { position:absolute; left:14px; right:14px; top:0; height:3px; border-radius:0 0 4px 4px; background:linear-gradient(90deg,transparent,rgba(var(--org),.95),transparent); opacity:.55; transition:opacity .3s; }
+.std-card:hover .sc-hl, .std-card.on .sc-hl { opacity:1; }
+.std-card.asme { background:radial-gradient(130% 80% at 0% 0%, rgba(45,170,239,.18), transparent 55%), linear-gradient(165deg,#13243c,#0a1424 70%); }
+.std-card.asme.on { border-color:rgba(45,190,239,.75); box-shadow:0 30px 60px -22px rgba(45,190,239,.5), 0 0 0 1px rgba(45,190,239,.35); }
+.std-card.asme .sc-num { background:linear-gradient(135deg,#7fe3ff,#2dd4ef 45%,#ffa043); -webkit-background-clip:text; background-clip:text; }
+html[data-theme="light"] .std-card.asme { background:radial-gradient(130% 80% at 0% 0%, rgba(45,170,239,.14), transparent 55%), linear-gradient(165deg,#ffffff,#eef3f8 70%); }
+.apibig-wrap { display:flex; flex-direction:row; align-items:center; gap:16px; }
+.ap-logo { width:56px; height:56px; border-radius:14px; }
+@media (max-width:760px){ .sc-logo { width:28px; height:28px; border-radius:7px; } }
+/* ===== Two-sided flip cards ===== */
+.std-card { background:none !important; border:none !important; box-shadow:none !important; overflow:visible !important; perspective:1000px; }
+.std-card::before, .std-card::after { display:none !important; }
+.sc-inner { position:absolute; inset:0; transform-style:preserve-3d; transition:transform .75s cubic-bezier(.3,1.25,.45,1); transition-delay:calc(var(--i) * 45ms); }
+.std-deck:hover .sc-inner, .std-card.on .sc-inner { transform:rotateY(180deg); }
+.std-deck:not(:hover) .sc-inner { transition-delay:calc((6 - var(--i)) * 35ms); }
+.std-card.on .sc-inner { transition-delay:0s; }
+.sc-face { position:absolute; inset:0; border-radius:16px; overflow:hidden; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  border:1px solid rgba(140,180,220,.22); box-shadow:0 18px 34px -18px rgba(0,0,0,.85), inset 0 1px 0 rgba(255,255,255,.05);
+  background:radial-gradient(130% 80% at 0% 0%, rgba(255,138,31,.16), transparent 55%), linear-gradient(165deg,#15233a,#0b1424 70%);
+  transition:border-color .35s, box-shadow .35s; }
+.sc-info { transform:rotateY(180deg); }
+.sc-info::before { content:''; position:absolute; inset:10px; border-radius:10px; border:1px dashed rgba(140,180,220,.14); pointer-events:none; }
+.sc-info::after { content:''; position:absolute; inset:0; background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.08) 50%,transparent 65%); transform:translateX(-120%); transition:transform .8s ease .35s; pointer-events:none; }
+.std-card:hover .sc-info::after { transform:translateX(120%); }
+.std-card:hover .sc-face { border-color:rgba(255,160,67,.45); }
+.std-card.on .sc-face { border-color:rgba(255,160,67,.75); box-shadow:0 30px 60px -22px rgba(255,138,31,.55), 0 0 0 1px rgba(255,160,67,.35), inset 0 1px 0 rgba(255,255,255,.08);
+  background:radial-gradient(130% 80% at 0% 0%, rgba(255,138,31,.32), transparent 60%), linear-gradient(165deg,#1d2c45,#0d1729 70%); }
+/* front (logo) side */
+.sc-front { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+  background:
+    repeating-linear-gradient(45deg, transparent 0 11px, rgba(255,255,255,.022) 11px 22px),
+    radial-gradient(70% 55% at 50% 42%, rgba(255,138,31,.22), transparent 70%),
+    linear-gradient(165deg,#16253d,#0a1322 75%); }
+.sc-front::before { content:''; position:absolute; inset:10px; border-radius:10px; border:1px solid rgba(255,160,67,.22); pointer-events:none; }
+.sc-front::after { content:''; position:absolute; left:0; right:0; top:0; height:45%; background:linear-gradient(to bottom,rgba(255,255,255,.06),transparent); pointer-events:none; }
+.scf-ring { position:relative; display:grid; place-items:center; width:100px; height:100px; border-radius:26px; padding:8px;
+  background:conic-gradient(from 210deg, rgba(255,160,67,.85), rgba(255,160,67,.1) 35%, rgba(45,212,239,.55) 65%, rgba(255,160,67,.85)); box-shadow:0 16px 34px -14px rgba(255,138,31,.6); }
+.scf-logo { display:grid; place-items:center; width:100%; height:100%; border-radius:20px; background:#fff; overflow:hidden; }
+.scf-logo img { width:82%; height:82%; object-fit:contain; display:block; }
+.scf-logo em { display:none; font-style:normal; font-family:'Rajdhani',sans-serif; font-weight:800; font-size:24px; color:#0b1a33; letter-spacing:1px; }
+.scf-logo.nologo img { display:none; } .scf-logo.nologo em { display:block; }
+.scf-org { font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700; letter-spacing:3px; color:var(--tx3); }
+.std-card.asme .sc-front { background:repeating-linear-gradient(45deg, transparent 0 11px, rgba(255,255,255,.022) 11px 22px), radial-gradient(70% 55% at 50% 42%, rgba(45,190,239,.22), transparent 70%), linear-gradient(165deg,#14263d,#0a1422 75%); }
+.std-card.asme .scf-ring { background:conic-gradient(from 210deg, rgba(45,212,239,.85), rgba(45,212,239,.1) 35%, rgba(255,160,67,.55) 65%, rgba(45,212,239,.85)); box-shadow:0 16px 34px -14px rgba(45,190,239,.6); }
+.std-card.asme .sc-front::before { border-color:rgba(45,212,239,.22); }
+.std-card.asme .sc-info { background:radial-gradient(130% 80% at 0% 0%, rgba(45,170,239,.18), transparent 55%), linear-gradient(165deg,#13243c,#0a1424 70%); }
+.std-card.asme.on .sc-face { border-color:rgba(45,190,239,.75); box-shadow:0 30px 60px -22px rgba(45,190,239,.5), 0 0 0 1px rgba(45,190,239,.35); }
+.sc-hl { z-index:2; }
+html[data-theme="light"] .sc-face { background:radial-gradient(130% 80% at 0% 0%, rgba(255,138,31,.12), transparent 55%), linear-gradient(165deg,#ffffff,#eef3f8 70%); border-color:#c3d1e0; box-shadow:0 18px 30px -20px rgba(30,60,100,.45); }
+html[data-theme="light"] .sc-front { background:repeating-linear-gradient(45deg, transparent 0 11px, rgba(30,60,100,.03) 11px 22px), radial-gradient(70% 55% at 50% 42%, rgba(255,138,31,.16), transparent 70%), linear-gradient(165deg,#ffffff,#eaf0f6 75%); }
+html[data-theme="light"] .std-card.on .sc-face { background:radial-gradient(130% 80% at 0% 0%, rgba(255,138,31,.22), transparent 60%), linear-gradient(165deg,#ffffff,#f4f7fb 70%); }
+html[data-theme="light"] .std-card.asme .sc-front { background:repeating-linear-gradient(45deg, transparent 0 11px, rgba(30,60,100,.03) 11px 22px), radial-gradient(70% 55% at 50% 42%, rgba(45,170,239,.16), transparent 70%), linear-gradient(165deg,#ffffff,#eaf0f6 75%); }
+html[data-theme="light"] .std-card.asme .sc-info { background:radial-gradient(130% 80% at 0% 0%, rgba(45,170,239,.14), transparent 55%), linear-gradient(165deg,#ffffff,#eef3f8 70%); }
+@media (max-width:1100px) { .scf-ring { width:84px; height:84px; border-radius:22px; padding:7px; } .scf-logo { border-radius:16px; } }
+/* touch screens: no hover → show the info side, flip-in only on the chosen card */
+@media (hover:none), (max-width:760px) {
+  .sc-inner { transform:rotateY(180deg); transition-delay:0s !important; }
+}
 /* ===== Custom themed dropdown (cs-*) ===== */
 select.cs-native { position:absolute !important; width:1px !important; height:1px !important; opacity:0 !important; pointer-events:none !important; padding:0 !important; border:0 !important; margin:0 !important; overflow:hidden; clip:rect(0 0 0 0); }
 .cs-btn { position:relative; width:100%; display:flex; align-items:center; gap:8px; text-align:left; cursor:pointer;
@@ -1532,9 +1735,10 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
       <h1 class="main">RISK<br><span class="ac">BASED</span><br><span class="out">INSPECTION</span></h1>
       <p class="hdesc">A data-driven framework for optimizing inspection programs across oil &amp; gas process equipment — allocating resources where risk is highest, reducing cost while strengthening safety margins.</p>
       <div class="hpills">
-        <span class="pill hi">API 581</span><span class="pill hi">API 653</span>
-        <span class="pill">PoF × CoF</span><span class="pill">Remaining Life</span>
-        <span class="pill">NDT Optimization</span><span class="pill">Semi-Quantitative</span>
+        <span class="pill hi">API 580</span><span class="pill hi">API 581</span>
+        <span class="pill">API 510</span><span class="pill">API 570</span>
+        <span class="pill">API 650</span><span class="pill">API 653</span>
+        <span class="pill">ASME VIII</span>
       </div>
       <div class="hcta">
         <button class="btnp" onclick="rbiGoCalc()">
@@ -1545,23 +1749,68 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
       </div>
     </div>
     <div class="hr">
-      <div class="sfloat" style="top:60px;left:20px;"><div class="sf-n">242</div><div class="sf-l">TANK ACCIDENTS</div><div class="sf-l">1960 – 2003</div></div>
-      <div class="sfloat" style="bottom:40px;left:14px;"><div class="sf-n">$24M</div><div class="sf-l">AVG INCIDENT COST</div></div>
-      <div class="hero-scene" id="hero-scene"></div>
-      <div class="api-badge">
-        <div class="ab-num">581</div>
-        <div class="ab-lbl">STANDARD</div>
-        <div class="ab-sub">American Petroleum<br>Institute</div>
+      <div class="hr-cards">
+        <div class="sfloat"><div class="sf-n">580</div><div class="sf-l">API RECOMMENDED PRACTICE</div><div class="sf-l">Risk-Based Inspection</div></div>
+        <div class="api-badge">
+          <div class="ab-num">581</div>
+          <div class="ab-lbl">STANDARD</div>
+          <div class="ab-sub">American Petroleum<br>Institute</div>
+        </div>
       </div>
+      <div class="hero-scene" id="hero-scene"></div>
     </div>
   </div>
 
-  <div class="istrip" data-reveal>
-    <div class="ii"><div class="n" data-count>242</div><div class="l">Tank Accidents 1960–2003</div></div>
-    <div class="ii"><div class="n" data-count>74%</div><div class="l">Occurred at Refineries</div></div>
-    <div class="ii"><div class="n" data-count>$24.18M</div><div class="l">Average Accident Cost</div></div>
-    <div class="ii"><div class="n" data-count>$312/yr</div><div class="l">RBI Inspection Savings</div></div>
-  </div>
+  <section class="eqinv" data-reveal>
+    <div class="eqinv-hd">
+      <div><div class="stag">Inventori Peralatan</div><h3>Equipment tercatat di sistem RBI</h3></div>
+      <p>Jumlah peralatan PPSDM Migas Cepu yang sudah diinput dan dikalkulasi di platform ini, per jenis equipment.</p>
+    </div>
+    <div class="eqinv-grid">
+      <div class="eqi">
+        <svg class="eqi-wm" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 18 L24 10 L40 18"/><path d="M8 18 V40 H40 V18"/><path d="M8 25.5 H40 M8 33 H40" stroke-dasharray="3 2.5"/><path d="M40 22 V36"/><path d="M4 42 H44"/></svg>
+        <div class="eqi-top"><div class="eqi-ico"><svg class="" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 18 L24 10 L40 18"/><path d="M8 18 V40 H40 V18"/><path d="M8 25.5 H40 M8 33 H40" stroke-dasharray="3 2.5"/><path d="M40 22 V36"/><path d="M4 42 H44"/></svg></div><span class="eqi-no">01</span></div>
+        <div class="eqi-nm">Storage Tank</div>
+        <div class="eqi-std">API 650 · API 653</div>
+        <div class="eqi-ft"><span class="eqi-u">Unit tercatat</span><span class="eqi-n">—</span></div>
+      </div>
+      <div class="eqi">
+        <svg class="eqi-wm" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 12 Q24 3 31 12 V34 Q24 43 17 34 Z"/><path d="M17 16 H31 M17 30 H31" stroke-dasharray="3 2.5"/><path d="M24 7 V3 M21 3 H27"/><path d="M31 22 H37 M37 19.5 V24.5"/><path d="M19 38 L16 45 M29 38 L32 45"/></svg>
+        <div class="eqi-top"><div class="eqi-ico"><svg class="" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 12 Q24 3 31 12 V34 Q24 43 17 34 Z"/><path d="M17 16 H31 M17 30 H31" stroke-dasharray="3 2.5"/><path d="M24 7 V3 M21 3 H27"/><path d="M31 22 H37 M37 19.5 V24.5"/><path d="M19 38 L16 45 M29 38 L32 45"/></svg></div><span class="eqi-no">02</span></div>
+        <div class="eqi-nm">Pressure Vessel</div>
+        <div class="eqi-std">ASME VIII · API 510</div>
+        <div class="eqi-ft"><span class="eqi-u">Unit tercatat</span><span class="eqi-n">—</span></div>
+      </div>
+      <div class="eqi">
+        <svg class="eqi-wm" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="10" y="17" width="28" height="14" rx="3"/><path d="M10 19 Q4 24 10 29 M38 19 Q44 24 38 29"/><path d="M13 21.5 H35 M13 24 H35 M13 26.5 H35" stroke-dasharray="2.5 2"/><path d="M16 17 V11 M13 11 H19 M32 31 V37 M29 37 H35"/><path d="M14 31 V38 M34 17 V14"/></svg>
+        <div class="eqi-top"><div class="eqi-ico"><svg class="" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="10" y="17" width="28" height="14" rx="3"/><path d="M10 19 Q4 24 10 29 M38 19 Q44 24 38 29"/><path d="M13 21.5 H35 M13 24 H35 M13 26.5 H35" stroke-dasharray="2.5 2"/><path d="M16 17 V11 M13 11 H19 M32 31 V37 M29 37 H35"/><path d="M14 31 V38 M34 17 V14"/></svg></div><span class="eqi-no">03</span></div>
+        <div class="eqi-nm">Heat Exchanger</div>
+        <div class="eqi-std">TEMA · ASME VIII</div>
+        <div class="eqi-ft"><span class="eqi-u">Unit tercatat</span><span class="eqi-n">—</span></div>
+      </div>
+      <div class="eqi">
+        <svg class="eqi-wm" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22 H18 A6 6 0 0 0 24 16 V4"/><path d="M4 32 H18 A16 16 0 0 0 34 16 V4"/><path d="M10 19 V35 M21 7 H37"/><path d="M27 36 H44 M27 42 H44 M36 34 V44" opacity=".7"/></svg>
+        <div class="eqi-top"><div class="eqi-ico"><svg class="" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22 H18 A6 6 0 0 0 24 16 V4"/><path d="M4 32 H18 A16 16 0 0 0 34 16 V4"/><path d="M10 19 V35 M21 7 H37"/><path d="M27 36 H44 M27 42 H44 M36 34 V44" opacity=".7"/></svg></div><span class="eqi-no">04</span></div>
+        <div class="eqi-nm">Piping</div>
+        <div class="eqi-std">API 570 · ASME B31.3</div>
+        <div class="eqi-ft"><span class="eqi-u">Unit tercatat</span><span class="eqi-n">—</span></div>
+      </div>
+      <div class="eqi">
+        <svg class="eqi-wm" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 34 L24 28.5 L14 23 Z M34 34 L24 28.5 L34 23 Z"/><path d="M24 28.5 V44 M19 44 H29"/><rect x="20" y="15" width="8" height="10" rx="1.5"/><path d="M21 15 L27 12 L21 9 L27 6 L24 4.5"/><path d="M34 28.5 H42 M42 24.5 V32.5"/></svg>
+        <div class="eqi-top"><div class="eqi-ico"><svg class="" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 34 L24 28.5 L14 23 Z M34 34 L24 28.5 L34 23 Z"/><path d="M24 28.5 V44 M19 44 H29"/><rect x="20" y="15" width="8" height="10" rx="1.5"/><path d="M21 15 L27 12 L21 9 L27 6 L24 4.5"/><path d="M34 28.5 H42 M42 24.5 V32.5"/></svg></div><span class="eqi-no">05</span></div>
+        <div class="eqi-nm">Pressure Relief Device</div>
+        <div class="eqi-std">API 520 · API 576</div>
+        <div class="eqi-ft"><span class="eqi-u">Unit tercatat</span><span class="eqi-n">—</span></div>
+      </div>
+      <div class="eqi">
+        <svg class="eqi-wm" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="26" width="32" height="12" rx="6"/><path d="M14 38 V44 M34 38 V44 M10 44 H38"/><path d="M16 22 C13 18 19 16 16 12 C14 9 18 7 16 4"/><path d="M24 22 C21 18 27 16 24 12 C22 9 26 7 24 4"/><path d="M32 22 C29 18 35 16 32 12 C30 9 34 7 32 4"/><path d="M8 32 H40" stroke-dasharray="3 2.5" opacity=".6"/></svg>
+        <div class="eqi-top"><div class="eqi-ico"><svg class="" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="26" width="32" height="12" rx="6"/><path d="M14 38 V44 M34 38 V44 M10 44 H38"/><path d="M16 22 C13 18 19 16 16 12 C14 9 18 7 16 4"/><path d="M24 22 C21 18 27 16 24 12 C22 9 26 7 24 4"/><path d="M32 22 C29 18 35 16 32 12 C30 9 34 7 32 4"/><path d="M8 32 H40" stroke-dasharray="3 2.5" opacity=".6"/></svg></div><span class="eqi-no">06</span></div>
+        <div class="eqi-nm">Steam System</div>
+        <div class="eqi-std">ASME I · ASME B31.1</div>
+        <div class="eqi-ft"><span class="eqi-u">Unit tercatat</span><span class="eqi-n">—</span></div>
+      </div>
+    </div>
+  </section>
 
   <div class="wrbi" id="what-is-rbi" data-reveal>
     <div>
@@ -1576,13 +1825,25 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
       </div>
     </div>
     <div>
-      <div class="eq-box">
-        <div class="eq-label">Core Equations — API 581 / API 653</div>
-        <div class="eq-block"><div class="eq-title">RISK</div>\[ \text{Risk} = P_{of} \times C_{of} \]</div>
-        <div class="eq-block"><div class="eq-title">PROBABILITY OF FAILURE</div>\[ P_{of} = g_{ff} \times D_f(t) \times F_{MS} \]</div>
-        <div class="eq-block"><div class="eq-title">CONSEQUENCE OF FAILURE</div>\[ C_{of} = FC_{environ} + FC_{cmd} + FC_{prod} \]</div>
-        <div class="eq-block"><div class="eq-title">MINIMUM THICKNESS (API 653)</div>\[ t_{min} = \frac{2.6\,(H-1)\,D\,G}{S \cdot E} \]</div>
-        <div class="eq-block"><div class="eq-title">REMAINING LIFE</div>\[ RL = \frac{t_{act} - t_{min}}{CR} \]</div>
+      <div class="eq-box rmx-card">
+        <div class="eq-label">Risk Matrix — API 581 (5 × 5)</div>
+        <p class="rmx-intro">Setiap equipment diplot pada matriks 5×5: Probability of Failure (1–5) terhadap Consequence of Failure (A–E). Sel hasilnya menentukan urgensi, metode, dan interval inspeksi.</p>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--tx3);letter-spacing:1px;margin-bottom:8px;">PROBABILITY ↑</div>
+        <div class="rmx">
+          <div class="rm rml">5</div><div class="rm rm2">MED</div><div class="rm rm3">M-H</div><div class="rm rm4">HIGH</div><div class="rm rm4">HIGH</div><div class="rm rm4">HIGH</div>
+          <div class="rm rml">4</div><div class="rm rm2">MED</div><div class="rm rm2">MED</div><div class="rm rm3">M-H</div><div class="rm rm4">HIGH</div><div class="rm rm4">HIGH</div>
+          <div class="rm rml">3</div><div class="rm rl">LOW</div><div class="rm rm2">MED</div><div class="rm rm2">MED</div><div class="rm rm3">M-H</div><div class="rm rm4">HIGH</div>
+          <div class="rm rml">2</div><div class="rm rl">LOW</div><div class="rm rl">LOW</div><div class="rm rm2">MED</div><div class="rm rm2">MED</div><div class="rm rm3">M-H</div>
+          <div class="rm rml">1</div><div class="rm rl">LOW</div><div class="rm rl">LOW</div><div class="rm rmk">1C ✦</div><div class="rm rm2">MED</div><div class="rm rm2">MED</div>
+          <div class="rm"></div><div class="rm rml">A</div><div class="rm rml">B</div><div class="rm rml">C</div><div class="rm rml">D</div><div class="rm rml">E</div>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--tx3);letter-spacing:1px;margin-top:8px;text-align:center;">CONSEQUENCE →</div>
+        <div class="mleg">
+          <div class="mlr"><div class="mlb" style="background:rgba(224,53,53,.18);border:1px solid rgba(224,53,53,.24)"></div><span class="mlt">HIGH — Immediate action; enhanced NDT</span></div>
+          <div class="mlr"><div class="mlb" style="background:rgba(212,137,26,.28);border:1px solid rgba(212,137,26,.38)"></div><span class="mlt">MEDIUM-HIGH — Priority inspection</span></div>
+          <div class="mlr"><div class="mlb" style="background:rgba(212,137,26,.14);border:1px solid rgba(212,137,26,.2)"></div><span class="mlt">MEDIUM — Periodic, ≤ 5 yr interval</span></div>
+          <div class="mlr"><div class="mlb" style="background:rgba(39,184,106,.12);border:1px solid rgba(39,184,106,.18)"></div><span class="mlt">LOW — Extended intervals, basic methods</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1598,39 +1859,39 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
       </div>
       <div class="egrid">
         <div class="ecard av" onclick="showPage(1)">
-          <svg class="ec-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="22" width="32" height="20" rx="1"/><polyline points="8,22 24,12 40,22"/><line x1="8" y1="30" x2="40" y2="30" stroke-dasharray="4 3"/><line x1="8" y1="26" x2="40" y2="26" stroke-dasharray="4 3"/><rect x="4" y="42" width="40" height="3" rx="1"/></svg>
-          <div class="ec-nm">Atmospheric Storage Tank</div>
+          <svg class="ec-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 18 L24 10 L40 18"/><path d="M8 18 V40 H40 V18"/><path d="M8 25.5 H40 M8 33 H40" stroke-dasharray="3 2.5"/><path d="M40 22 V36"/><path d="M4 42 H44"/></svg>
+          <div class="ec-nm">Storage Tank</div>
           <div class="ec-dc">Full RBI per API 653 &amp; API 581 — includes RLA, PoF (GFF · DF · FMS), CoF, risk matrix plotting, and PDF report.</div>
           <div class="ec-ft"><span class="ectag rdy">AVAILABLE NOW</span><svg class="ec-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
         </div>
-        <div class="ecard" onclick="openDummy('Gas / Liquid Separator','RBI module coming soon for horizontal and vertical separators.')">
-          <svg class="ec-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="18" width="36" height="18" rx="9"/><ellipse cx="6" cy="27" rx="5" ry="9"/><ellipse cx="42" cy="27" rx="5" ry="9"/><line x1="24" y1="10" x2="24" y2="18"/><line x1="16" y1="36" x2="16" y2="44"/><line x1="32" y1="36" x2="32" y2="44"/></svg>
-          <div class="ec-nm">Separator</div>
-          <div class="ec-dc">Gas/liquid and three-phase horizontal separators subject to thinning, SCC, and environmental cracking.</div>
+        <div class="ecard" onclick="openDummy('Pressure Vessel','RBI module for pressure vessel is coming soon.')">
+          <svg class="ec-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 12 Q24 3 31 12 V34 Q24 43 17 34 Z"/><path d="M17 16 H31 M17 30 H31" stroke-dasharray="3 2.5"/><path d="M24 7 V3 M21 3 H27"/><path d="M31 22 H37 M37 19.5 V24.5"/><path d="M19 38 L16 45 M29 38 L32 45"/></svg>
+          <div class="ec-nm">Pressure Vessel</div>
+          <div class="ec-dc">Drums, separators, reactors and columns per ASME VIII &amp; API 510 — thinning, SCC, HTHA and brittle fracture.</div>
           <div class="ec-ft"><span class="ectag sn">COMING SOON</span><svg class="ec-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
         </div>
-        <div class="ecard" onclick="openDummy('Distillation Column','RBI module coming soon for fractionation towers.')">
-          <svg class="ec-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="16" y="6" width="16" height="38" rx="2"/><line x1="16" y1="16" x2="32" y2="16" stroke-dasharray="4 3"/><line x1="16" y1="24" x2="32" y2="24" stroke-dasharray="4 3"/><line x1="16" y1="32" x2="32" y2="32" stroke-dasharray="4 3"/><line x1="6" y1="20" x2="16" y2="20"/><line x1="32" y1="28" x2="42" y2="28"/></svg>
-          <div class="ec-nm">Distillation Column</div>
-          <div class="ec-dc">Fractionation towers in CDU/VDU with complex tray internals and high-temperature damage mechanisms.</div>
-          <div class="ec-ft"><span class="ectag sn">COMING SOON</span><svg class="ec-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-        </div>
-        <div class="ecard" onclick="openDummy('Heat Exchanger','RBI module coming soon for shell &amp; tube heat exchangers.')">
-          <svg class="ec-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="16" width="32" height="16" rx="2"/><rect x="4" y="19" width="6" height="10" rx="1"/><rect x="38" y="19" width="6" height="10" rx="1"/></svg>
+        <div class="ecard" onclick="openDummy('Heat Exchanger','RBI module for heat exchanger is coming soon.')">
+          <svg class="ec-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="10" y="17" width="28" height="14" rx="3"/><path d="M10 19 Q4 24 10 29 M38 19 Q44 24 38 29"/><path d="M13 21.5 H35 M13 24 H35 M13 26.5 H35" stroke-dasharray="2.5 2"/><path d="M16 17 V11 M13 11 H19 M32 31 V37 M29 37 H35"/><path d="M14 31 V38 M34 17 V14"/></svg>
           <div class="ec-nm">Heat Exchanger</div>
-          <div class="ec-dc">Shell &amp; tube exchangers susceptible to tube thinning, baffle damage, and fouling-induced corrosion.</div>
+          <div class="ec-dc">Shell &amp; tube exchangers — shell and bundle RBI for tube thinning, fouling-induced corrosion and cracking.</div>
           <div class="ec-ft"><span class="ectag sn">COMING SOON</span><svg class="ec-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
         </div>
-        <div class="ecard" onclick="openDummy('Centrifugal Pump','RBI module coming soon for process pumps.')">
-          <svg class="ec-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="28" cy="26" r="14"/><circle cx="28" cy="26" r="5"/><line x1="6" y1="26" x2="14" y2="26"/></svg>
-          <div class="ec-nm">Centrifugal Pump</div>
-          <div class="ec-dc">Process and injection pumps with mechanical fatigue, erosion-corrosion, and seal housing degradation.</div>
+        <div class="ecard" onclick="openDummy('Piping','RBI module for piping is coming soon.')">
+          <svg class="ec-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22 H18 A6 6 0 0 0 24 16 V4"/><path d="M4 32 H18 A16 16 0 0 0 34 16 V4"/><path d="M10 19 V35 M21 7 H37"/><path d="M27 36 H44 M27 42 H44 M36 34 V44" opacity=".7"/></svg>
+          <div class="ec-nm">Piping</div>
+          <div class="ec-dc">Process piping circuits per API 570 — internal and external corrosion, CUI, erosion and injection/mix points.</div>
           <div class="ec-ft"><span class="ectag sn">COMING SOON</span><svg class="ec-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
         </div>
-        <div class="ecard" onclick="openDummy('Fired Heater / Furnace','RBI module coming soon for process furnaces.')">
-          <svg class="ec-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="10" y="14" width="28" height="28" rx="2"/><polygon points="10,14 24,4 38,14"/><path d="M18,28 Q21,20 24,26 Q27,20 30,28" fill="none"/></svg>
-          <div class="ec-nm">Fired Heater</div>
-          <div class="ec-dc">Furnaces in CDU, VDU, and reformers. High-temp degradation: creep, oxidation, and tube rupture risk.</div>
+        <div class="ecard" onclick="openDummy('Pressure Relief Device','RBI module for pressure relief device is coming soon.')">
+          <svg class="ec-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 34 L24 28.5 L14 23 Z M34 34 L24 28.5 L34 23 Z"/><path d="M24 28.5 V44 M19 44 H29"/><rect x="20" y="15" width="8" height="10" rx="1.5"/><path d="M21 15 L27 12 L21 9 L27 6 L24 4.5"/><path d="M34 28.5 H42 M42 24.5 V32.5"/></svg>
+          <div class="ec-nm">Pressure Relief Device</div>
+          <div class="ec-dc">Pressure relief valves per API 520 / API 576 — fail-to-open and leakage risk for the protected equipment.</div>
+          <div class="ec-ft"><span class="ectag sn">COMING SOON</span><svg class="ec-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="ecard" onclick="openDummy('Steam System','RBI module for steam system is coming soon.')">
+          <svg class="ec-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="26" width="32" height="12" rx="6"/><path d="M14 38 V44 M34 38 V44 M10 44 H38"/><path d="M16 22 C13 18 19 16 16 12 C14 9 18 7 16 4"/><path d="M24 22 C21 18 27 16 24 12 C22 9 26 7 24 4"/><path d="M32 22 C29 18 35 16 32 12 C30 9 34 7 32 4"/><path d="M8 32 H40" stroke-dasharray="3 2.5" opacity=".6"/></svg>
+          <div class="ec-nm">Steam System</div>
+          <div class="ec-dc">Boiler feedwater, steam and condensate lines — flow-accelerated corrosion, thermal fatigue and creep.</div>
           <div class="ec-ft"><span class="ectag sn">COMING SOON</span><svg class="ec-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
         </div>
       </div>
@@ -1638,45 +1899,117 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
   </div>
 
   <div class="apid" data-reveal>
-    <div class="apidh">
-      <div class="apibig">581</div>
-      <div>
-        <h3>API 581 — Risk-Based Inspection Methodology</h3>
-        <p>The industry standard providing a semi-quantitative framework for assessing probability and consequence of failure. Globally adopted across refineries, petrochemical plants, and upstream facilities.</p>
-      </div>
+    <div class="std-head"><div class="stag">Standards &amp; Codes</div><p><span class="t-desk">Arahkan kursor ke tumpukan kartu, lalu pilih satu standar.</span><span class="t-touch">Geser kartu, lalu ketuk untuk memilih standar.</span></p></div>
+    <div class="std-deck" role="tablist" aria-label="Standards">
+        <button type="button" class="std-card" role="tab" aria-selected="false" data-k="580" style="--o:-3.0;--i:0" onclick="rbiApiTab('580')">
+          <span class="sc-inner"><span class="sc-face sc-front"><span class="scf-ring"><span class="scf-logo"><img src="logoapi.webp" alt="API" onerror="this.parentNode.classList.add('nologo')"><em>API</em></span></span><span class="scf-org">API</span></span><span class="sc-face sc-info">
+          <span class="sc-hl"></span>
+          <span class="sc-corner sc-head"><span class="sc-logo"><img src="logoapi.webp" alt="API" onerror="this.parentNode.classList.add('nologo')"><em>API</em></span><span class="sc-id"><b>API</b>580</span></span>
+          <span class="sc-cat">RBI · Program</span>
+          <span class="sc-num">580</span>
+          <span class="sc-nm">Risk-Based Inspection</span>
+          <span class="sc-corner br"><b>API</b>580</span></span></span>
+        </button><button type="button" class="std-card" role="tab" aria-selected="false" data-k="581" style="--o:-2.0;--i:1" onclick="rbiApiTab('581')">
+          <span class="sc-inner"><span class="sc-face sc-front"><span class="scf-ring"><span class="scf-logo"><img src="logoapi.webp" alt="API" onerror="this.parentNode.classList.add('nologo')"><em>API</em></span></span><span class="scf-org">API</span></span><span class="sc-face sc-info">
+          <span class="sc-hl"></span>
+          <span class="sc-corner sc-head"><span class="sc-logo"><img src="logoapi.webp" alt="API" onerror="this.parentNode.classList.add('nologo')"><em>API</em></span><span class="sc-id"><b>API</b>581</span></span>
+          <span class="sc-cat">RBI · Calculation</span>
+          <span class="sc-num">581</span>
+          <span class="sc-nm">RBI Methodology</span>
+          <span class="sc-corner br"><b>API</b>581</span></span></span>
+        </button><button type="button" class="std-card" role="tab" aria-selected="false" data-k="510" style="--o:-1.0;--i:2" onclick="rbiApiTab('510')">
+          <span class="sc-inner"><span class="sc-face sc-front"><span class="scf-ring"><span class="scf-logo"><img src="logoapi.webp" alt="API" onerror="this.parentNode.classList.add('nologo')"><em>API</em></span></span><span class="scf-org">API</span></span><span class="sc-face sc-info">
+          <span class="sc-hl"></span>
+          <span class="sc-corner sc-head"><span class="sc-logo"><img src="logoapi.webp" alt="API" onerror="this.parentNode.classList.add('nologo')"><em>API</em></span><span class="sc-id"><b>API</b>510</span></span>
+          <span class="sc-cat">Vessel · In-service</span>
+          <span class="sc-num">510</span>
+          <span class="sc-nm">Pressure Vessel Inspection</span>
+          <span class="sc-corner br"><b>API</b>510</span></span></span>
+        </button><button type="button" class="std-card" role="tab" aria-selected="false" data-k="570" style="--o:0.0;--i:3" onclick="rbiApiTab('570')">
+          <span class="sc-inner"><span class="sc-face sc-front"><span class="scf-ring"><span class="scf-logo"><img src="logoapi.webp" alt="API" onerror="this.parentNode.classList.add('nologo')"><em>API</em></span></span><span class="scf-org">API</span></span><span class="sc-face sc-info">
+          <span class="sc-hl"></span>
+          <span class="sc-corner sc-head"><span class="sc-logo"><img src="logoapi.webp" alt="API" onerror="this.parentNode.classList.add('nologo')"><em>API</em></span><span class="sc-id"><b>API</b>570</span></span>
+          <span class="sc-cat">Piping · In-service</span>
+          <span class="sc-num">570</span>
+          <span class="sc-nm">Piping Inspection</span>
+          <span class="sc-corner br"><b>API</b>570</span></span></span>
+        </button><button type="button" class="std-card" role="tab" aria-selected="false" data-k="650" style="--o:1.0;--i:4" onclick="rbiApiTab('650')">
+          <span class="sc-inner"><span class="sc-face sc-front"><span class="scf-ring"><span class="scf-logo"><img src="logoapi.webp" alt="API" onerror="this.parentNode.classList.add('nologo')"><em>API</em></span></span><span class="scf-org">API</span></span><span class="sc-face sc-info">
+          <span class="sc-hl"></span>
+          <span class="sc-corner sc-head"><span class="sc-logo"><img src="logoapi.webp" alt="API" onerror="this.parentNode.classList.add('nologo')"><em>API</em></span><span class="sc-id"><b>API</b>650</span></span>
+          <span class="sc-cat">Tank · Construction</span>
+          <span class="sc-num">650</span>
+          <span class="sc-nm">Welded Storage Tanks</span>
+          <span class="sc-corner br"><b>API</b>650</span></span></span>
+        </button><button type="button" class="std-card" role="tab" aria-selected="false" data-k="653" style="--o:2.0;--i:5" onclick="rbiApiTab('653')">
+          <span class="sc-inner"><span class="sc-face sc-front"><span class="scf-ring"><span class="scf-logo"><img src="logoapi.webp" alt="API" onerror="this.parentNode.classList.add('nologo')"><em>API</em></span></span><span class="scf-org">API</span></span><span class="sc-face sc-info">
+          <span class="sc-hl"></span>
+          <span class="sc-corner sc-head"><span class="sc-logo"><img src="logoapi.webp" alt="API" onerror="this.parentNode.classList.add('nologo')"><em>API</em></span><span class="sc-id"><b>API</b>653</span></span>
+          <span class="sc-cat">Tank · In-service</span>
+          <span class="sc-num">653</span>
+          <span class="sc-nm">Tank Inspection &amp; Repair</span>
+          <span class="sc-corner br"><b>API</b>653</span></span></span>
+        </button><button type="button" class="std-card asme" role="tab" aria-selected="false" data-k="VIII" style="--o:3.0;--i:6" onclick="rbiApiTab('VIII')">
+          <span class="sc-inner"><span class="sc-face sc-front"><span class="scf-ring"><span class="scf-logo"><img src="logoasme.png" alt="ASME" onerror="this.parentNode.classList.add('nologo')"><em>ASME</em></span></span><span class="scf-org">ASME</span></span><span class="sc-face sc-info">
+          <span class="sc-hl"></span>
+          <span class="sc-corner sc-head"><span class="sc-logo"><img src="logoasme.png" alt="ASME" onerror="this.parentNode.classList.add('nologo')"><em>ASME</em></span><span class="sc-id"><b>ASME</b>VIII</span></span>
+          <span class="sc-cat">BPVC · Section VIII</span>
+          <span class="sc-num">VIII</span>
+          <span class="sc-nm">Pressure Vessel Construction</span>
+          <span class="sc-corner br"><b>ASME</b>VIII</span></span></span>
+        </button>
     </div>
-    <div class="apmods">
-      <div class="apm"><div class="mn">MODULE 01 · PoF</div><h4>Probability of Failure</h4><p>Derived from generic failure frequency \(g_{ff}\), a damage factor \(D_f(t)\) for active degradation and inspection history, and a management system factor \(F_{MS}\). Classified 1–5.</p></div>
-      <div class="apm"><div class="mn">MODULE 02 · CoF</div><h4>Consequence of Failure</h4><p>Financial consequence: environmental cleanup \(FC_{environ}\), equipment repair \(FC_{cmd}\), and production loss \(FC_{prod}\). Categorized A–E from &lt;$10K to &gt;$10M.</p></div>
-      <div class="apm"><div class="mn">MODULE 03 · RLA</div><h4>Remaining Life Assessment</h4><p>Per API 653. Uses measured wall thickness, corrosion rate, and minimum allowable thickness to calculate remaining years. Max inspection interval = RL/2 or 15 yr.</p></div>
+    <div class="std-detail" id="std-detail">
+      <div class="std-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>Pilih kartu untuk menampilkan ringkasan standar</div>
+    <div class="api-pane" data-k="580" role="tabpanel">
+      <div class="apidh">
+        <div class="apibig-wrap"><span class="ap-logo"><img src="logoapi.webp" alt="API" onerror="this.parentNode.classList.add('nologo')"><em>API</em></span><div class="apibig">580</div></div>
+        <div><h3>API 580 — Risk-Based Inspection</h3><p>Recommended practice that sets the minimum elements for building, running and maintaining an RBI program — the "what" of RBI, independent of the calculation method.</p></div>
+      </div>
+      <div class="apmods"><div class="apm"><div class="mn">01 · PLAN</div><h4>Scope &amp; Data</h4><p>Define the RBI scope, equipment boundaries, systems and corrosion loops; collect design, process, inspection and damage-mechanism data.</p></div><div class="apm"><div class="mn">02 · ASSESS</div><h4>Risk Assessment</h4><p>Risk = PoF × CoF. Allows qualitative, semi-quantitative or quantitative approaches as long as damage mechanisms are identified and risk is ranked.</p></div><div class="apm"><div class="mn">03 · MANAGE</div><h4>Risk Management</h4><p>Inspection planning and mitigation from the risk ranking, documented results, and reassessment whenever process, damage or inspection data change.</p></div></div>
     </div>
-  </div>
-
-  <div class="mwrap" data-reveal>
-    <div class="minner">
-      <div>
-        <h2>THE RISK MATRIX</h2>
-        <p>All equipment is plotted on a 5×5 matrix combining Probability of Failure (1–5) with Consequence of Failure (A–E). The resulting cell drives inspection urgency, method, and frequency.</p>
-        <p>Storage Tank A lands at <strong style="color:var(--gold2)">position 1C — MEDIUM risk</strong>, recommending a 5-year periodic inspection interval using 100% visual inspection + UT Scan/Spot per API 653.</p>
-        <div class="mleg">
-          <div class="mlr"><div class="mlb" style="background:rgba(224,53,53,.18);border:1px solid rgba(224,53,53,.24)"></div><span class="mlt">HIGH — Immediate action; enhanced NDT</span></div>
-          <div class="mlr"><div class="mlb" style="background:rgba(212,137,26,.28);border:1px solid rgba(212,137,26,.38)"></div><span class="mlt">MEDIUM-HIGH — Priority inspection</span></div>
-          <div class="mlr"><div class="mlb" style="background:rgba(212,137,26,.14);border:1px solid rgba(212,137,26,.2)"></div><span class="mlt">MEDIUM — Periodic, ≤ 5 yr interval</span></div>
-          <div class="mlr"><div class="mlb" style="background:rgba(39,184,106,.12);border:1px solid rgba(39,184,106,.18)"></div><span class="mlt">LOW — Extended intervals, basic methods</span></div>
-        </div>
+    <div class="api-pane" data-k="581" role="tabpanel">
+      <div class="apidh">
+        <div class="apibig-wrap"><span class="ap-logo"><img src="logoapi.webp" alt="API" onerror="this.parentNode.classList.add('nologo')"><em>API</em></span><div class="apibig">581</div></div>
+        <div><h3>API 581 — Risk-Based Inspection Methodology</h3><p>The industry standard providing a semi-quantitative framework for assessing probability and consequence of failure. Globally adopted across refineries, petrochemical plants, and upstream facilities.</p></div>
       </div>
-      <div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--tx3);letter-spacing:1px;margin-bottom:8px;">PROBABILITY ↑</div>
-        <div class="rmx">
-          <div class="rm rml">5</div><div class="rm rm2">MED</div><div class="rm rm3">M-H</div><div class="rm rm4">HIGH</div><div class="rm rm4">HIGH</div><div class="rm rm4">HIGH</div>
-          <div class="rm rml">4</div><div class="rm rm2">MED</div><div class="rm rm2">MED</div><div class="rm rm3">M-H</div><div class="rm rm4">HIGH</div><div class="rm rm4">HIGH</div>
-          <div class="rm rml">3</div><div class="rm rl">LOW</div><div class="rm rm2">MED</div><div class="rm rm2">MED</div><div class="rm rm3">M-H</div><div class="rm rm4">HIGH</div>
-          <div class="rm rml">2</div><div class="rm rl">LOW</div><div class="rm rl">LOW</div><div class="rm rm2">MED</div><div class="rm rm2">MED</div><div class="rm rm3">M-H</div>
-          <div class="rm rml">1</div><div class="rm rl">LOW</div><div class="rm rl">LOW</div><div class="rm rmk">1C ✦</div><div class="rm rm2">MED</div><div class="rm rm2">MED</div>
-          <div class="rm"></div><div class="rm rml">A</div><div class="rm rml">B</div><div class="rm rml">C</div><div class="rm rml">D</div><div class="rm rml">E</div>
-        </div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--tx3);letter-spacing:1px;margin-top:8px;text-align:center;">CONSEQUENCE →</div>
+      <div class="apmods"><div class="apm"><div class="mn">MODULE 01 · PoF</div><h4>Probability of Failure</h4><p>Derived from generic failure frequency \(g_{ff}\), a damage factor \(D_f(t)\) for active degradation and inspection history, and a management system factor \(F_{MS}\). Classified 1–5.</p></div><div class="apm"><div class="mn">MODULE 02 · CoF</div><h4>Consequence of Failure</h4><p>Financial consequence: environmental cleanup \(FC_{environ}\), equipment repair \(FC_{cmd}\), and production loss \(FC_{prod}\). Categorized A–E from &lt;$10K to &gt;$10M.</p></div><div class="apm"><div class="mn">MODULE 03 · RLA</div><h4>Remaining Life Assessment</h4><p>Per API 653. Uses measured wall thickness, corrosion rate, and minimum allowable thickness to calculate remaining years. Max inspection interval = RL/2 or 15 yr.</p></div></div>
+    </div>
+    <div class="api-pane" data-k="510" role="tabpanel">
+      <div class="apidh">
+        <div class="apibig-wrap"><span class="ap-logo"><img src="logoapi.webp" alt="API" onerror="this.parentNode.classList.add('nologo')"><em>API</em></span><div class="apibig">510</div></div>
+        <div><h3>API 510 — Pressure Vessel Inspection Code</h3><p>In-service inspection, repair, alteration and rerating of pressure vessels and pressure-relieving devices once they leave the ASME VIII construction stage.</p></div>
       </div>
+      <div class="apmods"><div class="apm"><div class="mn">01 · INTERVAL</div><h4>Inspection Intervals</h4><p>Internal / on-stream: half the remaining life or 10 years, whichever is less. External: 5 years or the internal interval, whichever is less — or set by an RBI assessment.</p></div><div class="apm"><div class="mn">02 · RLA</div><h4>Corrosion Rate &amp; Remaining Life</h4><p>Long- and short-term corrosion rates from thickness readings; \(RL = (t_{act} - t_{req}) / CR\) drives the next inspection date.</p></div><div class="apm"><div class="mn">03 · REPAIR</div><h4>Repair, Alteration &amp; Rerating</h4><p>Repairs and rerating follow the construction code (ASME VIII) under an authorized inspector, including pressure testing when required.</p></div></div>
+    </div>
+    <div class="api-pane" data-k="570" role="tabpanel">
+      <div class="apidh">
+        <div class="apibig-wrap"><span class="ap-logo"><img src="logoapi.webp" alt="API" onerror="this.parentNode.classList.add('nologo')"><em>API</em></span><div class="apibig">570</div></div>
+        <div><h3>API 570 — Piping Inspection Code</h3><p>In-service inspection, rating, repair and alteration of metallic process piping systems, organised by piping circuits and condition monitoring locations (CMLs).</p></div>
+      </div>
+      <div class="apmods"><div class="apm"><div class="mn">01 · CLASS</div><h4>Piping Classification</h4><p>Class 1–3 by consequence of a leak. Higher class means shorter intervals; injection points, dead legs and soil-to-air interfaces get special attention.</p></div><div class="apm"><div class="mn">02 · INTERVAL</div><h4>Inspection Intervals</h4><p>Thickness: Class 1 every 5 yr, Class 2 &amp; 3 every 10 yr, capped at half the remaining life. External visual: 5 / 5 / 10 yr. RBI may replace the table.</p></div><div class="apm"><div class="mn">03 · DAMAGE</div><h4>Damage &amp; Remaining Life</h4><p>Internal corrosion, CUI, erosion and mix-point damage tracked at CMLs; remaining life and MAWP recalculated from measured thickness.</p></div></div>
+    </div>
+    <div class="api-pane" data-k="650" role="tabpanel">
+      <div class="apidh">
+        <div class="apibig-wrap"><span class="ap-logo"><img src="logoapi.webp" alt="API" onerror="this.parentNode.classList.add('nologo')"><em>API</em></span><div class="apibig">650</div></div>
+        <div><h3>API 650 — Welded Tanks for Oil Storage</h3><p>Design, materials, fabrication, erection and testing of new vertical, cylindrical, aboveground welded steel tanks at near-atmospheric pressure.</p></div>
+      </div>
+      <div class="apmods"><div class="apm"><div class="mn">01 · DESIGN</div><h4>Shell Design</h4><p>One-foot method for shell course thickness, e.g. \(t_d = \frac{4.9\,D\,(H-0.3)\,G}{S_d} + CA\) (SI), plus roof, bottom and wind girder rules.</p></div><div class="apm"><div class="mn">02 · MATERIAL</div><h4>Materials &amp; Welding</h4><p>Approved plate grades with allowable stresses, weld joint details and qualified welding procedures for shell, bottom and roof.</p></div><div class="apm"><div class="mn">03 · TEST</div><h4>Inspection &amp; Testing</h4><p>Radiography of shell butt welds, vacuum-box testing of bottom welds and a hydrostatic test before the tank enters service.</p></div></div>
+    </div>
+    <div class="api-pane" data-k="653" role="tabpanel">
+      <div class="apidh">
+        <div class="apibig-wrap"><span class="ap-logo"><img src="logoapi.webp" alt="API" onerror="this.parentNode.classList.add('nologo')"><em>API</em></span><div class="apibig">653</div></div>
+        <div><h3>API 653 — Tank Inspection, Repair, Alteration &amp; Reconstruction</h3><p>In-service inspection and integrity evaluation of storage tanks built to API 650 / API 12C — the code behind this platform’s tank calculation.</p></div>
+      </div>
+      <div class="apmods"><div class="apm"><div class="mn">01 · INTERVAL</div><h4>Inspection Intervals</h4><p>External by an authorized inspector every 5 yr or RCA/4N, whichever is less; UT thickness every RCA/2N or 15 yr; internal based on bottom corrosion rate or RBI.</p></div><div class="apm"><div class="mn">02 · SHELL</div><h4>Shell Evaluation</h4><p>Minimum acceptable shell thickness \(t_{min} = \frac{2.6\,(H-1)\,D\,G}{S\,E}\) (US units) per course, compared with measured thickness.</p></div><div class="apm"><div class="mn">03 · REPAIR</div><h4>Repair &amp; Reconstruction</h4><p>Rules for shell and bottom repairs, nozzle work, alterations and reconstruction, with the required NDE and hydrotest.</p></div></div>
+    </div>
+    <div class="api-pane" data-k="VIII" role="tabpanel">
+      <div class="apidh">
+        <div class="apibig-wrap"><span class="ap-logo"><img src="logoasme.png" alt="ASME" onerror="this.parentNode.classList.add('nologo')"><em>ASME</em></span><div class="apibig">VIII</div></div>
+        <div><h3>ASME BPVC Section VIII — Pressure Vessels</h3><p>Rules for design, fabrication, inspection, testing and certification of pressure vessels. Division 1 is design-by-rule, Division 2 alternative rules / design-by-analysis, Division 3 high pressure.</p></div>
+      </div>
+      <div class="apmods"><div class="apm"><div class="mn">01 · DESIGN</div><h4>Design by Rule</h4><p>Shell thickness under internal pressure, e.g. UG-27: \(t = \frac{P\,R}{S\,E - 0.6\,P}\), plus heads, nozzles and reinforcement.</p></div><div class="apm"><div class="mn">02 · JOINT</div><h4>Weld Joint Efficiency</h4><p>Joint efficiency \(E\) set by joint category and extent of radiography (UW-12), feeding straight into the thickness calculation.</p></div><div class="apm"><div class="mn">03 · TEST</div><h4>Testing &amp; Certification</h4><p>Hydrostatic or pneumatic pressure test (UG-99 / UG-100), inspection by an authorized inspector and code nameplate / certification mark.</p></div></div>
+    </div>
     </div>
   </div>
 
@@ -1684,7 +2017,7 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
     <div class="footer-inner">
       <div class="footer-brand">
         <div class="fb-name">RBI<span>PLATFORM</span></div>
-        <p>Platform kalkulasi Risk-Based Inspection berbasis API 581 dan API 653 untuk peralatan proses industri migas.</p>
+        <p>Platform kalkulasi Risk-Based Inspection berbasis API 580/581 untuk peralatan proses industri migas — storage tank, pressure vessel, piping, dan lainnya.</p>
       </div>
       <div class="footer-col">
         <h5>Navigation</h5>
@@ -1696,15 +2029,19 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
       <div class="footer-col">
         <h5>Standards</h5>
         <ul>
-          <li><span class="dot"></span>API 581 — RBI Methodology</li>
-          <li><span class="dot"></span>API 653 — Tank Inspection</li>
           <li><span class="dot"></span>API 580 — RBI Base Resource</li>
+          <li><span class="dot"></span>API 581 — RBI Methodology</li>
+          <li><span class="dot"></span>API 510 — Pressure Vessel Inspection</li>
+          <li><span class="dot"></span>API 570 — Piping Inspection</li>
+          <li><span class="dot"></span>API 650 — Welded Storage Tanks</li>
+          <li><span class="dot"></span>API 653 — Tank Inspection</li>
+          <li><span class="dot"></span>ASME VIII — Pressure Vessels</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <p>© 2025 <span class="ac">PPSDM MIGAS CEPU</span> · RBI Platform · Developed By <span class="ac">Naufal - Husendi | Universitas Padjadjaran</span></p>
-      <p>API 581 · API 653 · Semi-Quantitative Method</p>
+      <p>API 580 · 581 · 510 · 570 · 650 · 653 · ASME VIII</p>
     </div>
   </footer>
 </div><!-- /p0 -->
@@ -3951,6 +4288,19 @@ function rbiMountScenes(){
   el.innerHTML=rbiRefineryScene('hs'); rbiSceneEngine('hs', el);
 }
 
+
+
+/* Standards switcher on the landing page */
+function rbiApiTab(k){
+  document.querySelectorAll('.std-card').forEach(b=>{ const on=b.dataset.k===k; b.classList.toggle('on',on); b.setAttribute('aria-selected',on?'true':'false');
+    if(on){ const t=b.parentElement; if(t.scrollWidth>t.clientWidth+2) t.scrollTo({left:b.offsetLeft-(t.clientWidth-b.offsetWidth)/2,behavior:'smooth'}); } });
+  document.querySelectorAll('.api-pane').forEach(p=>p.classList.toggle('on',p.dataset.k===k));
+  const deck=document.querySelector('.std-deck'); if(deck) deck.classList.add('picked');
+  const det=document.getElementById('std-detail'); if(det) det.classList.add('has');
+  const pn=document.querySelector('.api-pane.on'); if(pn){ setTimeout(()=>{ const r=pn.getBoundingClientRect(); if(r.top>window.innerHeight*0.72) window.scrollBy({top:r.top-window.innerHeight*0.45,behavior:'smooth'}); },60); }
+  const pane=document.querySelector('.api-pane.on');
+  if(pane && window.MathJax && MathJax.typesetPromise && !pane.dataset.mj){ pane.dataset.mj='1'; MathJax.typesetPromise([pane]).catch(()=>{}); }
+}
 
 /* Login: plain submit (no loading animation on the login page) */
 function rbiLoginSubmit(){ doLogin(); }
