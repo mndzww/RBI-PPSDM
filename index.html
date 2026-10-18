@@ -1514,6 +1514,13 @@ html[data-theme="light"] .std-card.asme .sc-info { background:radial-gradient(13
 @media (hover:none), (max-width:760px) {
   .sc-inner { transform:rotateY(180deg); transition-delay:0s !important; }
 }
+/* General: standard equipment info strip */
+.eqstd-info { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:-4px 0 6px; padding:10px 12px; border-radius:var(--r-md); border:1px dashed var(--bdr2); background:rgba(255,138,31,.04); font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--tx2); }
+.eqstd-info b { color:var(--gold2); }
+.eqs-k { color:var(--tx3); letter-spacing:.6px; font-size:9.5px; text-transform:uppercase; }
+.eqs-sep { width:1px; height:14px; background:var(--bdr2); margin:0 4px; }
+.eqs-chip { display:inline-flex; gap:6px; align-items:center; padding:3px 8px; border-radius:999px; border:1px solid var(--bdr2); color:var(--tx); }
+.eqs-chip i { font-style:normal; color:var(--cyan,#2dd4ef); }
 /* ===== Custom themed dropdown (cs-*) ===== */
 select.cs-native { position:absolute !important; width:1px !important; height:1px !important; opacity:0 !important; pointer-events:none !important; padding:0 !important; border:0 !important; margin:0 !important; overflow:hidden; clip:rect(0 0 0 0); }
 .cs-btn { position:relative; width:100%; display:flex; align-items:center; gap:8px; text-align:left; cursor:pointer;
@@ -2141,8 +2148,9 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
             <div class="fld"><label>Kepemilikan</label><div class="fw"><input type="text" id="db-g-kepemilikan"></div></div>
             <div class="fld"><label>Manufaktur</label><div class="fw"><input type="text" id="db-g-manufaktur"></div></div>
           </div>
-          <div class="frow s1">
+          <div class="frow">
             <div class="fld"><label>Lokasi</label><div class="fw"><input type="text" id="db-g-lokasi"></div></div>
+            <div class="fld"><label>Kondisi</label><div class="fw"><select id="db-g-kondisi"><option value="">— pilih —</option><option value="Operasi">Operasi</option><option value="Tidak Beroperasi">Tidak Beroperasi</option></select></div></div>
           </div>
           <hr class="dvhr">
           <div class="slbl">Konstruksi</div>
@@ -2151,6 +2159,10 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
             <div class="fld"><label>Welding Type</label><div class="fw"><select id="db-g-welding" onchange="dbToggleRivetRow()"><option>Welded</option><option>Riveted</option></select></div></div>
             <div class="fld" id="db-g-rivetrow-wrap"><label>Number of Rivet Row</label><div class="fw"><select id="db-g-rivetrow"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div></div>
           </div>
+          <div class="frow s1">
+            <div class="fld"><label>Standard Equipment (API 581 Tabel 4.2)</label><div class="fw"><select id="db-g-eqstd" onchange="dbEqStdInfo()"><option value="Unknown">Unknown</option><option value="API 650">API 650 — Tank650</option><option value="API 620">API 620 — Tank620</option></select></div></div>
+          </div>
+          <div class="eqstd-info" id="db-g-eqstd-info"></div>
           <button class="calc-btn" onclick="dbSaveGeneral()">▶ SAVE GENERAL</button>
         </div>
       </div>
@@ -2179,11 +2191,15 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
                 <option value="Crude Oil">Crude Oil</option>
               </optgroup>
             </select></div></div>
-            <div class="fld"><label>Joint Type</label><div class="fw"><select id="db-d-joint"><option>Butt</option><option>Lap</option></select></div></div>
+            <div class="fld"><label>Fluida Mengandung Kaustik?</label><div class="fw"><select id="db-d-kaustik" onchange="dfRenderScreening()"><option value="">— pilih —</option><option value="Ya">Ya</option><option value="Tidak">Tidak</option></select></div></div>
           </div>
           <div class="frow">
-            <div class="fld"><label>Additional Fluid (Amina)</label><div class="fw"><select id="db-d-addfluid" onchange="dfRenderScreening()"><option value="">— pilih —</option><option value="Tidak ada">Tidak ada</option><option value="MEA">MEA</option><option value="DEA">DEA</option><option value="DIPA">DIPA</option><option value="MDEA">MDEA</option></select></div></div>
-            <div class="fld"><label>Fluida Mengandung Kaustik?</label><div class="fw"><select id="db-d-kaustik" onchange="dfRenderScreening()"><option value="">— pilih —</option><option value="Ya">Ya</option><option value="Tidak">Tidak</option></select></div></div>
+            <div class="fld"><label>Additional Fluid 1</label><div class="fw"><select id="db-d-addfluid1" class="add-fluid" onchange="dfRenderScreening()"></select></div></div>
+            <div class="fld"><label>Additional Fluid 2</label><div class="fw"><select id="db-d-addfluid2" class="add-fluid" onchange="dfRenderScreening()"></select></div></div>
+          </div>
+          <div class="frow">
+            <div class="fld"><label>pH (opsional)</label><div class="fw"><input type="number" id="db-d-ph" step="0.1" min="0" max="14" oninput="dfRenderScreening()"></div></div>
+            <div class="fld"><label>Tekanan Parsial H₂S (opsional)</label><div class="fw"><input type="number" id="db-d-h2spp" step="0.01" min="0" oninput="dfRenderScreening()"><span class="un">psia</span></div></div>
           </div>
           <div class="frow">
             <div class="fld"><label>Liquid Specific Gravity</label><div class="fw"><input type="number" id="db-d-liquid" step="0.01"></div></div>
@@ -2206,12 +2222,11 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
           <div class="frow s3">
             <div class="fld"><label>Material Roof</label><div class="fw"><select id="db-d-matroof" onchange="dbRecalcInspeksi()"><option value="A 283-C">A 283-C</option><option value="A285-C">A285-C</option><option value="A36">A36</option><option value="A131-A, B, CS">A131-A, B, CS</option><option value="A131-EH 36">A131-EH 36</option><option value="A573-58">A573-58</option><option value="A573-65">A573-65</option><option value="A573-70">A573-70</option><option value="A516-55">A516-55</option><option value="A516-60">A516-60</option><option value="A516-65">A516-65</option><option value="A516-70">A516-70</option><option value="A662-B">A662-B</option><option value="A662-C">A662-C</option><option value="A537-Class 1">A537-Class 1</option><option value="A537-Class 2">A537-Class 2</option><option value="A633-C, D">A633-C, D</option><option value="A678-A">A678-A</option><option value="A678-B">A678-B</option><option value="A737-B A841">A737-B A841</option><option value="A10 (Note 1)">A10 (Note 1)</option><option value="A7 (Note 1)">A7 (Note 1)</option><option value="A442-55 (Note 1)">A442-55 (Note 1)</option><option value="A442-60 (Note 1)">A442-60 (Note 1)</option><option value="G40.21, 38W">G40.21, 38W</option><option value="G40.21, 44W">G40.21, 44W</option><option value="G40.21, 50W">G40.21, 50W</option><option value="G40.21, 50WT">G40.21, 50WT</option><option value="Unknown">Unknown</option></select></div></div>
             <div class="fld"><label>Material Shell</label><div class="fw"><select id="db-d-matshell" onchange="dbRecalcInspeksi()"><option value="A 283-C">A 283-C</option><option value="A285-C">A285-C</option><option value="A36">A36</option><option value="A131-A, B, CS">A131-A, B, CS</option><option value="A131-EH 36">A131-EH 36</option><option value="A573-58">A573-58</option><option value="A573-65">A573-65</option><option value="A573-70">A573-70</option><option value="A516-55">A516-55</option><option value="A516-60">A516-60</option><option value="A516-65">A516-65</option><option value="A516-70">A516-70</option><option value="A662-B">A662-B</option><option value="A662-C">A662-C</option><option value="A537-Class 1">A537-Class 1</option><option value="A537-Class 2">A537-Class 2</option><option value="A633-C, D">A633-C, D</option><option value="A678-A">A678-A</option><option value="A678-B">A678-B</option><option value="A737-B A841">A737-B A841</option><option value="A10 (Note 1)">A10 (Note 1)</option><option value="A7 (Note 1)">A7 (Note 1)</option><option value="A442-55 (Note 1)">A442-55 (Note 1)</option><option value="A442-60 (Note 1)">A442-60 (Note 1)</option><option value="G40.21, 38W">G40.21, 38W</option><option value="G40.21, 44W">G40.21, 44W</option><option value="G40.21, 50W">G40.21, 50W</option><option value="G40.21, 50WT">G40.21, 50WT</option><option value="Unknown">Unknown</option></select></div></div>
-            <div class="fld"><label>Standard</label><div class="fw"><select id="db-d-standard" onchange="dbRecalcInspeksi()"><option>API 650</option><option>API 12C</option><option>Unknown</option></select></div></div>
+            <div class="fld"><label>Standard (Joint Efficiency)</label><div class="fw"><select id="db-d-standard" onchange="dbRecalcInspeksi()"><option>API 650</option><option>API 12C</option><option>Unknown</option></select></div></div>
           </div>
-          <div class="frow s3">
+          <div class="frow">
+            <div class="fld"><label>Joint Type</label><div class="fw"><select id="db-d-joint" onchange="dbRecalcInspeksi()"><option>Butt</option><option>Lap</option></select></div></div>
             <div class="fld"><label>Komponen Berinsulasi?</label><div class="fw"><select id="db-d-insulasi" onchange="dfRenderScreening()"><option value="">— pilih —</option><option value="Insulated">Insulated</option><option value="Uninsulated">Uninsulated</option></select></div></div>
-            <div class="fld"><label>pH (opsional)</label><div class="fw"><input type="number" id="db-d-ph" step="0.1" min="0" max="14" oninput="dfRenderScreening()"></div></div>
-            <div class="fld"><label>Tekanan Parsial H₂S (opsional)</label><div class="fw"><input type="number" id="db-d-h2spp" step="0.01" min="0" oninput="dfRenderScreening()"><span class="un">psia</span></div></div>
           </div>
           <div class="frow s3">
             <div class="fld"><label>Diameter — D</label><div class="fw"><input type="number" id="db-d-diameter" step="0.001" onchange="dbRecalcInspeksi()"><span class="un un-len">m</span></div></div>
@@ -2277,7 +2292,7 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
     <div class="clayout">
       <div>
         <div class="cpanel">
-          <div class="phd"><span class="ptag">A</span><h3>BASELINE INSPECTION (A)</h3></div>
+          <div class="phd"><span class="ptag">A</span><h3>PREVIOUS INSPECTION (A)</h3></div>
           <div class="pbd">
             <div class="frow">
               <div class="fld"><label>Date Inspection A</label><div class="fw"><input type="date" id="db-i-dateA" onchange="dbRecalcInspeksi()"></div></div>
@@ -2297,7 +2312,7 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
         </div>
 
         <div class="cpanel">
-          <div class="phd"><span class="ptag">B</span><h3>LATEST INSPECTION (B)</h3></div>
+          <div class="phd"><span class="ptag">B</span><h3>ACTUAL / CURRENT INSPECTION (B)</h3></div>
           <div class="pbd">
             <div class="frow">
               <div class="fld"><label>Date Inspection B</label><div class="fw"><input type="date" id="db-i-dateB" onchange="dbRecalcInspeksi()"></div></div>
@@ -2732,14 +2747,18 @@ const dfQTempRange = (lo,hi,loF,hiF)=>({q:`Apakah temperatur operasi berada anta
 const dfQTempAbove = (c,f)=>({q:`Apakah temperatur operasi > ${f} °F (${c} °C)?`, src:'auto', get:()=>dfTempAboveC(c), show:dfShowTemp});
 const dfQPending = (q, where)=>({q, src:'pending', get:DF_PENDING, show:()=>where});
 
-// pH & H2S partial pressure (Desain Konstruksi, optional)
+// pH & H2S partial pressure (Desain Operasi, optional)
 function dfPH(){ return dfNum('db-d-ph'); }
-function dfShowPH(){ const v=dfPH(); return v===null ? 'pH belum diisi (opsional — Desain Konstruksi)' : `pH: ${v}`; }
+function dfShowPH(){ const v=dfPH(); return v===null ? 'pH belum diisi (opsional — Desain Operasi)' : `pH: ${v}`; }
 function dfH2sPP(){ return dfNum('db-d-h2spp'); }
-function dfShowH2sPP(){ const v=dfH2sPP(); return v===null ? 'Tekanan parsial H₂S belum diisi (opsional — Desain Konstruksi)' : `Tekanan parsial H₂S: ${v} psia (${(v*6.89476).toFixed(2)} kPa)`; }
+function dfShowH2sPP(){ const v=dfH2sPP(); return v===null ? 'Tekanan parsial H₂S belum diisi (opsional — Desain Operasi)' : `Tekanan parsial H₂S: ${v} psia (${(v*6.89476).toFixed(2)} kPa)`; }
 // Additional Fluid (amina) & kaustik (Desain Operasi)
-function dfAmine(){ const v=val('db-d-addfluid'); return !v ? null : v!=='Tidak ada'; }
-function dfShowAmine(){ const v=val('db-d-addfluid'); return v ? `Additional fluid: ${v}` : 'Additional fluid belum dipilih (Desain Operasi)'; }
+// Additional Fluid 1 & 2 — API 581 representative fluids + amines (MEA/DEA/DIPA/MDEA)
+const DB_AMINES = ['MEA','DEA','DIPA','MDEA'];
+function dfAddFluids(){ return [val('db-d-addfluid1'), val('db-d-addfluid2')]; }
+function dfAmine(){ const f=dfAddFluids(); if(f.some(v=>DB_AMINES.includes(v))) return true; return (f[0]||f[1]) ? false : null; }
+function dfShowAmine(){ const f=dfAddFluids().filter(Boolean); if(!f.length) return 'Additional fluid belum dipilih (Desain Operasi)';
+  const am=f.filter(v=>DB_AMINES.includes(v)); return `Additional fluid: ${f.join(' + ')}` + (am.length?` → amina (${am.join(', ')})`:' → tidak mengandung amina'); }
 function dfYN(id){ const v=val(id); return v==='Ya' ? true : v==='Tidak' ? false : null; }
 function dfShowYN(id,label){ const v=val(id); return v ? `${label}: ${v}` : `${label} belum diisi (Desain Operasi)`; }
 
@@ -2925,8 +2944,8 @@ function dfThinCompute(key){
   r.agetk = r.dateB ? (r.today - new Date(r.dateB)) / (365.25*24*3600*1000) : null;
   r.agerc = 0;
   if (!r.trdi) r.missing.push('Ketebalan terukur inspeksi B (trdi)');
-  if (r.agetk===null) r.missing.push('Date Inspection B');
-  if (!r.dateA || !ci.tA) r.missing.push('Inspeksi A (untuk laju korosi)');
+  if (r.agetk===null) r.missing.push('Date Inspection B (Actual/Current)');
+  if (!r.dateA || !ci.tA) r.missing.push('Previous Inspection A (untuk laju korosi)');
   if (!ci.Y || !ci.T) r.missing.push('Material shell (YS/TS)');
   if (!ci.E) r.missing.push('Joint efficiency E (kombinasi Standard/Joint tidak ada di tabel)');
   if (!ci.tMin) r.missing.push('t_min');
@@ -3552,6 +3571,9 @@ function dbLoadTank(){
   setVal('db-g-tipe', t.tipe||'Vertical');
   setVal('db-g-welding', t.weldingType||'Welded');
   setVal('db-g-rivetrow', t.numberofRivetRow||'1');
+  setVal('db-g-kondisi', t.kondisi||'');
+  setVal('db-g-eqstd', t.equipmentStandard||'Unknown');
+  dbEqStdInfo();
   dbToggleRivetRow();
   dbLoadTankImages(t.tag_no||tag);
 
@@ -3570,7 +3592,9 @@ function dbLoadTank(){
   setVal('db-d-insulasi', dbNormInsulasi(t.insulasi));
   setVal('db-d-ph', t.ph ?? t.scrPH ?? '');
   setVal('db-d-h2spp', t.h2sPP ?? t.scrH2sPP ?? '');
-  setVal('db-d-addfluid', t.additionalFluid||'');
+  dbFillAddFluidOptions();
+  { const af1 = t.additionalFluid1 ?? (t.additionalFluid && t.additionalFluid!=='Tidak ada' ? t.additionalFluid : (t.additionalFluid==='Tidak ada' ? 'Tidak ada' : ''));
+    setVal('db-d-addfluid1', af1||''); setVal('db-d-addfluid2', t.additionalFluid2||''); }
   setVal('db-d-kaustik', t.kaustik||'');
   setVal('db-d-diameter', dispLen(t.diameter));
   setVal('db-d-tinggi', dispLen(t.tinggi));
@@ -3624,6 +3648,39 @@ function dbLoadTank(){
   dbDrawTankViz();
 }
 
+
+/* ── API 581 Table 4.1 representative fluids (Additional Fluid 1 & 2) + amines ── */
+const DB_REP_FLUIDS = [
+  ['C1-C2','Methane, ethane, ethylene, LNG, fuel gas'],['C3-C4','Propane, butane, isobutane, LPG'],['C5','Pentane'],
+  ['C6-C8','Gasoline, naphtha, light straight run, heptane'],['C9-C12','Diesel, kerosene'],['C13-C16','Jet fuel, kerosene, atmospheric gas oil'],
+  ['C17-C25','Gas oil, typical crude'],['C25+','Residuum, heavy crude, lube oil, seal oil'],['Water','Water'],['Steam','Steam'],
+  ['Acid','Acid, caustic'],['H2','Hydrogen only'],['H2S','Hydrogen sulfide only'],['HF','Hydrogen fluoride'],['CO','Carbon monoxide'],
+  ['DEE','Diethyl ether'],['HCl','Hydrogen chloride'],['Nitric acid','Nitric acid'],['NO2','Nitrogen dioxide'],['Phosgene','Phosgene'],
+  ['TDI','Toluene diisocyanate'],['Methanol','Methanol'],['PO','Propylene oxide'],['Styrene','Styrene'],
+  ['EEA','Ethylene glycol monoethyl ether acetate'],['EE','Ethylene glycol monoethyl ether'],['EG','Ethylene glycol'],['EO','Ethylene oxide']];
+const DB_AMINE_LBL = {MEA:'Monoethanolamine',DEA:'Diethanolamine',DIPA:'Diisopropanolamine',MDEA:'Methyldiethanolamine'};
+function dbFillAddFluidOptions(){
+  const esc=t=>String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  const html = '<option value="">— pilih —</option><option value="Tidak ada">Tidak ada</option>'
+    + '<optgroup label="Representative Fluid (API 581 Tabel 4.1)">'
+    + DB_REP_FLUIDS.map(([v,d])=>`<option value="${esc(v)}">${esc(v.replace(/(\d+)/g,'$1').replace(/^C(\d+)-C(\d+)$/,'C$1–C$2'))} — ${esc(d)}</option>`).join('')
+    + '</optgroup><optgroup label="Amina">'
+    + DB_AMINES.map(a=>`<option value="${a}">${a} — ${DB_AMINE_LBL[a]}</option>`).join('') + '</optgroup>';
+  ['db-d-addfluid1','db-d-addfluid2'].forEach(id=>{ const el=document.getElementById(id); if(el && !el.dataset.filled){ el.innerHTML=html; el.dataset.filled='1'; } });
+}
+/* ── Standard Equipment → API 581 Table 4.2 component & geometry types ── */
+const DB_EQ_STD = {
+  'API 650': {eq:'Tank650', comps:[['COURSE-1-10','CYL'],['TANKBOTTOM','PLT'],['TANKBOTEDGE','PLT']]},
+  'API 620': {eq:'Tank620', comps:[['COURSE-1-10','CYL'],['TANKBOTTOM','PLT'],['TANKBOTEDGE','PLT']]},
+};
+function dbEqStdInfo(){
+  const el=document.getElementById('db-g-eqstd-info'); if(!el) return;
+  const d=DB_EQ_STD[val('db-g-eqstd')];
+  el.innerHTML = d
+    ? `<span class="eqs-k">Equipment type</span><b>${d.eq}</b><span class="eqs-sep"></span><span class="eqs-k">Component · Geometry</span>${d.comps.map(([c,g])=>`<span class="eqs-chip">${c}<i>${g}</i></span>`).join('')}`
+    : `<span class="eqs-k">Standard belum diketahui — equipment type API 581 (Tank650 / Tank620) belum dapat ditentukan.</span>`;
+}
+
 /* ── Tab 1: General ── */
 function dbSaveGeneral(){
   if(!dbCurrentTag) return;
@@ -3635,6 +3692,8 @@ function dbSaveGeneral(){
     weldingType: val('db-g-welding'),
     numberofRivetRow: val('db-g-rivetrow'),
     tipe: val('db-g-tipe'),
+    kondisi: val('db-g-kondisi'),
+    equipmentStandard: val('db-g-eqstd'),
   });
   dbRefreshTagSelect();
   document.getElementById('db-tagno').value = dbCurrentTag;
@@ -3660,7 +3719,8 @@ function dbSaveDesain(){
     insulasi: val('db-d-insulasi'),
     ph: numOrNull('db-d-ph'),
     h2sPP: numOrNull('db-d-h2spp'),
-    additionalFluid: val('db-d-addfluid'),
+    additionalFluid1: val('db-d-addfluid1'),
+    additionalFluid2: val('db-d-addfluid2'),
     kaustik: val('db-d-kaustik'),
     diameter: readLen('db-d-diameter'),
     tinggi: readLen('db-d-tinggi'),
@@ -4244,8 +4304,8 @@ function rbiSceneEngine(p, host){
   }
   function frame(now){
     raf=0; if(!running) return;
-    const el=((now-t0)/1000)%CYCLE;
-    let ci=Math.min(3,Math.floor(el/PER)), lt=el-ci*PER, a, yc, climbing=false;
+    const el=Math.max(0,(now-t0)/1000)%CYCLE;
+    let ci=Math.max(0,Math.min(3,Math.floor(el/PER))), lt=el-ci*PER, a, yc, climbing=false;
     if(el>=PER*4){ ci=3; lt=SWEEP; }
     const dir=ci%2?-1:1, span=RS3.aMax-RS3.aMin, c=RS3.courses[ci], cy=(c.y0+c.y1)/2;
     if(lt<=SWEEP){ const s=lt/SWEEP, e=s<.5?2*s*s:1-Math.pow(-2*s+2,2)/2; a=dir>0?RS3.aMin+span*e:RS3.aMax-span*e; yc=cy; }
