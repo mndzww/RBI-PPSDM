@@ -1521,6 +1521,45 @@ html[data-theme="light"] .std-card.asme .sc-info { background:radial-gradient(13
 .eqs-sep { width:1px; height:14px; background:var(--bdr2); margin:0 4px; }
 .eqs-chip { display:inline-flex; gap:6px; align-items:center; padding:3px 8px; border-radius:999px; border:1px solid var(--bdr2); color:var(--tx); }
 .eqs-chip i { font-style:normal; color:var(--cyan,#2dd4ef); }
+/* Riwayat scope checklist */
+.scope-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:6px 0 10px; }
+.scope-grp { border:1px solid var(--bdr); border-radius:var(--r-md); padding:12px; background:rgba(5,10,18,.35); display:flex; flex-direction:column; gap:6px; }
+html[data-theme="light"] .scope-grp { background:#f8fafc; }
+.scope-gt { font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--gold2); margin-bottom:4px; }
+.scope-it { border:1px solid transparent; border-radius:10px; padding:6px 8px; transition:background .2s, border-color .2s; }
+.scope-it.on { background:rgba(255,138,31,.07); border-color:rgba(255,160,67,.3); }
+.scope-ck { display:flex; align-items:center; gap:9px; cursor:pointer; font-size:12.5px; color:var(--tx); user-select:none; }
+.scope-ck input { position:absolute; opacity:0; pointer-events:none; }
+.scope-box { width:17px; height:17px; flex:none; border-radius:5px; border:1.5px solid var(--bdr2); display:grid; place-items:center; transition:all .15s; }
+.scope-ck input:checked + .scope-box { background:var(--grad); border-color:transparent; }
+.scope-ck input:checked + .scope-box::after { content:''; width:5px; height:9px; border:solid #1b0d00; border-width:0 2px 2px 0; transform:rotate(45deg) translate(-1px,-1px); }
+.scope-ck input:focus-visible + .scope-box { box-shadow:var(--ring); }
+.scope-tag { margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:.8px; padding:2px 6px; border-radius:999px; border:1px solid rgba(45,212,239,.4); color:var(--cyan,#2dd4ef); }
+.scope-x { display:none; flex-wrap:wrap; align-items:center; gap:8px; margin:8px 0 2px 26px; }
+.scope-it.on .scope-x { display:flex; }
+.scope-cov { display:flex; align-items:center; gap:4px; }
+.scope-cov input, .scope-x.ffs input, .scope-txt { background:rgba(5,10,18,.55); border:1px solid var(--bdr2); color:var(--white); border-radius:8px; padding:6px 8px; font-family:'JetBrains Mono',monospace; font-size:11.5px; outline:none; }
+html[data-theme="light"] .scope-cov input, html[data-theme="light"] .scope-x.ffs input, html[data-theme="light"] .scope-txt { background:#fff; color:#16202b; }
+.scope-cov input { width:92px; } .scope-txt { width:100%; }
+.scope-cov input:focus, .scope-x.ffs input:focus, .scope-txt:focus { border-color:var(--gold2); box-shadow:var(--ring); }
+.scope-cov span, .scope-x.ffs span { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--tx3); }
+.scope-rule { width:100%; font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--tx3); }
+.scope-x.ffs { flex-direction:column; align-items:stretch; }
+.scope-x.ffs label { display:grid; grid-template-columns:1fr 90px 40px; align-items:center; gap:6px; font-size:11px; color:var(--tx2); }
+.sc-cat-b { display:inline-grid; place-items:center; min-width:24px; height:22px; padding:0 6px; border-radius:6px; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:800; border:1px solid var(--bdr2); color:var(--tx3); }
+.sc-cat-b.cat-A, .scope-chip b.cat-A { color:#34d399; border-color:rgba(52,211,153,.5); background:rgba(52,211,153,.1); }
+.sc-cat-b.cat-B, .scope-chip b.cat-B { color:#7dd3fc; border-color:rgba(125,211,252,.5); background:rgba(125,211,252,.1); }
+.sc-cat-b.cat-C, .scope-chip b.cat-C { color:#ffc672; border-color:rgba(255,198,114,.5); background:rgba(255,198,114,.1); }
+.sc-cat-b.cat-D, .scope-chip b.cat-D { color:#ffa043; border-color:rgba(255,160,67,.5); background:rgba(255,160,67,.1); }
+.sc-cat-b.cat-E, .scope-chip b.cat-E { color:#ff5d6c; border-color:rgba(255,93,108,.5); background:rgba(255,93,108,.1); }
+.scope-chip b { padding:0 4px; border-radius:4px; border:1px solid; }
+.scope-sum { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--tx2); padding:10px 12px; border-radius:var(--r-md); border:1px dashed var(--bdr2); margin-bottom:16px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.scope-chips { display:flex; flex-wrap:wrap; gap:4px; }
+.scope-chip { font-size:10px; padding:2px 7px; border-radius:999px; border:1px solid var(--bdr2); white-space:nowrap; }
+#db-r-table td:first-child { white-space:nowrap; }
+.scope-note { font-size:11px; color:var(--tx2); margin-bottom:4px; }
+@media (max-width:1100px){ .scope-grid { grid-template-columns:1fr 1fr; } }
+@media (max-width:700px){ .scope-grid { grid-template-columns:1fr; } }
 /* ===== Custom themed dropdown (cs-*) ===== */
 select.cs-native { position:absolute !important; width:1px !important; height:1px !important; opacity:0 !important; pointer-events:none !important; padding:0 !important; border:0 !important; margin:0 !important; overflow:hidden; clip:rect(0 0 0 0); }
 .cs-btn { position:relative; width:100%; display:flex; align-items:center; gap:8px; text-align:left; cursor:pointer;
@@ -2226,7 +2265,11 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
           </div>
           <div class="frow">
             <div class="fld"><label>Joint Type</label><div class="fw"><select id="db-d-joint" onchange="dbRecalcInspeksi()"><option>Butt</option><option>Lap</option></select></div></div>
-            <div class="fld"><label>Komponen Berinsulasi?</label><div class="fw"><select id="db-d-insulasi" onchange="dfRenderScreening()"><option value="">— pilih —</option><option value="Insulated">Insulated</option><option value="Uninsulated">Uninsulated</option></select></div></div>
+            <div class="fld"><label>Komponen Berinsulasi?</label><div class="fw"><select id="db-d-insulasi" onchange="dbInsToggle(); dfRenderScreening()"><option value="">— pilih —</option><option value="Insulated">Insulated</option><option value="Uninsulated">Uninsulated</option></select></div></div>
+          </div>
+          <div class="frow" id="db-d-instype-row" style="display:none">
+            <div class="fld"><label>Jenis Insulasi (API 581 — Tabel 2.5)</label><div class="fw"><select id="db-d-instype" onchange="dbInsToggle(); dfRenderScreening()"></select></div></div>
+            <div class="fld"><label>Adjustment Factor F<sub>INS</sub></label><div class="fw"><input type="text" id="db-d-fins" readonly placeholder="—"></div></div>
           </div>
           <div class="frow s3">
             <div class="fld"><label>Diameter — D</label><div class="fw"><input type="number" id="db-d-diameter" step="0.001" onchange="dbRecalcInspeksi()"><span class="un un-len">m</span></div></div>
@@ -2371,8 +2414,11 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
           </div>
           <div class="frow">
             <div class="fld"><label>Date of Inspection</label><div class="fw"><input type="date" id="db-r-date"></div></div>
-            <div class="fld"><label>Scope of Inspection</label><div class="fw"><input type="text" id="db-r-scope"></div></div>
+            <div class="fld"><label>Keterangan Scope (teks bebas, opsional)</label><div class="fw"><input type="text" id="db-r-scope" placeholder="mis. Onstream inspection"></div></div>
           </div>
+          <div class="slbl">Scope Inspeksi &amp; Pemeliharaan — centang yang dilakukan</div>
+          <div class="scope-grid" id="db-r-scopegrid"></div>
+          <div class="scope-sum" id="db-r-scopesum"></div>
           <div class="frow">
             <div class="fld"><label>Uninspection Report Reference</label><div class="fw"><input type="text" id="db-r-uninspection"></div></div>
             <div class="fld"><label>Authorization Letter</label><div class="fw"><input type="text" id="db-r-al"></div></div>
@@ -2390,7 +2436,7 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
 
           <div class="db-riwayat-table-wrap">
             <table class="summary-table">
-              <thead><tr><th>Tanggal</th><th>Scope</th><th>Report Reference</th><th>3rd Party</th></tr></thead>
+              <thead><tr><th>Tanggal</th><th>Scope Inspeksi &amp; Pemeliharaan</th><th>Efektivitas UT (Thinning)</th><th>Report Reference</th><th>3rd Party</th></tr></thead>
               <tbody id="db-r-table"></tbody>
             </table>
           </div>
@@ -3044,12 +3090,19 @@ function dfThinPanel(){
       ['<b>SR<sub>P</sub></b>', `<b>${dfFmt(r.SRp,4)}</b>`, '']])
       + '<div class="dft-note">Persamaan (1.6) berbasis tekanan internal tidak dipakai — shell tangki dibebani tekanan hidrostatis, sesuai Catatan 5 brief.</div>' : blockMsg), r.ok?'ok':'na'));
   // 8
-  s.push(dfStep(8,'Jumlah inspeksi per tingkat efektivitas (N<sub>A</sub>, N<sub>B</sub>, N<sub>C</sub>, N<sub>D</sub>)','API RP 581 Part 2 — §4.5.6, Annex 2.C (inspection effectiveness)',
-    dfNA('CALCULATION UNAVAILABLE — Riwayat Pemeliharaan belum memiliki kategori efektivitas inspeksi (A–E) per entri.'),'na'));
+  { const ic=dbThinInspCounts(dbCurrentTag); const N=ic.N;
+    s.push(dfStep(8,'Jumlah inspeksi per tingkat efektivitas (N<sub>A</sub>, N<sub>B</sub>, N<sub>C</sub>, N<sub>D</sub>)','API RP 581 Part 2 — §4.5.6, brief Tabel 1.6 (Kategori Inspeksi General Thinning)',
+      dfKV([
+        ['Sumber','Riwayat Pemeliharaan','entri yang mencentang <b>UT Thickness</b> + coverage'],
+        ['Aturan kategori UT Thickness','<25% E · ≥25% D · >50% C · >75% B · 100% A',''],
+        ['Inspeksi terhitung', ic.used.length ? ic.used.map(([d,c,cv])=>`${d} (${cv}% → ${c})`).join(', ') : 'belum ada', `dari ${ic.total} entri riwayat`],
+        ['<b>N<sub>A</sub> / N<sub>B</sub> / N<sub>C</sub> / N<sub>D</sub></b>', `<b>${N.A} / ${N.B} / ${N.C} / ${N.D}</b>`, N.E?`(${N.E} inspeksi kategori E — tidak dihitung)`:''],
+      ]) + (ic.used.length ? '' : '<div class="dft-note">Belum ada entri riwayat dengan UT Thickness + coverage, sehingga N<sub>A</sub>–N<sub>D</sub> = 0. Tambahkan data di tab Riwayat Pemeliharaan (centang UT Thickness, isi coverage %). Contoh brief: inspeksi 2011, 2016, 2020 kategori C → N = 0, 0, 3, 0.</div>'),
+      ic.used.length ? 'ok' : 'info')); }
   // 9
   s.push(dfStep(9,'Faktor efektivitas inspeksi (I<sub>1</sub>, I<sub>2</sub>, I<sub>3</sub>)','API RP 581 Part 2 — Persamaan (1.7), Tabel 1.6 & 1.7',
     `\\[ I_i^{Thin} = Pr_{p,i}^{Thin}\\,(Co_{p,i}^{ThinA})^{N_A}\\,(Co_{p,i}^{ThinB})^{N_B}\\,(Co_{p,i}^{ThinC})^{N_C}\\,(Co_{p,i}^{ThinD})^{N_D} \\]`+
-    dfNA('CALCULATION UNAVAILABLE — membutuhkan N<sub>A</sub>–N<sub>D</sub> (Langkah 8) dan tingkat keyakinan data laju korosi (Low/Medium/High) untuk prior probability Tabel 1.6.'),'na'));
+    dfNA('CALCULATION UNAVAILABLE — N<sub>A</sub>–N<sub>D</sub> sudah dari Langkah 8; masih menunggu tingkat keyakinan data laju korosi (Low / Medium / High Confidence) untuk prior probability Tabel 1.7.'),'na'));
   // 10
   s.push(dfStep(10,'Probabilitas posterior (Po<sub>1</sub>, Po<sub>2</sub>, Po<sub>3</sub>)','API RP 581 Part 2 — Persamaan (1.8)',
     `\\[ Po_{p,i}^{Thin} = \\frac{I_i^{Thin}}{I_1^{Thin} + I_2^{Thin} + I_3^{Thin}} \\]`+
@@ -3072,7 +3125,7 @@ function dfThinPanel(){
           ['F<sub>OM</sub> (online monitoring)','tidak tersedia','']])+
     dfNA('CALCULATION UNAVAILABLE — bergantung pada Langkah 12 dan data online monitoring (F<sub>OM</sub>, Tabel 1.8).'),'na'));
 
-  const result = `<div class="dft-result"><span>D<sub>f</sub><sup>Thin</sup> — Course ${dfThinComp}</span><b>CALCULATION UNAVAILABLE</b><small>Menunggu: efektivitas inspeksi (Langkah 8), confidence level laju korosi (Langkah 9), online monitoring (Langkah 13)</small></div>`;
+  const result = `<div class="dft-result"><span>D<sub>f</sub><sup>Thin</sup> — Course ${dfThinComp}</span><b>CALCULATION UNAVAILABLE</b><small>Menunggu: confidence level data laju korosi (Langkah 9, Tabel 1.7) dan online monitoring F<sub>OM</sub> (Langkah 13)</small></div>`;
   return `<div class="dft">${head}${s.join('')}${result}</div>`;
 }
 
@@ -3590,6 +3643,7 @@ function dbLoadTank(){
   setVal('db-d-matshell', t.materialSheel||'Unknown');
   setVal('db-d-standard', t.standard||'Unknown');
   setVal('db-d-insulasi', dbNormInsulasi(t.insulasi));
+  dbFillInsOptions(); setVal('db-d-instype', t.insulationType||''); dbInsToggle();
   setVal('db-d-ph', t.ph ?? t.scrPH ?? '');
   setVal('db-d-h2spp', t.h2sPP ?? t.scrH2sPP ?? '');
   dbFillAddFluidOptions();
@@ -3627,6 +3681,7 @@ function dbLoadTank(){
   dbRefreshRiwayatSelect();
   dbResetRiwayatForm();
   dbRenderRiwayatTable();
+  dbScopeSet({});
 
   // DF Screening — auto answers come from the Desain fields above; the
   // Ya/Tidak questions answered on the DF Screening page itself are kept here.
@@ -3717,6 +3772,7 @@ function dbSaveDesain(){
     materialSheel: val('db-d-matshell'),
     standard: val('db-d-standard'),
     insulasi: val('db-d-insulasi'),
+    insulationType: val('db-d-insulasi')==='Insulated' ? val('db-d-instype') : '',
     ph: numOrNull('db-d-ph'),
     h2sPP: numOrNull('db-d-h2spp'),
     additionalFluid1: val('db-d-addfluid1'),
@@ -3815,6 +3871,133 @@ function dbSaveInspeksi(){
   dbToast('Data Inspeksi tersimpan');
 }
 
+
+/* ═══ Riwayat — Scope Inspeksi & Pemeliharaan (multi-select checklist) ═══
+   Coverage → Inspection effectiveness category (A–E) per metode, sesuai arahan pembimbing.
+   A = 100 %, rule lainnya: daftar [kategori, ambang, inklusif?] dicek dari B ke D; selain itu E. */
+const DB_SCOPE = [
+  {grp:'Inspeksi NDT', items:[
+    {k:'VT',   n:'Visual Inspection'},
+    {k:'UTT',  n:'UT Thickness', cov:[['B',75,false],['C',50,false],['D',25,true]], thin:true, rule:'<25% E · ≥25% D · >50% C · >75% B · 100% A'},
+    {k:'UTS',  n:'UT Scanning', cov:[['B',75,false],['C',35,false],['D',10,false]], rule:'>10% D · >35% C · >75% B · 100% A'},
+    {k:'UTFD', n:'UT Flaw Detector', cov:[['B',66,false],['C',35,false],['D',0,false]], rule:'≤35% D · >35% C · >66% B · 100% A'},
+    {k:'UTSB', n:'Ultrasonic Straight Beam'},
+    {k:'PAUT', n:'Phased Array UT (PAUT)'},
+    {k:'TOFD', n:'Time of Flight Diffraction (TOFD)'},
+    {k:'RT',   n:'Radiography', cov:[['B',65,false],['C',35,false],['D',5,true]], rule:'5% D · >35% C · >65% B · 100% A'},
+    {k:'PT',   n:'Dye Penetrant', cov:[['B',60,false],['C',30,false],['D',5,true]], rule:'5% D · >30% C · >60% B · 100% A'},
+    {k:'MT',   n:'Magnetic Particle Test', cov:[['B',75,false],['C',35,false],['D',10,false]], rule:'>10% D · >35% C · >75% B · 100% A'},
+    {k:'ECT',  n:'Eddy Current Testing'},
+    {k:'PG',   n:'Pit Gauge'},
+    {k:'DIM',  n:'Dimensional Measurement'},
+  ]},
+  {grp:'Pengukuran & Assessment', items:[
+    {k:'PLB',  n:'Plumbness'},
+    {k:'SET',  n:'Settlement'},
+    {k:'GRD',  n:'Grounding'},
+    {k:'FFS',  n:'Fitness for Service (FFS)', ffs:true},
+  ]},
+  {grp:'Pemeliharaan', items:[
+    {k:'RPL',  n:'Pergantian Komponen', text:'Komponen yang diganti'},
+    {k:'CLN',  n:'Pembersihan Internal / Eksternal'},
+    {k:'CTG',  n:'Coating / Painting'},
+  ]},
+];
+const DB_SCOPE_ITEMS = DB_SCOPE.flatMap(g=>g.items);
+function dbCovCat(item, cov){
+  if (!item || !item.cov || cov===null || cov===undefined || cov==='' || isNaN(cov)) return null;
+  cov=+cov; if (cov>=100) return 'A';
+  for (const [c,th,inc] of item.cov){ if (inc ? cov>=th : cov>th) return c; }
+  return 'E';
+}
+function dbScopeEsc(t){ return String(t??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+function dbScopeBuild(){
+  const g=document.getElementById('db-r-scopegrid'); if(!g || g.dataset.built) return; g.dataset.built='1';
+  g.innerHTML = DB_SCOPE.map(grp=>`<div class="scope-grp"><div class="scope-gt">${grp.grp}</div>${grp.items.map(it=>`
+    <div class="scope-it" data-k="${it.k}">
+      <label class="scope-ck"><input type="checkbox" data-k="${it.k}" onchange="dbScopeUI()"><span class="scope-box"></span><span class="scope-nm">${it.n}</span>${it.thin?'<span class="scope-tag">DF Thinning</span>':''}</label>
+      ${it.cov?`<div class="scope-x"><div class="scope-cov"><input type="number" min="0" max="100" step="1" data-cov="${it.k}" placeholder="Coverage" oninput="dbScopeUI()"><span>%</span></div><span class="sc-cat-b" data-catof="${it.k}">–</span><div class="scope-rule">${it.rule}</div></div>`:''}
+      ${it.ffs?`<div class="scope-x ffs"><label>t required<input type="number" step="0.01" data-ffs="treq"><span>mm</span></label><label>Corrosion Rate<input type="number" step="0.001" data-ffs="cr"><span>mm/yr</span></label><label>Remaining Life<input type="number" step="0.1" data-ffs="rl"><span>yr</span></label></div>`:''}
+      ${it.text?`<div class="scope-x"><input type="text" class="scope-txt" data-txt="${it.k}" placeholder="${it.text} (mis. roof plate, nozzle, gasket)"></div>`:''}
+    </div>`).join('')}</div>`).join('');
+}
+function dbScopeUI(){
+  const g=document.getElementById('db-r-scopegrid'); if(!g) return;
+  g.querySelectorAll('.scope-it').forEach(el=>{
+    const k=el.dataset.k, on=el.querySelector('input[type=checkbox]').checked;
+    el.classList.toggle('on',on);
+    const it=DB_SCOPE_ITEMS.find(x=>x.k===k), ci=el.querySelector(`[data-cov="${k}"]`), b=el.querySelector(`[data-catof="${k}"]`);
+    if (ci && b){ const c=dbCovCat(it, ci.value===''?null:+ci.value); b.textContent=c||'–'; b.className='sc-cat-b'+(c?' cat-'+c:''); }
+  });
+  const sel=dbScopeGet(); const n=Object.keys(sel).length; const ut=sel.UTT? dbCovCat(DB_SCOPE_ITEMS.find(x=>x.k==='UTT'), sel.UTT.cov):null;
+  const sum=document.getElementById('db-r-scopesum');
+  if(sum) sum.innerHTML = n ? `<b>${n}</b> item dipilih${sel.UTT?` · Efektivitas inspeksi untuk DF Thinning (UT Thickness): <span class="sc-cat-b cat-${ut||'x'}">${ut||'isi coverage'}</span>`:' · UT Thickness tidak dipilih → entri ini tidak dihitung pada N<sub>A</sub>–N<sub>D</sub> DF Thinning'}` : 'Belum ada scope yang dicentang.';
+}
+function dbScopeGet(){
+  const g=document.getElementById('db-r-scopegrid'); const out={}; if(!g) return out;
+  g.querySelectorAll('.scope-it').forEach(el=>{
+    const k=el.dataset.k; if(!el.querySelector('input[type=checkbox]').checked) return;
+    const o={}; const ci=el.querySelector(`[data-cov="${k}"]`); if(ci && ci.value!=='') o.cov=+ci.value;
+    el.querySelectorAll('[data-ffs]').forEach(i=>{ if(i.value!=='') o[i.dataset.ffs]=+i.value; });
+    const tx=el.querySelector(`[data-txt="${k}"]`); if(tx && tx.value.trim()) o.text=tx.value.trim();
+    out[k]=o;
+  });
+  return out;
+}
+function dbScopeSet(items){
+  dbScopeBuild();
+  const g=document.getElementById('db-r-scopegrid'); if(!g) return;
+  g.querySelectorAll('.scope-it').forEach(el=>{
+    const k=el.dataset.k, o=items[k];
+    el.querySelector('input[type=checkbox]').checked=!!o;
+    const ci=el.querySelector(`[data-cov="${k}"]`); if(ci) ci.value = o&&o.cov!==undefined ? o.cov : '';
+    el.querySelectorAll('[data-ffs]').forEach(i=>{ i.value = o&&o[i.dataset.ffs]!==undefined ? o[i.dataset.ffs] : ''; });
+    const tx=el.querySelector(`[data-txt="${k}"]`); if(tx) tx.value = o&&o.text ? o.text : '';
+  });
+  dbScopeUI();
+}
+function dbScopeText(items, note){
+  const parts=Object.entries(items).map(([k,o])=>{ const it=DB_SCOPE_ITEMS.find(x=>x.k===k); if(!it) return k;
+    let t=it.n; if(o.cov!==undefined) t+=` ${o.cov}% (${dbCovCat(it,o.cov)})`; if(o.text) t+=`: ${o.text}`; return t; });
+  if (note) parts.unshift(note);
+  return parts.join('; ');
+}
+function dbScopeCellHTML(r){
+  if (!r.scopeItems) return dbScopeEsc(r.scopeInspection||'');
+  const chips=Object.entries(r.scopeItems).map(([k,o])=>{ const it=DB_SCOPE_ITEMS.find(x=>x.k===k); const c=it?dbCovCat(it,o.cov):null;
+    return `<span class="scope-chip">${dbScopeEsc(it?it.n:k)}${o.cov!==undefined?` · ${o.cov}%`:''}${c?` <b class="cat-${c}">${c}</b>`:''}${o.text?` · ${dbScopeEsc(o.text)}`:''}${k==='FFS'?['treq','cr','rl'].filter(f=>o[f]!==undefined).map(f=>` · ${({treq:'t<sub>req</sub>',cr:'CR',rl:'RL'})[f]} ${o[f]}`).join(''):''}</span>`; }).join('');
+  return (r.scopeNote?`<div class="scope-note">${dbScopeEsc(r.scopeNote)}</div>`:'')+`<div class="scope-chips">${chips||'—'}</div>`;
+}
+/* inspection-effectiveness category used by DF Thinning (dari UT Thickness coverage) */
+function dbRiwayatThinCat(r){
+  const o=r.scopeItems && r.scopeItems.UTT; if(!o) return null;
+  return dbCovCat(DB_SCOPE_ITEMS.find(x=>x.k==='UTT'), o.cov);
+}
+function dbThinInspCounts(tag){
+  const today=new Date().toISOString().slice(0,10);
+  const list=dbGetRiwayat(tag).filter(r=>(r.dateInspection||'')<=today);
+  const N={A:0,B:0,C:0,D:0,E:0}; const used=[];
+  list.forEach(r=>{ const c=dbRiwayatThinCat(r); if(c){ N[c]++; used.push([r.dateInspection,c,r.scopeItems.UTT.cov]); } });
+  return {N, used, total:list.length};
+}
+
+/* ═══ Insulation type → F_INS (API 581 Part 2, Tabel 2.5 brief / Table 2.D.3.3) ═══ */
+const DB_INS_TYPES = [
+  ['Unknown/unspecified',1.5],['Asbestos',1.5],['Cellular glass',0.75],['Expanded perlite',1.0],['Fiberglass',1.25],
+  ['Type E fiberglass',1.25],['Mineral wool',1.5],['Mineral wool (water resistant)',1.25],['Calcium silicate',1.25],
+  ['Flexible aerogel',1.25],['Microporous blanket',1.0],['Intumescent coating',0.75],['Cementitious coating',1.0]];
+function dbFillInsOptions(){
+  const el=document.getElementById('db-d-instype'); if(!el || el.dataset.filled) return; el.dataset.filled='1';
+  el.innerHTML='<option value="">— pilih jenis insulasi —</option>'+DB_INS_TYPES.map(([n,f])=>`<option value="${n}">${n} — F_INS ${f.toFixed(2)}</option>`).join('');
+}
+function dbFins(){ const t=DB_INS_TYPES.find(x=>x[0]===val('db-d-instype')); return t?t[1]:null; }
+function dbInsToggle(){
+  dbFillInsOptions();
+  const ins = val('db-d-insulasi')==='Insulated';
+  const row=document.getElementById('db-d-instype-row'); if(row) row.style.display = ins ? '' : 'none';
+  const f=dbFins(); setVal('db-d-fins', ins && f!==null ? f.toFixed(2) : '');
+}
+
 /* ── Tab 4: Riwayat Pemeliharaan ── */
 function dbRefreshRiwayatSelect(){
   const sel = document.getElementById('db-r-dateselect');
@@ -3828,7 +4011,8 @@ function dbRiwayatSelectChange(){
   const r = dbGetRiwayat(dbCurrentTag).find(x=>String(x.id)===String(id));
   if(!r) return;
   setVal('db-r-date', r.dateInspection);
-  setVal('db-r-scope', r.scopeInspection);
+  setVal('db-r-scope', r.scopeNote ?? (r.scopeItems ? '' : r.scopeInspection));
+  dbScopeSet(r.scopeItems||{});
   setVal('db-r-uninspection', r.uninspection);
   setVal('db-r-al', r.aL);
   setVal('db-r-result', r.result);
@@ -3836,6 +4020,7 @@ function dbRiwayatSelectChange(){
 }
 function dbResetRiwayatForm(){
   ['db-r-date','db-r-scope','db-r-uninspection','db-r-al','db-r-result','db-r-3rdparty'].forEach(id=>setVal(id,''));
+  dbScopeSet({});
   const sel = document.getElementById('db-r-dateselect');
   if(sel) sel.value='';
 }
@@ -3849,7 +4034,9 @@ function dbAddRiwayat(){
     id: nextId,
     tag_no: dbCurrentTag,
     dateInspection,
-    scopeInspection: val('db-r-scope'),
+    scopeItems: dbScopeGet(),
+    scopeNote: val('db-r-scope'),
+    scopeInspection: dbScopeText(dbScopeGet(), val('db-r-scope')),
     uninspection: val('db-r-uninspection'),
     aL: val('db-r-al'),
     result: val('db-r-result'),
@@ -3859,13 +4046,15 @@ function dbAddRiwayat(){
   dbResetRiwayatForm();
   dbRefreshRiwayatSelect();
   dbRenderRiwayatTable();
+  dfRenderScreening();
   dbToast('Riwayat pemeliharaan ditambahkan');
 }
 function dbRenderRiwayatTable(){
   const tbody = document.getElementById('db-r-table');
   const list = dbGetRiwayat(dbCurrentTag);
-  if(!list.length){ tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--tx3);padding:16px;">Belum ada riwayat</td></tr>'; return; }
-  tbody.innerHTML = list.map(r=>`<tr><td>${r.dateInspection||'—'}</td><td>${r.scopeInspection||''}</td><td>${r.uninspection||''}</td><td>${r.thirdParty||''}</td></tr>`).join('');
+  if(!list.length){ tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--tx3);padding:16px;">Belum ada riwayat</td></tr>'; return; }
+  tbody.innerHTML = list.map(r=>{ const c=dbRiwayatThinCat(r);
+    return `<tr><td>${r.dateInspection||'—'}</td><td>${dbScopeCellHTML(r)}</td><td>${c?`<span class="sc-cat-b cat-${c}">${c}</span>`:'<span style="color:var(--tx3)">—</span>'}</td><td>${r.uninspection||''}</td><td>${r.thirdParty||''}</td></tr>`; }).join('');
 }
 
 /* ── Tab 5: RBI ──
