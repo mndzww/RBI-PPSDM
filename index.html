@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RBI Platform — Risk-Based Inspection</title>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
 MathJax = {
   tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
@@ -69,7 +69,7 @@ html[data-theme="light"] .api-badge,
 html[data-theme="light"] .sfloat { background:rgba(255,255,255,.92); }
 html[data-theme="light"] .fw select option { background:#fff; color:#0a0e14; }
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
+html { scroll-behavior:auto; }
 body { background:var(--bg); color:var(--tx); font-family:'Inter',sans-serif; min-height:100vh; overflow-x:hidden; }
 body::after { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,rgba(0,0,0,.04) 0,rgba(0,0,0,.04) 1px,transparent 1px,transparent 3px); pointer-events:none; z-index:9999; }
 
@@ -855,7 +855,7 @@ html[data-theme="light"] body::before { background-image:linear-gradient(rgba(40
 @keyframes gradShift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
 
 /* ── navbar ── */
-nav { height:var(--nav-h); padding:0 28px; border-bottom:1px solid rgba(120,160,210,.10); backdrop-filter:blur(18px) saturate(140%); -webkit-backdrop-filter:blur(18px) saturate(140%); box-shadow:0 10px 30px -18px rgba(0,0,0,.6); }
+nav { height:var(--nav-h); padding:0 28px; border-bottom:1px solid rgba(120,160,210,.10); background:color-mix(in srgb, var(--nav-bg) 40%, var(--bg, #070d16)); backdrop-filter:none; -webkit-backdrop-filter:none; box-shadow:0 10px 30px -18px rgba(0,0,0,.6); }
 nav::after { content:''; position:absolute; left:0; right:0; bottom:-1px; height:1px; background:linear-gradient(90deg,transparent,rgba(255,160,67,.55),rgba(45,212,239,.45),transparent); opacity:.7; }
 .nav-co-name { font-family:'Rajdhani',sans-serif; font-size:18px; letter-spacing:.3px; }
 .nav-co-name span { font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:1.6px; color:var(--tx3); }
@@ -1560,6 +1560,155 @@ html[data-theme="light"] .scope-cov input, html[data-theme="light"] .scope-x.ffs
 .scope-note { font-size:11px; color:var(--tx2); margin-bottom:4px; }
 @media (max-width:1100px){ .scope-grid { grid-template-columns:1fr 1fr; } }
 @media (max-width:700px){ .scope-grid { grid-template-columns:1fr; } }
+/* ===== Landing hero: full-bleed photo, bottom-left headline, thumbnail rail ===== */
+.hx { --hx-ink:#F5F7F9; --hx-mute:#C3CDD8; --hx-dim:rgba(245,247,249,.55); --hx-line:rgba(245,247,249,.18); --hx-amber:#F0A030; --hx-navy:#0B1C2D;
+  position:relative; isolation:isolate; overflow:hidden; color:var(--hx-ink); background:var(--hx-navy);
+  height:calc(100vh - var(--nav-h)); height:calc(100svh - var(--nav-h)); min-height:600px; max-height:1100px;
+  display:grid; grid-template-rows:1fr auto; }
+.hx-stage { position:absolute; inset:0; z-index:-2; overflow:hidden; background:#16273a; }
+.hx-shade { position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:
+    linear-gradient(0deg, rgba(8,20,33,.94) 0%, rgba(8,20,33,.7) 24%, rgba(8,20,33,.1) 52%, rgba(8,20,33,.55) 100%),
+    linear-gradient(90deg, rgba(8,20,33,.70) 0%, rgba(8,20,33,.25) 45%, rgba(8,20,33,0) 70%); }
+.hx-top { position:absolute; z-index:2; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:flex-start; gap:24px; max-width:1360px; margin:0 auto; padding:clamp(22px,4vh,40px) 40px 0; }
+.hx-org { display:flex; align-items:center; gap:14px; margin:0; font:400 14px/1.4 'Inter',sans-serif; color:var(--hx-mute); }
+.hx-org span { font-weight:600; color:var(--hx-ink); padding-right:14px; border-right:1px solid var(--hx-line); }
+.hx-now { display:flex; flex-direction:column; align-items:flex-end; gap:6px; text-align:right; }
+.hx-count { font:600 34px/1 'Archivo','Inter',sans-serif; font-stretch:75%; letter-spacing:.02em; font-variant-numeric:tabular-nums; color:var(--hx-ink); }
+.hx-count i { font-style:normal; color:var(--hx-dim); font-size:.6em; margin-left:4px; }
+.hx-cap { font:500 14px/1.3 'Inter',sans-serif; color:var(--hx-ink); }
+.hx-geo { font:400 12px/1.3 'Inter',sans-serif; letter-spacing:.04em; color:var(--hx-dim); font-variant-numeric:tabular-nums; }
+.hx-main { display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,410px); align-items:end; gap:clamp(32px,5vw,80px); width:100%; max-width:1360px; margin:0 auto; padding:0 40px clamp(30px,5.5vh,60px); align-self:end; }
+.hx h1 { margin:0; font-family:'Archivo','Inter',sans-serif; font-stretch:68%; font-weight:700; font-size:clamp(48px, min(7.4vw, 13.5vh), 150px); line-height:.9; letter-spacing:-.02em; color:var(--hx-ink); white-space:nowrap; }
+.hx-side { display:flex; flex-direction:column; gap:28px; padding-left:24px; border-left:2px solid var(--hx-amber); padding-bottom:6px; }
+.hx-lead { margin:0; font:500 16px/1.58 'Inter',sans-serif; color:#0B1C2D; }
+.hx-lead span { background:#fff; padding:.02em .6em; -webkit-box-decoration-break:clone; box-decoration-break:clone; }
+.hx-actions { display:flex; align-items:center; gap:22px; flex-wrap:wrap; }
+.hx-btn { font:600 16px/1 'Inter',sans-serif; color:#1a1104; background:var(--hx-amber); border:none; border-radius:3px; padding:17px 22px 17px 26px; display:inline-flex; gap:12px; align-items:center; cursor:pointer; transition:background .2s; }
+.hx-btn:hover { background:#F7B54E; }
+.hx-link { font:500 16px/1 'Inter',sans-serif; color:var(--hx-ink); background:none; border:none; padding:6px 0; cursor:pointer; border-bottom:1px solid rgba(245,247,249,.5); transition:border-color .2s; }
+.hx-link:hover { border-bottom-color:var(--hx-ink); }
+.hx-btn:focus-visible, .hx-link:focus-visible, .hx-rail button:focus-visible { outline:2px solid #fff; outline-offset:4px; }
+.hx-top, .hx h1, .hx-side { animation:hxRise 1s cubic-bezier(.2,.7,.2,1) both; }
+.hx h1 { animation-delay:.08s; } .hx-side { animation-delay:.2s; }
+/* thumbnail rail + slide bar + arrows */
+.hx-rail { position:relative; z-index:2; background:rgba(8,20,33,.94); border-top:1px solid var(--hx-line); }
+.hx-ctl { display:flex; align-items:stretch; max-width:1360px; margin:0 auto; padding:0 40px; }
+.hx-rail ol { list-style:none; margin:0; padding:0; flex:1; min-width:0; display:grid; grid-template-columns:repeat(var(--hx-n,4),minmax(0,1fr)); }
+.hx-rail ol:empty { display:none; }
+.hx-rail li + li { border-left:1px solid var(--hx-line); }
+.hx-rail li button { position:relative; display:grid; grid-template-columns:76px 1fr; align-items:center; gap:14px; width:100%; padding:16px 18px; background:none; border:none; cursor:pointer; text-align:left; color:var(--hx-dim); transition:color .3s, background .3s; }
+.hx-rail li:first-child button { padding-left:0; }
+.hx-rail li button:hover { color:var(--hx-mute); background:rgba(245,247,249,.04); }
+.hx-rail img { width:76px; height:48px; object-fit:cover; border-radius:2px; opacity:.55; filter:saturate(.6); transition:opacity .3s, filter .3s; }
+.hx-rail .t { display:flex; flex-direction:column; gap:3px; font:400 13.5px/1.3 'Inter',sans-serif; }
+.hx-rail .n { font-size:12px; font-variant-numeric:tabular-nums; color:var(--hx-dim); }
+.hx-rail li button[aria-current="true"] { color:var(--hx-ink); }
+.hx-rail li button[aria-current="true"] img { opacity:1; filter:none; }
+.hx-rail li button::before { content:''; position:absolute; left:0; right:0; top:-1px; height:2px; background:rgba(245,247,249,.10); }
+.hx-rail li button::after { content:''; position:absolute; left:0; top:-1px; height:2px; width:100%; background:var(--hx-amber); transform:scaleX(0); transform-origin:left center; will-change:transform; }
+.hx-rail li button[aria-current="true"]::after { animation:hxProg var(--hx-dwell,7s) linear forwards; }
+.hx.paused .hx-rail li button[aria-current="true"]::after { animation-play-state:paused; }
+.hx-nav { position:absolute; z-index:3; top:calc(50% - 32px); transform:translateY(-50%); width:56px; height:96px; padding:0; background:none; border:none; color:var(--hx-ink); cursor:pointer; display:grid; place-items:center; opacity:.75; transition:opacity .2s, color .2s, transform .2s; }
+.hx-nav svg { width:22px; height:44px; fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 1px 6px rgba(0,0,0,.55)); }
+.hx-prev { left:max(8px,1.2vw); } .hx-next { right:max(8px,1.2vw); }
+.hx-nav:hover { opacity:1; color:var(--hx-amber); }
+.hx-prev:hover { transform:translateY(-50%) translateX(-3px); } .hx-next:hover { transform:translateY(-50%) translateX(3px); }
+.hx-nav:focus-visible, .hx-rail li button:focus-visible { outline:2px solid #fff; outline-offset:2px; }
+.hx.single .hx-nav { display:none; }
+/* slides: simple crossfade */
+.hx-shot { position:absolute; inset:0; margin:0; overflow:hidden; z-index:1; opacity:0; visibility:hidden; transition:opacity .9s ease, visibility 0s linear .9s; }
+.hx-shot.is-out { visibility:visible; z-index:1; }
+.hx-shot.is-on { opacity:1; visibility:visible; z-index:2; transition:opacity .9s ease, visibility 0s; }
+.hx-shot img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 45%; display:block; transform:scale(1.09); will-change:transform; backface-visibility:hidden; }
+.hx-shot.is-on img, .hx-shot.is-out img { animation:hxDrift calc(var(--hx-dwell,7s) + 1.4s) linear forwards; }
+.hx.paused .hx-shot.is-on img { animation-play-state:paused; }
+.hx { contain:paint; }
+@keyframes hxProg { from { transform:scaleX(0); } to { transform:scaleX(1); } }
+@keyframes hxDrift { from { transform:scale(1.09); } to { transform:scale(1); } }
+@keyframes hxRise { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
+@media (prefers-reduced-motion: reduce) { .hx-top, .hx h1, .hx-side,  .hx-shot, .hx-shot.is-on { transition:none; } .hx-rail li button[aria-current="true"]::after { transform:scaleX(1); } }
+@media (max-width:1100px) { .hx-rail li button { grid-template-columns:1fr; } .hx-rail img { display:none; } }
+@media (max-width:900px) { .hx-ctl { padding:0 24px; } }
+@media (max-width:600px) { .hx-nav { width:40px; height:72px; top:32%; } .hx-nav svg { width:16px; height:32px; } .hx-prev { left:2px; } .hx-next { right:2px; } .hx-ctl { padding:0 16px; } .hx-rail .t { display:none; } .hx-rail li button, .hx-rail li:first-child button { padding:20px 0; } .hx-rail li + li { border-left:none; padding-left:6px; } }
+@media (max-width:900px) {
+  .hx { height:auto; min-height:calc(100svh - var(--nav-h)); max-height:none; }
+  .hx-main { grid-template-columns:1fr; gap:26px; padding-top:150px; }
+  .hx-top { padding:20px 24px 0; }
+  .hx-geo { display:none; }
+}
+@media (max-width:600px) {
+  .hx-main { padding:130px 16px 28px; }
+  .hx-top { padding:18px 16px 0; }
+  .hx-count { font-size:26px; } .hx-cap { display:none; }
+  .hx-side { padding-left:16px; }
+  .hx h1 { font-size:clamp(40px, 12.5vw, 72px); }
+  .hx-org { flex-direction:column; align-items:flex-start; gap:4px; font-size:13px; } .hx-org span { border-right:none; padding-right:0; }
+  .hx-lead { font-size:15.5px; }
+}
+
+/* ===== Landing below the hero: editorial layout (no card grids, no glow) ===== */
+.stag { font:600 12px/1 'Inter',sans-serif; letter-spacing:.08em; text-transform:uppercase; color:var(--tx3); display:block; margin:0 0 18px; }
+.stag::before { content:none; }
+.fx-glow { display:none !important; }
+.lb { margin:0 0 16px; font:600 12px/1 'Inter',sans-serif; letter-spacing:.08em; text-transform:uppercase; color:var(--gold2); }
+.ab-text .lb, .pk-hd .lb, .ev .lb { margin:0 0 16px; max-width:none; font:600 12px/1 'Inter',sans-serif; letter-spacing:.08em; color:var(--gold2); }
+.ev, .ab, .pk { max-width:1360px; margin:0 auto; padding:clamp(64px,9vw,112px) 40px 0; }
+.ev h2, .ab h2, .pk h2 { margin:0; font-family:'Archivo','Inter',sans-serif; font-stretch:72%; font-weight:700; font-size:clamp(34px,4.4vw,60px); line-height:.98; letter-spacing:-.015em; color:var(--white); text-transform:none; }
+.ev { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:clamp(32px,5vw,80px); align-items:start; }
+.ev > figure { position:sticky; top:calc(var(--nav-h) + 28px); }
+.ev-scene { position:relative; width:100%; aspect-ratio:600/420; overflow:hidden; border-radius:4px; background:#06101f; }
+.ev-scene .rs { width:100%; height:100%; display:block; }
+.ev-cap { margin:12px 0 0; font:400 13px/1.5 'Inter',sans-serif; color:var(--tx3); }
+.ev-sub { margin:18px 0 28px; max-width:46ch; font:400 15.5px/1.65 'Inter',sans-serif; color:var(--tx2); }
+.ledger { width:100%; border-collapse:collapse; }
+.ledger th { text-align:left; padding:0 0 10px; font:600 11.5px/1 'Inter',sans-serif; letter-spacing:.06em; text-transform:uppercase; color:var(--tx3); border-bottom:1px solid var(--bdr2); }
+.ledger th:last-child, .ledger td:last-child { text-align:right; }
+.ledger td { padding:15px 0; border-bottom:1px solid var(--bdr); vertical-align:middle; }
+.ledger .no { width:38px; font:500 13px/1 'Inter',sans-serif; color:var(--tx3); font-variant-numeric:tabular-nums; }
+.ledger .nm { font:600 16.5px/1.25 'Inter',sans-serif; color:var(--white); }
+.ledger .nm small { display:block; margin-top:4px; font:400 12.5px/1.3 'Inter',sans-serif; color:var(--tx3); }
+.ledger .ct { font:600 18px/1 'Archivo','Inter',sans-serif; color:var(--tx3); font-variant-numeric:tabular-nums; }
+.ab { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(36px,6vw,96px); align-items:start; }
+.ab-text p { margin:22px 0 0; max-width:54ch; font:400 16px/1.7 'Inter',sans-serif; color:var(--tx2); }
+.ab-text h2 + p { margin-top:28px; }
+.ab-text strong { color:var(--white); font-weight:600; }
+.ab-cmp { margin:34px 0 0; padding:0; border-top:1px solid var(--bdr2); }
+.ab-cmp div { display:grid; grid-template-columns:120px 1fr; gap:20px; padding:16px 0; border-bottom:1px solid var(--bdr); }
+.ab-cmp dt { font:600 14px/1.5 'Inter',sans-serif; color:var(--white); }
+.ab-cmp dd { margin:0; font:400 14.5px/1.55 'Inter',sans-serif; color:var(--tx2); }
+.ab-mx h3 { margin:0 0 6px; font:600 18px/1.3 'Inter',sans-serif; color:var(--white); }
+.ab-mx > p { margin:0 0 22px; max-width:52ch; font:400 14.5px/1.6 'Inter',sans-serif; color:var(--tx2); }
+.ab-mx .rmx { max-width:520px; }
+.ab-mx .ax { margin:8px 0 0; font:500 12px/1 'Inter',sans-serif; color:var(--tx3); letter-spacing:.04em; }
+.ab-mx .mleg { margin-top:22px; display:grid; grid-template-columns:1fr 1fr; gap:10px 18px; max-width:520px; }
+.pk-hd { display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:34px; }
+.pk-hd p { margin:0; max-width:36ch; font:400 14.5px/1.6 'Inter',sans-serif; color:var(--tx2); }
+.pk-list { border-top:1px solid var(--bdr2); }
+.pk-row { display:grid; grid-template-columns:44px 36px minmax(180px,1.1fr) minmax(0,2fr) 150px 28px; align-items:center; gap:18px; width:100%; padding:22px 0; background:none; border:none; border-bottom:1px solid var(--bdr); text-align:left; color:inherit; cursor:pointer; font:inherit; transition:background .2s; }
+.pk-row:hover { background:rgba(255,160,67,.05); }
+.pk-row:focus-visible { outline:2px solid var(--gold2); outline-offset:2px; }
+.pk-row .no { font:500 13px/1 'Inter',sans-serif; color:var(--tx3); font-variant-numeric:tabular-nums; }
+.pk-row svg.ic { width:30px; height:30px; color:var(--tx3); }
+.pk-row .nm { font:600 19px/1.25 'Inter',sans-serif; color:var(--white); }
+.pk-row .ds { font:400 14px/1.55 'Inter',sans-serif; color:var(--tx2); }
+.pk-row .st { font:500 13px/1 'Inter',sans-serif; color:var(--tx3); }
+.pk-row.av .st { color:var(--gold2); font-weight:600; }
+.pk-row.av svg.ic { color:var(--gold2); }
+.pk-row .ar { font:400 18px/1 'Inter',sans-serif; color:var(--tx3); transition:transform .2s, color .2s; }
+.pk-row:hover .ar { transform:translateX(4px); color:var(--gold2); }
+@media (max-width:1000px) { .ev, .ab { grid-template-columns:1fr; } .pk-row { grid-template-columns:30px 30px 1fr 28px; } .pk-row .ds, .pk-row .st { display:none; } .pk-row .nm { grid-column:3; } }
+@media (max-width:640px) { .ev, .ab, .pk { padding-left:16px; padding-right:16px; } .ab-cmp div { grid-template-columns:1fr; gap:4px; } .pk-hd { flex-direction:column; align-items:flex-start; gap:12px; } .ab-mx .mleg { grid-template-columns:1fr; } }
+
+
+.ev .eqinv-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:26px; }
+.ev .eqi-n { margin-left:auto; }
+.pk .egrid { gap:16px; }
+@media (max-width:640px) { .ev .eqinv-grid { grid-template-columns:1fr 1fr; gap:10px; } .pk .egrid { grid-template-columns:1fr; } }
+.login-card { transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s cubic-bezier(.2,.8,.2,1), border-color .35s; }
+.login-card:hover { transform:translateY(-6px); border-color:rgba(255,160,67,.45); box-shadow:0 40px 80px -30px rgba(0,0,0,.85), 0 0 0 1px rgba(255,160,67,.18), 0 0 46px -6px rgba(255,160,67,.28); }
+html[data-theme="light"] .login-card:hover { box-shadow:0 40px 80px -34px rgba(30,60,100,.5), 0 0 0 1px rgba(224,112,15,.25), 0 0 40px -8px rgba(224,112,15,.25); }
+@media (hover:none) { .login-card:hover { transform:none; } }
 /* ===== Custom themed dropdown (cs-*) ===== */
 select.cs-native { position:absolute !important; width:1px !important; height:1px !important; opacity:0 !important; pointer-events:none !important; padding:0 !important; border:0 !important; margin:0 !important; overflow:hidden; clip:rect(0 0 0 0); }
 .cs-btn { position:relative; width:100%; display:flex; align-items:center; gap:8px; text-align:left; cursor:pointer;
@@ -1726,7 +1875,7 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
           <img src="logoasme.png" alt="ASME">
         </div>
         <div>PPSDM MIGAS CEPU · RBI Platform v1.0</div>
-        <div>Developed by Naufal - Husendi · Universitas Padjadjaran</div>
+        <div>Developed by Naufal - Husendi · M. Febrian Adhi P</div>
       </div>
     </section>
   </div>
@@ -1775,44 +1924,37 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
 ═══════════════════════════════════════ -->
 <div class="page" id="p0">
 
-  <div class="hero">
-    <div class="hl">
-      <div class="eyebrow"><span class="eb-code">API RP 581</span><span class="eb-txt">Risk-Based Inspection Methodology</span></div>
-      <h1 class="main">RISK<br><span class="ac">BASED</span><br><span class="out">INSPECTION</span></h1>
-      <p class="hdesc">A data-driven framework for optimizing inspection programs across oil &amp; gas process equipment — allocating resources where risk is highest, reducing cost while strengthening safety margins.</p>
-      <div class="hpills">
-        <span class="pill hi">API 580</span><span class="pill hi">API 581</span>
-        <span class="pill">API 510</span><span class="pill">API 570</span>
-        <span class="pill">API 650</span><span class="pill">API 653</span>
-        <span class="pill">ASME VIII</span>
-      </div>
-      <div class="hcta">
-        <button class="btnp" onclick="rbiGoCalc()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          START CALCULATOR
-        </button>
-        <button class="btns" onclick="document.getElementById('what-is-rbi').scrollIntoView({behavior:'smooth'})">DETAILED CALCULATION</button>
-      </div>
+  <section class="hx" aria-labelledby="hx-title">
+    <div class="hx-stage" id="hx-slides" aria-roledescription="carousel" aria-label="Foto kilang PPSDM Migas Cepu"></div>
+    <div class="hx-shade" aria-hidden="true"></div>
+    <div class="hx-top">
+      <p class="hx-org"><span>   </span>   </p>
+      <div class="hx-now" aria-live="off"><span class="hx-count" id="hx-count">01<i>/04</i></span><span class="hx-cap" id="hx-cap"></span><span class="hx-geo">Cepu, Jawa Tengah · 7°09′ S 111°35′ E</span></div>
     </div>
-    <div class="hr">
-      <div class="hr-cards">
-        <div class="sfloat"><div class="sf-n">580</div><div class="sf-l">API RECOMMENDED PRACTICE</div><div class="sf-l">Risk-Based Inspection</div></div>
-        <div class="api-badge">
-          <div class="ab-num">581</div>
-          <div class="ab-lbl">STANDARD</div>
-          <div class="ab-sub">American Petroleum<br>Institute</div>
+    <div class="hx-main">
+      <h1 id="hx-title">Inspect what matters,<br>before it fails.</h1>
+      <div class="hx-side">
+        <p class="hx-lead"><span>Thickness history, damage mechanisms and consequence of failure combined into one risk ranking for every tank, vessel and pipe — following API 580 and API 581.</span></p>
+        <div class="hx-actions">
+          <button type="button" class="hx-btn" onclick="rbiGoCalc()">Start a calculation <span aria-hidden="true">→</span></button>
+          <button type="button" class="hx-link" onclick="document.getElementById('what-is-rbi').scrollIntoView({behavior:'smooth'})">How RBI works</button>
         </div>
       </div>
-      <div class="hero-scene" id="hero-scene"></div>
     </div>
-  </div>
+    <button type="button" class="hx-nav hx-prev" id="hx-prev" aria-label="Foto sebelumnya"><svg viewBox="0 0 24 48" aria-hidden="true"><path d="M20 4 4 24l16 20"/></svg></button>
+    <button type="button" class="hx-nav hx-next" id="hx-next" aria-label="Foto berikutnya"><svg viewBox="0 0 24 48" aria-hidden="true"><path d="M4 4l16 20L4 44"/></svg></button>
+    <div class="hx-rail"><div class="hx-ctl"><ol id="hx-index" aria-label="Pilih foto"></ol>
+      </div></div>
+  </section>
 
-  <section class="eqinv" data-reveal>
-    <div class="eqinv-hd">
-      <div><div class="stag">Inventori Peralatan</div><h3>Equipment tercatat di sistem RBI</h3></div>
-      <p>Jumlah peralatan PPSDM Migas Cepu yang sudah diinput dan dikalkulasi di platform ini, per jenis equipment.</p>
-    </div>
-    <div class="eqinv-grid">
+  <section class="ev" data-reveal>
+    <figure style="margin:0"><div class="ev-scene" id="hero-scene" role="img" aria-label="Simulasi crawler UT memindai shell tangki"></div>
+      <figcaption class="ev-cap">Simulasi pemindaian UT pada shell tangki T-100: ketebalan aktual, t minimum, laju korosi, dan sisa umur dihitung per course.</figcaption></figure>
+    <div>
+      <p class="lb">Inventori peralatan</p>
+      <h2>Peralatan tercatat di sistem RBI</h2>
+      <p class="ev-sub">Jumlah peralatan PPSDM Migas Cepu yang sudah diinput dan dikalkulasi di platform ini, per jenis equipment.</p>
+      <div class="eqinv-grid">
       <div class="eqi">
         <svg class="eqi-wm" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 18 L24 10 L40 18"/><path d="M8 18 V40 H40 V18"/><path d="M8 25.5 H40 M8 33 H40" stroke-dasharray="3 2.5"/><path d="M40 22 V36"/><path d="M4 42 H44"/></svg>
         <div class="eqi-top"><div class="eqi-ico"><svg class="" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 18 L24 10 L40 18"/><path d="M8 18 V40 H40 V18"/><path d="M8 25.5 H40 M8 33 H40" stroke-dasharray="3 2.5"/><path d="M40 22 V36"/><path d="M4 42 H44"/></svg></div><span class="eqi-no">01</span></div>
@@ -1856,26 +1998,25 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
         <div class="eqi-ft"><span class="eqi-u">Unit tercatat</span><span class="eqi-n">—</span></div>
       </div>
     </div>
+    </div>
   </section>
 
-  <div class="wrbi" id="what-is-rbi" data-reveal>
-    <div>
-      <div class="stag">What is RBI</div>
-      <h2>INSPECTION<br>DRIVEN BY<br>ACTUAL RISK</h2>
-      <p>Risk-Based Inspection (RBI), standardized under <strong style="color:var(--white)">API 580 &amp; API 581</strong>, replaces fixed-calendar schedules with a risk-driven approach that determines when, where, and how intensively to inspect each asset.</p>
-      <p>Risk is the product of <strong style="color:var(--white)">Probability of Failure (PoF)</strong> and <strong style="color:var(--white)">Consequence of Failure (CoF)</strong>. Equipment with high risk gets more frequent, thorough inspection; low-risk assets can safely have extended intervals — freeing resources and cutting costs without compromising safety.</p>
-      <p>RBI applies across all process equipment: storage tanks, pressure vessels, separators, distillation columns, heat exchangers, pumps, and fired heaters.</p>
-      <div class="tbi-grid">
-        <div class="tbi-c"><div class="tbi-t">TIME-BASED</div><div class="tbi-v">Fixed 4-yr</div><div class="tbi-s">Uniform cycle, higher cost</div></div>
-        <div class="tbi-c hi"><div class="tbi-t">RISK-BASED</div><div class="tbi-v">Optimized 5-yr</div><div class="tbi-s">Saves ~$5,000 / tank</div></div>
-      </div>
+  <section class="ab" id="what-is-rbi" data-reveal>
+    <div class="ab-text">
+      <p class="lb">About RBI</p>
+      <h2>Inspect by risk,<br>not by the calendar.</h2>
+      <p>Risk-Based Inspection, set out in <strong>API 580</strong> and <strong>API 581</strong>, decides when, where and how hard to inspect each asset from its own risk, instead of a fixed schedule for everything.</p>
+      <p>Risk is <strong>Probability of Failure</strong> multiplied by <strong>Consequence of Failure</strong>. Equipment with high risk is inspected sooner and more thoroughly; low-risk equipment can safely wait longer, so inspection effort goes where it reduces risk the most.</p>
+      <dl class="ab-cmp">
+        <div><dt>Time-based</dt><dd>Every tank follows the same fixed interval, whatever its condition.</dd></div>
+        <div><dt>Risk-based</dt><dd>The interval follows each tank's own risk ranking and inspection history.</dd></div>
+      </dl>
     </div>
-    <div>
-      <div class="eq-box rmx-card">
-        <div class="eq-label">Risk Matrix — API 581 (5 × 5)</div>
-        <p class="rmx-intro">Setiap equipment diplot pada matriks 5×5: Probability of Failure (1–5) terhadap Consequence of Failure (A–E). Sel hasilnya menentukan urgensi, metode, dan interval inspeksi.</p>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--tx3);letter-spacing:1px;margin-bottom:8px;">PROBABILITY ↑</div>
-        <div class="rmx">
+    <div class="ab-mx">
+      <h3>Risk matrix, API 581 (5 × 5)</h3>
+      <p>Each equipment item is plotted by Probability of Failure (1–5) against Consequence of Failure (A–E). The resulting cell sets the urgency, method and interval of inspection.</p>
+      <p class="ax" style="margin:0 0 8px">PROBABILITY ↑</p>
+      <div class="rmx">
           <div class="rm rml">5</div><div class="rm rm2">MED</div><div class="rm rm3">M-H</div><div class="rm rm4">HIGH</div><div class="rm rm4">HIGH</div><div class="rm rm4">HIGH</div>
           <div class="rm rml">4</div><div class="rm rm2">MED</div><div class="rm rm2">MED</div><div class="rm rm3">M-H</div><div class="rm rm4">HIGH</div><div class="rm rm4">HIGH</div>
           <div class="rm rml">3</div><div class="rm rl">LOW</div><div class="rm rm2">MED</div><div class="rm rm2">MED</div><div class="rm rm3">M-H</div><div class="rm rm4">HIGH</div>
@@ -1883,27 +2024,20 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
           <div class="rm rml">1</div><div class="rm rl">LOW</div><div class="rm rl">LOW</div><div class="rm rmk">1C ✦</div><div class="rm rm2">MED</div><div class="rm rm2">MED</div>
           <div class="rm"></div><div class="rm rml">A</div><div class="rm rml">B</div><div class="rm rml">C</div><div class="rm rml">D</div><div class="rm rml">E</div>
         </div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--tx3);letter-spacing:1px;margin-top:8px;text-align:center;">CONSEQUENCE →</div>
-        <div class="mleg">
+        
+      <p class="ax" style="text-align:center">CONSEQUENCE →</p>
+      <div class="mleg">
           <div class="mlr"><div class="mlb" style="background:rgba(224,53,53,.18);border:1px solid rgba(224,53,53,.24)"></div><span class="mlt">HIGH — Immediate action; enhanced NDT</span></div>
           <div class="mlr"><div class="mlb" style="background:rgba(212,137,26,.28);border:1px solid rgba(212,137,26,.38)"></div><span class="mlt">MEDIUM-HIGH — Priority inspection</span></div>
           <div class="mlr"><div class="mlb" style="background:rgba(212,137,26,.14);border:1px solid rgba(212,137,26,.2)"></div><span class="mlt">MEDIUM — Periodic, ≤ 5 yr interval</span></div>
           <div class="mlr"><div class="mlb" style="background:rgba(39,184,106,.12);border:1px solid rgba(39,184,106,.18)"></div><span class="mlt">LOW — Extended intervals, basic methods</span></div>
         </div>
       </div>
-    </div>
-  </div>
+  </section>
 
-  <div class="esec" id="ea" data-reveal>
-    <div class="einner">
-      <div class="ehdr">
-        <div>
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold2);letter-spacing:2px;margin-bottom:8px;">// SELECT EQUIPMENT TYPE</div>
-          <h2>CALCULATE RBI FOR<br>YOUR EQUIPMENT</h2>
-        </div>
-        <div class="esub">API 581 SEMI-QUANTITATIVE METHOD</div>
-      </div>
-      <div class="egrid">
+  <section class="pk" id="ea" data-reveal>
+    <div class="pk-hd"><div><p class="lb">Calculator</p><h2>Calculate RBI for<br>your equipment</h2></div><p>Semi-quantitative method per API 581. Storage tank is available now; other equipment types are being prepared.</p></div>
+    <div class="egrid">
         <div class="ecard av" onclick="showPage(1)">
           <svg class="ec-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 18 L24 10 L40 18"/><path d="M8 18 V40 H40 V18"/><path d="M8 25.5 H40 M8 33 H40" stroke-dasharray="3 2.5"/><path d="M40 22 V36"/><path d="M4 42 H44"/></svg>
           <div class="ec-nm">Storage Tank</div>
@@ -1941,8 +2075,7 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
           <div class="ec-ft"><span class="ectag sn">COMING SOON</span><svg class="ec-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
         </div>
       </div>
-    </div>
-  </div>
+  </section>
 
   <div class="apid" data-reveal>
     <div class="std-head"><div class="stag">Standards &amp; Codes</div><p><span class="t-desk">Arahkan kursor ke tumpukan kartu, lalu pilih satu standar.</span><span class="t-touch">Geser kartu, lalu ketuk untuk memilih standar.</span></p></div>
@@ -2086,7 +2219,7 @@ html[data-theme="light"] .cs-group { color:#0e7490; }
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 <span class="ac">PPSDM MIGAS CEPU</span> · RBI Platform · Developed By <span class="ac">Naufal - Husendi | Universitas Padjadjaran</span></p>
+      <p>© 2025 <span class="ac">PPSDM MIGAS CEPU</span> · RBI Platform · Developed By <span class="ac">Naufal - Husendi | M. Febrian Adhi P</span></p>
       <p>API 580 · 581 · 510 · 570 · 650 · 653 · ASME VIII</p>
     </div>
   </footer>
@@ -4551,6 +4684,82 @@ function rbiApiTab(k){
   if(pane && window.MathJax && MathJax.typesetPromise && !pane.dataset.mj){ pane.dataset.mj='1'; MathJax.typesetPromise([pane]).catch(()=>{}); }
 }
 
+
+
+/* ═══ Landing hero slideshow ═══
+   Taruh foto di folder yang sama dengan index.html. 'file' = nama file TANPA ekstensi;
+   browser mencoba <file>.webp dulu, lalu <file>.jpg. Foto yang tidak ada akan dilewati.
+   'caption' tampil di daftar foto (kolom kiri) dan di pojok foto. */
+const HERO_SLIDES = [
+  { file:'bg_kilang', caption:'Kilang PPSDM Migas, Cepu' },
+  { file:'hero_2',    caption:'Area tangki timbun' },
+  { file:'hero_3',    caption:'Unit proses' },
+  { file:'hero_4',    caption:'Inspeksi lapangan' },
+];
+const HERO_DWELL = 7000;     // lama tiap foto tampil (ms)
+function rbiHeroSlides(){
+  const stage=document.getElementById('hx-slides'); if(!stage || stage.dataset.ready) return; stage.dataset.ready='1';
+  const hero=stage.closest('.hx'), index=document.getElementById('hx-index');
+  hero.style.setProperty('--hx-dwell', HERO_DWELL+'ms');
+  const reduce=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const slides=HERO_SLIDES.map(d=>({...d, url:null, dead:false, el:null}));
+  let cur=-1, timer=0, paused=false;
+  const esc=t=>String(t??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+  function probe(s, first){
+    return new Promise(res=>{ const im=new Image(); let ext='webp'; im.decoding='async'; if(first) im.fetchPriority='high';
+      im.onload=()=>{ s.url=im.src;
+        try{ const c=document.createElement('canvas'); c.width=152; c.height=96; const g=c.getContext('2d'); const r=Math.max(152/im.naturalWidth,96/im.naturalHeight); const w=im.naturalWidth*r,h=im.naturalHeight*r; g.drawImage(im,(152-w)/2,(96-h)/2,w,h); s.thumb=c.toDataURL('image/jpeg',.7); }catch(e){ s.thumb=s.url; }
+        res(true); };
+      im.onerror=()=>{ if(ext==='webp'){ ext='jpg'; im.src=s.file+'.jpg'; } else { s.dead=true; res(false); } };
+      im.src=s.file+'.webp'; });
+  }
+  const live=()=>slides.filter(s=>s.url);
+  function ensureEl(s){ if(s.el) return s.el; const f=document.createElement('figure'); f.className='hx-shot'; const im=document.createElement('img'); im.alt=''; im.decoding='async'; im.src=s.url; f.appendChild(im); stage.appendChild(f); s.el=f; return f; }
+  let built=-1;
+  function renderIndex(){
+    const L=live(), cs=slides[cur], k=Math.max(0,L.indexOf(cs));
+    const c=document.getElementById('hx-count'), t=document.getElementById('hx-cap');
+    if(c&&cs) c.innerHTML=String(k+1).padStart(2,'0')+'<i>/'+String(L.length).padStart(2,'0')+'</i>'; if(t&&cs) t.textContent=cs.caption||'';
+    hero.classList.toggle('single', L.length<2); index.style.setProperty('--hx-n', L.length);
+    if(built!==L.length){            // build the rail only when the number of photos changes
+      built=L.length;
+      index.innerHTML = L.length<2 ? '' : L.map((s,i)=>`<li><button type="button" aria-label="Foto ${i+1}: ${esc(s.caption)}"><img src="${esc(s.thumb||s.url)}" alt="" width="76" height="48" decoding="async"><span class="t"><span class="n">${String(i+1).padStart(2,'0')}</span>${esc(s.caption)}</span></button></li>`).join('');
+      [...index.querySelectorAll('button')].forEach((b,i)=>b.onclick=()=>go(slides.indexOf(L[i])));
+    }
+    [...index.querySelectorAll('button')].forEach((b,i)=>b.setAttribute('aria-current', i===k ? 'true':'false'));
+  }
+  let token=0;
+  function show(i){
+    const s=slides[i]; if(!s || !s.url) return;
+    const my=++token, el=ensureEl(s), im=el.firstChild;
+    (im.decode ? im.decode() : Promise.resolve()).catch(()=>{}).then(()=>{
+      if(my!==token) return;
+      const prev=slides[cur]; cur=i;
+      if(prev && prev.el && prev!==s){ prev.el.classList.remove('is-on'); prev.el.classList.add('is-out'); clearTimeout(prev.t); prev.t=setTimeout(()=>prev.el.classList.remove('is-out'),1300); }
+      clearTimeout(s.t); el.classList.remove('is-out');
+      requestAnimationFrame(()=>{ el.classList.add('is-on'); renderIndex(); schedule(); });
+    });
+  }
+  function go(i){ if(i===cur) return; show(i); }
+  function step(d){ const L=live(); if(L.length<2) return; const k=L.indexOf(slides[cur]); go(slides.indexOf(L[(k+d+L.length)%L.length])); }
+  function schedule(){ clearTimeout(timer); if(paused || reduce || live().length<2) return; timer=setTimeout(()=>step(1), HERO_DWELL); }
+  const pv=document.getElementById('hx-prev'), nx=document.getElementById('hx-next');
+  if(pv) pv.onclick=()=>step(-1); if(nx) nx.onclick=()=>step(1);
+  let tx=null; hero.addEventListener('touchstart',e=>{ tx=e.touches[0].clientX; },{passive:true});
+  hero.addEventListener('touchend',e=>{ if(tx===null) return; const dx=e.changedTouches[0].clientX-tx; tx=null; if(Math.abs(dx)>50) step(dx<0?1:-1); },{passive:true});
+  (async ()=>{
+    for(let i=0;i<slides.length;i++){ if(await probe(slides[i], true)){ show(i); break; } }
+    const rest=slides.filter(s=>!s.url && !s.dead);
+    const run=()=>Promise.all(rest.map(s=>probe(s,false))).then(()=>{ renderIndex(); schedule(); });
+    ('requestIdleCallback' in window) ? requestIdleCallback(run,{timeout:2500}) : setTimeout(run,800);
+  })();
+  const sync=()=>{ const p0=document.getElementById('p0'); const off=document.hidden || (p0 && !p0.classList.contains('on'));
+    if(off!==paused){ paused=off; hero.classList.toggle('paused',off); off?clearTimeout(timer):schedule(); } };
+  document.addEventListener('visibilitychange',sync);
+  const p0=document.getElementById('p0'); if(p0) new MutationObserver(sync).observe(p0,{attributes:true,attributeFilter:['class']});
+  if('IntersectionObserver' in window) new IntersectionObserver(es=>{ const off=!es[0].isIntersecting; if(off!==paused){ paused=off; hero.classList.toggle('paused',off); off?clearTimeout(timer):schedule(); } }).observe(hero);
+}
+
 /* Login: plain submit (no loading animation on the login page) */
 function rbiLoginSubmit(){ doLogin(); }
 
@@ -4608,7 +4817,9 @@ function rbiInitMouseFx(){
 }
 
 rbiMountScenes();
+rbiHeroSlides();
 rbiInitReveal();
+
 rbiInitMouseFx();
 dbSyncThemeUI();
 
